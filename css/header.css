@@ -3,6 +3,11 @@
     src: url("../assets/fonts/SourceSansPro-SemiBold.ttf");
 }
 
+*{
+    margin: 0;
+    padding: 0;
+}
+
 .header{
     font-family: "Source Sans Pro";
     display: inline-block;
@@ -19,7 +24,7 @@
 .right-position{
     float:right;
     position: fixed; 
-    top: 10px;
+    top: 4px;
     right: 10px;
     vertical-align: middle;
     margin: 25px;
