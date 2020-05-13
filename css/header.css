@@ -32,3 +32,17 @@
 .right-position a{
     text-align: left;
 }
+
+#dropdown-content{
+    visibility: visible;
+    opacity: 0;
+    display: block;
+}
+
+.image:hover{
+    cursor: pointer;
+}
+
+img:hover .dropdown-content {
+    opacity: 1;
+}

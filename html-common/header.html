@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Header</title>
     <link rel="stylesheet" href="../css/header.css">
+    <script src = "../js/dropdown.js" ></script>
 </head>
 
 
@@ -19,7 +20,11 @@
             <a> | </a>
             <a id = "role">Admin</a>
         </div>
-        <img class = "right-position image" src = "../assets/icons/user_icon.png" alt="user icon">
+        <img class = "right-position image" src = "../assets/icons/user_icon.png" alt="user icon" onclick = "return displayDropdown()">
+        <div id="dropdown-content">
+            <a href="#">My account</a>
+            <a href="#">Log out</a>
+        </div>
     </header>
 </body>
 
