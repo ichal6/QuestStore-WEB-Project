@@ -65,8 +65,8 @@
 
 }
 
-.arrow-up {
-    display: block;
+#arrow-up {
+    display: none;
     float:right;
     position: fixed; 
     top:68px;
