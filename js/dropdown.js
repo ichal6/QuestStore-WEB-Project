@@ -1,4 +1,4 @@
 function displayDropdown(){
-    document.getElementById("dropdown-content").style.opacity = 1;
+    document.getElementById("dropdown-content").style.display = "block";
 }
 
