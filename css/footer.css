@@ -3,6 +3,11 @@
     src: url("../assets/fonts/SourceSansPro-SemiBold.ttf");
 }
 
+*{
+    margin: 0;
+    padding: 0;
+}
+
 .footer{
     font-family: "Source Sans Pro";
     background-color: #545759;
