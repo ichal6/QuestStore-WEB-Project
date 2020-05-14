@@ -7,6 +7,27 @@ body{
     min-width: 695px;
 }
 
-#content{
-    float: left;
+
+#label{
+    grid-area: label;
 }
+
+#information{
+    grid-area: information;
+}
+
+#change-password{
+    grid-area: change-password;
+}
+
+#content{
+    display: grid;
+    grid-template-rows: 40% 40%;
+    grid-template-columns: auto;
+    grid-template-areas:
+        "label none" 
+        "information change-password";
+}
+
+
+
