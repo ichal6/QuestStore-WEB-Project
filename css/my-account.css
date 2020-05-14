@@ -41,6 +41,19 @@ form, #picture, p{
     font-size: 18px;
 }
 
+form label,form input{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+#picture p{
+    margin-bottom: 10px;
+}
+
+#information-bottom a{
+    margin-top: 10px;
+}
+
 #role-content{
     grid-area: role;
 }
@@ -68,6 +81,7 @@ form, #picture, p{
 }
 
 #information-bottom{
+    margin-top: 20px;
     display: grid;
     grid-template-rows: 40% 40%;
     grid-template-columns: auto;
