@@ -21,7 +21,7 @@
         <div class = "right-position">
             <a id = "name">Jan Kowalski</a>
             <a> | </a>
-            <a id = "role">Admin</a>
+            <a id = "role-header">Admin</a>
         </div>
         <img class = "right-position image" src = "../assets/icons/user_icon.png" alt="user icon" onmouseover = "return displayDropdown()">
         <div id = "arrow-up">
@@ -61,31 +61,33 @@
         <div id = "content">
             <h1 id = "label">My Account</h1>
             <div id = "information"> 
-                <h2>Profile Information</h2>
+                <h2 id = "label-profil">Profile Information</h2>
                 <form>
-                    <label>Name*:</label>
-                    <input type="text">
-                    <label>Email*:</label>
-                    <input type="text">
+                    <label>Name*:</label><br>
+                    <input type="text"><br>
+                    <label>Email*:</label><br>
+                    <input type="text"><br>
                 </form>
-                <div id = "picture">
-                    <p>Picture:</p>
-                    <img src = "../assets/icons/profile_photo.svg">
-                    <a href = "#"> Change picture<img src = "../assets/icons/change_picture.svg"></a>
+                <div id = "information-bottom">
+                    <div id = "picture">
+                        <p>Picture:</p>
+                        <img src = "../assets/icons/profile_photo.svg"><br>
+                    </div>
+                    <a href = "#"> <img src = "../assets/icons/change_picture.svg"> Change picture</a>
+                    <p id = "role-content">Role: Admin</p>
+                    <button>Update</button>
                 </div>
-                <p>Role: Admin</p>
-                <button>Update</button>
             </div>
 
             <div id = "change-password">
                 <h2>Change Password</h2>
                 <form>
-                    <label>Old password*:</label>
-                    <input type="text">
-                    <label>New password*:</label>
-                    <input type="text">
-                    <label>Repeat new password*:</label>
-                    <input type="text">
+                    <label>Old password*:</label><br>
+                    <input type="text"><br>
+                    <label>New password*:</label><br>
+                    <input type="text"><br>
+                    <label>Repeat new password*:</label><br>
+                    <input type="text"><br>
                 </form>
                 <button>Change password</button>
             </div>

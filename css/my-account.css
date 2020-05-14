@@ -38,10 +38,31 @@ form, #picture, p{
     font-size: 18px;
 }
 
+#role-content{
+    grid-area: role;
+}
+
+#picture{
+    width: 50%;
+}
+
+#label-profil{
+    grid-area: label-profil;
+}
+
 #information{
     background-color: #F2F2F2;
     margin-left: 10px;
     grid-area: information;
+}
+
+#information-bottom{
+    display: grid;
+    grid-template-rows: 40% 40%;
+    grid-template-columns: auto;
+    grid-template-areas:
+        "picture role"
+        "change-picture button";
 }
 
 #change-password{
