@@ -8,6 +8,11 @@
     padding: 0;
 }
 
+footer{
+    clear: both;
+    position: relative;   
+}
+
 .footer{
     background-color: #545759;
     height: 80px;
