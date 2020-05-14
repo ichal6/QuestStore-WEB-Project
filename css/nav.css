@@ -11,8 +11,9 @@
 }
 
 .nav {
+    margin-top: -4px;;
     width: 200px;
-    height: 100vh;
+    height: 101%; 
     background-color: #BF343F;
 }
 

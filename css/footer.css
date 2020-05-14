@@ -8,6 +8,11 @@
     padding: 0;
 }
 
+footer{
+    clear: both;
+    position: relative;   
+}
+
 .footer{
     font-family: "Source Sans Pro";
     background-color: #545759;
