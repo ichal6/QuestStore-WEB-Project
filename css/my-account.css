@@ -1,9 +1,20 @@
+@font-face {
+    font-family: "Source Sans Pro";
+    src: url("../assets/fonts/SourceSansPro-SemiBold.ttf");
+}
+
+@font-face {
+    font-family: "Source Sans Regular";
+    src: url("../assets/fonts/SourceSansPro-Regular.ttf");
+}
+
 *{
     margin: 0;
     padding: 0;
 }
 
 body{
+    font-family: "Source Sans Pro";
     background-color: #C9C9C9;
     min-width: 695px;
 }
@@ -12,6 +23,19 @@ body{
 #label{
     grid-area: label;
     margin: 10px;
+}
+
+h1{
+    font-size: 36px;
+}
+
+h2{
+    font-size: 28px;
+}
+
+form, #picture, p{
+    font-family: "Source Sans Regular";
+    font-size: 18px;
 }
 
 #information{
