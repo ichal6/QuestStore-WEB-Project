@@ -19,6 +19,9 @@ body{
     min-width: 695px;
 }
 
+input{
+    width: 100%;
+}
 
 #label{
     grid-area: label;
@@ -50,6 +53,14 @@ form, #picture, p{
     grid-area: label-profil;
 }
 
+#information, #change-password{
+    padding: 25px;
+}
+
+#label-password, #label-profil{
+    padding-bottom: 20px; 
+}
+
 #information{
     background-color: #F2F2F2;
     margin-left: 10px;
@@ -70,6 +81,13 @@ form, #picture, p{
     margin-left: 10px;
     margin-right: 10px;
     grid-area: change-password;
+}
+
+#change-password button{
+    display: grid;
+    position: relative;
+    margin-top: 145px;
+    float: right;
 }
 
 #content{
