@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/my-account.css">
     <script src = "../js/dropdown.js" ></script>
+    <script src = "../js/myAccount.js" defer></script>
 </head>
 
 
@@ -62,11 +63,11 @@
             <h1 id = "label">My Account</h1>
             <div id = "information"> 
                 <h2 id = "label-profil">Profile Information</h2>
-                <form>
+                <form oninput = "return checkData()">
                     <label>Name*:</label><br>
-                    <input type="text"><br>
+                    <input type="text" id = "name-and-surname" placeholder = "Mateusz Przykładowy"><br>
                     <label>Email*:</label><br>
-                    <input type="text"><br>
+                    <input type="text" id = "e-mail" placeholder = "mateusz@gmail.com" ><br>
                 </form>
                 <div id = "information-bottom">
                     <div id = "picture">
@@ -75,7 +76,7 @@
                     </div>
                     <a href = "#"> <img src = "../assets/icons/change_picture.svg">Change picture</a>
                     <p id = "role-content">Role: Admin</p>
-                    <button>Update</button>
+                    <button id = "update" onclick = "return displayMessage()" disabled = true>Update</button>
                 </div>
             </div>
 
@@ -83,11 +84,11 @@
                 <h2 id = "label-password">Change Password</h2>
                 <form>
                     <label>Old password*:</label><br>
-                    <input type="text"><br>
+                    <input type="password" id = "old-password"><br>
                     <label>New password*:</label><br>
-                    <input type="text"><br>
+                    <input type="password" id = "new-password"><br>
                     <label>Repeat new password*:</label><br>
-                    <input type="text"><br>
+                    <input type="password" id = "repeat-new-password"><br>
                 </form>
                 <button>Change password</button>
             </div>
