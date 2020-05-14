@@ -107,11 +107,9 @@ h2{
 }
 
 #change-password button{
-    display: grid;
     position: relative;
-    padding-top: 7px;
-    margin-top: 150px;
     float: right;
+    top: 138px;
 }
 
 #content{
