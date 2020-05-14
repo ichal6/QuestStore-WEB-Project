@@ -4,19 +4,26 @@
 }
 
 body{
+    background-color: #C9C9C9;
     min-width: 695px;
 }
 
 
 #label{
     grid-area: label;
+    margin: 10px;
 }
 
 #information{
+    background-color: #F2F2F2;
+    margin-left: 10px;
     grid-area: information;
 }
 
 #change-password{
+    background-color: #F2F2F2;
+    margin-left: 10px;
+    margin-right: 10px;
     grid-area: change-password;
 }
 
