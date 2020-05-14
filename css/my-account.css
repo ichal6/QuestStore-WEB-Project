@@ -32,10 +32,6 @@ h1{
     font-size: 36px;
 }
 
-h2{
-    font-size: 28px;
-}
-
 form, #picture, p{
     font-family: "Source Sans Regular";
     font-size: 18px;
@@ -52,6 +48,7 @@ form label,form input{
 
 #information-bottom a{
     margin-top: 10px;
+    color: #545759
 }
 
 #role-content{
@@ -68,6 +65,12 @@ form label,form input{
 
 #information, #change-password{
     padding: 25px;
+    color: #545759;
+}
+
+h2{
+    font-size: 28px;
+    color: black;
 }
 
 #label-password, #label-profil{
