@@ -48,7 +48,12 @@ form label,form input{
 
 #information-bottom a{
     margin-top: 10px;
-    color: #545759
+    color: #545759;
+    width: 70%;
+}
+
+#information-bottom a img{
+    margin-right: 25px;
 }
 
 #role-content{
