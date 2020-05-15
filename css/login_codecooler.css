@@ -5,10 +5,10 @@ body{
 .nav-bar{
     background-color: #F2F2F2;
     width: 100%;
-    height: 10vh;
+    height: 124px;
     display: flex; 
     align-items: center;
-    justify-content: right;
+    justify-content: center;
 }
 
 .logo{
