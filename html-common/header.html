@@ -9,7 +9,6 @@
     <script src = "../js/dropdown.js" ></script>
 </head>
 
-
 <body>
     <div class="header">
         <div class = "left-position">
@@ -17,12 +16,11 @@
         </div>
         <div class = "right-position">
             <a id = "name">Jan Kowalski</a>
-            <a> | </a>
+            <a>&nbsp&nbsp|&nbsp&nbsp</a>
             <a id = "role">Admin</a>
+            <img class = "right-position image" src = "../assets/icons/user_icon.png" alt="user icon" onmouseover = "return displayDropdown()">
+            <div id = "arrow-up">
         </div>
-        <img class = "right-position image" src = "../assets/icons/user_icon.png" alt="user icon" onmouseover = "return displayDropdown()">
-        <div id = "arrow-up">
-
         </div>
         <div id="dropdown-content">
             <ul>
@@ -34,9 +32,9 @@
                     <a href="#">Log out
                     <img src = "../assets/icons/log_out_icon.png"></a>
                 </li>
-                
             </ul>
         </div>
+    </div>
 </body>
 
 </html>
