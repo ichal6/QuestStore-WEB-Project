@@ -17,9 +17,9 @@
 .options_container {
     display: grid;
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 160px);
     grid-template-columns: repeat(4, 25%);
-    grid-template-rows: repeat(2,240px);
+    grid-template-rows: repeat(2, 240px);
     gap: 1px 1px;
     background-color: #DFDFDF;
     font-family: "Source Sans Pro";
@@ -52,6 +52,7 @@
     top: -36px;
     left: 0;
 }
+
 .number{
     color: #0D0D0D;
     font-size: 28px;
@@ -70,6 +71,7 @@
     display: flex;
     align-items: center;
 }
+
 .lower_section {
     height: 40%;
     width: 100%;
