@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" onclick = "return hideSubMenu()">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/admin_dashboard.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <script src = "../js/dropdown.js" ></script>
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <div class="header">
+        <div class = "left-position">
+            <img id = "logo" src = "../assets/icons/codecool_logo_color.png" alt="Codecool logo">
+        </div>
+        <div class = "right-position">
+            <a id = "name">Jan Kowalski</a>
+            <a>&nbsp&nbsp|&nbsp&nbsp</a>
+            <a id = "role">Admin</a>
+            <img class = "right-position image" src = "../assets/icons/user_icon.png" alt="user icon" onmouseover = "return displayDropdown()">
+            <div id = "arrow-up">
+        </div>
+        </div>
+        <div id="dropdown-content">
+            <ul>
+                <li>
+                    <a href="#">My account
+                    <img src = "../assets/icons/my_account_icon.png"></a>
+                </li>
+                <li>
+                    <a href="#">Log out
+                    <img src = "../assets/icons/log_out_icon.png"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <aside>
+            <div class="nav">
+                <ul class="nav-menu">
+                    <li><a href=""><img src="../assets/icons/home_icon.png" alt="home-icon">Dashboard</a></li>
+                    <li><a href=""><img src="../assets/icons/admins_icon.png" alt="">Admins</a></li>
+                    <li><a href=""><img src="../assets/icons/mentors_icon.png" alt="">Mentors</a></li>
+                    <li><a href=""><img src="../assets/icons/levels_icon.png" alt="">Levels</a></li>
+                    <li><a href=""><img src="../assets/icons/codecoolers_icon.png" alt="">Codecoolers</a></li>
+                    <li><a href=""><img src="../assets/icons/classes_icon.png" alt="">Classes</a></li>
+                    <li><a href=""><img src="../assets/icons/teams_icon.png" alt="">Teams</a></li>
+                    <li><a href=""><img src="../assets/icons/quests_icon.png" alt="">Quests</a></li>
+                    <li><a href=""><img src="../assets/icons/artifacts_icon.png" alt="">Artifacts</a></li>
+                </ul>
+            </div>
+        </aside>
+        <div class="options_container">
+            <div class="options_rectangle">
+                <div class="upper_section">
+                    <img src="../assets/icons/admins_svg.svg" alt="admins_icon" class="admins_icon">
+                    <div class="title_section">
+                        <div><p>Admins in CC:</p></div>
+                        <div class="number" id="admins_number"><p>10</p></div>
+                    </div>
+                </div>
+                <div class="lower_section">
+                    <p><a href="">See list of admins...</a></p>
+                </div>
+            </div>
+            <div class="options_rectangle">
+                <div class="upper_section">
+                    <img src="../assets/icons/mentors_svg.svg" alt="mentors_icon" class="mentors_icon">
+                    <div class="title_section">
+                        <div><p>Mentors in CC:</p></div>
+                        <div class="number" id="mentors_number"><p>50</p></div>
+                    </div>
+                </div>
+                <div class="lower_section">
+                    <p><a href="">See list of mentors...</a></p>
+                </div>
+            </div>
+            <div class="options_rectangle">
+                <div class="upper_section">
+                    <img src="../assets/icons/students_svg.svg" alt="students_icon" class="students_icon">
+                    <div class="title_section">
+                        <div><p>Students in CC:</p></div>
+                        <div class="number" id="students_number"><p>3992</p></div>
+                    </div>
+                </div>
+                <div class="lower_section">
+                    <p><a href="">See list of Codecoolers...</a></p>
+                </div>
+            </div>
+            <div class="options_rectangle">
+                <div class="upper_section">
+                    <img src="../assets/icons/levels_svg.svg" alt="levels_icon" class="levels_icon">
+                    <div class="title_section">
+                        <div><p>Levels in CC:</p></div>
+                        <div class="number" id="levels_number"><p>25</p></div>
+                    </div>
+                </div>
+                <div class="lower_section">
+                    <p><a href="">See list of all levels...</a></p>
+                </div>
+            </div>
+            <div class="options_rectangle">
+                <div class="upper_section">
+                    <img src="../assets/icons/classes_svg.svg" alt="classes_icon" class="classes_icon">
+                    <div class="title_section">
+                        <div><p>Classes in CC:</p></div>
+                        <div class="number" id="classes_number"><p>33</p></div>
+                    </div>
+                </div>
+                <div class="lower_section">
+                    <p><a href="">See list of classes...</a></p>
+                </div>
+            </div>
+            <div class="options_rectangle">
+                <div class="upper_section">
+                    <img src="../assets/icons/teams_svg.svg" alt="teams_icon" class="teams_icon">
+                    <div class="title_section">
+                        <div><p>Teams in CC:</p></div>
+                        <div class="number" id="teams_number"><p>210</p></div>
+                    </div>
+                </div>
+                <div class="lower_section">
+                    <p><a href="">See list of teams...</a></p>
+                </div>
+            </div>
+            <div class="options_rectangle">
+                <div class="upper_section">
+                    <img src="../assets/icons/quests_svg.svg" alt="quests_icon" class="quest_icon">
+                    <div class="title_section">
+                        <div><p>Possible quests:</p></div>
+                        <div class="number" id="quests_number"><p>111</p></div>
+                    </div>
+                </div>
+                <div class="lower_section">
+                    <p><a href="">See list of quests...</a></p>
+                </div>
+            </div>
+            <div class="options_rectangle">
+                <div class="upper_section">
+                    <img src="../assets/icons/artifacts_svg.svg" alt="artifacts_icon" class="artifacts_icon">
+                    <div class="title_section">
+                        <div><p>Available artifacts:</p></div>
+                        <div class="number" id="artifacts_number"><p>124</p></div>
+                    </div>
+                </div>
+                <div class="lower_section">
+                    <p><a href="">See list of artifacts...</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer">
+            <img src="../assets/icons/codecool_logo_white 1.png" alt="Codecool logo">
+            <p>©2020 - All rights reserved by Karolina, Michał, Michał and Rafał</p>
+        </div>
+    </footer>
+</body>
+
+</html>
