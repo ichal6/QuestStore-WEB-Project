@@ -80,7 +80,7 @@
     margin: auto 4px;
 }
 
-.mentor-row div {
+.person-row div {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -98,11 +98,11 @@
     margin: 2px;
 }
 
-.mentor-row {
+.person-row {
     height: 60px;
 }
 
-.mentor-row img {
+.person-row img {
     margin-right: 12px;
     height: 18px;
     width: 18px;
