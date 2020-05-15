@@ -12,12 +12,12 @@
 .container {
     display: flex;
     flex-direction: row;
+    min-height: calc(100vh - 160px);
 }
 
 .options_container {
     display: grid;
     width: 100%;
-    height: calc(100vh - 160px);
     grid-template-columns: repeat(4, 25%);
     grid-template-rows: repeat(2, 240px);
     gap: 1px 1px;
@@ -116,4 +116,33 @@
 
 .artifacts_icon {
     background-color: #E56E00;
+}
+
+@media screen and (max-width: 1230px) {
+    .options_container {
+        grid-template-columns: repeat(3, 33%);
+        grid-template-rows: repeat(3, 240px);
+    }
+}
+
+@media screen and (max-width: 1030px) {
+    .options_container {
+        grid-template-columns: repeat(2, 50%);
+        grid-template-rows: repeat(4, 240px);
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .options_container {
+        grid-template-columns: repeat(1, 100%);
+        grid-template-rows: repeat(8, 240px);
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .nav {
+        width: 100% !important;
+    }
 }
