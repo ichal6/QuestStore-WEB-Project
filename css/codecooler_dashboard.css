@@ -59,8 +59,17 @@ nav a{
     width: 100%;
     display: grid;
     background-color:#BF343F;
-    height:80vh;
+    height:auto;
     margin-bottom: 0px
+}
+
+.level-1{
+    margin-left: -10px;
+    margin-bottom: -12px;
+}
+
+.level-1 img{
+    width:100%;
 }
 
 .form{
@@ -86,7 +95,7 @@ nav a{
 .footer{
     background-color:#545759 ;
     width: 100%;
-    height: 10vh;
+    /* height: 10vh; */
     grid-template-columns: repeat(10, 1fr);
     display: flex; 
     align-items: center;  
@@ -102,6 +111,8 @@ nav a{
 }
 
 .footer-logo{
+    margin-top: 15px;
+    margin-bottom: 15px;
     margin-left: 15px;
 }
 
