@@ -176,26 +176,6 @@ nav a{
     background-color: #BF343F;
 }
 
-.form{
-    background-color: #F2F2F2;
-    width: 320px;
-    justify-content: center; 
-}
-
-.login-container{
-    display: flex; 
-    align-items: center;
-    justify-content: center;
-}
-
-.form{
-    width: 400px;
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-    border-radius: 15px;
-}
 .footer{
     background-color:#545759 ;
     width: 100%;
@@ -253,48 +233,4 @@ nav a{
     margin-bottom: 20px;
     margin-right: 20px;
     border:none;
-}
-
-.input-icons i {
-    position: absolute;
-}
-
-.input-field {
-    width: 100%;
-    padding: 10px;
-    background: #F2F2F2;
-    border: 1px solid #9CA1A6;
-    box-sizing: border-box;
-    border-radius: 10px;
-    text-align: center;
-    font-family: 'Source Sans Pro', sans-serif;
-}
-
-.icon{
-   padding: 10px;
-}
-
-.form h5{
-    text-align: right;
-    padding: 0;
-    margin: 0;
-    font-family: 'Source Sans Pro', sans-serif;
-    margin-top: 20px;
-} 
-
-.form h5 a{
-    text-decoration: none;
-    color:#418FBF;    
-} 
-
-.form h5 a:hover{
-    text-decoration: none;
-    color:#418FBF;  
-    color:#031543;   
-} 
-
-.form h2{
-    color: black;
-    text-align: center;
-    font-family: 'Source Sans Pro', sans-serif;
 }
