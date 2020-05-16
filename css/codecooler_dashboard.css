@@ -57,19 +57,50 @@ nav a{
 
 .content{
     width: 100%;
-    display: grid;
+    display: flex;
     background-color:#BF343F;
     height:auto;
     margin-bottom: 0px
 }
 
 .level-1{
+    position: relative; 
     margin-left: -10px;
     margin-bottom: -12px;
 }
 
 .level-1 img{
     width:100%;
+}
+
+.texts{
+    display: flex;
+    flex-direction: column; 
+    position: absolute;  
+    right: 5%;                        /* horizontal alignment */
+    top: 10%;                         /* vertical alignment */
+    transform: translate(-0%, -0%);/*  precise centering; see link below */
+}
+
+.text{
+    display: inline;
+    font-family: "Source Sans Pro";
+    font-size: 72px;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 13px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.text.blue{
+    color: #2491D4;
+    background-color: #F2F2F2;
+}
+
+.text.red{
+    color: #F2F2F2;
+    background-color: #BF343F;
 }
 
 .form{
