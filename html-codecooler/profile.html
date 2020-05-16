@@ -37,12 +37,10 @@
 
     <div class="content">
         <div class = "level-1">
-            <h1 id = "label">My Account</h1>
+            <h1 id = "label">Magdalena Cielecka</h1>
             <div id = "information"> 
-                <h2 id = "label-profil">Profile Information</h2>
+                <h2 id = "label-profil">Basic info:</h2>
                 <form oninput = "return checkData()">
-                    <label>Name*:</label><br>
-                    <input type="text" id = "name-and-surname" placeholder = "Mateusz Przykładowy"><br>
                     <label>Email*:</label><br>
                     <input type="text" id = "e-mail" placeholder = "mateusz@gmail.com" ><br>
                 </form>
@@ -52,13 +50,14 @@
                         <img src = "../assets/icons/profile_photo.svg"><br>
                     </div>
                     <a href = "#"> <img src = "../assets/icons/change_picture.svg">Change picture</a>
-                    <p id = "role-content">Role: Admin</p>
+                    <p id = "city">City: Warsaw</p>
+                    <p id = "class-name">Class: WAW-2020-FULLSTACK</p>
                     <button id = "update" onclick = "return displayMessage()" disabled = true>Update</button>
                 </div>
             </div>
 
             <div id = "change-password">
-                <h2 id = "label-password">Change Password</h2>
+                <h2 id = "label-password">Password change:</h2>
                 <form>
                     <label>Old password*:</label><br>
                     <input type="password" id = "old-password"><br>
