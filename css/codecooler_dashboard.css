@@ -134,6 +134,10 @@ nav a{
     max-width: 635px;
 }
 
+.level-3-text p{
+    margin-right: 20px;
+}
+
 .level-3 img{
     max-width: 60%;
     max-height: 60%;
@@ -244,6 +248,7 @@ nav a{
     letter-spacing: 2px;
     color: #BF343F;
     margin-bottom: 20px;
+    margin-right: 20px;
     border:none;
 }
 
