@@ -5,10 +5,10 @@ body{
 .nav-bar{
     background-color: #F2F2F2;
     width: 100%;
-    height: 10vh;
+    height: 124px;
     display: flex; 
     align-items: center;
-    justify-content: right;
+    justify-content: center;
 }
 
 .logo{
@@ -23,6 +23,12 @@ body{
     margin-bottom: 0px
 }
 
+.form{
+    background-color: #F2F2F2;
+    width: 320px;
+    justify-content: center; 
+}
+
 .login-container{
     display: flex; 
     align-items: center;
@@ -31,13 +37,11 @@ body{
 
 .form{
     width: 400px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
     border-radius: 15px;
-    background-color: #F2F2F2;
-    display: grid;
-    justify-content: center; 
-
-    
 }
 .footer{
     background-color:#545759 ;
@@ -74,24 +78,16 @@ body{
     line-height: 30px;
     letter-spacing: 2px;
     color: #F2F2F2;
-    margin-bottom:20px;
+    margin-bottom: 20px;
     border:none;
 }
 
-.reset{
-    letter-spacing: 1px;
-    margin: 0px 50px 20px 50px;
-}
-
-
 .input-icons i {
-    padding: 10px;;
     position: absolute;
 }
 
-
 .input-field {
-    width: 300px;
+    width: 100%;
     padding: 10px;
     background: #F2F2F2;
     border: 1px solid #9CA1A6;
@@ -101,23 +97,12 @@ body{
     font-family: 'Source Sans Pro', sans-serif;
 }
 
-.input{
-    margin-left: 50px;
-}
-
 .icon{
-   padding-bottom: 20px;
-   margin-left: 50px;
+   padding: 10px;
 }
-.form h4{
-    text-align: justify;
-    padding: 0px;
-    margin: 0;
-    font-family: 'Source Sans Pro', sans-serif;
-    margin-top: 0px;
-    align-items: center;
-    margin: 0px 30px 30px 30px;
 
+br{
+    margin-top: 20px;
 }
 
 .form h5{
@@ -128,14 +113,14 @@ body{
     margin-top: 20px;
 } 
 
-
 .form h5 a{
     text-decoration: none;
     color:#418FBF;    
 } 
 
 .form h5 a:hover{
-    text-decoration: none; 
+    text-decoration: none;
+    color:#418FBF;  
     color:#031543;   
 } 
 
@@ -143,11 +128,4 @@ body{
     color: black;
     text-align: center;
     font-family: 'Source Sans Pro', sans-serif;
-}
-
-.form-top-text{
-    padding-top: 30px;
-    letter-spacing: 1px;
-    margin: 0px 50px 20px 50px;
-    
 }

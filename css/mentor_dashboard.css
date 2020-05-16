@@ -18,7 +18,7 @@
 .options_container {
     display: grid;
     width: 100%;
-    grid-template-columns: repeat(4, 25%);
+    grid-template-columns: repeat(3, 33%);
     grid-template-rows: repeat(2, 240px);
     gap: 1px 1px;
     background-color: #DFDFDF;
@@ -28,7 +28,8 @@
 
 .options_rectangle {
     margin: auto;
-    width: 275px;
+    margin-left: 12px;
+    width: 370px;
     height: 171px;
     padding: 12px;
     background-color: #F2F2F2;
