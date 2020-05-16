@@ -9,6 +9,7 @@
   <meta name="login" content="LoginSite">
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/codecooler_profile.css">
+  <script src = "../js/profile.js" defer></script>
 </head>
 <body>
     <header>
@@ -35,8 +36,10 @@
     </header>
 
     <div class="content">
-        <div class = "level-1">
-            <h1 id = "label">Magdalena Cielecka</h1>
+        
+        <h1><span id = "label">Magdalena Cielecka</span></h1>
+
+        <div class = "level-1">  
             <div id = "information"> 
                 <h2 id = "label-profil">Basic info:</h2>
                 <form class = "form" oninput = "return checkData()">
@@ -46,18 +49,21 @@
                 <div id = "information-bottom">
                     <div id = "picture">
                         <p>Picture:</p>
-                        <img src = "../assets/icons/profile_photo.svg"><br>
+                        <img id  = "student-photo" src = "../assets/icons/profile_photo.svg"><br>
+                        <a href = "#"> <img src = "../assets/icons/change_picture.svg">Change picture</a>
                     </div>
-                    <a href = "#"> <img src = "../assets/icons/change_picture.svg">Change picture</a>
-                    <p id = "city">City: Warsaw</p>
-                    <p id = "class-name">Class: WAW-2020-FULLSTACK</p>
-                    <button class = "button-red" onclick = "return displayMessage()" disabled = true>Update</button>
+                    <div class = "info-student">
+                        <p id = "city">City: Warsaw</p>
+                        <p id = "class-name">Class: WAW-2020-FULLSTACK</p>
+                    </div>
+                    
                 </div>
+                <button id = "button-update" class = "button-red" onclick = "return displayMessage()" disabled = true>Update</button>
             </div>
 
             <div id = "change-password">
                 <h2 id = "label-password">Password change:</h2>
-                <form>
+                <form class = "form">
                     <label>Old password*:</label><br>
                     <input type="password" id = "old-password"><br>
                     <label>New password*:</label><br>
