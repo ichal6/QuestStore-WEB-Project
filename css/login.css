@@ -8,7 +8,7 @@ body{
     height: 10vh;
     display: flex; 
     align-items: center;
-    justify-content: right;
+    justify-content: left;
 }
 
 .logo{
@@ -23,12 +23,6 @@ body{
     margin-bottom: 0px
 }
 
-.form{
-    background-color: #F2F2F2;
-    width: 320px;
-    justify-content: center; 
-}
-
 .login-container{
     display: flex; 
     align-items: center;
@@ -37,11 +31,13 @@ body{
 
 .form{
     width: 400px;
-    display: grid;
-    justify-content: center;
-    align-items: center;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
     border-radius: 15px;
+    background-color: #F2F2F2;
+    display: grid;
+    justify-content: center; 
+
+    
 }
 .footer{
     background-color:#545759 ;
@@ -78,16 +74,26 @@ body{
     line-height: 30px;
     letter-spacing: 2px;
     color: #F2F2F2;
-    margin-bottom: 20px;
+    margin-bottom:20px;
     border:none;
 }
 
+.reset{
+    letter-spacing: 1px;
+    margin: 0px 50px 20px 50px;
+}
+
+.input-icons{
+    margin: 18px 0;
+}
 .input-icons i {
+    padding: 10px;;
     position: absolute;
 }
 
+
 .input-field {
-    width: 100%;
+    width: 300px;
     padding: 10px;
     background: #F2F2F2;
     border: 1px solid #9CA1A6;
@@ -97,8 +103,23 @@ body{
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+.input{
+    margin-left: 50px;
+}
+
 .icon{
-   padding: 10px;
+   padding-bottom: 20px;
+   margin-left: 50px;
+}
+.form h4{
+    text-align: justify;
+    padding: 0px;
+    margin: 0;
+    font-family: 'Source Sans Pro', sans-serif;
+    margin-top: 0px;
+    align-items: center;
+    margin: 0px 30px 30px 30px;
+
 }
 
 .form h5{
@@ -106,8 +127,9 @@ body{
     padding: 0;
     margin: 0;
     font-family: 'Source Sans Pro', sans-serif;
-    margin-top: 20px;
+   margin-bottom: 20px;
 } 
+
 
 .form h5 a{
     text-decoration: none;
@@ -115,8 +137,7 @@ body{
 } 
 
 .form h5 a:hover{
-    text-decoration: none;
-    color:#418FBF;  
+    text-decoration: none; 
     color:#031543;   
 } 
 
@@ -124,4 +145,11 @@ body{
     color: black;
     text-align: center;
     font-family: 'Source Sans Pro', sans-serif;
+}
+
+.form-top-text{
+    padding-top: 30px;
+    letter-spacing: 1px;
+    margin: 0px 50px 20px 50px;
+    
 }
