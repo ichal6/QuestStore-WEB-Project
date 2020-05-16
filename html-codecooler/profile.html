@@ -8,8 +8,7 @@
   <meta name="description">
   <meta name="login" content="LoginSite">
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/codecooler_dashboard.css">
-  <link rel="stylesheet" href="../css/my-account.css">
+  <link rel="stylesheet" href="../css/codecooler_profile.css">
 </head>
 <body>
     <header>
@@ -40,7 +39,7 @@
             <h1 id = "label">Magdalena Cielecka</h1>
             <div id = "information"> 
                 <h2 id = "label-profil">Basic info:</h2>
-                <form oninput = "return checkData()">
+                <form class = "form" oninput = "return checkData()">
                     <label>Email*:</label><br>
                     <input type="text" id = "e-mail" placeholder = "mateusz@gmail.com" ><br>
                 </form>
@@ -52,7 +51,7 @@
                     <a href = "#"> <img src = "../assets/icons/change_picture.svg">Change picture</a>
                     <p id = "city">City: Warsaw</p>
                     <p id = "class-name">Class: WAW-2020-FULLSTACK</p>
-                    <button id = "update" onclick = "return displayMessage()" disabled = true>Update</button>
+                    <button class = "button-red" onclick = "return displayMessage()" disabled = true>Update</button>
                 </div>
             </div>
 
@@ -67,7 +66,7 @@
                     <input type="password" id = "repeat-new-password"><br>
                 </form>
                 <div id = "change-password-button">
-                    <button >Change password</button>
+                    <button class = "button-red">Change password</button>
                 </div>
                 
             </div>
