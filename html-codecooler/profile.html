@@ -9,6 +9,7 @@
   <meta name="login" content="LoginSite">
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/codecooler_dashboard.css">
+  <link rel="stylesheet" href="../css/my-account.css">
 </head>
 <body>
     <header>
@@ -36,12 +37,40 @@
 
     <div class="content">
         <div class = "level-1">
-            <img src = "../assets/img/dashboard-codecooler-1.svg">
-            <div class = "texts">
-                <div class = "text blue">THE MORE</div>
-                <div class = "text blue">YOU WORK</div>
-                <div class = "text red">THE MORE</div>
-                <div class = "text red">YOU GET!</div>
+            <h1 id = "label">My Account</h1>
+            <div id = "information"> 
+                <h2 id = "label-profil">Profile Information</h2>
+                <form oninput = "return checkData()">
+                    <label>Name*:</label><br>
+                    <input type="text" id = "name-and-surname" placeholder = "Mateusz Przykładowy"><br>
+                    <label>Email*:</label><br>
+                    <input type="text" id = "e-mail" placeholder = "mateusz@gmail.com" ><br>
+                </form>
+                <div id = "information-bottom">
+                    <div id = "picture">
+                        <p>Picture:</p>
+                        <img src = "../assets/icons/profile_photo.svg"><br>
+                    </div>
+                    <a href = "#"> <img src = "../assets/icons/change_picture.svg">Change picture</a>
+                    <p id = "role-content">Role: Admin</p>
+                    <button id = "update" onclick = "return displayMessage()" disabled = true>Update</button>
+                </div>
+            </div>
+
+            <div id = "change-password">
+                <h2 id = "label-password">Change Password</h2>
+                <form>
+                    <label>Old password*:</label><br>
+                    <input type="password" id = "old-password"><br>
+                    <label>New password*:</label><br>
+                    <input type="password" id = "new-password"><br>
+                    <label>Repeat new password*:</label><br>
+                    <input type="password" id = "repeat-new-password"><br>
+                </form>
+                <div id = "change-password-button">
+                    <button >Change password</button>
+                </div>
+                
             </div>
         </div>
 
