@@ -10,6 +10,7 @@
     src: url("../assets/fonts/SourceSansPro-SemiBold.ttf");
 }
 
+
 .container {
     font-family: "Source Sans Pro";
     display: flex;
@@ -55,19 +56,21 @@
     border-radius: 25px;
     font-size: 18px;
     color: #F2F2F2;
-    border:none;
+    border: none;
+ 
 }
 
-.list-of-persons {
+
+.list-of-students {
     display: grid;
     grid-template-rows: auto;
     row-gap: 8px;
 }
 
-.list-of-persons div {
+.list-of-students div {
     background-color: #F2F2F2;
     display: grid;
-    grid-template-columns: 36px repeat(5, 1fr);
+    grid-template-columns: 30px repeat(7, 1fr);
 }
 
 .header-for-list {
@@ -78,22 +81,39 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    align-items: center;
-    margin: auto 4px;
+    align-items: center; 
+}
+
+.header-for-list .city-div{
+    justify-content: center;
+}
+
+.header-for-list .actions{
+    justify-content: center;
+    margin-right: 20px;
 }
 
 .person-row div {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-
     margin: auto 4px;
 }
+
+.person-row .person-city{
+    justify-content: center;
+}
+
+.person-row .actions{
+    justify-content: center;
+}
+
 
 .arrows {
     display: flex !important;
     flex-direction: column !important;
     justify-content: center;
+   
 }
 
 .arrows img {
@@ -108,4 +128,33 @@
     margin-right: 12px;
     height: 18px;
     width: 18px;
+}
+
+.selector{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background-color:#DFDFDF;
+
+    
+}
+
+.selector a{
+    padding: 7px;
+    color:#418FBF;
+    background-color:#F2F2F2;
+    text-decoration: none;
+  
+}
+
+.selector .first{
+    margin-left: 210px;
+
+}
+
+.selector a:hover{
+    padding: 7px;
+    color: #F2F2F2;
+    background-color:#418FBF;
+    text-decoration: none;
 }
