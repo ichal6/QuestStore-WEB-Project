@@ -254,7 +254,7 @@ body{
     width: auto;
     font-family: "Source Sans Pro";
     font-size: 48px;
-    color: #BF343F;
+    color: #418FBF;
     background-color: transparent;
     margin-top: 0px;
     margin-bottom: 0px;
@@ -335,6 +335,7 @@ body{
     color: #F2F2F2;
     margin-bottom: 20px;
     border:none;
+    margin-left: 230px;
 }
 
 .button-red{
