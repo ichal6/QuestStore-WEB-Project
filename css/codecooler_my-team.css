@@ -194,7 +194,7 @@ body{
     margin-left: 20px;
 }
 
-.level-3{
+.level-4{
     display: flex;
     justify-content: center;
     text-align: center;
@@ -202,7 +202,7 @@ body{
     margin-bottom: 50px;
 }
 
-.level-3 h1{
+.level-4 h1{
     width: auto;
     font-family: "Source Sans Pro";
     font-size: 48px;
@@ -214,7 +214,7 @@ body{
     padding-right: 20px;
 }
 
-.level-3-text{
+.level-4-text{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -225,7 +225,7 @@ body{
     
 }
 
-.level-3-text p{
+.level-4-text p{
     padding-left: 60px;
     margin-right: 20px;
     max-width: 635px;
