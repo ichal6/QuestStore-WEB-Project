@@ -55,12 +55,13 @@
     border-radius: 25px;
     font-size: 18px;
     color: #F2F2F2;
+    border: none;
 }
 
 .list-of-persons {
     display: grid;
     grid-template-rows: auto;
-    row-gap: 8px;
+    row-gap: 1px;
 }
 
 .list-of-persons div {
