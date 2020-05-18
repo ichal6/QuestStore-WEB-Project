@@ -8,6 +8,11 @@
     src: url("../assets/fonts/SourceSansPro-Regular.ttf");
 }
 
+@font-face {
+    font-family: "Source Sans Black";
+    src: url("../assets/fonts/SourceSansPro-Black.ttf");
+}
+
 body{
     margin: 0px;
 }
@@ -56,11 +61,13 @@ body{
 
 
 .level-1{
-    display: flex;
-    justify-content: space-between;
-    margin-left: 65px;
-    margin-right: 65px;
-    background-color: #F2F2F2;
+    position: relative; 
+    margin-left: -10px;
+    margin-bottom: -12px;
+}
+
+.level-1 img{
+    width:100%;
 }
 
 #change-password form input{
@@ -243,9 +250,19 @@ body{
     padding-right: 30px;
 }
 
+.text.simple{
+    font-family: "Source Sans Regular";
+    font-size: 18px;
+    text-align: right;
+    max-width: 635px;
+    position: relative;
+    right: -70px;
+}
+
 .text.blue{
-    color: #2491D4;
-    background-color: #F2F2F2;
+    font-family: "Source Sans Black";
+    background-color: #2491D4;
+    color: #F2F2F2;
 }
 
 .text.red{
