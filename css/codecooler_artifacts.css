@@ -112,7 +112,7 @@ body{
 
 .level-3, .level-4{
     display: flex;
-    background-color: #418FBF;
+    background-color: #2E3159;
 }
 
 .level-3 img, .level-4 img{
@@ -205,6 +205,14 @@ body{
 
 .level-2-text .title, .level-2-text .item p{
     color: #F2F2F2;
+}
+
+.level-3-text .item{
+    background-color: #F2F2F2;
+}
+
+.level-3-text .title, .level-3-text .item p{
+    color: #2E3159;
 }
 
 .title{
@@ -387,6 +395,24 @@ body{
     line-height: 30px;
     letter-spacing: 2px;
     color: #418FBF;
+    margin: 5px;
+    margin-bottom: 20px;
+    border:none;
+}
+
+.button-white{
+    width: 290px;
+    height: 50px;
+    background:#2E3159;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 25px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: 2px;
+    color: #F2F2F2;
     margin: 5px;
     margin-bottom: 20px;
     border:none;
