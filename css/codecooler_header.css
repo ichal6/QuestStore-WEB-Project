@@ -41,7 +41,7 @@ nav{
 }
 
 nav a{
-    font: "Source Sans Pro";
+    font-family: "Source Sans Regular";
     text-decoration: none;
     color: #0D0D0D;
 }
@@ -53,6 +53,7 @@ nav a{
 }
 
 .right-position p, a{
+    font-family: "Source Sans Pro";
     margin-right: 10px;
 }
 
