@@ -198,14 +198,15 @@ body{
     display: flex;
     justify-content: center;
     text-align: center;
-    background-color: #BF343F;
+    background-color: #F2F2F2;
+    margin-bottom: 50px;
 }
 
 .level-3 h1{
     width: auto;
     font-family: "Source Sans Pro";
     font-size: 48px;
-    color: #F2F2F2;
+    color: #BF343F;
     background-color: transparent;
     margin-top: 0px;
     margin-bottom: 0px;
@@ -299,7 +300,7 @@ body{
     font-weight: 600;
     font-size: 20px;
     line-height: 30px;
-    letter-spacing: 2px;
+    letter-spacing: 0px;
     color: #F2F2F2;
     margin-bottom: 20px;
     margin-right: 0px;
