@@ -142,6 +142,10 @@ body{
     margin-top: 50px;
 }
 
+.level-3{
+    background-color: #BF343F;
+}
+
 #acctual-account, .team-name{
     color: #F2F2F2;
     background-color: #BF343F;
@@ -213,6 +217,14 @@ body{
 
 .level-2-text .title, .level-2-text .item p{
     color: #2E3159;
+}
+
+.level-3-text .item{
+    background-color: #F2F2F2;
+}
+
+.level-3-text .title, .level-3-text .item p{
+    color: #BF343F;
 }
 
 .title{
