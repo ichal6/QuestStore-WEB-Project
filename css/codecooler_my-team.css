@@ -119,6 +119,10 @@ body{
     margin-right: 10px;
 }
 
+.level-2{
+    display: flex;
+}
+
 .level-2 h1, .level-2 h2, .level-3 h1, .level-3 h2{
     display: table;
     width: auto;
