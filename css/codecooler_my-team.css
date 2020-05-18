@@ -198,6 +198,11 @@ body{
     font-size: 28px;
 }
 
+.item{
+    max-width: 371px;
+    background-color: #F2F2F2;
+}
+
 .item p{
     margin: 10px;
     max-width: 450px;
