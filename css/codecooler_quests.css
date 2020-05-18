@@ -110,12 +110,12 @@ body{
     width: 190px;
 }
 
-.level-3, .level-4{
+.level-2, .level-4{
     display: flex;
     background-color: #2E3159;
 }
 
-.level-3 img, .level-4 img{
+.level-2 img, .level-4 img{
     margin-right: 10px;
 }
 
@@ -137,7 +137,7 @@ body{
     color: #418FBF;
 }
 
-.level-3 h2{
+.level-2 h2{
     font-size: 28px;
     margin-top: 50px;
 }
@@ -207,11 +207,11 @@ body{
     color: #F2F2F2;
 }
 
-.level-3-text .item{
+.level-2-text .item{
     background-color: #F2F2F2;
 }
 
-.level-3-text .title, .level-3-text .item p{
+.level-2-text .title, .level-2-text .item p{
     color: #2E3159;
 }
 
