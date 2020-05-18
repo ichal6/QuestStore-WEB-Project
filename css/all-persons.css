@@ -67,14 +67,14 @@
 .list-of-persons div {
     background-color: #F2F2F2;
     display: grid;
-    grid-template-columns: 36px repeat(5, 1fr);
+    grid-template-columns: 36px 1fr 1fr 100px 160px 100px;
 }
 
 .header-for-list {
     height: 40px;
 }
 
-.header-for-list div {
+.header-for-list div { 
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -86,7 +86,6 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-
     margin: auto 4px;
 }
 
@@ -108,4 +107,17 @@
     margin-right: 12px;
     height: 18px;
     width: 18px;
+}
+
+.person-img-name img {
+    height: 40px;
+    width: 40px;
+}
+
+.person-img-name {
+    line-height: 40px;
+}
+
+.actions {
+    max-width: 20px;
 }
