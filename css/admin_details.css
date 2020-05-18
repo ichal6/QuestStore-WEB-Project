@@ -3,6 +3,11 @@
     src: url("../assets/fonts/SourceSansPro-SemiBold.ttf");
 }
 
+@font-face {
+    font-family: "Source Sans Regular";
+    src: url("../assets/fonts/SourceSansPro-Regular.ttf");
+}
+
 * {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
