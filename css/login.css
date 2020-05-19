@@ -118,12 +118,10 @@ body{
    color:#418FBF;
 }
 .form h4{
-    text-align: left;
+    text-align: center;
     padding: 0px;
     font-family: 'Source Sans Pro', sans-serif;
-
     margin: 0px 30px 30px 30px;
-    letter-spacing: 1px;
 }
 
 .form h5{
