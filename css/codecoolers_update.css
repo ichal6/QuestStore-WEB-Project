@@ -168,3 +168,12 @@ input{
     grid-column-start: 1;
     width: 350px !important;
 }
+
+.class-team-seletor{
+    width: 400px;
+    height: 50px;
+    border-radius: 12px;
+    border: 1px solid #9CA1A6;
+    background-color: #F2F2F2;
+    font-size: 16px;
+}
