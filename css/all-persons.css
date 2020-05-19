@@ -55,13 +55,17 @@
     border-radius: 25px;
     font-size: 18px;
     color: #F2F2F2;
+<<<<<<< HEAD
     border:none;
+=======
+    border: none;
+>>>>>>> 9f7b8ecde2828d2bff49c603705f5ce9f4facf1e
 }
 
 .list-of-persons {
     display: grid;
     grid-template-rows: auto;
-    row-gap: 8px;
+    row-gap: 1px;
 }
 
 .list-of-persons div {
