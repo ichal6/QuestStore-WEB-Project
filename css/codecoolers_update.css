@@ -150,11 +150,11 @@ input{
 #selector{
     height: 40px;
     width: fit-content;
-    border:1px solid #DFDFDF;
+    border:3px solid #DFDFDF;
     border-radius: 26px;
     font-size: 15px;;
     font-weight: 700;
-    background-color: #DFDFDF;;
+    background-color: #F2F2F2;
 }
 
 .add-new-achivement{
