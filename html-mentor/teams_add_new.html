@@ -54,25 +54,25 @@
             </div>
         </aside>
         <div class="details-container">
-            <h1>Quest's details</h1>
+            <h1>Add new quest</h1>
             <a href="quests_list.html">&#60;- Back to the list</a>
             <div class="quest-details">
                 <h2>Basic details</h2>
                 <label for="quest-name">Name*:</label>
-                <input type="text" id="quest-name" value="Spot a major mistake in cc assignment">
+                <input type="text" id="quest-name">
                 <label for="quest-descripton">Description*:</label>
-                <textarea id="quest-descripton">You’ve found the mistake that our mentors did, congratulations! Contact your mentor to be rewarded for it!</textarea> 
+                <textarea id="quest-descripton"></textarea> 
                 <div class = "proporties-section">
                     <div class = "picture">
                         <p>Picture: </p>
-                        <img id = "quest-logo" src = "../assets/img/quest_logo_02.svg"><br>
-                        <a href = "#"><img src = "../assets/icons/change_picture.svg">Change picture</a> 
+                        <a href = "#"><img src = "../assets/icons/change_picture.svg">Add the picture</a> 
                     </div>
                     <div class = proporties>
                         <label>Value (Number of coins student will get for the quest)*:</label><br>
-                        <input type="text" value = "500"><br>                        
+                        <input type="text"><br>                        
                         <label>Type (Basic or Extra):</label><br>
                         <select class= "type-seletor" id="type-selector">
+                            <option value="" selected disabled hidden>Choose...</option>
                             <option> Basic</option>
                             <option> Extra</option>
                         </select>
@@ -80,7 +80,7 @@
                 </div>
                 <div class="lower-section">
                     <p>*- Fields marked like the need to be filled to add new entry</p>
-                    <button class="btn" id="update-admin">Update</button>
+                    <button class="btn" id="add-new-quest">Add new quest</button>
                 </div>
             </div>
         </div>
