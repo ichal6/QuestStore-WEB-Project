@@ -73,7 +73,7 @@
 .list-of-teams div {
     background-color: #F2F2F2;
     display: grid;
-    grid-template-columns: 36px 1fr 1fr 100px 160px 100px;
+    grid-template-columns: 36px 1fr 1fr 1fr 100px;
 }
 
 .header-for-list {
