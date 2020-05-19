@@ -126,3 +126,7 @@
 .proporties input{
     width: 400px;
 }
+
+.proporties select{
+    padding-left: 15px;
+}
