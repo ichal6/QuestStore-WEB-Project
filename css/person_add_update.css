@@ -106,10 +106,12 @@
     margin-left: 6px;
 }
 
-.img-coins img {
+.thumbail-img {
     margin: 12px 0;
 }
-
+.change-img-icon{
+    margin-right: 12px;
+}
 .img-coins div {
     display: flex;
     flex-direction: column;
