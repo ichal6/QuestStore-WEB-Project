@@ -23,7 +23,7 @@
     min-height: calc(100vh - 160px);
 }
 
-.all-quests-container {
+.all-artifacts-container {
     font-family: 'Source Sans Pro';
     width: 100%;
     margin: 12px;
@@ -64,13 +64,13 @@
     border: none;
 }
 
-.list-of-quests {
+.list-of-artifacts {
     display: grid;
     grid-template-rows: auto;
     row-gap: 1px;
 }
 
-.list-of-quests div {
+.list-of-artifacts div {
     background-color: #F2F2F2;
     display: grid;
     grid-template-columns: 36px 1fr 1fr 100px 100px 160px 100px;
@@ -88,7 +88,7 @@
     margin: auto 4px;
 }
 
-.quest-row div {
+.artifact-row div {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -106,22 +106,22 @@
     margin: 2px;
 }
 
-.quest-row {
+.artifact-row {
     height: 60px;
 }
 
-.quest-row img {
+.artifact-row img {
     margin-right: 12px;
     height: 18px;
     width: 18px;
 }
 
-.quest-img-name img {
+.artifact-img-name img {
     height: 40px;
     width: 40px;
 }
 
-.quest-img-name {
+.artifact-img-name {
     line-height: 40px;
 }
 
