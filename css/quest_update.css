@@ -96,3 +96,14 @@
     font-family: "Source Sans Pro";
     color: #545759;
 }
+
+.proporties-section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#quest-logo{
+    width: 156px;
+    height: 156px;
+}
