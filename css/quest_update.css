@@ -34,7 +34,7 @@
     color: #418FBF;
 }
 
-.personal-details {
+.quest-details {
     display: flex;
     flex-direction: column;
     background-color: #F2F2F2;
@@ -42,17 +42,17 @@
     margin-top: 24px;
 }
 
-.personal-details h2 {
+.quest-details h2 {
     font-size: 28px;
     margin-bottom: 24px;
 }
 
-.personal-details label, .picture p, .picture a, .proporties, .proporties input, .proporties select {
+.quest-details label, .picture p, .picture a, .proporties, .proporties input, .proporties select {
     color: #545759;
     margin: 12px 0;
 }
 
-.personal-details input, .personal-details textarea {
+.quest-details input, .quest-details textarea {
     border: 1px solid #9CA1A6;
     background-color: #F2F2F2;
     height: 50px;
@@ -63,7 +63,7 @@
     border-radius: 12px;
 }
 
-.personal-details textarea{
+.quest-details textarea{
     height: auto;
 }
 
