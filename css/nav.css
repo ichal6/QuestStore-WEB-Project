@@ -21,7 +21,7 @@
 }
 
 .nav-menu li:hover {
-    background-color: #9a1823;
+    background-color: #9A1823;
 }
 
 .nav-menu img {
@@ -33,4 +33,8 @@
     font-size: 18px;
     font-family: "Source Sans Pro";
     text-decoration: none;
+}
+
+#select-page{
+    background-color: #9A1823;
 }
