@@ -119,26 +119,35 @@
     background-color: #E56E00;
 }
 
+@media screen and (min-width: 1700px) {
+    .options_container {
+        grid-template-columns: repeat(4, 25%);
+        grid-template-rows: repeat(2, 240px);
+    }
+}
+
+@media screen and (min-width: 2300px) {
+    .options_container {
+        grid-template-columns: repeat(5, 20%);
+        grid-template-rows: repeat(1, 240px);
+    }
+}
+
 @media screen and (max-width: 1230px) {
     .options_container {
-        grid-template-columns: repeat(3, 33%);
+        grid-template-columns: repeat(2, 50%);
         grid-template-rows: repeat(3, 240px);
     }
 }
 
 @media screen and (max-width: 1030px) {
     .options_container {
-        grid-template-columns: repeat(2, 50%);
-        grid-template-rows: repeat(4, 240px);
+        grid-template-columns: repeat(1, 100%);
+        grid-template-rows: repeat(5, 240px);
     }
 }
 
-@media screen and (max-width: 750px) {
-    .options_container {
-        grid-template-columns: repeat(1, 100%);
-        grid-template-rows: repeat(8, 240px);
-    }
-
+@media screen and (max-width: 650px) {
     .container {
         flex-direction: column;
     }
