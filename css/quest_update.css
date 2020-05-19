@@ -3,6 +3,11 @@
     src: url("../assets/fonts/SourceSansPro-SemiBold.ttf");
 }
 
+@font-face {
+    font-family: "Source Sans Regular";
+    src: url("../assets/fonts/SourceSansPro-Regular.ttf");
+}
+
 * {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -42,7 +47,7 @@
     margin-bottom: 24px;
 }
 
-.personal-details label {
+.personal-details label, .picture p, .picture a {
     color: #545759;
     margin: 12px 0;
 }
@@ -106,4 +111,14 @@
 #quest-logo{
     width: 156px;
     height: 156px;
+}
+
+.picture a{
+    text-decoration: underline;
+}
+
+.picture a img{
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
 }
