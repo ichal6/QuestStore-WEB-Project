@@ -3,6 +3,11 @@
     src: url("../assets/fonts/SourceSansPro-SemiBold.ttf");
 }
 
+@font-face {
+    font-family: "Source Sans Regular";
+    src: url("../assets/fonts/SourceSansPro-Regular.ttf");
+}
+
 * {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -29,8 +34,7 @@
     color: #418FBF;
 }
 
-.personal-details {
-    font-family: "Source Sans Pro";
+.artifacts-details {
     display: flex;
     flex-direction: column;
     background-color: #F2F2F2;
@@ -38,17 +42,17 @@
     margin-top: 24px;
 }
 
-.personal-details h2 {
+.artifacts-details h2 {
     font-size: 28px;
     margin-bottom: 24px;
 }
 
-.personal-details label {
+.artifacts-details label, .picture p, .picture a, .proporties, .proporties input, .proporties select {
     color: #545759;
     margin: 12px 0;
 }
 
-.personal-details input, .personal-details textarea {
+.artifacts-details input, .artifacts-details textarea {
     border: 1px solid #9CA1A6;
     background-color: #F2F2F2;
     height: 50px;
@@ -57,6 +61,10 @@
     color: #545759;
     padding: 18px;
     border-radius: 12px;
+}
+
+.artifacts-details textarea{
+    height: auto;
 }
 
 .lower-section {
@@ -75,7 +83,7 @@
 
 .btn {
     background: #418FBF;
-    padding: 6px 18px;
+    padding: 6px 50px;
     border: none;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
     border-radius: 25px;
@@ -83,37 +91,42 @@
     color: #F2F2F2;
 }
 
-#level-description {
-    height: 100px;
-}
-
-#level-description::placeholder {
-    text-align: justify;
-}
-
-.img-coins {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    margin: 24px 0;
-}
-
-.img-coins p {
+.type-seletor{
+    width: 400px;
+    height: 50px;
+    border-radius: 12px;
+    border: 1px solid #9CA1A6;
+    background-color: #F2F2F2;
+    font-size: 16px;
+    font-family: "Source Sans Pro";
     color: #545759;
 }
 
-.img-coins a {
-    text-decoration: underline;
-    margin-left: 6px;
+.proporties-section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.thumbail-img {
-    margin: 12px 0;
+#artifacts-logo{
+    width: 156px;
+    height: 156px;
 }
-.change-img-icon{
-    margin-right: 12px;
+
+.picture a{
+    text-decoration: underline;
 }
-.img-coins div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+
+.picture a img{
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.proporties input{
+    width: 400px;
+}
+
+.proporties select{
+    padding-left: 15px;
 }
