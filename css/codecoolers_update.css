@@ -150,7 +150,7 @@ input{
 #selector{
     height: 40px;
     width: fit-content;
-    border:3px solid #DFDFDF;
+    border:1px solid #DFDFDF;
     border-radius: 26px;
     font-size: 15px;;
     font-weight: 700;
@@ -178,8 +178,4 @@ input{
     font-size: 16px;
     font-family: "Source Sans Pro";
     color: #545759;
-}
-
-#update-student{
-    width: 250px;
 }
