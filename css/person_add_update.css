@@ -30,6 +30,7 @@
 }
 
 .personal-details {
+    font-family: "Source Sans Pro";
     display: flex;
     flex-direction: column;
     background-color: #F2F2F2;
@@ -47,7 +48,7 @@
     margin: 12px 0;
 }
 
-.personal-details input {
+.personal-details input, .personal-details textarea {
     border: 1px solid #9CA1A6;
     background-color: #F2F2F2;
     height: 50px;
@@ -80,4 +81,43 @@
     border-radius: 25px;
     font-size: 18px;
     color: #F2F2F2;
+}
+
+#level-description {
+    height: 100px;
+}
+
+#level-description::placeholder {
+    text-align: justify;
+}
+
+.img-coins {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    margin: 24px 0;
+}
+
+.img-coins p {
+    color: #545759;
+}
+
+.img-coins a {
+    text-decoration: underline;
+    margin-left: 6px;
+}
+
+.thumbail-img {
+    margin: 12px 0;
+}
+.change-img-icon{
+    margin-right: 12px;
+}
+.img-coins div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.level-coins input{
+    width: 100%;
 }
