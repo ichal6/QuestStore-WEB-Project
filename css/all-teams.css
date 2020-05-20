@@ -64,6 +64,10 @@
     border: none;
 }
 
+.btn:hover{
+    cursor: pointer;
+}
+
 .list-of-teams {
     display: grid;
     grid-template-rows: auto;
