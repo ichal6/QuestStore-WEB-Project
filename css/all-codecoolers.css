@@ -59,9 +59,11 @@
     color: #F2F2F2;
     border: none;
     height: 40px;
- 
 }
 
+.btn:hover{
+    cursor: pointer;
+}
 
 .list-of-students {
     display: grid;
