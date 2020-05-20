@@ -48,7 +48,7 @@
     margin: 12px 0;
 }
 
-.personal-details input {
+.personal-details input, .personal-details textarea {
     border: 1px solid #9CA1A6;
     background-color: #F2F2F2;
     height: 50px;
