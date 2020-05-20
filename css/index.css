@@ -3,13 +3,11 @@ body{
 }
 
 .container-1{
-    background-color: #F2F2F2;
+    background-color: #BF343F;
     width: 100vw;
     height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr;
-   
+    display: flex;
+    flex-direction: column;
 }
 
 .login-container{
@@ -17,7 +15,7 @@ body{
     height: 60vh;
     border-radius: 12px;
     background-color: #F2F2F2;
-    margin: 0 auto 70px auto;
+    margin: 100px auto 70px auto;
     display: grid;
     grid-gap: 10px;
     align-items: center;
@@ -48,4 +46,11 @@ body{
 
 .button:hover{
     opacity: 0.8;
+}
+
+label{
+    text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 40px;
+    color: #BF343F;
 }
