@@ -34,7 +34,7 @@
     color: #418FBF;
 }
 
-.quest-details {
+.artifacts-details {
     display: flex;
     flex-direction: column;
     background-color: #F2F2F2;
@@ -42,17 +42,17 @@
     margin-top: 24px;
 }
 
-.quest-details h2 {
+.artifacts-details h2 {
     font-size: 28px;
     margin-bottom: 24px;
 }
 
-.quest-details label, .picture p, .picture a, .proporties, .proporties input, .proporties select {
+.artifacts-details label, .picture p, .picture a, .proporties, .proporties input, .proporties select {
     color: #545759;
     margin: 12px 0;
 }
 
-.quest-details input, .quest-details textarea {
+.artifacts-details input, .artifacts-details textarea {
     border: 1px solid #9CA1A6;
     background-color: #F2F2F2;
     height: 50px;
@@ -63,7 +63,7 @@
     border-radius: 12px;
 }
 
-.quest-details textarea{
+.artifacts-details textarea{
     height: auto;
 }
 
@@ -108,7 +108,7 @@
     justify-content: space-between;
 }
 
-#quest-logo{
+#artifacts-logo{
     width: 156px;
     height: 156px;
 }
@@ -121,6 +121,12 @@
     margin-top: 10px;
     margin-right: 10px;
     margin-left: 10px;
+}
 
 .proporties input{
     width: 400px;
+}
+
+.proporties select{
+    padding-left: 15px;
+}
