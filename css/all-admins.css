@@ -54,6 +54,12 @@
     border-radius: 25px;
     font-size: 18px;
     color: #F2F2F2;
+    transition: all 0.2s;
+}
+
+.btn:hover{
+    background-color: rgb(55, 158, 223);
+    font-size: 21px;
 }
 
 .list-of-admins {
