@@ -12,7 +12,7 @@
 </head>
 <body>
     <nav class="nav-bar">
-        <img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo">
+        <a href = "login.html"><img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
     </nav>
     <div class="content">
         <div class="login-container">
@@ -22,7 +22,7 @@
 
                 <div class="input-icons"> 
                     <i><img src="../assets/icons/login_icon.png" class="login-icon"> </i> 
-                    <input class="input-field" type="text"placeholder="Your email"> 
+                    <input class="input-field" id = "email" type="text"placeholder="Your email"> 
                 </div> 
 
                 <div class="input-icons"> 
@@ -33,7 +33,7 @@
                 <h5><a href="login-password-reset.html">forgot your password?</a> </h5>
                 
                 <div class ="submit-button">
-                    <a href="../html-mentor/mentor_dashboard.html"><input class="button" type ="submit" value ="Sign in"> </a>
+                    <input class="button" type ="submit" value ="Sign in" onclick="return launchPage()">
                 </div>
             </div>	
         </div>
@@ -49,5 +49,17 @@
 
     </div>
 </footer>
+
+<script> 
+    function launchPage(){
+        var inputEmail = document.getElementById("email").value;
+        if(inputEmail == "admin"){
+            window.open("../html-admin/admin_dashboard.html","_self");
+        }
+        else{
+            window.open("../html-mentor/mentor_dashboard.html","_self");
+        }
+    }
+</script>
 
 </html>
