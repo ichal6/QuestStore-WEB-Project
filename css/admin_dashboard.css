@@ -37,6 +37,11 @@
     height: 171px;
     padding: 12px;
     background-color: #F2F2F2;
+    text-decoration: none;
+}
+
+.options_rectangle >  div > p > a:hover{
+    color: black;
 }
 
 .upper_section {
