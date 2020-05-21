@@ -82,7 +82,7 @@ body{
     transition: all 0.2s;
 }
 
-.btn:hover{
+.button:hover{
     background-color: rgb(55, 158, 223);
     font-size: 21px;
     cursor: pointer;
@@ -123,6 +123,7 @@ body{
    margin-left: 50px;
    color:#418FBF;
 }
+
 .form h4{
     text-align: center;
     padding: 0px;
@@ -154,6 +155,9 @@ body{
 .form-top-text{
     padding-top: 30px;
     letter-spacing: 1px;
-    margin: 0px 50px 20px 50px;
+    margin: 0px 50px 20px 50px;  
+}
+
+@media screen and (max-width: 10px) {
     
 }
