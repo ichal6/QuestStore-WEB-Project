@@ -81,6 +81,11 @@ body{
     border:none;
 }
 
+.button:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
+
 .reset{
     letter-spacing: 1px;
     margin: 0px 50px 20px 50px;
