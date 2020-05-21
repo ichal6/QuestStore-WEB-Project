@@ -45,6 +45,9 @@ body{
 }
 
 .button:hover{
+    background-color: rgb(55, 158, 223);
+    font-size: 21px;
+    cursor: pointer;
     opacity: 0.8;
 }
 

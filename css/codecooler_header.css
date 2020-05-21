@@ -41,7 +41,7 @@ nav{
 }
 
 nav a{
-    font-family: "Source Sans Regular";
+    font-family: "Source Sans Pro";
     text-decoration: none;
     color: #0D0D0D;
 }
@@ -55,8 +55,55 @@ nav a{
 .right-position p, a{
     font-family: "Source Sans Pro";
     margin-right: 10px;
+    color: black;
+    text-decoration: none;
 }
 
 .logo{
     padding: 10px;
+}
+
+#fb-logo{
+    height: 25px;
+    transition: all 0.2s;
+}
+
+#fb-logo:hover{
+    filter: invert(28%) sepia(16%) saturate(4449%) hue-rotate(194deg) brightness(96%) contrast(73%);
+}
+
+#linkedin-logo{
+    height: 25px;
+    transition: all 0.2s;
+}
+
+#linkedin-logo:hover{
+    filter: invert(26%) sepia(93%) saturate(1531%) hue-rotate(178deg) brightness(100%) contrast(101%);
+}
+
+#yt-logo{
+    height: 25px;
+    transition: all 0.2s;
+}
+
+#yt-logo:hover{
+    filter: invert(13%) sepia(88%) saturate(6957%) hue-rotate(357deg) brightness(92%) contrast(118%);
+}
+
+#instagram-logo{
+    height: 25px;
+    transition: all 0.2s;
+}
+
+#instagram-logo:hover{
+    filter: invert(27%) sepia(47%) saturate(5531%) hue-rotate(325deg) brightness(95%) contrast(85%);
+}
+
+#twitter-logo{
+    height: 25px;
+    transition: all 0.2s;
+}
+
+#twitter-logo:hover{
+    filter: invert(59%) sepia(37%) saturate(4140%) hue-rotate(176deg) brightness(93%) contrast(104%);
 }

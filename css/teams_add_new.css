@@ -86,6 +86,13 @@
     color: #F2F2F2;
     width: 160px;
     height: 50px;
+    transition: all 0.2s;
+}
+
+.btn:hover{
+    background-color: rgb(55, 158, 223);
+    font-size: 19px;
+    cursor: pointer;
 }
 
 .header-for-list{
