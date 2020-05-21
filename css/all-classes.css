@@ -62,6 +62,12 @@
     font-size: 18px;
     color: #F2F2F2;
     border: none;
+    transition: all 0.2s;
+}
+
+.btn:hover{
+    background-color: rgb(55, 158, 223);
+    font-size: 19px;
 }
 
 .list-of-classes {
