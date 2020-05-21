@@ -43,7 +43,7 @@ nav{
 nav a{
     font: "Source Sans Pro";
     text-decoration: none;
-    color: #0D0D0D;
+    color: rgb(7, 6, 6);
 }
 
 .right-position{
