@@ -247,3 +247,24 @@ nav a{
     margin-top: 20px;
     border:none;
 }
+
+@media screen and (max-width: 1000px) {
+    .text{
+        font-size: 48px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .text{
+        font-size: 36px;
+    }
+    .level-2 img, .level-3 img, .level-4 img{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .text{
+        font-size: 24px;
+    }
+}
