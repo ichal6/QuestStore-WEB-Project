@@ -137,34 +137,25 @@ body{
     background-color: #BF343F;
 }
 
-#acctual-account, .team-name{
-    color: #F2F2F2;
-    background-color: #BF343F;
-    margin-left: 20px;
-    margin-bottom: 50px;
-    padding: 0px;
-    padding-left: 20px;
-    padding-right: 20px;
-    display: table;
-    font-family: "Source Sans Black";
-    font-size: 48px;
-}
-
 .items, .users{
     width: 100%;
-    margin-left: 20px;
     margin-bottom: 60px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
+
+.items::after{
+    content: '';
+    width: 310px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 
 .item, .user{
     background-color: #BF343F;
     margin-top: 30px;
-    margin-right: 30px;
-    padding: 10px;
-    padding-left: 0px;
     max-width: 450px;
 }
 
@@ -206,12 +197,17 @@ body{
 }
 
 .item{
-    max-width: 294px;
+    max-width: 310px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .item img{
-    margin-left: -3px;
-    max-width: 310px;
+    margin-right: 0px;
+    width: 100%;
+    width: 310px;
+    height: 310px;
+    object-fit: cover;
 }
 
 .item p{
@@ -247,6 +243,7 @@ body{
     font-size: 18px;
     margin-top: 35px;
     margin-left: 20px;
+    margin-right: 20px;
 }
 
 .level-4{
@@ -259,9 +256,9 @@ body{
 
 .level-4 h1{
     width: auto;
-    font-family: "Source Sans Pro";
+    font-family: "Source Sans Black";
     font-size: 48px;
-    color: #418FBF;
+    color: #2E3159;
     background-color: transparent;
     margin-top: 0px;
     margin-bottom: 0px;
@@ -347,61 +344,13 @@ body{
     margin-bottom: 20px;
     border:none;
     margin-left: 230px;
+    transition: all 0.2s;
 }
 
-.button-red{
-    width: 300px;
-    height: 50px;
-    background:#BF343F;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-    border-radius: 25px;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 30px;
-    letter-spacing: 0px;
-    color: #F2F2F2;
-    margin-bottom: 20px;
-    margin-right: 0px;
-    border:none;
-    margin-left: 190px;
-}
-
-.button-blue{
-    width: 290px;
-    height: 50px;
-    background:#F2F2F2;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-    border-radius: 25px;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 30px;
-    letter-spacing: 2px;
-    color: #418FBF;
-    margin: 5px;
-    margin-bottom: 20px;
-    border:none;
-}
-
-.button-white{
-    width: 290px;
-    height: 50px;
-    background:#2E3159;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-    border-radius: 25px;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 30px;
-    letter-spacing: 2px;
-    color: #F2F2F2;
-    margin: 5px;
-    margin-bottom: 20px;
-    border:none;
+.button:hover {
+    background-color:rgb(58, 63, 160);
+    font-size: 21px;
+    cursor: pointer;
 }
 
 #red-text{
