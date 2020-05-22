@@ -36,11 +36,6 @@ body{
     width:100%;
 }
 
-.info-student{
-    margin: 10px;
-    margin-left: 50px;
-}
-
 #picture a img{
     margin-right: 10px;
 }
@@ -108,10 +103,6 @@ body{
     max-width: 450px;
 }
 
-.user img{
-    margin-bottom: -4px;
-}
-
 .level-2-text .title, .level-2-text .item p{
     color: #F2F2F2;
 }
@@ -171,16 +162,6 @@ body{
 
 .price img{
     margin-right: 10px;
-}
-
-.used{
-    font-family: "Source Sans Regular";
-    font-size: 28px;
-}
-
-.available{
-    font-family: "Source Sans Pro";
-    font-size: 40px;
 }
 
 .level-2-text, .level-3-text, .level-4-text{
@@ -335,4 +316,5 @@ body{
     .text.red{
         font-size: 24px;
     }
+}
 }
