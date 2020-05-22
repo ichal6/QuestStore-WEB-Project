@@ -26,40 +26,6 @@ body{
     margin-bottom: 0px
 }
 
-#label{
-    font-family: "Source Sans Pro";
-    font-size: 48px;
-    display: table;
-    width: auto;
-    margin-left: 65px;
-    padding: 5px;
-    color: #F2F2F2;
-    background-color: #BF343F;
-}
-
-#label-profil, #label-password{
-    font-family: "Source Sans Pro";
-    font-size: 36px;
-    margin-bottom: 40px;
-}
-
-.form label{
-    font-family: "Source Sans Regular";
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.form input{
-    margin-top: 10px;
-    width: 100%;
-    height: 25px;
-    padding: 10px;
-    border-radius: 10px;
-    background: #F2F2F2;
-    border: 1px solid #9CA1A6;
-}
-
-
 .level-1{
     position: relative; 
     margin-left: -10px;
@@ -68,24 +34,6 @@ body{
 
 .level-1 img{
     width:100%;
-    margin-bottom: 50px;
-}
-
-#change-password form input{
-    margin-bottom: 30px;
-    margin-top: 10px;
-    width: 460px;
-    /* width: 460px; */
-    /* margin-right: 100px; */
-}
-
-.info-student{
-    margin: 10px;
-    margin-left: 50px;
-}
-
-#student-photo{
-    margin-bottom: 20px;
 }
 
 #picture a img{
@@ -97,22 +45,9 @@ body{
     color: #545759;
 }
 
-#change-password-button{
-    margin-top: 80px;
-}
-
-#information-bottom{
-    display: flex;
-}
-
-#button-update{
-    margin-top: 60px;
-    width: 190px;
-}
-
 .level-2, .level-4{
     display: flex;
-    background-color: #2E3159;
+    background-color: #F2F2F2;
 }
 
 .level-2 img, .level-4 img{
@@ -134,7 +69,7 @@ body{
 }
 
 .level-2 h1, .level-2 h2{
-    color: #F2F2F2;
+    color: #0D0D0D;
 }
 
 .level-2 h2{
@@ -146,77 +81,39 @@ body{
     background-color: #BF343F;
 }
 
-#acctual-account, .team-name{
-    color: #F2F2F2;
-    background-color: #BF343F;
-    margin-left: 20px;
-    margin-bottom: 50px;
-    padding: 0px;
-    padding-left: 20px;
-    padding-right: 20px;
-    display: table;
-    font-family: "Source Sans Black";
-    font-size: 48px;
-}
-
 .items, .users{
     width: 100%;
-    margin-left: 20px;
     margin-bottom: 60px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
+
+.items::after{
+    content: '';
+    width: 310px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
 
 .item, .user{
     background-color: #BF343F;
     margin-top: 30px;
-    margin-right: 30px;
-    padding: 10px;
-    padding-left: 0px;
     max-width: 450px;
 }
 
-.user{
-    padding: 0px;
-}
-
-.user img{
-    margin-bottom: -4px;
-}
-
-.description{
-    background-color: #F2F2F2;
-}
-
-.description p{
-    margin-top: 0px;
-    padding-top: 20px;
-}
-
-.name, .surname{
-    font-family: "Source Sans Pro";
-    font-size: 28px;
-    color: #F2F2F2;
-    padding-left: 15px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.level-2-text .item{
-    background-color: #418FBF;
-}
-
 .level-2-text .title, .level-2-text .item p{
     color: #F2F2F2;
 }
 
 .level-2-text .item{
-    background-color: #F2F2F2;
+    background-color: #2E3159;
 }
 
-.level-2-text .title, .level-2-text .item p{
-    color: #2E3159;
+.level-2-text .item .description{
+    font-family: "Source Sans Regular";
+    font-weight: 300;
 }
 
 .level-3-text .item{
@@ -236,12 +133,17 @@ body{
 }
 
 .item{
-    max-width: 294px;
+    max-width: 310px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .item img{
-    margin-left: -3px;
-    max-width: 310px;
+    margin-right: 0px;
+    width: 100%;
+    width: 310px;
+    height: 310px;
+    object-fit: cover;
 }
 
 .item p{
@@ -262,21 +164,12 @@ body{
     margin-right: 10px;
 }
 
-.used{
-    font-family: "Source Sans Regular";
-    font-size: 28px;
-}
-
-.available{
-    font-family: "Source Sans Pro";
-    font-size: 40px;
-}
-
 .level-2-text, .level-3-text, .level-4-text{
     font-family: "Source Sans Regular";
     font-size: 18px;
     margin-top: 35px;
-    margin-left: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
 .level-4{
@@ -289,9 +182,9 @@ body{
 
 .level-4 h1{
     width: auto;
-    font-family: "Source Sans Pro";
+    font-family: "Source Sans Black";
     font-size: 48px;
-    color: #418FBF;
+    color: #2E3159;
     background-color: transparent;
     margin-top: 0px;
     margin-bottom: 0px;
@@ -343,6 +236,8 @@ body{
     max-width: 635px;
     position: relative;
     right: 0px;
+    margin-left: 40px;
+    margin-top: 20px;
 }
 
 .text.blue{
@@ -355,6 +250,7 @@ body{
     font-family: "Source Sans Black";
     color: #F2F2F2;
     background-color: #BF343F;
+    margin-left: 40px;
 }
 
 
@@ -374,63 +270,51 @@ body{
     margin-bottom: 20px;
     border:none;
     margin-left: 230px;
+    transition: all 0.2s;
 }
 
-.button-red{
-    width: 300px;
-    height: 50px;
-    background:#BF343F;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-    border-radius: 25px;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 30px;
-    letter-spacing: 0px;
-    color: #F2F2F2;
-    margin-bottom: 20px;
-    margin-right: 0px;
-    border:none;
-    margin-left: 190px;
-}
-
-.button-blue{
-    width: 290px;
-    height: 50px;
-    background:#F2F2F2;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-    border-radius: 25px;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 30px;
-    letter-spacing: 2px;
-    color: #418FBF;
-    margin: 5px;
-    margin-bottom: 20px;
-    border:none;
-}
-
-.button-white{
-    width: 290px;
-    height: 50px;
-    background:#2E3159;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
-    border-radius: 25px;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 30px;
-    letter-spacing: 2px;
-    color: #F2F2F2;
-    margin: 5px;
-    margin-bottom: 20px;
-    border:none;
+.button:hover {
+    background-color:rgb(58, 63, 160);
+    font-size: 21px;
+    cursor: pointer;
 }
 
 #red-text{
     color: #BF343F;
+}
+
+
+@media screen and (max-width: 1000px) {
+    .text.red{
+        font-size: 48px;
+    }
+
+    .button{
+        margin: auto;
+}
+
+@media screen and (max-width: 650px) {
+    .text.red{
+        font-size: 36px;
+    }
+
+    .item img{
+        height: 180px;
+    }
+
+    .level-1 img{
+        height: 400px;
+        object-fit: cover;
+    }
+
+    .text.simple{
+        max-width: 435px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .text.red{
+        font-size: 24px;
+    }
+}
 }
