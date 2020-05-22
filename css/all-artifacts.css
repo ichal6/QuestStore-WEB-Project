@@ -68,6 +68,7 @@
 .btn:hover{
     background-color: rgb(55, 158, 223);
     font-size: 19px;
+    cursor: pointer;
 }
 
 .list-of-artifacts {
