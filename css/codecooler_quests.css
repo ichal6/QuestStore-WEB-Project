@@ -68,15 +68,6 @@ body{
 
 .level-1 img{
     width:100%;
-    margin-bottom: 50px;
-}
-
-#change-password form input{
-    margin-bottom: 30px;
-    margin-top: 10px;
-    width: 460px;
-    /* width: 460px; */
-    /* margin-right: 100px; */
 }
 
 .info-student{
@@ -112,7 +103,7 @@ body{
 
 .level-2, .level-4{
     display: flex;
-    background-color: #2E3159;
+    background-color: #F2F2F2;
 }
 
 .level-2 img, .level-4 img{
@@ -134,7 +125,7 @@ body{
 }
 
 .level-2 h1, .level-2 h2{
-    color: #F2F2F2;
+    color: #0D0D0D;
 }
 
 .level-2 h2{
@@ -185,38 +176,17 @@ body{
     margin-bottom: -4px;
 }
 
-.description{
-    background-color: #F2F2F2;
-}
-
-.description p{
-    margin-top: 0px;
-    padding-top: 20px;
-}
-
-.name, .surname{
-    font-family: "Source Sans Pro";
-    font-size: 28px;
-    color: #F2F2F2;
-    padding-left: 15px;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.level-2-text .item{
-    background-color: #418FBF;
-}
-
 .level-2-text .title, .level-2-text .item p{
     color: #F2F2F2;
 }
 
 .level-2-text .item{
-    background-color: #F2F2F2;
+    background-color: #2E3159;
 }
 
-.level-2-text .title, .level-2-text .item p{
-    color: #2E3159;
+.level-2-text .item .description{
+    font-family: "Source Sans Regular";
+    font-weight: 300;
 }
 
 .level-3-text .item{
@@ -343,6 +313,8 @@ body{
     max-width: 635px;
     position: relative;
     right: 0px;
+    margin-left: 40px;
+    margin-top: 20px;
 }
 
 .text.blue{
@@ -355,6 +327,7 @@ body{
     font-family: "Source Sans Black";
     color: #F2F2F2;
     background-color: #BF343F;
+    margin-left: 40px;
 }
 
 
