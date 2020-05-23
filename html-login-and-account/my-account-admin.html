@@ -11,10 +11,9 @@
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/my-account.css">
     <script src="../js/dropdown.js" ></script>
-    <script src="../js/myAccount.js" defer></script>
 </head>
 
-<body>
+<body onload="checkName();checkEmail()">
     <div class="header">
         <div class="left-position">
             <a href="../html-admin/admin_dashboard.html"> <img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
@@ -61,11 +60,17 @@
             <h1 id="label">My Account</h1>
             <div id="information"> 
                 <h2 id="label-profil">Profile Information</h2>
-                <form oninput="return checkData()">
+                <form>
                     <label>Name*:</label><br>
-                    <input type="text" id="name-and-surname" placeholder="Mateusz Przykładowy"><br>
+                    <input type="text" id="name-and-surname" class="name-surname" placeholder="Mateusz Przykładowy"><br>
+                    <div class="warning hidden">
+                        <p>Your name is invalid</p>
+                    </div>
                     <label>Email*:</label><br>
-                    <input type="text" id="e-mail" placeholder="mateusz@gmail.com" ><br>
+                    <input type="text" id="e-mail" class="email-input" placeholder="mateusz@gmail.com" ><br>
+                    <div class="warning-email hidden">
+                        <p>Your mail is invalid</p>
+                    </div>
                 </form>
                 <div id="information-bottom">
                     <div id="picture">
@@ -74,7 +79,7 @@
                     </div>
                     <a href="#"> <img src="../assets/icons/change_picture.svg" alt="change photo">Change picture</a>
                     <p id="role-content">Role: Admin</p>
-                    <button id="update" onclick="return displayMessage()" disabled>Update</button>
+                    <button id="update" disabled>Update</button>
                 </div>
             </div>
 
@@ -102,6 +107,7 @@
             <p>©2020 - All rights reserved by Karolina, Michał, Michał and Rafał</p>
         </div>
     </footer>
+    <script src="../js/input-validator.js"></script>
 </body>
 
 </html>
