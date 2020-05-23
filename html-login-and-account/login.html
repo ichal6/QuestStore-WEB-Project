@@ -1,18 +1,20 @@
 <!doctype html>
 
 <html lang="pl">
-<head>
-  <meta charset="utf-8">
 
-  <title>Codecool</title>
-  <meta name="description">
-  <meta name="login" content="LoginSite">
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/login.css">
+<head>
+    <meta charset="utf-8">
+
+    <title>Codecool</title>
+    <meta name="description">
+    <meta name="login" content="LoginSite">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/login.css">
 </head>
-<body>
+
+<body onload="passwordClick()">
     <nav class="nav-bar">
-        <a href = "login.html"><img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
+        <a href="login.html"><img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
     </nav>
     <div class="content">
         <div class="login-container">
@@ -20,46 +22,51 @@
 
                 <h2>Login to your account</h2>
 
-                <div class="input-icons"> 
-                    <i><img src="../assets/icons/login_icon.png" class="login-icon"> </i> 
-                    <input class="input-field" id = "email" type="text"placeholder="Your email"> 
-                </div> 
+                <div class="input-icons">
+                    <i><img src="../assets/icons/login_icon.png" class="login-icon"> </i>
+                    <input class="input-field email-input" id="email" type="text" placeholder="Your email">
+                    <div class="warning hidden">
+                        <p>Email is not valid</p>
+                    </div>
+                </div>
 
-                <div class="input-icons"> 
-                    <i><img src="../assets/icons/password_icon.png" class="login-icon"> </i> 
-                    <input class="input-field" type="password"placeholder="Password"> 
-                </div> 
+                <div class="input-icons">
+                    <i><img src="../assets/icons/password_icon.png" class="login-icon"> </i>
+                    <input class="input-field passw-input" type="password" placeholder="Password">
+                </div>
 
                 <h5><a href="login-password-reset.html">forgot your password?</a> </h5>
-                
-                <div class ="submit-button">
-                    <input class="button" type ="submit" value ="Sign in" onclick="return launchPage()">
+
+                <div class="submit-button">
+                    <input class="button" type="submit" value="Sign in" onclick="return launchPage()">
                 </div>
-            </div>	
+            </div>
         </div>
     </div>
+
+
+    <footer>
+        <div class="footer">
+            <div class="footer-logo"> <img src="../assets/img/codecool_logo_white.png" alt="logo"> </div>
+
+            <div class="footer-text">
+                <p> ©2020 All rights reserved by Karolina, Michał, Michał and Rafał</p>
+
+            </div>
+        </div>
+    </footer>
+    <script src="../js/input-validator.js"></script>
+
+    <script>
+        function launchPage() {
+            var inputEmail = document.getElementById("email").value;
+            if (inputEmail == "admin") {
+                window.open("../html-admin/admin_dashboard.html", "_self");
+            } else {
+                window.open("../html-mentor/mentor_dashboard.html", "_self");
+            }
+        }
+    </script>
 </body>
-
-<footer class="footer">
-
-    <div class="footer-logo">  <img src="../assets/img/codecool_logo_white.png" alt="logo"> </div>
-    
-    <div class="footer-text">
-        <p> ©2020 All rights reserved by Karolina, Michał, Michał and Rafał</p>
-
-    </div>
-</footer>
-
-<script> 
-    function launchPage(){
-        var inputEmail = document.getElementById("email").value;
-        if(inputEmail == "admin"){
-            window.open("../html-admin/admin_dashboard.html","_self");
-        }
-        else{
-            window.open("../html-mentor/mentor_dashboard.html","_self");
-        }
-    }
-</script>
 
 </html>
