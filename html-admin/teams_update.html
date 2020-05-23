@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='icon' href='../favicon.ico' type='image/x-icon'>
     <link rel="stylesheet" href="../css/teams_add_new.css">
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
    
-
     <script src="../js/dropdown.js"></script>
     <title>Codecool</title>
 </head>
@@ -17,11 +17,11 @@
 <body>
     <div class="header">
         <div class="left-position">
-            <a href = "admin_dashboard.html"> <img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
+            <a href="admin_dashboard.html"> <img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
         </div>
         <div class="right-position">
             <a id="name">Jan Kowalski</a>
-            <a>&nbsp&nbsp|&nbsp&nbsp</a>
+            <a>&nbsp;&nbsp;|&nbsp;&nbsp;</a>
             <a id="role">Admin</a>
             <img class="right-position image" src="../assets/icons/user_icon.png" alt="user icon"
                 onmouseover="return displayDropdown()">
@@ -32,11 +32,11 @@
             <ul>
                 <li>
                     <a href="../html-login-and-account/my-account-admin.html">My account
-                        <img src="../assets/icons/my_account_icon.svg"></a>
+                        <img src="../assets/icons/my_account_icon.svg" alt="my account icon"></a>
                 </li>
                 <li>
                     <a href="#">Log out
-                        <img src="../assets/icons/log_out_icon.svg"></a>
+                        <img src="../assets/icons/log_out_icon.svg" alt="log out icon"></a>
                 </li>
             </ul>
         </div>
@@ -52,13 +52,13 @@
                     <li><a href="levels_list.html"><img src="../assets/icons/levels_icon.png" alt="levels-icon">Levels</a></li>
                     <li><a href="codecoolers_list.html"><img src="../assets/icons/codecoolers_icon.png" alt="codecoolers-icon">Codecoolers</a></li>
                     <li><a href="classes_list.html"><img src="../assets/icons/classes_icon.png" alt="classes-icon">Classes</a></li>                    
-                    <li id = "select-page"><a href="teams_list.html"><img src="../assets/icons/teams_icon.png" alt="teams-icon">Teams</a></li>
+                    <li id="select-page"><a href="teams_list.html"><img src="../assets/icons/teams_icon.png" alt="teams-icon">Teams</a></li>
                     <li><a href="quests_list.html"><img src="../assets/icons/quests_icon.png" alt="quests-icon">Quests</a></li>
                     <li><a href="artifacts_list.html"><img src="../assets/icons/artifacts_icon.png" alt="artifacts-icon">Artifacts</a></li>
                 </ul>
             </div>
         </aside>
-        <div class = "details-container"> 
+        <div class="details-container"> 
 
             <h1>Team details</h1>
             <a href="teams_list.html">&#60;- Back to the list</a>
@@ -67,12 +67,12 @@
 
                     <div class ="details">
                         
-                        <div class="person"> Name*: </br><input type="text" id="person-name" value="Tomato-TicTacToe-Team"></div>
-                        <div class="person"> City: </br><input type="text" id="person-city" value="Cracow"></div>
-                        <div class="person"> Start date*:</br><input type="text" id="person-start-date" value="05/05/2019"></div>
+                        <div class="person"> Name*: <input type="text" id="person-name" value="Tomato-TicTacToe-Team"></div>
+                        <div class="person"> City: <input type="text" id="person-city" value="Cracow"></div>
+                        <div class="person"> Start date*:<input type="text" id="person-start-date" value="05/05/2019"></div>
                     
                         <div class="lower-section">
-                            <p>*- Fields marked like these need to be filled</br></p>
+                            <p>*- Fields marked like these need to be filled</p>
                             <button class="btn" id="update-admin">Update</button>
                         </div>
                 </div>
@@ -104,7 +104,7 @@
                     <div class="team-members-name">James Bons</div>
                     <div class="team-members-email">james.bond007@gmail.com</div>
                     <div class="actions">
-                        <a href = ""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
+                        <a href=""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
                     </div>
 
                 </div> 
@@ -113,7 +113,7 @@
                     <div class="team-members-name">James Bons</div>
                     <div class="team-members-email">james.bond007@gmail.com</div>
                     <div class="actions">
-                        <a href = ""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
+                        <a href=""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
                     </div>
 
                 </div> 
@@ -122,14 +122,14 @@
                     <div class="team-members-name">James Bons</div>
                     <div class="team-members-email">james.bond007@gmail.com</div>
                     <div class="actions">
-                        <a href = ""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
+                        <a href=""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
                     </div>
 
                 </div> 
 
                 <div class="add-new-codecooler">
                     <label class="title">Add new Student</label><br>
-                   <select class = "student-name" id="selector">
+                   <select class="student-name" id="selector">
                         <option value="" disabled selected>Select Student </option>
                        <option>Grażyna Kowalska</option>
                        <option>Janusz Adamczyk</option>
@@ -144,7 +144,7 @@
      </div>
     <footer>
         <div class="footer">
-            <img src="../assets/icons/codecool_logo_white 1.png" alt="Codecool logo">
+            <img src="../assets/icons/codecool_logo_white.png" alt="Codecool logo">
             <p>©2020 - All rights reserved by Karolina, Michał, Michał and Rafał</p>
         </div>
     </footer>

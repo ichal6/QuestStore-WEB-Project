@@ -1,39 +1,40 @@
 <!DOCTYPE html>
-<html lang="en" onclick = "return hideSubMenu()"></html>
+<html lang="en" onclick="return hideSubMenu()">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='icon' href='../favicon.ico' type='image/x-icon'>
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/all-codecoolers.css">
-    <script src = "../js/dropdown.js" ></script>
-    <title>Document</title>
+    <script src="../js/dropdown.js" ></script>
+    <title>Codecooler's list</title>
 </head>
 
 <body>
     <div class="header">
-        <div class = "left-position">
-            <a href = "admin_dashboard.html"> <img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
+        <div class="left-position">
+            <a href="admin_dashboard.html"> <img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
         </div>
-        <div class = "right-position">
-            <a id = "name">Jan Kowalski</a>
-            <a>&nbsp&nbsp|&nbsp&nbsp</a>
-            <a id = "role">Mentor</a>
-            <img class = "right-position image" src = "../assets/icons/user_icon.png" alt="user icon" onmouseover = "return displayDropdown()">
-            <div id = "arrow-up">
+        <div class="right-position">
+            <a id="name">Jan Kowalski</a>
+            <a>&nbsp;&nbsp;|&nbsp;&nbsp;</a>
+            <a id="role">Admin</a>
+            <img class="right-position image" src="../assets/icons/user_icon.png" alt="user icon" onmouseover="return displayDropdown()">
+            <div id="arrow-up">
         </div>
         </div>
         <div id="dropdown-content">
             <ul>
                 <li>
-                    <a href="mentor_dashboard.html">My account
-                    <img src = "../assets/icons/my_account_icon.svg"></a>
+                    <a href="../html-login-and-account/my-account-admin.html">My account
+                        <img src="../assets/icons/my_account_icon.svg" alt="icon"></a>
                 </li>
                 <li>
                     <a href="#">Log out
-                    <img src = "../assets/icons/log_out_icon.svg"></a>
+                        <img src="../assets/icons/log_out_icon.svg" alt="icon"></a>
                 </li>
             </ul>
         </div>
@@ -47,7 +48,7 @@
                     <li><a href="admins_list.html"><img src="../assets/icons/admins_icon.png" alt="admin-icon">Admins</a></li>
                     <li><a href="mentors_list.html"><img src="../assets/icons/mentors_icon.png" alt="mentors-icon">Mentors</a></li>
                     <li><a href="levels_list.html"><img src="../assets/icons/levels_icon.png" alt="levels-icon">Levels</a></li>
-                    <li id = "select-page"><a href="codecoolers_list.html"><img src="../assets/icons/codecoolers_icon.png" alt="codecoolers-icon">Codecoolers</a></li>
+                    <li id="select-page"><a href="codecoolers_list.html"><img src="../assets/icons/codecoolers_icon.png" alt="codecoolers-icon">Codecoolers</a></li>
                     <li><a href="classes_list.html"><img src="../assets/icons/classes_icon.png" alt="classes-icon">Classes</a></li>
                     <li><a href="teams_list.html"><img src="../assets/icons/teams_icon.png" alt="teams-icon">Teams</a></li>
                     <li><a href="quests_list.html"><img src="../assets/icons/quests_icon.png" alt="quests-icon">Quests</a></li>
@@ -59,7 +60,7 @@
             <div class="upper-section">
                 <div class="h1-button">
                     <h1>All Codecoolers</h1>
-                    <a href="codecoolers_add_new.html"><button class="btn">+ Add new codecooler</button></a>
+                    <button onclick="location.href='artifacts_add_new.html'" class="btn">+ Add new codecooler</button>
                 </div>
                 <div class="right-section">
                     <p>Items per page</p>
@@ -71,43 +72,43 @@
                     <div class="name-div">
                         <span>Name:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="">
-                            <img src="../assets/img/arrow-down.svg" alt="">
+                            <img src="../assets/img/arrow-up.svg" alt="^">
+                            <img src="../assets/img/arrow-down.svg" alt="v">
                         </div>
                     </div>
                     <div class="email-div">
                         <span>Email:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="">
-                            <img src="../assets/img/arrow-down.svg" alt="">
+                            <img src="../assets/img/arrow-up.svg" alt="^">
+                            <img src="../assets/img/arrow-down.svg" alt="v">
                         </div>
                     </div>
                     <div class="city-div">
                         <span>City:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="">
-                            <img src="../assets/img/arrow-down.svg" alt="">
+                            <img src="../assets/img/arrow-up.svg" alt="^">
+                            <img src="../assets/img/arrow-down.svg" alt="v">
                         </div>
                     </div>
                     <div class="class-div">
                         <span>Class:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="">
-                            <img src="../assets/img/arrow-down.svg" alt="">
+                            <img src="../assets/img/arrow-up.svg" alt="^">
+                            <img src="../assets/img/arrow-down.svg" alt="v">
                         </div>
                     </div>
                     <div class="team-div">
                         <span>Team:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="">
-                            <img src="../assets/img/arrow-down.svg" alt="">
+                            <img src="../assets/img/arrow-up.svg" alt="^">
+                            <img src="../assets/img/arrow-down.svg" alt="v">
                         </div>
                     </div>
                     <div class="date-of-adding-div">
                         <span>Date of adding:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="">
-                            <img src="../assets/img/arrow-down.svg" alt="">
+                            <img src="../assets/img/arrow-up.svg" alt="^">
+                            <img src="../assets/img/arrow-down.svg" alt="v">
                         </div>
                     </div>
                     <div class="actions">
@@ -194,7 +195,7 @@
                  </div>
             </div>
             <div class="selector"> 
-                <a href="#" class="first"><<</a>
+                <a href="#" class="first">&lt;&lt;</a>
                 <a href="#">1</a>
                 <a href="#">2</a>
                 <a href="#">3</a>
@@ -205,7 +206,7 @@
     
     <footer>
         <div class="footer">
-            <img src="../assets/icons/codecool_logo_white 1.png" alt="Codecool logo">
+            <img src="../assets/icons/codecool_logo_white.png" alt="Codecool logo">
             <p>©2020 - All rights reserved by Karolina, Michał, Michał and Rafał</p>
         </div>
     </footer>

@@ -11,13 +11,12 @@ body{
 }
 
 .login-container{
-    width: 90vh;
-    height: 60vh;
+    width: 70vh;
+    height: 54vh;
     border-radius: 12px;
     background-color: #F2F2F2;
     margin: 100px auto 70px auto;
     display: grid;
-    grid-gap: 10px;
     align-items: center;
     justify-content: center;
 }

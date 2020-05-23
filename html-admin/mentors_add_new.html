@@ -4,22 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='icon' href='../favicon.ico' type='image/x-icon'>
     <link rel="stylesheet" href="../css/person_add_update.css">
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
     <script src="../js/dropdown.js"></script>
-    <title>Document</title>
+    <title>Add new mentor</title>
 </head>
 
 <body>
     <div class="header">
         <div class="left-position">
-            <a href = "admin_dashboard.html"> <img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
+            <a href="admin_dashboard.html"> <img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
         </div>
         <div class="right-position">
             <a id="name">Jan Kowalski</a>
-            <a>&nbsp&nbsp|&nbsp&nbsp</a>
+            <a>&nbsp;&nbsp;|&nbsp;&nbsp;</a>
             <a id="role">Admin</a>
             <img class="right-position image" src="../assets/icons/user_icon.png" alt="user icon"
                 onmouseover="return displayDropdown()">
@@ -30,11 +31,11 @@
             <ul>
                 <li>
                     <a href="../html-login-and-account/my-account-admin.html">My account
-                        <img src="../assets/icons/my_account_icon.svg"></a>
+                        <img src="../assets/icons/my_account_icon.svg" alt="icon"></a>
                 </li>
                 <li>
                     <a href="#">Log out
-                        <img src="../assets/icons/log_out_icon.svg"></a>
+                        <img src="../assets/icons/log_out_icon.svg" alt="icon"></a>
                 </li>
             </ul>
         </div>
@@ -46,7 +47,7 @@
                 <ul class="nav-menu">
                     <li><a href="admin_dashboard.html"><img src="../assets/icons/home_icon.png" alt="home-icon">Dashboard</a></li>
                     <li><a href="admins_list.html"><img src="../assets/icons/admins_icon.png" alt="admin-icon">Admins</a></li>
-                    <li><a href="mentors_list.html"><img src="../assets/icons/mentors_icon.png" alt="mentors-icon">Mentors</a></li>
+                    <li id="select-page"><a href="mentors_list.html"><img src="../assets/icons/mentors_icon.png" alt="mentors-icon">Mentors</a></li>
                     <li><a href="levels_list.html"><img src="../assets/icons/levels_icon.png" alt="levels-icon">Levels</a></li>
                     <li><a href="codecoolers_list.html"><img src="../assets/icons/codecoolers_icon.png" alt="codecoolers-icon">Codecoolers</a></li>
                     <li><a href="classes_list.html"><img src="../assets/icons/classes_icon.png" alt="classes-icon">Classes</a></li>
@@ -57,7 +58,7 @@
         </aside>
         <div class="details-container">
             <h1>Add new mentor</h1>
-            <a href="all-admins.html">&#60;- Back to the list</a>
+            <a href="mentors_list.html">&#60;- Back to the list</a>
             <div class="personal-details">
                 <h2>New mentor's personal details:</h2>
                 <label for="person-name">Name*:</label>
@@ -76,7 +77,7 @@
 
     <footer>
         <div class="footer">
-            <img src="../assets/icons/codecool_logo_white 1.png" alt="Codecool logo">
+            <img src="../assets/icons/codecool_logo_white.png" alt="Codecool logo">
             <p>©2020 - All rights reserved by Karolina, Michał, Michał and Rafał</p>
         </div>
     </footer>
