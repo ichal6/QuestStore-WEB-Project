@@ -147,7 +147,7 @@ input {
     grid-column-end: 4;
 }
 
-#selector {
+.selector {
     height: 40px;
     width: fit-content;
     border: 1px solid #DFDFDF;
@@ -168,6 +168,17 @@ input {
 .achivement {
     grid-column-start: 1;
     width: 350px !important;
+}
+
+.achivement.add-achievement {
+    width: 100%;
+    height: 50px;
+    border-radius: 12px;
+    border: 1px solid #9CA1A6;
+    background-color: #F2F2F2;
+    font-size: 16px;
+    font-family: "Source Sans Pro";
+    color: #545759;
 }
 
 .class-team-seletor {

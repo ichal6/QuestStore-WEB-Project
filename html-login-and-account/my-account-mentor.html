@@ -1,42 +1,42 @@
 <!DOCTYPE html>
-<html lang="en" onclick = "return hideSubMenu()">
+<html lang="en" onclick="return hideSubMenu()">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Codecool</title>
+    <title>Codecool - My account</title>
     <link rel='icon' href='../favicon.ico' type='image/x-icon'>
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/my-account.css">
-    <script src = "../js/dropdown.js" ></script>
-    <script src = "../js/myAccount.js" defer></script>
+    <script src="../js/dropdown.js" ></script>
+    <script src="../js/myAccount.js" defer></script>
 </head>
 
 
 <body>
     <div class="header">
-        <div class = "left-position">
-            <img id = "logo" src = "../assets/icons/codecool_logo_color.png" alt="Codecool logo">
+        <div class="left-position">
+            <img id="logo" src="../assets/icons/codecool_logo_color.png" alt="Codecool logo">
         </div>
-        <div class = "right-position">
-            <a id = "name">Jan Kowalski</a>
-            <a>&nbsp&nbsp|&nbsp&nbsp</a>
-            <a id = "role">Mentor</a>
-            <img class = "right-position image" src = "../assets/icons/user_icon.png" alt="user icon" onmouseover = "return displayDropdown()">
-            <div id = "arrow-up">
+        <div class="right-position">
+            <a id="name">Jan Kowalski</a>
+            <a>&nbsp;&nbsp;|&nbsp;&nbsp;</a>
+            <a id="role">Mentor</a>
+            <img class="right-position image" src="../assets/icons/user_icon.png" alt="user icon" onmouseover="return displayDropdown()">
+            <div id="arrow-up">
         </div>
         </div>
         <div id="dropdown-content">
             <ul>
                 <li>
                     <a href="../html-login-and-account/my-account.html">My account
-                    <img src = "../assets/icons/my_account_icon.svg"></a>
+                    <img src="../assets/icons/my_account_icon.svg" alt="my account icon"></a>
                 </li>
                 <li>
                     <a href="#">Log out
-                    <img src = "../assets/icons/log_out_icon.svg"></a>
+                    <img src="../assets/icons/log_out_icon.svg" alt="log out icon"></a>
                 </li>
             </ul>
         </div>
@@ -55,38 +55,38 @@
             </div>
         </aside>
 
-        <div id = "content">
-            <h1 id = "label">My Account</h1>
-            <div id = "information"> 
-                <h2 id = "label-profil">Profile Information</h2>
-                <form oninput = "return checkData()">
+        <div id="content">
+            <h1 id="label">My Account</h1>
+            <div id="information"> 
+                <h2 id="label-profil">Profile Information</h2>
+                <form oninput="return checkData()">
                     <label>Name*:</label><br>
-                    <input type="text" id = "name-and-surname" placeholder = "Mateusz Przykładowy"><br>
+                    <input type="text" id="name-and-surname" placeholder="Mateusz Przykładowy"><br>
                     <label>Email*:</label><br>
-                    <input type="text" id = "e-mail" placeholder = "mateusz@gmail.com" ><br>
+                    <input type="text" id="e-mail" placeholder="mateusz@gmail.com" ><br>
                 </form>
-                <div id = "information-bottom">
-                    <div id = "picture">
+                <div id="information-bottom">
+                    <div id="picture">
                         <p>Picture:</p>
-                        <img src = "../assets/icons/profile_photo.svg"><br>
+                        <img src="../assets/icons/profile_photo.svg" alt="profile photo"><br>
                     </div>
-                    <a href = "#"> <img src = "../assets/icons/change_picture.svg">Change picture</a>
-                    <p id = "role-content">Role: Admin</p>
-                    <button id = "update" onclick = "return displayMessage()" disabled = true>Update</button>
+                    <a href="#"> <img src="../assets/icons/change_picture.svg" alt="change picture">Change picture</a>
+                    <p id="role-content">Role: Admin</p>
+                    <button id="update" onclick="return displayMessage()" disabled>Update</button>
                 </div>
             </div>
 
-            <div id = "change-password">
-                <h2 id = "label-password">Change Password</h2>
+            <div id="change-password">
+                <h2 id="label-password">Change Password</h2>
                 <form>
                     <label>Old password*:</label><br>
-                    <input type="password" id = "old-password"><br>
+                    <input type="password" id="old-password"><br>
                     <label>New password*:</label><br>
-                    <input type="password" id = "new-password"><br>
+                    <input type="password" id="new-password"><br>
                     <label>Repeat new password*:</label><br>
-                    <input type="password" id = "repeat-new-password"><br>
+                    <input type="password" id="repeat-new-password"><br>
                 </form>
-                <div id = "change-password-button">
+                <div id="change-password-button">
                     <button >Change password</button>
                 </div>
                 
@@ -94,12 +94,12 @@
         </div>
     </div>
 
-        <footer>
-            <div class="footer">
-                <img src="../assets/icons/codecool_logo_white 1.png" alt="Codecool logo">
-                <p>©2020 - All rights reserved by Karolina, Michał, Michał and Rafał</p>
-            </div>
-        </footer>
+    <footer>
+        <div class="footer">
+            <img src="../assets/icons/codecool_logo_white.png" alt="Codecool logo">
+            <p>©2020 - All rights reserved by Karolina, Michał, Michał and Rafał</p>
+        </div>
+    </footer>
 </body>
 
 </html>

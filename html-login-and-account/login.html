@@ -1,11 +1,9 @@
 <!doctype html>
 
-<html lang="pl">
+<html lang="en">
 <head>
   <meta charset="utf-8">
-
   <title>Codecool</title>
-  <meta name="description">
   <meta name="login" content="LoginSite">
   <link rel='icon' href='../favicon.ico' type='image/x-icon'>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
@@ -13,7 +11,7 @@
 </head>
 <body>
     <nav class="nav-bar">
-        <a href = "login.html"><img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
+        <a href="login.html"><img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
     </nav>
     <div class="content">
         <div class="login-container">
@@ -22,13 +20,13 @@
                 <h2>Login to your account</h2>
 
                 <div class="input-icons"> 
-                    <i><img src="../assets/icons/login_icon.png" class="login-icon"> </i> 
-                    <input class="input-field" id = "email" type="text"placeholder="Your email"> 
+                    <i><img src="../assets/icons/login_icon.png" class="login-icon" alt="icon"> </i> 
+                    <input class="input-field" id="email" type="text" placeholder="Your email"> 
                 </div> 
 
                 <div class="input-icons"> 
-                    <i><img src="../assets/icons/password_icon.png" class="login-icon"> </i> 
-                    <input class="input-field" type="password"placeholder="Password"> 
+                    <i><img src="../assets/icons/password_icon.png" class="login-icon" alt="icon"> </i> 
+                    <input class="input-field" type="password" placeholder="Password"> 
                 </div> 
 
                 <h5><a href="login-password-reset.html">forgot your password?</a> </h5>
@@ -39,28 +37,30 @@
             </div>	
         </div>
     </div>
+
+
+    <footer class="footer">
+
+        <div class="footer-logo">  <img src="../assets/img/codecool_logo_white.png" alt="logo"> </div>
+        
+        <div class="footer-text">
+            <p> ©2020 All rights reserved by Karolina, Michał, Michał and Rafał</p>
+
+        </div>
+    </footer>
+
+    <script> 
+        function launchPage(){
+            var inputEmail=document.getElementById("email").value;
+            if(inputEmail == "admin"){
+                window.open("../html-admin/admin_dashboard.html","_self");
+            }
+            else{
+                window.open("../html-mentor/mentor_dashboard.html","_self");
+            }
+        }
+    </script>
+
 </body>
-
-<footer class="footer">
-
-    <div class="footer-logo">  <img src="../assets/img/codecool_logo_white.png" alt="logo"> </div>
-    
-    <div class="footer-text">
-        <p> ©2020 All rights reserved by Karolina, Michał, Michał and Rafał</p>
-
-    </div>
-</footer>
-
-<script> 
-    function launchPage(){
-        var inputEmail = document.getElementById("email").value;
-        if(inputEmail == "admin"){
-            window.open("../html-admin/admin_dashboard.html","_self");
-        }
-        else{
-            window.open("../html-mentor/mentor_dashboard.html","_self");
-        }
-    }
-</script>
 
 </html>
