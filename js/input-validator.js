@@ -7,6 +7,7 @@ let name_input = document.querySelector(".name-surname");
 const submitBtn = document.querySelector(".submit-button");
 
 
+
 function emailValidator() {
     var mailformat = /([a-zA-z_\-.\]+)@([a-zA-z0-9-]+)\.([a-z\.])/
     let email_value = email_input.value;
@@ -23,13 +24,17 @@ function passwordValidator() {
     var passwFormat = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
     let passw_value = passw_input.value;
     let validPassw = passwFormat.test(passw_value);
-    displayWarning(validPassw);
+    if(!validPassw){
+        document.querySelector(".warning-password").classList.remove("hidden");
+    }else{
+        document.querySelector(".warning-password").classList.add("hidden");
+    }
 }
 
 function checkMatchPasswords(){
     let passw_value = passw_input.value;
     let sec_passw = document.querySelector(".sec-passw").value;
-    const warnig_passw_message = document.querySelector(".warning-passw");
+    const warnig_passw_message = document.querySelector(".warning-equals");
     if(passw_value !== sec_passw){
         warnig_passw_message.classList.remove("hidden");
     }else{

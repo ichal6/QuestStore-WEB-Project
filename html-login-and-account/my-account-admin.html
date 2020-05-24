@@ -13,7 +13,7 @@
     <script src="../js/dropdown.js" ></script>
 </head>
 
-<body onload="checkName();checkEmail()">
+<body onload="checkName();checkEmail();checkPasswordForRegEx();checkIfPasswordsAreEquals();">
     <div class="header">
         <div class="left-position">
             <a href="../html-admin/admin_dashboard.html"> <img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
@@ -89,11 +89,17 @@
                     <label>Old password*:</label><br>
                     <input type="password" id="old-password"><br>
                     <label>New password*:</label><br>
-                    <input type="password" id="new-password"><br>
+                    <input type="password" id="new-password" class="passw-input"><br>
+                    <div class="warning-password hidden">
+                        <p>Your password is invalid</p>
+                    </div>
                     <label>Repeat new password*:</label><br>
-                    <input type="password" id="repeat-new-password"><br>
+                    <input type="password" id="repeat-new-password" class="sec-passw"><br>
+                    <div class="warning-equals hidden">
+                        <p>Your passwords are not equals.</p>
+                    </div>
                 </form>
-                <div id="change-password-button">
+                <div id="change-password-button" class="button">
                     <button >Change password</button>
                 </div>
                 

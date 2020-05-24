@@ -169,7 +169,9 @@ button:hover {
 }
 
 .warning,
-.warning-email {
+.warning-email,
+.warning-password,
+.warning-equals {
     color: #BF343F;
     height: 24px;
     padding: 0 8px;
