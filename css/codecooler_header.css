@@ -44,6 +44,10 @@ nav a{
     color: #0D0D0D;
 }
 
+nav a:hover{
+    color:#2491D4;
+}
+
 .right-position{
     display: flex; 
     align-items: center;
