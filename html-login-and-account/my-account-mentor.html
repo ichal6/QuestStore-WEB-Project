@@ -11,11 +11,10 @@
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/my-account.css">
     <script src="../js/dropdown.js" ></script>
-    <script src="../js/myAccount.js" defer></script>
 </head>
 
 
-<body>
+<body onload="checkName();checkEmail();checkPasswordForRegEx();checkIfPasswordsAreEquals();">
     <div class="header">
         <div class="left-position">
             <img id="logo" src="../assets/icons/codecool_logo_color.png" alt="Codecool logo">
@@ -59,20 +58,26 @@
             <h1 id="label">My Account</h1>
             <div id="information"> 
                 <h2 id="label-profil">Profile Information</h2>
-                <form oninput="return checkData()">
+                <form>
                     <label>Name*:</label><br>
-                    <input type="text" id="name-and-surname" placeholder="Mateusz Przykładowy"><br>
+                    <input type="text" id="name-and-surname" class="name-surname" placeholder="Mateusz Przykładowy"><br>
+                    <div class="warning hidden">
+                        <p>Your name is invalid</p>
+                    </div>
                     <label>Email*:</label><br>
-                    <input type="text" id="e-mail" placeholder="mateusz@gmail.com" ><br>
+                    <input type="text" id="e-mail" class="email-input" placeholder="mateusz@gmail.com" ><br>
+                    <div class="warning-email hidden">
+                        <p>Your mail is invalid</p>
+                    </div>
                 </form>
                 <div id="information-bottom">
                     <div id="picture">
                         <p>Picture:</p>
                         <img src="../assets/icons/profile_photo.svg" alt="profile photo"><br>
                     </div>
-                    <a href="#"> <img src="../assets/icons/change_picture.svg" alt="change picture">Change picture</a>
+                    <a href="#"> <img src="../assets/icons/change_picture.svg" alt="change photo">Change picture</a>
                     <p id="role-content">Role: Admin</p>
-                    <button id="update" onclick="return displayMessage()" disabled>Update</button>
+                    <button id="update" disabled>Update</button>
                 </div>
             </div>
 
@@ -82,11 +87,17 @@
                     <label>Old password*:</label><br>
                     <input type="password" id="old-password"><br>
                     <label>New password*:</label><br>
-                    <input type="password" id="new-password"><br>
+                    <input type="password" id="new-password" class="passw-input"><br>
+                    <div class="warning-password hidden">
+                        <p>Your password is invalid</p>
+                    </div>
                     <label>Repeat new password*:</label><br>
-                    <input type="password" id="repeat-new-password"><br>
+                    <input type="password" id="repeat-new-password" class="sec-passw"><br>
+                    <div class="warning-equals hidden">
+                        <p>Your passwords are not equals.</p>
+                    </div>
                 </form>
-                <div id="change-password-button">
+                <div id="change-password-button" class="button">
                     <button >Change password</button>
                 </div>
                 
@@ -100,6 +111,7 @@
             <p>©2020 - All rights reserved by Karolina, Michał, Michał and Rafał</p>
         </div>
     </footer>
+    <script src="../js/input-validator.js"></script>
 </body>
 
 </html>
