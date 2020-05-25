@@ -134,11 +134,17 @@ body{
     background-color: #418FBF;
 }
 
-.level-2 img, .level-4 img{
+.level-2 img, .level-4 img, .my-level img{
     margin-right: 10px;
 }
 
-.level-2 h1, .level-2 h2{
+#acctual-level img{
+    width: 100px;
+}
+
+
+
+.level-2 h1, .level-2 h2, .my-level h1, .my-level h2{
     display: table;
     width: auto;
     font-family: "Source Sans Pro";
@@ -148,12 +154,12 @@ body{
     padding-right: 20px;
 }
 
-.level-2 h2{
+.level-2 h2, .my-level h2{
     font-size: 28px;
     margin-top: 50px;
 }
 
-#acctual-account{
+#acctual-account, #acctual-level, #to-achieve-for-next-level{
     color: #418FBF;
     background-color: #F2F2F2;
     margin-left: 20px;
@@ -161,6 +167,34 @@ body{
     display: table;
     font-family: "Source Sans Pro";
     font-size: 48px;
+}
+
+#acctual-level, #to-achieve-for-next-level{
+    display: flex;
+    align-items: center;
+    max-width: max-content;
+    color: #BF343F;
+}
+
+.description{
+    margin-top: 20px !important;
+    margin-left: 20px;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+p.description {
+    padding-left: 20px;
+    margin-left: 20px;
+    font-family: "Source Sans Pro";
+    font-size: 20px;
+    color:#F2F2F2;
+}
+
+#next-level{
+    display:flex;
+    flex-direction: row;
+    margin-bottom: 30px;
 }
 
 .items{
@@ -221,7 +255,7 @@ body{
     font-size: 40px;
 }
 
-.level-2-text, .level-4-text{
+.level-2-text, .level-4-text, .my-level-text{
     font-family: "Source Sans Regular";
     font-size: 18px;
     margin-top: 35px;
@@ -335,6 +369,11 @@ body{
     background-color:rgb(228, 49, 64);
     font-size: 21px;
     cursor: pointer;
+}
+
+
+.my-level{
+    background-color: #BF343F;
 }
 
 @media screen and (max-width: 1000px) {
