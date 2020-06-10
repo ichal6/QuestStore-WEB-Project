@@ -11,7 +11,7 @@
         <a href="../html-admin/admin_dashboard.jsp"> <img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
     </div>
     <div class="right-position">
-        <a id="name">Jan Kowalski</a>
+        <a id="name">Mariusz Kowalski</a>
         <a>&nbsp;&nbsp;|&nbsp;&nbsp;</a>
         <a id="role">Admin</a>
         <img class="right-position image" src="../assets/icons/user_icon.png" alt="user icon" onmouseover="return displayDropdown()">
@@ -21,7 +21,7 @@
     <div id="dropdown-content">
         <ul>
             <li>
-                <a href="../html-login-and-account/my-account-admin.html">My account
+                <a href="../html-login-and-account/my-account-admin.jsp">My account
                     <img src="../assets/icons/my_account_icon.svg" alt="my account icon"></a>
             </li>
             <li>

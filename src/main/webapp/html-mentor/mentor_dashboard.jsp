@@ -1,27 +1,50 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html lang="en" onclick="return hideSubMenu()">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='icon' href='../favicon.ico' type='image/x-icon'>
-    <link rel="stylesheet" href="../css/admin_dashboard.css">
+    <link rel="stylesheet" href="../css/mentor_dashboard.css">
     <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <script src="../js/dropdown.js" ></script>
     <title>Dashboard</title>
 </head>
 
 <body>
-
-    <jsp:include page="../html-common/cms-header.jsp" />
+    <div class="header">
+        <div class="left-position">
+            <img id="logo" src="../assets/icons/codecool_logo_color.png" alt="Codecool logo">
+        </div>
+        <div class="right-position">
+            <a id="name">Jan Kowalski</a>
+            <a>&nbsp;&nbsp;|&nbsp;&nbsp;</a>
+            <a id="role">Mentor</a>
+            <img class="right-position image" src="../assets/icons/user_icon.png" alt="user icon" onmouseover="return displayDropdown()">
+            <div id="arrow-up">
+        </div>
+        </div>
+        <div id="dropdown-content">
+            <ul>
+                <li>
+                    <a href="../html-login-and-account/my-account-mentor.jsp">My account
+                    <img src="../assets/icons/my_account_icon.svg" alt="my account icon"></a>
+                </li>
+                <li>
+                    <a href="#">Log out
+                    <img src="../assets/icons/log_out_icon.svg" alt="log out icon"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
     <div class="container">
         <aside>
             <div class="nav">
                 <ul class="nav-menu">
-                    <li id="select-page"><a href="admin_dashboard.jsp"><img src="../assets/icons/home_icon.png" alt="home-icon">Dashboard</a></li>
-                    <li><a href="admins_list.jsp"><img src="../assets/icons/admins_icon.png" alt="admin-icon">Admins</a></li>
-                    <li><a href="mentors_list.jsp"><img src="../assets/icons/mentors_icon.png" alt="mentors-icon">Mentors</a></li>
-                    <li><a href="levels_list.jsp"><img src="../assets/icons/levels_icon.png" alt="levels-icon">Levels</a></li>
+                    <li id="select-page"><a href="mentor_dashboard.jsp"><img src="../assets/icons/home_icon.png" alt="home-icon">Dashboard</a></li>
                     <li><a href="codecoolers_list.jsp"><img src="../assets/icons/codecoolers_icon.png" alt="codecoolers-icon">Codecoolers</a></li>
                     <li><a href="classes_list.jsp"><img src="../assets/icons/classes_icon.png" alt="classes-icon">Classes</a></li>
                     <li><a href="teams_list.jsp"><img src="../assets/icons/teams_icon.png" alt="teams-icon">Teams</a></li>
@@ -33,30 +56,6 @@
         <div class="options_container">
             <div class="options_rectangle">
                 <div class="upper_section">
-                    <img src="../assets/icons/admins_svg.svg" alt="admins_icon" class="admins_icon">
-                    <div class="title_section">
-                        <div><p>Admins in CC:</p></div>
-                        <div class="number" id="admins_number"><p>10</p></div>
-                    </div>
-                </div>
-                <div class="lower_section">
-                    <p><a href="admins_list.jsp">See list of admins...</a></p>
-                </div>
-            </div>
-            <div class="options_rectangle">
-                <div class="upper_section">
-                    <img src="../assets/icons/mentors_svg.svg" alt="mentors_icon" class="mentors_icon">
-                    <div class="title_section">
-                        <div><p>Mentors in CC:</p></div>
-                        <div class="number" id="mentors_number"><p>50</p></div>
-                    </div>
-                </div>
-                <div class="lower_section">
-                    <p><a href="mentors_list.jsp">See list of mentors...</a></p>
-                </div>
-            </div>
-            <div class="options_rectangle">
-                <div class="upper_section">
                     <img src="../assets/icons/students_svg.svg" alt="students_icon" class="students_icon">
                     <div class="title_section">
                         <div><p>Students in CC:</p></div>
@@ -65,18 +64,6 @@
                 </div>
                 <div class="lower_section">
                     <p><a href="codecoolers_list.jsp">See list of Codecoolers...</a></p>
-                </div>
-            </div>
-            <div class="options_rectangle">
-                <div class="upper_section">
-                    <img src="../assets/icons/levels_svg.svg" alt="levels_icon" class="levels_icon">
-                    <div class="title_section">
-                        <div><p>Levels in CC:</p></div>
-                        <div class="number" id="levels_number"><p>25</p></div>
-                    </div>
-                </div>
-                <div class="lower_section">
-                    <p><a href="levels_list.jsp">See list of all levels...</a></p>
                 </div>
             </div>
             <div class="options_rectangle">
@@ -130,7 +117,12 @@
         </div>
     </div>
 
-    <jsp:include page="../html-common/footer.html" />
+    <footer>
+        <div class="footer">
+            <img src="../assets/icons/codecool_logo_white.png" alt="Codecool logo">
+            <p>©2020 - All rights reserved by Karolina, Michał, Michał and Rafał</p>
+        </div>
+    </footer>
 </body>
 
 </html>
