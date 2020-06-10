@@ -13,3 +13,5 @@ Actual branch for attach the back-end layer to the front-end layer.
 Actual branch for front-end.
 ## list-pages-correction
 Branch is used for try eliminate multiply CSS files.
+## include-jsp
+Divide header and footer section to another files and include they for jsp include.
