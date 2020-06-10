@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" onclick="return hideSubMenu()">
 
 <head>
@@ -7,44 +7,17 @@
     <link rel='icon' href='../favicon.ico' type='image/x-icon'>
     <link rel="stylesheet" href="../css/admin_dashboard.css">
     <link rel="stylesheet" href="../css/nav.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/footer.css">
-    <script src="../js/dropdown.js" ></script>
     <title>Dashboard</title>
 </head>
 
 <body>
-    <div class="header">
-        <div class="left-position">
-            <a href="admin_dashboard.html"> <img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
-        </div>
-        <div class="right-position">
-            <a id="name">Jan Kowalski</a>
-            <a>&nbsp;&nbsp;|&nbsp;&nbsp;</a>
-            <a id="role">Admin</a>
-            <img class="right-position image" src="../assets/icons/user_icon.png" alt="user icon" onmouseover="return displayDropdown()">
-            <div id="arrow-up">
-        </div>
-        </div>
-        <div id="dropdown-content">
-            <ul>
-                <li>
-                    <a href="../html-login-and-account/my-account-admin.html">My account
-                    <img src="../assets/icons/my_account_icon.svg" alt="my account icon"></a>
-                </li>
-                <li>
-                    <a href="#">Log out
-                    <img src="../assets/icons/log_out_icon.svg" alt="log out icon"></a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <jsp:include page="../html-common/cms-header.jsp" />
 
     <div class="container">
         <aside>
             <div class="nav">
                 <ul class="nav-menu">
-                    <li id="select-page"><a href="admin_dashboard.html"><img src="../assets/icons/home_icon.png" alt="home-icon">Dashboard</a></li>
+                    <li id="select-page"><a href="admin_dashboard.jsp"><img src="../assets/icons/home_icon.png" alt="home-icon">Dashboard</a></li>
                     <li><a href="admins_list.html"><img src="../assets/icons/admins_icon.png" alt="admin-icon">Admins</a></li>
                     <li><a href="mentors_list.html"><img src="../assets/icons/mentors_icon.png" alt="mentors-icon">Mentors</a></li>
                     <li><a href="levels_list.html"><img src="../assets/icons/levels_icon.png" alt="levels-icon">Levels</a></li>
@@ -156,12 +129,7 @@
         </div>
     </div>
 
-    <footer>
-        <div class="footer">
-            <img src="../assets/icons/codecool_logo_white.png" alt="Codecool logo">
-            <p>©2020 - All rights reserved by Karolina, Michał, Michał and Rafał</p>
-        </div>
-    </footer>
+    <jsp:include page="../html-common/footer.html" />
 </body>
 
 </html>
