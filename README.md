@@ -7,11 +7,9 @@ Basic items are meant for individual buyers while extra items are designed to be
 Assortment and prices can be changed at the beggining of week, depending on demand and supply.
 
 # Branches:
+## dev
+Actual branch for attach the back-end layer to the front-end layer.
 ## views
 Actual branch for front-end.
-## input-validation
-Branch is worked with validation inputs on front-end.
-## add-levels-for-codecooler
-Branch is existed for add display levels for codecooler.
 ## list-pages-correction
 Branch is used for try eliminate multiply CSS files.
