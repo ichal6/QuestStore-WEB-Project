@@ -12,7 +12,7 @@
 
 <body>
 
-    <jsp:include page="../html-common/cms-header.jsp" />
+    <jsp:include page="../html-common/cms-admin-header.jsp" />
 
     <div class="container">
         <aside>

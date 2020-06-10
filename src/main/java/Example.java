@@ -17,7 +17,7 @@ public class Example extends HttpServlet {
         String name="Przykład";
         request.setAttribute("name", name);
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("cms-header.jsp");
+                = request.getRequestDispatcher("cms-admin-header.jsp");
         dispatcher.forward(request, response);
     }
 }
