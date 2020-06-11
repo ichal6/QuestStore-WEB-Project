@@ -8,7 +8,7 @@
 <body>
 
 <%
-    String name = "Człowiek Admin";
+    String name = "Codecoolowy Zarządca";
     String role = "Admin";
     // te wartości daję tu na sztywno, ale później będą musiały być skądś pobierane (z jakiejś oddzielnej klasy)
     // jeśli te wartości nie pokazują Wam się w przeglądarce, możliwe, że musicie sobie wyczyścić ciasteczka
@@ -16,7 +16,20 @@
 
 <div class="header">
     <div class="left-position">
-        <a href="../html-cms/dashboard.jsp"> <img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
+        <%
+            if (role.toLowerCase().equals("admin")) {
+        %>
+
+            <a href="../html-cms/dashboard_admin.jsp"> <img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
+
+        <%
+            } else if (role.toLowerCase().equals("mentor")) {
+        %>
+
+            <a href="../html-cms/dashboard_mentor.jsp"> <img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
+        <%
+            }
+        %>
     </div>
     <div class="right-position">
         <a id="name"><%=name%></a>

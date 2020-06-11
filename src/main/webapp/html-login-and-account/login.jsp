@@ -57,8 +57,11 @@
 
     <script>
         function launchPage() {
-            window.open("../html-cms/dashboard.jsp", "_self");
+            window.open("../html-cms/dashboard_admin.jsp", "_self");
         }
+        // tutaj prowadzi na sztywno do konkretnego dashboardu. Później będzie to zależało od danych usera
+        // jeśli chcecie wyświetlać odpowiedni header i nav (w zależności od danych usera) - musicie
+        // zmienić "admin" na "mentor" w plikach cms-header.jsp i cms-navigation.jsp
     </script>
 </body>
 
