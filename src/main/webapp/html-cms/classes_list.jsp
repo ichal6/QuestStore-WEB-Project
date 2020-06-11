@@ -98,6 +98,9 @@
     </div>
 
     <jsp:include page="../html-common/footer.html" />
+    <script>
+        document.getElementsByClassName('classes-nav')[0].setAttribute('id', 'select-page');
+    </script>
 </body>
 
 </html>

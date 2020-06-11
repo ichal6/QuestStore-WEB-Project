@@ -149,6 +149,9 @@
     </div>
 
     <jsp:include page="../html-common/footer.html" />
+    <script>
+        document.getElementsByClassName('levels-nav')[0].setAttribute('id', 'select-page');
+    </script>
 </body>
 
 </html>

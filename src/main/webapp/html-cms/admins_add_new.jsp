@@ -27,7 +27,7 @@
                 <label for="person-city">City*:</label>
                 <input type="text" id="person-city" placeholder="Enter your city">
                 <div class="lower-section">
-                    <p>*- Fields marked like the need to be filled to add new entry</p>
+                    <p>*- Fields marked like that need to be filled to add new entry</p>
                     <button class="btn" id="add-new-admin">Add new admin</button>
                 </div>
             </div>
@@ -35,6 +35,9 @@
     </div>
 
     <jsp:include page="../html-common/footer.html" />
+    <script>
+        document.getElementsByClassName('admins-nav')[0].setAttribute('id', 'select-page');
+    </script>
 </body>
 
 </html>

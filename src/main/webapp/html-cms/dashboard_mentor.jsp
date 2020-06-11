@@ -78,12 +78,10 @@
         </div>
     </div>
 
-    <footer>
-        <div class="footer">
-            <img src="../assets/icons/codecool_logo_white.png" alt="Codecool logo">
-            <p>©2020 - All rights reserved by Karolina, Michał, Michał and Rafał</p>
-        </div>
-    </footer>
+    <jsp:include page="../html-common/footer.html" />
+    <script>
+        document.getElementsByClassName('dashboard-nav')[0].setAttribute('id', 'select-page');
+    </script>
 </body>
 
 </html>
