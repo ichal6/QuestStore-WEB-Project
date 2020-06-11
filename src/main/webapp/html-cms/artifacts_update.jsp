@@ -7,45 +7,17 @@
     <link rel='icon' href='../favicon.ico' type='image/x-icon'>
     <link rel="stylesheet" href="../css/artifact_update.css">
     <link rel="stylesheet" href="../css/nav.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/footer.css">
-    <script src="../js/dropdown.js"></script>
     <title>Update artifacts</title>
 </head>
 
 <body>
-    <div class="header">
-        <div class="left-position">
-            <a href="admin_dashboard.jsp"><img id="logo" src="../assets/icons/codecool_logo_color.png" alt="Codecool logo"></a>
-        </div>
-        <div class="right-position">
-            <a id="name">Jan Kowalski</a>
-            <a>&nbsp;&nbsp;|&nbsp;&nbsp;</a>
-            <a id="role">Admin</a>
-            <img class="right-position image" src="../assets/icons/user_icon.png" alt="user icon"
-                onmouseover="return displayDropdown()">
-            <div id="arrow-up">
-            </div>
-        </div>
-        <div id="dropdown-content">
-            <ul>
-                <li>
-                    <a href="../html-login-and-account/my-account-admin.jsp">My account
-                        <img src="../assets/icons/my_account_icon.svg" alt="icon"></a>
-                </li>
-                <li>
-                    <a href="#">Log out
-                        <img src="../assets/icons/log_out_icon.svg" alt="icon"></a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <jsp:include page="../html-common/cms-header.jsp" />
 
     <div class="container">
         <aside>
             <div class="nav">
                 <ul class="nav-menu">
-                    <li><a href="admin_dashboard.jsp"><img src="../assets/icons/home_icon.png" alt="home-icon">Dashboard</a></li>
+                    <li><a href="dashboard.jsp"><img src="../assets/icons/home_icon.png" alt="home-icon">Dashboard</a></li>
                     <li><a href="admins_list.jsp"><img src="../assets/icons/admins_icon.png" alt="admin-icon">Admins</a></li>
                     <li><a href="mentors_list.jsp"><img src="../assets/icons/mentors_icon.png" alt="mentors-icon">Mentors</a></li>
                     <li><a href="levels_list.jsp"><img src="../assets/icons/levels_icon.png" alt="levels-icon">Levels</a></li>

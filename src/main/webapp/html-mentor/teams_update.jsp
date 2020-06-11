@@ -30,7 +30,7 @@
         <div id="dropdown-content">
             <ul>
                 <li>
-                    <a href="../html-login-and-account/my-account-admin.jsp">My account
+                    <a href="../html-login-and-account/my-account.jsp">My account
                         <img src="../assets/icons/my_account_icon.svg" alt="my account icon"></a>
                 </li>
                 <li>

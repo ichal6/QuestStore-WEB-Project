@@ -57,12 +57,7 @@
 
     <script>
         function launchPage() {
-            var inputEmail = document.getElementById("email").value;
-            if (inputEmail == "admin") {
-                window.open("../html-admin/admin_dashboard.jsp", "_self");
-            } else {
-                window.open("../html-mentor/mentor_dashboard.jsp", "_self");
-            }
+            window.open("../html-cms/dashboard.jsp", "_self");
         }
     </script>
 </body>

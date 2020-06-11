@@ -14,10 +14,10 @@ public class Example extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String name="Przykład";
-        request.setAttribute("name", name);
-        RequestDispatcher dispatcher
-                = request.getRequestDispatcher("cms-admin-header.jsp");
-        dispatcher.forward(request, response);
+//        String name="Przykład";
+//        request.setAttribute("name", name);
+//        RequestDispatcher dispatcher
+//                = request.getRequestDispatcher("cms-header.jsp");
+//        dispatcher.forward(request, response);
     }
 }

@@ -12,13 +12,13 @@
 
 <body>
 
-    <jsp:include page="../html-common/cms-admin-header.jsp" />
+    <jsp:include page="../html-common/cms-header.jsp" />
 
     <div class="container">
         <aside>
             <div class="nav">
                 <ul class="nav-menu">
-                    <li id="select-page"><a href="admin_dashboard.jsp"><img src="../assets/icons/home_icon.png" alt="home-icon">Dashboard</a></li>
+                    <li id="select-page"><a href="dashboard.jsp"><img src="../assets/icons/home_icon.png" alt="home-icon">Dashboard</a></li>
                     <li><a href="admins_list.jsp"><img src="../assets/icons/admins_icon.png" alt="admin-icon">Admins</a></li>
                     <li><a href="mentors_list.jsp"><img src="../assets/icons/mentors_icon.png" alt="mentors-icon">Mentors</a></li>
                     <li><a href="levels_list.jsp"><img src="../assets/icons/levels_icon.png" alt="levels-icon">Levels</a></li>

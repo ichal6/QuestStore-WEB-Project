@@ -4,53 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Codecool - My account</title>
+    <title>My account</title>
     <link rel='icon' href='../favicon.ico' type='image/x-icon'>
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/my-account.css">
-    <script src="../js/dropdown.js" ></script>
 </head>
 
-
 <body onload="checkName();checkEmail();checkPasswordForRegEx();checkIfPasswordsAreEquals();">
-    <div class="header">
-        <div class="left-position">
-            <img id="logo" src="../assets/icons/codecool_logo_color.png" alt="Codecool logo">
-        </div>
-        <div class="right-position">
-            <a id="name">Jan Kowalski</a>
-            <a>&nbsp;&nbsp;|&nbsp;&nbsp;</a>
-            <a id="role">Mentor</a>
-            <img class="right-position image" src="../assets/icons/user_icon.png" alt="user icon" onmouseover="return displayDropdown()">
-            <div id="arrow-up">
-        </div>
-        </div>
-        <div id="dropdown-content">
-            <ul>
-                <li>
-                    <a href="../html-login-and-account/my-account.jsp">My account
-                    <img src="../assets/icons/my_account_icon.svg" alt="my account icon"></a>
-                </li>
-                <li>
-                    <a href="#">Log out
-                    <img src="../assets/icons/log_out_icon.svg" alt="log out icon"></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    
+    <jsp:include page="../html-common/cms-header.jsp" />
     <div class="container">
         <aside>
             <div class="nav">
                 <ul class="nav-menu">
-                    <li><a href="../html-mentor/mentor_dashboard.jsp"><img src="../assets/icons/home_icon.png" alt="home-icon">Dashboard</a></li>
-                    <li><a href="../html-mentor/codecoolers_list.jsp"><img src="../assets/icons/codecoolers_icon.png" alt="codecoolers-icon">Codecoolers</a></li>
-                    <li><a href="../html-mentor/classes_list.jsp"><img src="../assets/icons/classes_icon.png" alt="classes-icon">Classes</a></li>
-                    <li><a href="../html-mentor/teams_list.jsp"><img src="../assets/icons/teams_icon.png" alt="teams-icon">Teams</a></li>
-                    <li><a href="../html-mentor/quests_list.jsp"><img src="../assets/icons/quests_icon.png" alt="quests-icon">Quests</a></li>
-                    <li><a href="../html-mentor/artifacts_list.jsp"><img src="../assets/icons/artifacts_icon.png" alt="artifacts-icon">Artifacts</a></li></ul>
+                    <li><a href="../html-cms/dashboard.jsp"><img src="../assets/icons/home_icon.png" alt="home-icon">Dashboard</a></li>
+                    <li><a href="../html-cms/admins_list.jsp"><img src="../assets/icons/admins_icon.png" alt="admin-icon">Admins</a></li>
+                    <li><a href="../html-cms/mentors_list.jsp"><img src="../assets/icons/mentors_icon.png" alt="mentors-icon">Mentors</a></li>
+                    <li><a href="../html-cms/levels_list.jsp"><img src="../assets/icons/levels_icon.png" alt="levels-icon">Levels</a></li>
+                    <li><a href="../html-cms/codecoolers_list.jsp"><img src="../assets/icons/codecoolers_icon.png" alt="codecoolers-icon">Codecoolers</a></li>
+                    <li><a href="../html-cms/classes_list.jsp"><img src="../assets/icons/classes_icon.png" alt="classes-icon">Classes</a></li>
+                    <li><a href="../html-cms/teams_list.jsp"><img src="../assets/icons/teams_icon.png" alt="teams-icon">Teams</a></li>
+                    <li><a href="../html-cms/quests_list.jsp"><img src="../assets/icons/quests_icon.png" alt="quests-icon">Quests</a></li>
+                    <li><a href="../html-cms/artifacts_list.jsp"><img src="../assets/icons/artifacts_icon.png" alt="artifacts-icon">Artifacts</a></li></ul>
             </div>
         </aside>
 

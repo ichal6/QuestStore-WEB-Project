@@ -7,46 +7,18 @@
     <link rel='icon' href='../favicon.ico' type='image/x-icon'>
     <link rel="stylesheet" href="../css/person_add_update.css">
     <link rel="stylesheet" href="../css/nav.css">
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/footer.css">
-    <script src="../js/dropdown.js"></script>
-    <title>Levels add new</title>
+    <title>Update level details</title>
 </head>
 
 <body>
-    <div class="header">
-        <div class="left-position">
-            <a href="admin_dashboard.jsp"><img id="logo" src="../assets/icons/codecool_logo_color.png" alt="Codecool logo"></a>
-        </div>
-        <div class="right-position">
-            <a id="name">Jan Kowalski</a>
-            <a>&nbsp;&nbsp;|&nbsp;&nbsp;</a>
-            <a id="role">Admin</a>
-            <img class="right-position image" src="../assets/icons/user_icon.png" alt="user icon"
-                onmouseover="return displayDropdown()">
-            <div id="arrow-up">
-            </div>
-        </div>
-        <div id="dropdown-content">
-            <ul>
-                <li>
-                    <a href="../html-login-and-account/my-account-admin.jsp">My account
-                        <img src="../assets/icons/my_account_icon.svg" alt="icon"></a>
-                </li>
-                <li>
-                    <a href="#">Log out
-                        <img src="../assets/icons/log_out_icon.svg" alt="icon"></a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <jsp:include page="../html-common/cms-header.jsp" />
 
     <div class="container">
         <aside>
             <div class="nav">
                 <ul class="nav-menu">
-                    <li><a href="admin_dashboard.jsp"><img src="../assets/icons/home_icon.png"
-                                                           alt="home-icon">Dashboard</a></li>
+                    <li><a href="dashboard.jsp"><img src="../assets/icons/home_icon.png"
+                                                     alt="home-icon">Dashboard</a></li>
                     <li><a href="admins_list.jsp"><img src="../assets/icons/admins_icon.png"
                                 alt="admin-icon">Admins</a></li>
                     <li><a href="mentors_list.jsp"><img src="../assets/icons/mentors_icon.png"
@@ -67,27 +39,28 @@
             </div>
         </aside>
         <div class="details-container">
-            <h1>Add new level</h1>
-      -      <a href="levels_list.jsp">&#60;- Back to the list</a>
+            <h1>Level's details</h1>
+            <a href="levels_list.jsp">&#60;- Back to the list</a>
             <div class="personal-details">
                 <h2>Basic details:</h2>
                 <label for="level-name">Name*:</label>
-                <input type="text" id="level-name">
+                <input type="text" id="level-name" value="Level I with super name">
                 <label for="level-description">Description*:</label>
-                <input type="text" id="level-description">
+                <textarea id="level-description" >A few words about my super level, how cool I am to get it.</textarea>
                 <div class="img-coins">
                     <div>
                         <p>Picture*:</p>
-                        <a href=""><img src="../assets/img/change-img.svg" alt="Add image icon" class="change-img-icon">Add picture:</a>
+                        <img src="../assets/img/user-photo.svg" alt="Here should be uploaded image" class="thumbail-img">
+                        <a href=""><img src="../assets/img/change-img.svg" alt="Change image icon" class="change-img-icon">Change picture:</a>
                     </div>
                     <div class="level-coins">
                         <label for="level-coins">Cost (number of coins to get)*:</label>
-                        <input type="number" id="level-coins">
+                        <input type="number" id="level-coins" value="200">
                     </div>
                 </div>
                 <div class="lower-section">
                     <p>*- Fields marked like the need to be filled to add new entry</p>
-                    <button class="btn" id="update-level">Add new level</button>
+                    <button class="btn" id="update-level">Update level</button>
                 </div>
             </div>
         </div>
@@ -101,4 +74,4 @@
     </footer>
 </body>
 
-</html> 
+</html>
