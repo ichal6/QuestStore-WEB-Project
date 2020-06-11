@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='icon' href='../favicon.ico' type='image/x-icon'>
-    <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/all-quests.css">
     <title>List of quests</title>
 </head>
@@ -14,20 +13,8 @@
     <jsp:include page="../html-common/cms-header.jsp" />
 
     <div class="container">
-        <aside>
-            <div class="nav">
-                <ul class="nav-menu">
-                    <li><a href="dashboard.jsp"><img src="../assets/icons/home_icon.png" alt="home-icon">Dashboard</a></li>
-                    <li><a href="admins_list.jsp"><img src="../assets/icons/admins_icon.png" alt="admin-icon">Admins</a></li>
-                    <li><a href="mentors_list.jsp"><img src="../assets/icons/mentors_icon.png" alt="mentors-icon">Mentors</a></li>
-                    <li><a href="levels_list.jsp"><img src="../assets/icons/levels_icon.png" alt="levels-icon">Levels</a></li>
-                    <li><a href="codecoolers_list.jsp"><img src="../assets/icons/codecoolers_icon.png" alt="codecoolers-icon">Codecoolers</a></li>
-                    <li><a href="classes_list.jsp"><img src="../assets/icons/classes_icon.png" alt="classes-icon">Classes</a></li>
-                    <li><a href="teams_list.jsp"><img src="../assets/icons/teams_icon.png" alt="teams-icon">Teams</a></li>
-                    <li id="select-page"><a href="quests_list.jsp"><img src="../assets/icons/quests_icon.png" alt="quests-icon">Quests</a></li>
-                    <li><a href="artifacts_list.jsp"><img src="../assets/icons/artifacts_icon.png" alt="artifacts-icon">Artifacts</a></li></ul>
-            </div>
-        </aside>
+        <jsp:include page="../html-common/cms-navigation.jsp" />
+
         <div class="all-quests-container">
             <div class="upper-section">
                 <div class="h1-button">
