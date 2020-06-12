@@ -175,6 +175,12 @@ body {
     margin-left: 48px;
 }
 
+.warning-incorrect-login{
+    display: flex;
+    justify-content: center;
+    color: #BF343F;
+    font-size: 18px;
+}
 
 .hidden {
     display: none;

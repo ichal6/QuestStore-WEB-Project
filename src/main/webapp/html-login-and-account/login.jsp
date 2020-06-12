@@ -35,6 +35,8 @@
 
                 <h5><a href="login-password-reset.jsp">forgot your password?</a> </h5>
 
+                ${wrongLogIn}
+
                 <div class="submit-button">
                     <button  class="button" type="submit" onclick="return launchPage()">Sign in</button>
                 </div>

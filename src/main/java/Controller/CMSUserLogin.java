@@ -22,9 +22,11 @@ public class CMSUserLogin extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        //Here should be a request to database and should be attach to field's user
-        if(email.equals(user.getEmail()) && password.equals(user.getPassword())){
-            SessionUser.actualuser = user;
+        boolean isCorrectLogIn = tryLogIn(email, password);
+        isCorrectLogIn = email.equals(user.getEmail()) && password.equals(user.getPassword());
+        if(isCorrectLogIn){
+
+            SessionUser.actualUser = getUserFromDatabase(email, password);
             if(user.isAdmin()){
                 response.sendRedirect("/html-cms/dashboard_admin.jsp");
             }
@@ -33,9 +35,24 @@ public class CMSUserLogin extends HttpServlet {
             }
         }
         else{
-            System.out.println("You put incorrect data");
-            response.sendRedirect("/html-login-and-account/login.jsp");
+            String message = "<p class=\"warning-incorrect-login\">You put incorrect data!<p>";
+            request.setAttribute("wrongLogIn", message);
+            RequestDispatcher dispatcher
+                = request.getRequestDispatcher("/html-login-and-account/login.jsp");
+            dispatcher.forward(request, response);
         }
+    }
+
+    private boolean tryLogIn(String email, String password){
+        // It will be request to database
+        return true;
+    }
+
+    private CMSUser getUserFromDatabase(String email, String password){
+        //here should be run DAO and read current user after positive result of tryLogIn method
+        return new CMSUser(1,"NowyUser", "relaks@wp.pl", "1234",
+                "Kraków", new java.sql.Date(Calendar.getInstance().getTime().getTime()),
+                "simpleURL", true);
     }
 
 //    @Override
