@@ -45,7 +45,7 @@
                     <img src="../assets/icons/my_account_icon.svg" alt="my account icon"></a>
             </li>
             <li>
-                <a href="#">Log out
+                <a href="../index.jsp">Log out
                     <img src="../assets/icons/log_out_icon.svg" alt="log out icon"></a>
             </li>
         </ul>
