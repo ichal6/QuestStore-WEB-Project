@@ -34,7 +34,7 @@
                 <h5><a href="codecooler_reset.jsp">forgot your password?</a> </h5>
                 
                 <div class ="submit-button">
-                    <input class="button" type ="submit" value ="Sign in" onClick="location.href='dashboard_admin.jsp'">
+                    <input class="button" type ="submit" value ="Sign in" onClick="location.href='dashboard.jsp'">
                 </div>
             </div>	
         </div>
