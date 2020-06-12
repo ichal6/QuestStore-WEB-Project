@@ -56,4 +56,12 @@ public class CMSUser {
     public boolean isAdmin() {
         return isAdmin;
     }
+
+    public String getRole() {
+        if(isAdmin){
+            return "Admin";
+        }else{
+            return "Mentor";
+        }
+    }
 }

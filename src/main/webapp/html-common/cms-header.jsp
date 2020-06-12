@@ -1,3 +1,4 @@
+<%@ page import="Controller.SessionUser" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -8,10 +9,8 @@
 <body>
 
 <%
-    String name = "Codecoolowy Zarządca";
-    String role = "Admin";
-    // te wartości daję tu na sztywno, ale później będą musiały być skądś pobierane (z jakiejś oddzielnej klasy)
-    // jeśli te wartości nie pokazują Wam się w przeglądarce, możliwe, że musicie sobie wyczyścić ciasteczka
+    String name = SessionUser.actualUser.getName();
+    String role = SessionUser.actualUser.getRole();
 %>
 
 <div class="header">

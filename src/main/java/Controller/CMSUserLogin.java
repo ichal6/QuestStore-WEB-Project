@@ -13,9 +13,12 @@ import java.util.Calendar;
 
 @WebServlet(name = "CMSUserLogin", urlPatterns = "/CMSUserLogin")
 public class CMSUserLogin extends HttpServlet {
-    private CMSUser user = new CMSUser(1,"NowyUser", "relaks@wp.pl", "1234",
+    private CMSUser userAdmin = new CMSUser(1,"NowyUser", "relaks@wp.pl", "1234",
             "Kraków", new java.sql.Date(Calendar.getInstance().getTime().getTime()),
             "simpleURL", true);
+    private CMSUser userMentor = new CMSUser(1,"Nowy Mentor", "mentor@wp.pl", "1234",
+            "Kraków", new java.sql.Date(Calendar.getInstance().getTime().getTime()),
+            "simpleURL", false);
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,11 +26,9 @@ public class CMSUserLogin extends HttpServlet {
         String password = request.getParameter("password");
 
         boolean isCorrectLogIn = tryLogIn(email, password);
-        isCorrectLogIn = email.equals(user.getEmail()) && password.equals(user.getPassword());
         if(isCorrectLogIn){
-
             SessionUser.actualUser = getUserFromDatabase(email, password);
-            if(user.isAdmin()){
+            if(SessionUser.actualUser.isAdmin()){
                 response.sendRedirect("/html-cms/dashboard_admin.jsp");
             }
             else{
@@ -45,14 +46,20 @@ public class CMSUserLogin extends HttpServlet {
 
     private boolean tryLogIn(String email, String password){
         // It will be request to database
-        return true;
+        if(email.equals(userAdmin.getEmail()) && password.equals(userAdmin.getPassword())){
+            return true;
+        }
+        else return email.equals(userMentor.getEmail()) && password.equals(userMentor.getPassword());
     }
 
     private CMSUser getUserFromDatabase(String email, String password){
         //here should be run DAO and read current user after positive result of tryLogIn method
-        return new CMSUser(1,"NowyUser", "relaks@wp.pl", "1234",
-                "Kraków", new java.sql.Date(Calendar.getInstance().getTime().getTime()),
-                "simpleURL", true);
+        if(email.equals("relaks@wp.pl")){
+            return userAdmin;
+        }
+        else{
+            return userMentor;
+        }
     }
 
     @Override
