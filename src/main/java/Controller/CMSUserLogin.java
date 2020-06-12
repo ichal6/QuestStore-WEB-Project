@@ -55,10 +55,10 @@ public class CMSUserLogin extends HttpServlet {
                 "simpleURL", true);
     }
 
-//    @Override
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        RequestDispatcher dispatcher
-//                = request.getRequestDispatcher("/html-login-and-account/login.jsp");
-//        dispatcher.forward(request, response);
-//    }
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("/html-login-and-account/login.jsp");
+        dispatcher.forward(request, response);
+    }
 }
