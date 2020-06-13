@@ -35,8 +35,8 @@ public class CMSUserLogin extends HttpServlet {
         boolean isCorrectLogIn = tryLogIn(email, password);
         if(isCorrectLogIn){
             CMSUser user = getUserFromDatabase(email, password);
-            SessionUser.setActualUser(user);
-            if(SessionUser.getActualUser().isAdmin()){
+            SessionManager.setActualUser(user);
+            if(SessionManager.getActualUser().isAdmin()){
                 response.sendRedirect("/html-cms/dashboard_admin.jsp");
             }
             else{

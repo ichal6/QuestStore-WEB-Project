@@ -1,4 +1,4 @@
-<%@ page import="Controller.SessionUser" %>
+<%@ page import="Controller.SessionManager" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html lang="en">
@@ -16,7 +16,7 @@
 </head>
 <body>
     <%
-      SessionUser.setActualUser(null);
+      SessionManager.setActualUser(null);
     %>
     <div class ="container-1">
         <div class = "logo"> <img src="assets/img/codequest_logo.svg" alt="Simply Easy Learning" ></div>

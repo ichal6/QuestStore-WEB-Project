@@ -1,4 +1,4 @@
-<%@ page import="Controller.SessionUser" %>
+<%@ page import="Controller.SessionManager" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -8,7 +8,7 @@
 <body>
 
 <%
-    String role = SessionUser.getActualUser().getRole();
+    String role = SessionManager.getActualUser().getRole();
 %>
 
 <aside>

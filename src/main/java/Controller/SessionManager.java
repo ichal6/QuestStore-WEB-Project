@@ -2,11 +2,11 @@ package Controller;
 
 import Model.CMSUser;
 
-public class SessionUser {
+public class SessionManager {
     private static CMSUser actualUser;
 
     public static void setActualUser(CMSUser actualUser) {
-        SessionUser.actualUser = actualUser;
+        SessionManager.actualUser = actualUser;
     }
 
     public static CMSUser getActualUser() {
