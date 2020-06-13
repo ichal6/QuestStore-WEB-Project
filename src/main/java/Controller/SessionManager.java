@@ -10,6 +10,8 @@ public class SessionManager {
     }
 
     public static CMSUser getActualUser() {
+        //Here we should throw our exception (for example NoSessionException) when actualUser equals null.
+        // If user try bypass login page , when we should display error page ex. HTTP 403 forbidden.
         return actualUser;
     }
 }
