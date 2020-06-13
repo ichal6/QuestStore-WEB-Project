@@ -3,5 +3,13 @@ package Controller;
 import Model.CMSUser;
 
 public class SessionUser {
-    public static CMSUser actualUser;
+    private static CMSUser actualUser;
+
+    public static void setActualUser(CMSUser actualUser) {
+        SessionUser.actualUser = actualUser;
+    }
+
+    public static CMSUser getActualUser() {
+        return actualUser;
+    }
 }

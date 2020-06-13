@@ -8,7 +8,7 @@
 <body>
 
 <%
-    String role = SessionUser.actualUser.getRole();
+    String role = SessionUser.getActualUser().getRole();
 %>
 
 <aside>

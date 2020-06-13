@@ -9,8 +9,8 @@
 <body>
 
 <%
-    String name = SessionUser.actualUser.getName();
-    String role = SessionUser.actualUser.getRole();
+    String name = SessionUser.getActualUser().getName();
+    String role = SessionUser.getActualUser().getRole();
 %>
 
 <div class="header">

@@ -16,7 +16,7 @@
 </head>
 <body>
     <%
-      SessionUser.actualUser = null;
+      SessionUser.setActualUser(null);
     %>
     <div class ="container-1">
         <div class = "logo"> <img src="assets/img/codequest_logo.svg" alt="Simply Easy Learning" ></div>

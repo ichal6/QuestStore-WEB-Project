@@ -21,14 +21,22 @@ public class CMSUserLogin extends HttpServlet {
             "simpleURL", false);
 
     @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("/html-login-and-account/login.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
         boolean isCorrectLogIn = tryLogIn(email, password);
         if(isCorrectLogIn){
-            SessionUser.actualUser = getUserFromDatabase(email, password);
-            if(SessionUser.actualUser.isAdmin()){
+            CMSUser user = getUserFromDatabase(email, password);
+            SessionUser.setActualUser(user);
+            if(SessionUser.getActualUser().isAdmin()){
                 response.sendRedirect("/html-cms/dashboard_admin.jsp");
             }
             else{
@@ -39,7 +47,7 @@ public class CMSUserLogin extends HttpServlet {
             String message = "<p class=\"warning-incorrect-login\">You put incorrect data!<p>";
             request.setAttribute("wrongLogIn", message);
             RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/html-login-and-account/login.jsp");
+                    = request.getRequestDispatcher("/html-login-and-account/login.jsp");
             dispatcher.forward(request, response);
         }
     }
@@ -60,12 +68,5 @@ public class CMSUserLogin extends HttpServlet {
         else{
             return userMentor;
         }
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/html-login-and-account/login.jsp");
-        dispatcher.forward(request, response);
     }
 }
