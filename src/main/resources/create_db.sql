@@ -34,11 +34,13 @@ CREATE TABLE cms_user(
 
 CREATE TABLE class(
 	class_id serial PRIMARY KEY,
-	name varchar(25) NOT NULL,
+	name varchar(100) NOT NULL,
 	city varchar(25) NOT NULL,
 	start_date date NOT NULL,
 	end_date date NOT NULL
 );
+
+
 
 CREATE TABLE wallet(
 	wallet_id serial PRIMARY KEY,
