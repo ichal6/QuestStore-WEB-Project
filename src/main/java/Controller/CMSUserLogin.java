@@ -37,10 +37,10 @@ public class CMSUserLogin extends HttpServlet {
             CMSUser user = getUserFromDatabase(email, password);
             SessionManager.setActualUser(user);
             if(SessionManager.getActualUser().isAdmin()){
-                response.sendRedirect("/html-cms/dashboard_admin.jsp");
+                response.sendRedirect("/dashboard");
             }
             else{
-                response.sendRedirect("/html-cms/dashboard_mentor.jsp");
+                response.sendRedirect("/dashboard");
             }
         }
         else{
