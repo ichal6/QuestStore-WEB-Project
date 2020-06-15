@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS codecooler_artifacts CASCADE;
 DROP TABLE IF EXISTS team_artifacts CASCADE;
 
 CREATE TABLE level(
-	level_id serial PRIMARY KEY,
+	level_id serial PRIMARY KEY UNIQUE,
 	name varchar(30) NOT NULL,
 	description varchar(100) NOT NULL,
 	price integer NOT NULL, 
@@ -21,7 +21,7 @@ CREATE TABLE level(
 
 
 CREATE TABLE cms_user(
-	cms_user_id serial PRIMARY KEY,
+	cms_user_id serial PRIMARY KEY UNIQUE,
 	name varchar(25) NOT NULL,
 	email varchar(25) NOT NULL,
 	password varchar(25) NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE cms_user(
 
 
 CREATE TABLE class(
-	class_id serial PRIMARY KEY,
+	class_id serial PRIMARY KEY UNIQUE,
 	name varchar(100) NOT NULL,
 	city varchar(25) NOT NULL,
 	start_date date NOT NULL,
@@ -43,20 +43,20 @@ CREATE TABLE class(
 
 
 CREATE TABLE wallet(
-	wallet_id serial PRIMARY KEY,
+	wallet_id serial PRIMARY KEY UNIQUE,
 	coins_total integer NOT NULL DEFAULT 0,
 	coins_available integer NOT NULL DEFAULT 0
 );
 
 CREATE TABLE team(
-	team_id serial PRIMARY KEY,
+	team_id serial PRIMARY KEY UNIQUE,
 	name varchar(25) NOT NULL,
 	city varchar(25) NOT NULL,
 	start_date date NOT NULL
 );
 
 CREATE TABLE codecooler(
-	codecooler_id serial PRIMARY KEY,
+	codecooler_id serial PRIMARY KEY UNIQUE,
 	name varchar(25) NOT NULL,
 	email varchar(25) NOT NULL,
 	password varchar(25) NOT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE codecooler(
 );
 
 CREATE TABLE quest(
-	quest_id serial PRIMARY KEY, 
+	quest_id serial PRIMARY KEY UNIQUE,
 	name varchar(50) NOT NULL, 
 	desciption varchar(100) NOT NULL, 
 	value integer,
@@ -89,7 +89,7 @@ CREATE TABLE quest(
 
 
 CREATE TABLE codecooler_quests(
-	codecooler_quests_id serial PRIMARY KEY, 
+	codecooler_quests_id serial PRIMARY KEY UNIQUE,
 	codecooler_id integer, 
 	quest_id integer, 
 	date_of_achieving date NOT NULL DEFAULT CURRENT_DATE,
@@ -102,7 +102,7 @@ CREATE TABLE codecooler_quests(
 );
 
 CREATE TABLE artifact(
-	artifact_id serial PRIMARY KEY, 
+	artifact_id serial PRIMARY KEY UNIQUE,
 	name varchar(50),
 	description varchar(100),
 	value integer, 
@@ -112,7 +112,7 @@ CREATE TABLE artifact(
 );
 
 CREATE TABLE codecooler_artifacts(
-	codecooler_artifacts_id serial PRIMARY KEY, 
+	codecooler_artifacts_id serial PRIMARY KEY UNIQUE,
 	codecooler_id integer, 
 	artifact_id integer, 
 	date_of_buying date NOT NULL DEFAULT CURRENT_DATE, 
@@ -126,7 +126,7 @@ CREATE TABLE codecooler_artifacts(
 	);
 
 CREATE TABLE team_artifacts(
-	team_artifacts_id serial PRIMARY KEY, 
+	team_artifacts_id serial PRIMARY KEY UNIQUE,
 	team_id integer, 
 	artifact_id integer, 
 	date_of_buying date NOT NULL DEFAULT CURRENT_DATE, 
