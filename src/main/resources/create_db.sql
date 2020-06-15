@@ -66,13 +66,13 @@ CREATE TABLE codecooler(
 	class_id integer,
 	team_id integer,
 	wallet_id serial NOT NULL,
-	CONSTRAINT krzystof FOREIGN KEY (class_id)
+	CONSTRAINT codecooler_class_id FOREIGN KEY (class_id)
 	REFERENCES class (class_id)
 	ON UPDATE CASCADE,
-	CONSTRAINT grzegorz FOREIGN KEY (team_id)
+	CONSTRAINT codecooler_team_id FOREIGN KEY (team_id)
 	REFERENCES team (team_id)
 	ON UPDATE CASCADE,
-	CONSTRAINT andrzej FOREIGN KEY (wallet_id)
+	CONSTRAINT codecooler_wallet_id FOREIGN KEY (wallet_id)
 	REFERENCES wallet (wallet_id)
 	ON UPDATE CASCADE
 );
@@ -93,10 +93,10 @@ CREATE TABLE codecooler_quests(
 	codecooler_id integer, 
 	quest_id integer, 
 	date_of_achieving date NOT NULL DEFAULT CURRENT_DATE,
-	CONSTRAINT maciej FOREIGN KEY (codecooler_id) 
+	CONSTRAINT codecooler_quests_codecooler_id FOREIGN KEY (codecooler_id)
 	REFERENCES codecooler(codecooler_id)
 	ON UPDATE CASCADE,
-	CONSTRAINT emil FOREIGN KEY (quest_id)
+	CONSTRAINT codecooler_quests_quest_id FOREIGN KEY (quest_id)
  	REFERENCES quest(quest_id)
 	ON UPDATE CASCADE	
 );
@@ -117,10 +117,10 @@ CREATE TABLE codecooler_artifacts(
 	artifact_id integer, 
 	date_of_buying date NOT NULL DEFAULT CURRENT_DATE, 
 	is_used boolean,
-	CONSTRAINT mariusz FOREIGN KEY(codecooler_id) 
+	CONSTRAINT codecooler_artifacts_codecooler_id FOREIGN KEY(codecooler_id)
 	REFERENCES codecooler(codecooler_id)
 	ON UPDATE CASCADE,
-	CONSTRAINT maciej FOREIGN KEY(artifact_id) 
+	CONSTRAINT codecooler_artifacts_artifact_id FOREIGN KEY(artifact_id)
 	REFERENCES artifact(artifact_id)
 	ON UPDATE CASCADE	
 	);
@@ -131,10 +131,10 @@ CREATE TABLE team_artifacts(
 	artifact_id integer, 
 	date_of_buying date NOT NULL DEFAULT CURRENT_DATE, 
 	is_used boolean,
-	CONSTRAINT borys FOREIGN KEY(team_id) 
+	CONSTRAINT team_artifacts_team_id FOREIGN KEY(team_id)
 	REFERENCES team(team_id)
 	ON UPDATE CASCADE,
-	CONSTRAINT zbyszek FOREIGN KEY(artifact_id)
+	CONSTRAINT team_artifacts_artifact_id FOREIGN KEY(artifact_id)
  	REFERENCES artifact(artifact_id)
 	ON UPDATE CASCADE
 );
