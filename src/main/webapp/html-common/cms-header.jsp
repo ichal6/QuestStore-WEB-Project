@@ -1,3 +1,4 @@
+<%@ page import="Controller.SessionManager" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -8,10 +9,8 @@
 <body>
 
 <%
-    String name = "Codecoolowy Zarządca";
-    String role = "Admin";
-    // te wartości daję tu na sztywno, ale później będą musiały być skądś pobierane (z jakiejś oddzielnej klasy)
-    // jeśli te wartości nie pokazują Wam się w przeglądarce, możliwe, że musicie sobie wyczyścić ciasteczka
+    String name = SessionManager.getActualUser().getName();
+    String role = SessionManager.getActualUser().getRole();
 %>
 
 <div class="header">
@@ -46,7 +45,7 @@
                     <img src="../assets/icons/my_account_icon.svg" alt="my account icon"></a>
             </li>
             <li>
-                <a href="#">Log out
+                <a href="../index.jsp">Log out
                     <img src="../assets/icons/log_out_icon.svg" alt="log out icon"></a>
             </li>
         </ul>

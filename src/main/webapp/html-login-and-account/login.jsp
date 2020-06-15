@@ -15,14 +15,14 @@
         <a href="login.jsp"><img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
     </nav>
     <div class="content">
-        <div class="login-container">
-            <div class="form">
+        <div class="login-container" >
+            <form class="form" action="/CMSUserLogin" method="POST">
 
                 <h2>Login to your account</h2>
 
                 <div class="input-icons">
                     <i><img src="../assets/icons/login_icon.png" class="login-icon" alt="icon"> </i>
-                    <input class="input-field email-input" id="email" type="text" placeholder="Your email">
+                    <input class="input-field email-input" id="email" name="email" type="text" placeholder="Your email">
                     <div class="warning-email hidden">
                         <p>Email is not valid</p>
                     </div>
@@ -30,15 +30,17 @@
 
                 <div class="input-icons">
                     <i><img src="../assets/icons/password_icon.png" class="login-icon" alt="icon"> </i>
-                    <input class="input-field passw-input" type="password" placeholder="Password">
+                    <input class="input-field passw-input" name="password" type="password" placeholder="Password">
                 </div>
 
                 <h5><a href="login-password-reset.jsp">forgot your password?</a> </h5>
 
+                ${wrongLogIn}
+
                 <div class="submit-button">
-                    <input class="button" type="submit" value="Sign in" onclick="return launchPage()">
+                    <button  class="button" type="submit" onclick="return launchPage()">Sign in</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
@@ -57,7 +59,7 @@
 
     <script>
         function launchPage() {
-            window.open("../html-cms/dashboard_admin.jsp", "_self");
+            // window.open("../html-cms/dashboard_admin.jsp", "_self");
         }
         // tutaj prowadzi na sztywno do konkretnego dashboardu. Później będzie to zależało od danych usera
         // jeśli chcecie wyświetlać odpowiedni header i nav (w zależności od danych usera) - musicie
