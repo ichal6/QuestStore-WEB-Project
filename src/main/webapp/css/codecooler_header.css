@@ -40,6 +40,7 @@ nav{
 
 nav a{
     font-family: "Source Sans Pro";
+    font-size: 18px;
     text-decoration: none;
     color: #0D0D0D;
 }
@@ -110,6 +111,23 @@ nav a:hover{
 
 #twitter-logo:hover{
     filter: invert(59%) sepia(37%) saturate(4140%) hue-rotate(176deg) brightness(93%) contrast(104%);
+}
+
+#log-out-icon img{
+    width: 25px;
+    height: 25px;
+}
+
+#dark-blue-text{
+    color: #2E3159;
+}
+
+#light-blue-text{
+    color: #418FBF;
+}
+
+#red-text{
+    color: #BF343F;
 }
 
 @media screen and (max-width: 800px) {

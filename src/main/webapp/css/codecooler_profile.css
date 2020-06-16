@@ -142,8 +142,6 @@ body{
     width: 100px;
 }
 
-
-
 .level-2 h1, .level-2 h2, .my-level h1, .my-level h2{
     display: table;
     width: auto;
