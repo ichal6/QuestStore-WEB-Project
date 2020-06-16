@@ -1,7 +1,6 @@
 package DAO;
 
 import Model.CMSUser;
-import Model.UserBuilder;
 
 import java.io.IOException;
 import java.sql.*;
@@ -41,11 +40,6 @@ public class UserDBDAO implements IUserDAO {
         } catch (SQLException ex) {
             throw new ReadException("You cannot insert user");
         }
-    }
-
-    @Override
-    public void addUser(UserBuilder newUser) {
-
     }
 
     @Override
