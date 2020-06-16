@@ -8,32 +8,9 @@
   <link rel='icon' href='../favicon.ico' type='image/x-icon'>
   <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/codecooler_my-team.css">
-  <link rel="stylesheet" href="../css/codecooler_header.css">
-  <link rel="stylesheet" href="../css/codecooler_footer.css">
 </head>
 <body>
-    <header>
-        <div class="header-top">
-            <div class="social-media">
-                <a href="https://www.facebook.com/CodecoolPoland/" id="fb-logo"><img src="../assets/img/social-media/FB-logo.svg" alt="FB"></a>
-                <a href="https://www.linkedin.com/school/codecool/" id="linkedin-logo"><img src="../assets/img/social-media/LinkedIn-logo.svg" alt="LinkedIn"></a>
-                <a href="https://www.youtube.com/channel/UCFjOIWV4vfIwJltWe3ytZAQ?view_as=subscriber" id="yt-logo"><img src="../assets/img/social-media/Youtube-logo.svg" alt="YouTube"></a>
-                <a href="https://www.instagram.com/codecool_official/" id="instagram-logo"><img src="../assets/img/social-media/Instagram-logo.svg" alt="Instagram"></a>
-                <a href="https://twitter.com/CodecoolPoland" id="twitter-logo"><img src="../assets/img/social-media/Twitter-logo.svg" alt="Twitter"></a>
-            </div>
-            <a href="dashboard.jsp"><img src="../assets/img/codequest_logo.svg" alt="logo" class="logo"></a>
-            <div class="right-position">
-                <p>Jan Codecoolerowy</p><a href="profile.jsp" id="profil"><img src="../assets/icons/codecooler_icon.svg" alt="icon"></a>
-                <p>1200</p><a href="profile.jsp#acctual-account" id="coins"> <img src="../assets/icons/money_icon.svg" alt="icon"></a>
-            </div>
-        </div>
-        
-        <nav>
-            <a href="quests.jsp">QUESTS</a>
-            <a href="artifacts.jsp">ARTIFACTS</a>
-            <a id="blue-text" href="my-team.jsp"> MY TEAM</a>
-        </nav>
-    </header>
+    <jsp:include page="../html-common/codecooler-header.jsp" />
 
     <div class="content">
 
@@ -143,14 +120,10 @@
         </div>
     </div>
 
-    <footer class="footer">
+    <jsp:include page="../html-common/footer.html" />
 
-        <div class="footer-logo">  <img src="../assets/img/codecool_logo_white.png" alt="logo"> </div>
-        
-        <div class="footer-text">
-            <p> ©2020 All rights reserved by Karolina, Michał, Michał and Rafał</p>
-
-        </div>
-    </footer>
+    <script>
+        document.getElementsByClassName('teams-nav')[0].setAttribute('id', 'light-blue-text');
+    </script>
 </body>
 </html>

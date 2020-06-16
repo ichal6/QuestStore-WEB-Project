@@ -42,14 +42,6 @@
         </div>
     </div>
 
-    <footer class="footer">
-
-        <div class="footer-logo">  <img src="../assets/img/codecool_logo_white.png" alt="logo"> </div>
-        
-        <div class="footer-text">
-            <p> ©2020 All rights reserved by Karolina, Michał, Michał and Rafał</p>
-
-        </div>
-    </footer>
+    <jsp:include page="../html-common/footer.html" />
 </body>
 </html>

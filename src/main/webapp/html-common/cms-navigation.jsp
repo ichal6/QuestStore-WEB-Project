@@ -50,5 +50,3 @@
 </aside>
 </body>
 </html>
-
-<%--id="select-page" - dla podświetlonego obiektu--%>
