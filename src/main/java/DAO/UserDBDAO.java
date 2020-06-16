@@ -87,8 +87,15 @@ public class UserDBDAO implements IUserDAO {
     }
 
     @Override
-    public void deleteUser(int ID) {
-
+    public void deleteUser(int ID) throws ReadException {
+        try(Connection con = DriverManager.getConnection(DBUrl, this.DBUser, this.DBPassword);
+            PreparedStatement pst = con.prepareStatement("DELETE FROM cms_user WHERE cms_user_id = ?")){
+            pst.setInt(1, ID);
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new ReadException("You cannot access to database");
+        }
     }
 
     @Override

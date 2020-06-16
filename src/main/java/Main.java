@@ -14,5 +14,6 @@ public class Main {
                 "simpleURL", true);
         dao.addUser(userAdmin);
         dao.editUser(2, userAdmin);
+        dao.deleteUser(3);
     }
 }
