@@ -17,5 +17,5 @@ public interface IUserDAO {
     Map<Integer, CMSUser> getAllUsers() throws ReadException;
     Map<Integer, CMSUser> getAllAdmins() throws ReadException;
     Map<Integer, CMSUser> getAllMentors() throws ReadException;
-    CMSUser getDBUser() throws ReadException;
+    CMSUser getCMSUser(int ID) throws ReadException;
 }

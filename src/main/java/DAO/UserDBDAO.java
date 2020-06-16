@@ -114,7 +114,35 @@ public class UserDBDAO implements IUserDAO {
     }
 
     @Override
-    public CMSUser getDBUser() {
-        return null;
+    public CMSUser getCMSUser(int ID) throws ReadException {
+        try(Connection con = DriverManager.getConnection(this.DBUrl, this.DBUser, this.DBPassword);
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM cms_user WHERE cms_user_id = ?")) {
+            pst.setInt(1, ID);
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()) {
+                int id = rs.getInt(1);
+                String name = rs.getString(2);
+                String email = rs.getString(3);
+                String password = rs.getString(4);
+                String city = rs.getString(5);
+                Date date = rs.getDate(6);
+                String url = rs.getString(7);
+                boolean role = rs.getBoolean(8);
+
+                return new CMSUser.Builder()
+                        .userID(id)
+                        .userName(name)
+                        .userEmail(email)
+                        .userPassword(password)
+                        .userCity(city)
+                        .userDate(date)
+                        .userPicture(url)
+                        .userRole(role)
+                        .build();
+            }
+        } catch (SQLException ex) {
+            throw new ReadException("You cannot access to database.");
+        }
+        throw new ReadException("This user doesn't exist!");
     }
 }
