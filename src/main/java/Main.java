@@ -13,5 +13,6 @@ public class Main {
                 "Kraków", new java.sql.Date(Calendar.getInstance().getTime().getTime()),
                 "simpleURL", true);
         dao.addUser(userAdmin);
+        dao.editUser(2, userAdmin);
     }
 }

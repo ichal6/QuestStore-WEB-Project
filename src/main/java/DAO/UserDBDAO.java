@@ -67,8 +67,23 @@ public class UserDBDAO implements IUserDAO {
     }
 
     @Override
-    public void editUser(int ID, CMSUser user) {
-
+    public void editUser(int ID, CMSUser user) throws ReadException {
+        String query = "UPDATE cms_user SET name = ?, email = ?, password = ?, city = ?, date_of_adding = ? ,picture_url = ?, is_admin = ? WHERE cms_user_id = ?";
+        try (Connection con = DriverManager.getConnection(DBUrl, this.DBUser, this.DBPassword);
+             PreparedStatement pst = con.prepareStatement(query))
+        {
+            pst.setString(1, user.getName());
+            pst.setString(2, user.getEmail());
+            pst.setString(3, user.getPassword());
+            pst.setString(4, user.getCity());
+            pst.setDate(5, user.getDateOfAdding());
+            pst.setString(6, user.getPictureURL());
+            pst.setBoolean(7, user.isAdmin());
+            pst.setInt(8, ID);
+            pst.executeUpdate();
+        } catch (SQLException ex) {
+            throw new ReadException("You cannot insert user");
+        }
     }
 
     @Override
