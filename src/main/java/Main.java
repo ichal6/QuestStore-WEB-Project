@@ -8,6 +8,7 @@ import java.util.Calendar;
 
 public class Main {
     public static void main(String[] args) throws IOException, ReadException {
+        //Code only for testing
         IUserDAO dao = new UserDBDAO("src/main/resources/database.properties");
         CMSUser userAdmin = new CMSUser(1,"NowyUser", "relaks@wp.pl", "1234",
                 "Kraków", new java.sql.Date(Calendar.getInstance().getTime().getTime()),
@@ -15,5 +16,7 @@ public class Main {
         dao.addUser(userAdmin);
         dao.editUser(2, userAdmin);
         dao.deleteUser(3);
+        CMSUser user = dao.getCMSUser(4);
+        System.out.println(user);
     }
 }

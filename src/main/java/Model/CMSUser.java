@@ -133,4 +133,12 @@ public class CMSUser {
             return "Mentor";
         }
     }
+
+    @Override
+    public String toString(){
+        String date = dateOfAdding.toString();
+        String role = this.getRole();
+        return String.format("ID=%d name-%s email-%s password-%s city-%s Date-%s URL of picture - %s Role - %s",
+                ID, name, email, password, city, date, pictureURL, role);
+    }
 }
