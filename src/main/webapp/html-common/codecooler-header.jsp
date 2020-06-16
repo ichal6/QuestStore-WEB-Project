@@ -18,6 +18,7 @@
             <div class="right-position">
                 <p>Jan Codecoolerowy</p><a href="../html-codecooler/profile.jsp" id="profil"><img src="../assets/icons/codecooler_icon.svg" alt="icon"></a>
                 <p>1200</p><a href="../html-codecooler/profile.jsp#acctual-account" id="coins"> <img src="../assets/icons/money_icon.svg" alt="icon"></a>
+                <p>Log out</p><a href="../index.jsp" id="log-out-icon"><img src="../assets/icons/log_out_icon.svg" alt="log out icon"></a>
             </div>
         </div>
 

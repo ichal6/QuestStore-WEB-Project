@@ -113,6 +113,11 @@ nav a:hover{
     filter: invert(59%) sepia(37%) saturate(4140%) hue-rotate(176deg) brightness(93%) contrast(104%);
 }
 
+#log-out-icon img{
+    width: 25px;
+    height: 25px;
+}
+
 #dark-blue-text{
     color: #2E3159;
 }
