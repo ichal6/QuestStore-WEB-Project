@@ -112,7 +112,7 @@ body{
 }
 
 .level-2-text .item .description{
-    font-family: "Source Sans Regular";
+    font-family: "Source Sans Regular", sans-serif;
     font-weight: 300;
 }
 
@@ -149,7 +149,7 @@ body{
 .item p{
     margin: 10px;
     max-width: 450px;
-    font-family: "Source Sans Pro";
+    font-family: "Source Sans Pro", sans-serif;
     color: #418FBF;
 }
 
@@ -165,7 +165,7 @@ body{
 }
 
 .level-2-text, .level-3-text, .level-4-text{
-    font-family: "Source Sans Regular";
+    font-family: "Source Sans Regular", sans-serif;
     font-size: 18px;
     margin-top: 35px;
     margin-left: 40px;
@@ -182,7 +182,7 @@ body{
 
 .level-4 h1{
     width: auto;
-    font-family: "Source Sans Black";
+    font-family: "Source Sans Black", sans-serif;
     font-size: 48px;
     color: #2E3159;
     background-color: transparent;
@@ -196,7 +196,7 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-family: "Source Sans Regular";
+    font-family: "Source Sans Regular", sans-serif;
     font-size: 18px;
     margin-top: 35px;
     margin-left: 20px;
@@ -220,17 +220,15 @@ body{
 
 .text{
     display: inline;
-    font-family: "Source Sans Pro";
+    font-family: "Source Sans Pro", sans-serif;
     font-size: 72px;
     text-align: center;
     vertical-align: middle;
     margin-bottom: 13px;
-    /* padding-left: 30px;
-    padding-right: 30px; */
 }
 
 .text.simple{
-    font-family: "Source Sans Regular";
+    font-family: "Source Sans Regular", sans-serif;
     font-size: 18px;
     text-align: left;
     max-width: 635px;
@@ -241,13 +239,13 @@ body{
 }
 
 .text.blue{
-    font-family: "Source Sans Black";
+    font-family: "Source Sans Black", sans-serif;
     background-color: #2E3159;
     color: #F2F2F2;
 }
 
 .text.red{
-    font-family: "Source Sans Black";
+    font-family: "Source Sans Black", sans-serif;
     color: #F2F2F2;
     background-color: #BF343F;
     margin-left: 40px;
@@ -278,11 +276,6 @@ body{
     font-size: 21px;
     cursor: pointer;
 }
-
-#red-text{
-    color: #BF343F;
-}
-
 
 @media screen and (max-width: 1000px) {
     .text.red{

@@ -48,7 +48,6 @@ public class SummaryController extends HttpServlet {
         dispatcher.forward(req, resp);
     }
 
-
     private Connection connectToDB() throws IOException, SQLException {
         Properties prop = LoginData.readProperties("src/main/resources/database.properties");
         String url = prop.getProperty("db.url");
