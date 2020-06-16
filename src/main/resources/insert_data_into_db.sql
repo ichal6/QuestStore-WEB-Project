@@ -33,22 +33,22 @@ VALUES(default,'WAW-2019-JAVA-Weekend','Warsaw',TO_DATE('2019-08-01','YYYY-MM-DD
 
 
 INSERT INTO level
-values(default,'Level 1 - Iron Maiden','Basic level on yuur journey','200',default,'level1.png');
+values(default,'Level 1 - Iron Maiden','Basic level on yuur journey','200',default,'level1.svg');
 
 INSERT INTO level
-values(default,'Level 2 - Silver Warrior','You are getting stronger..','500',default,'level2.png');
+values(default,'Level 2 - Silver Warrior','You are getting stronger..','500',default,'level2.svg');
 
 INSERT INTO level
-values(default,'Level 3 - Golden Level','Higher, higher.','1000',default,'level3.png');
+values(default,'Level 3 - Golden Level','Higher, higher.','1000',default,'level3.svg');
 
 INSERT INTO level
-values(default,'Level 4 - Platinium Warrior','Halfway of the journey.','2500',default,'level4.png');
+values(default,'Level 4 - Platinium Warrior','Halfway of the journey.','2500',default,'level4.svg');
 
 INSERT INTO level
-values(default,'Level 5 - Stealth Ninja','Almost on the top.','5000',default,'level5.png');
+values(default,'Level 5 - Stealth Ninja','Almost on the top.','5000',default,'level5.svg');
 
 INSERT INTO level
-values(default,'Level 6 - Codecool Buddha','There is nothing more.','10000',default,'level6.png');
+values(default,'Level 6 - Codecool Buddha','There is nothing more.','10000',default,'level6.svg');
 
 
 
