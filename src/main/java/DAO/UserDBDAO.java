@@ -5,6 +5,7 @@ import Model.UserBuilder;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
@@ -12,14 +13,14 @@ public class UserDBDAO implements IUserDAO {
     private final String DBUrl;
     private final String DBUser;
     private final String DBPassword;
-    private Map<Integer, CMSUser> dicOfUser;
+    private Map<Integer, CMSUser> dicOfUsers;
 
     public UserDBDAO(String path) throws IOException {
         Properties prop = LoginData.readProperties(path);
         DBUrl = prop.getProperty("db.url");
         DBUser = prop.getProperty("db.user");
         DBPassword = prop.getProperty("db.passwd");
-
+        dicOfUsers = new HashMap<>();
     }
 
     @Override
@@ -99,8 +100,14 @@ public class UserDBDAO implements IUserDAO {
     }
 
     @Override
-    public Map<Integer, CMSUser> getAllUsers() {
-        return null;
+    public Map<Integer, CMSUser> getAllUsers() throws ReadException{
+        try(Connection con = DriverManager.getConnection(this.DBUrl, this.DBUser, this.DBPassword);
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM cms_user")) {
+            ResultSet rs = pst.executeQuery();
+            return fillDicOfUsers(rs);
+        } catch (SQLException ex) {
+            throw new ReadException("You cannot access to database.");
+        }
     }
 
     @Override
@@ -144,5 +151,28 @@ public class UserDBDAO implements IUserDAO {
             throw new ReadException("You cannot access to database.");
         }
         throw new ReadException("This user doesn't exist!");
+    }
+
+    private Map<Integer, CMSUser> fillDicOfUsers(ResultSet rs) throws ReadException{
+        dicOfUsers.clear();
+        try {
+            while (rs.next()) {
+                CMSUser user = new CMSUser.Builder()
+                        .userID(rs.getInt(1))
+                        .userName(rs.getString(2))
+                        .userEmail(rs.getString(3))
+                        .userPassword(rs.getString(4))
+                        .userCity(rs.getString(5))
+                        .userDate(rs.getDate(6))
+                        .userPicture(rs.getString(7))
+                        .userRole(rs.getBoolean(8))
+                        .build();
+
+                dicOfUsers.put(user.getID(), user);
+            }
+        } catch (SQLException ex) {
+            throw new ReadException("You cannot import list of users.");
+        }
+        return dicOfUsers;
     }
 }

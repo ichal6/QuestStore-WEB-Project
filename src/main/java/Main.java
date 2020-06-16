@@ -5,6 +5,7 @@ import Model.CMSUser;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException, ReadException {
@@ -17,6 +18,10 @@ public class Main {
         dao.editUser(2, userAdmin);
         dao.deleteUser(3);
         CMSUser user = dao.getCMSUser(4);
+
         System.out.println(user);
+        for (Map.Entry<Integer,CMSUser> entry : dao.getAllUsers().entrySet())
+            System.out.println("Key = " + entry.getKey() +
+                    ", Value = " + entry.getValue());
     }
 }
