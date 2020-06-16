@@ -10,8 +10,7 @@
 </head>
 
 <body>
-    dev
-
+    <jsp:include page="../html-common/cms-header.jsp" />
 
     <div class="container">
         <jsp:include page="../html-common/cms-navigation.jsp" />
