@@ -127,36 +127,45 @@ public class UserDBDAO implements IUserDAO {
     }
 
     @Override
+    public CMSUser getCMSUser(String email, String password) throws ReadException {
+        try(Connection con = DriverManager.getConnection(this.DBUrl, this.DBUser, this.DBPassword);
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM cms_user WHERE email = ? AND password = ?")) {
+            pst.setString(1, email);
+            pst.setString(2, password);
+            ResultSet rs = pst.executeQuery();
+            return createNewUser(rs);
+        } catch (SQLException ex) {
+            throw new ReadException("You cannot access to database.");
+        }
+    }
+
+    @Override
     public CMSUser getCMSUser(int ID) throws ReadException {
         try(Connection con = DriverManager.getConnection(this.DBUrl, this.DBUser, this.DBPassword);
             PreparedStatement pst = con.prepareStatement("SELECT * FROM cms_user WHERE cms_user_id = ?")) {
             pst.setInt(1, ID);
             ResultSet rs = pst.executeQuery();
-            if(rs.next()) {
-                int id = rs.getInt(1);
-                String name = rs.getString(2);
-                String email = rs.getString(3);
-                String password = rs.getString(4);
-                String city = rs.getString(5);
-                Date date = rs.getDate(6);
-                String url = rs.getString(7);
-                boolean role = rs.getBoolean(8);
+            return createNewUser(rs);
+        } catch (SQLException ex) {
+            throw new ReadException("You cannot access to database.");
+        }
+    }
 
-                return new CMSUser.Builder()
-                        .userID(id)
-                        .userName(name)
-                        .userEmail(email)
-                        .userPassword(password)
-                        .userCity(city)
-                        .userDate(date)
-                        .userPicture(url)
-                        .userRole(role)
-                        .build();
+    @Override
+    public boolean checkUser(String email, String password) throws ReadException {
+        try(Connection con = DriverManager.getConnection(this.DBUrl, this.DBUser, this.DBPassword);
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM cms_user WHERE email = ? AND password = ?")) {
+            pst.setString(1, email);
+            pst.setString(2, password);
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()) {
+                return true;
+            }else{
+                return false;
             }
         } catch (SQLException ex) {
             throw new ReadException("You cannot access to database.");
         }
-        throw new ReadException("This user doesn't exist!");
     }
 
     private Map<Integer, CMSUser> fillDicOfUsers(ResultSet rs) throws ReadException{
@@ -180,5 +189,32 @@ public class UserDBDAO implements IUserDAO {
             throw new ReadException("You cannot import list of users.");
         }
         return dicOfUsers;
+    }
+
+    private CMSUser createNewUser(ResultSet rs) throws SQLException, ReadException {
+        if(rs.next()) {
+            int id = rs.getInt(1);
+            String name = rs.getString(2);
+            String email = rs.getString(3);
+            String password = rs.getString(4);
+            String city = rs.getString(5);
+            Date date = rs.getDate(6);
+            String url = rs.getString(7);
+            boolean role = rs.getBoolean(8);
+
+            return new CMSUser.Builder()
+                    .userID(id)
+                    .userName(name)
+                    .userEmail(email)
+                    .userPassword(password)
+                    .userCity(city)
+                    .userDate(date)
+                    .userPicture(url)
+                    .userRole(role)
+                    .build();
+        }
+        else{
+            throw new ReadException("This user doesn't exist!");
+        }
     }
 }
