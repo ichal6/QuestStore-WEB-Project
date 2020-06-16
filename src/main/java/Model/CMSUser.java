@@ -25,6 +25,75 @@ public class CMSUser {
         this.isAdmin = isAdmin;
     }
 
+    public CMSUser(){
+
+    }
+
+    public static final class Builder {
+        private int userID;
+        private String userName;
+        private String email;
+        private String password;
+        private String city;
+        private Date dateOfAdding;
+        private String pictureURL;
+        private boolean isAdmin;
+
+        public Builder userID(int userID) {
+            this.userID = userID;
+            return this;
+        }
+
+        public Builder userName(String userName) {
+            this.userName = userName;
+            return this;
+        }
+
+        public Builder userEmail(String userEmail) {
+            this.email = userEmail;
+            return this;
+        }
+
+        public Builder userPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public Builder userCity(String city) {
+            this.city = city;
+            return this;
+        }
+
+        public Builder userDate(Date date){
+            this.dateOfAdding = date;
+            return this;
+        }
+
+        public Builder userPicture(String url){
+            this.pictureURL = url;
+            return this;
+        }
+
+        public Builder userRole(boolean isAdmin){
+            this.isAdmin = isAdmin;
+            return this;
+        }
+
+        public CMSUser build() {
+
+            CMSUser user = new CMSUser();
+            user.ID = this.userID;
+            user.name = this.userName;
+            user.email = this.email;
+            user.city = this.city;
+            user.isAdmin = this.isAdmin;
+            user.password = this.password;
+            user.dateOfAdding = this.dateOfAdding;
+            user.pictureURL = this.pictureURL;
+            return user;
+        }
+    }
+
     public int getID() {
         return ID;
     }
@@ -63,5 +132,13 @@ public class CMSUser {
         }else{
             return "Mentor";
         }
+    }
+
+    @Override
+    public String toString(){
+        String date = dateOfAdding.toString();
+        String role = this.getRole();
+        return String.format("ID=%d name-%s email-%s password-%s city-%s Date-%s URL of picture - %s Role - %s",
+                ID, name, email, password, city, date, pictureURL, role);
     }
 }
