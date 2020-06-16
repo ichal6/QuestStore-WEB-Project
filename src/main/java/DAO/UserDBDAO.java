@@ -105,8 +105,14 @@ public class UserDBDAO implements IUserDAO {
     }
 
     @Override
-    public Map<Integer, CMSUser> getAllAdmins() {
-        return null;
+    public Map<Integer, CMSUser> getAllAdmins() throws ReadException {
+        try(Connection con = DriverManager.getConnection(this.DBUrl, this.DBUser, this.DBPassword);
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM cms_user WHERE is_admin='t'")) {
+            ResultSet rs = pst.executeQuery();
+            return fillDicOfUsers(rs);
+        } catch (SQLException ex) {
+            throw new ReadException("You cannot access to database.");
+        }
     }
 
     @Override

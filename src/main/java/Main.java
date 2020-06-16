@@ -13,14 +13,19 @@ public class Main {
         IUserDAO dao = new UserDBDAO("src/main/resources/database.properties");
         CMSUser userAdmin = new CMSUser(1,"NowyUser", "relaks@wp.pl", "1234",
                 "Kraków", new java.sql.Date(Calendar.getInstance().getTime().getTime()),
-                "simpleURL", true);
+                "simpleURL", false);
         dao.addUser(userAdmin);
         dao.editUser(2, userAdmin);
         dao.deleteUser(3);
         CMSUser user = dao.getCMSUser(4);
 
         System.out.println(user);
-        for (Map.Entry<Integer,CMSUser> entry : dao.getAllUsers().entrySet())
+        System.out.println("List of Admins:");
+        for (Map.Entry<Integer,CMSUser> entry : dao.getAllAdmins().entrySet())
+            System.out.println("Key = " + entry.getKey() +
+                    ", Value = " + entry.getValue());
+        System.out.println("Lista mentorów:");
+        for (Map.Entry<Integer,CMSUser> entry : dao.getAllMentors().entrySet())
             System.out.println("Key = " + entry.getKey() +
                     ", Value = " + entry.getValue());
     }
