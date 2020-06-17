@@ -1,6 +1,7 @@
 package DAO;
 
 import Model.CMSUser;
+import Exception.ReadException;
 
 import java.io.IOException;
 import java.sql.*;
@@ -15,7 +16,7 @@ public class UserDBDAO implements IUserDAO {
     private Map<Integer, CMSUser> dicOfUsers;
 
     public UserDBDAO(String path) throws IOException {
-        Properties prop = LoginData.readProperties(path);
+        Properties prop = PropertiesReader.readProperties(path);
         DBUrl = prop.getProperty("db.url");
         DBUser = prop.getProperty("db.user");
         DBPassword = prop.getProperty("db.passwd");
@@ -94,7 +95,7 @@ public class UserDBDAO implements IUserDAO {
     }
 
     @Override
-    public Map<Integer, CMSUser> getAllUsers() throws ReadException{
+    public Map<Integer, CMSUser> getAllUsers() throws ReadException {
         try(Connection con = DriverManager.getConnection(this.DBUrl, this.DBUser, this.DBPassword);
             PreparedStatement pst = con.prepareStatement("SELECT * FROM cms_user")) {
             ResultSet rs = pst.executeQuery();
@@ -168,7 +169,7 @@ public class UserDBDAO implements IUserDAO {
         }
     }
 
-    private Map<Integer, CMSUser> fillDicOfUsers(ResultSet rs) throws ReadException{
+    private Map<Integer, CMSUser> fillDicOfUsers(ResultSet rs) throws ReadException {
         dicOfUsers.clear();
         try {
             while (rs.next()) {
