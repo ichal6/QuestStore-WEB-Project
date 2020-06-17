@@ -15,7 +15,7 @@ public class UserDBDAO implements IUserDAO {
     private Map<Integer, CMSUser> dicOfUsers;
 
     public UserDBDAO(String path) throws IOException {
-        Properties prop = LoginData.readProperties(path);
+        Properties prop = PropertiesReader.readProperties(path);
         DBUrl = prop.getProperty("db.url");
         DBUser = prop.getProperty("db.user");
         DBPassword = prop.getProperty("db.passwd");

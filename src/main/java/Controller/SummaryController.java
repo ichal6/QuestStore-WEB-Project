@@ -1,6 +1,6 @@
 package Controller;
 
-import DAO.LoginData;
+import DAO.PropertiesReader;
 import Model.SummaryAdmin;
 import Model.SummaryMentor;
 
@@ -49,7 +49,7 @@ public class SummaryController extends HttpServlet {
     }
 
     private Connection connectToDB() throws IOException, SQLException {
-        Properties prop = LoginData.readProperties("src/main/resources/database.properties");
+        Properties prop = PropertiesReader.readProperties("src/main/resources/database.properties");
         String url = prop.getProperty("db.url");
         String user = prop.getProperty("db.user");
         String password = prop.getProperty("db.passwd");

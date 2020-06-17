@@ -11,7 +11,7 @@ import java.util.Properties;
 public class QuestJDBCDAO implements QuestDAO {
 
     private Connection connectToDB() throws IOException, SQLException {
-        Properties prop = LoginData.readProperties("src/main/resources/database.properties");
+        Properties prop = PropertiesReader.readProperties("src/main/resources/database.properties");
         String url = prop.getProperty("db.url");
         String user = prop.getProperty("db.user");
         String password = prop.getProperty("db.passwd");
