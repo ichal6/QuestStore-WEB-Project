@@ -1,4 +1,4 @@
-package DAO;
+package Exception;
 
 public class ReadException extends Exception {
     public ReadException(String errorMessage) {

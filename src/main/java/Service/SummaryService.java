@@ -24,7 +24,7 @@ public class SummaryService {
     public SummaryMentor getSummaryMentor() throws SQLException, IOException {
         Connection connectionToDB = connectToDB();
         Statement statement = connectionToDB.createStatement();
-        
+
         return new SummaryMentor(
                 getCodecoolersCount(statement),
                 getClassesCount(statement),

@@ -1,7 +1,7 @@
 package Controller;
 
 import DAO.IUserDAO;
-import DAO.ReadException;
+import Exception.ReadException;
 import DAO.UserDBDAO;
 import Model.CMSUser;
 import Session.SessionManager;
