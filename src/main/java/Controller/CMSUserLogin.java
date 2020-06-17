@@ -1,8 +1,8 @@
 package Controller;
 
-import DAO.IUserDAO;
+import DAO.UserDAO;
 import Exception.ReadException;
-import DAO.UserDBDAO;
+import DAO.UserJDBCDAO;
 import Model.CMSUser;
 import Session.SessionManager;
 
@@ -16,7 +16,7 @@ import java.io.IOException;
 
 @WebServlet(name = "CMSUserLogin", urlPatterns = "/CMSUserLogin")
 public class CMSUserLogin extends HttpServlet {
-    private IUserDAO dao;
+    private UserDAO dao;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,7 +27,7 @@ public class CMSUserLogin extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        dao = new UserDBDAO("src/main/resources/database.properties");
+        dao = new UserJDBCDAO("src/main/resources/database.properties");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 

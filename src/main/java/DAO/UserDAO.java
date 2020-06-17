@@ -6,7 +6,7 @@ import Exception.ReadException;
 import java.sql.Date;
 import java.util.Map;
 
-public interface IUserDAO {
+public interface UserDAO {
     void addUser(int ID, String name, String email,
                  String password, String city, Date dateOfAdding,
                  String pictureURL, boolean isAdmin) throws ReadException;

@@ -9,13 +9,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class UserDBDAO implements IUserDAO {
+public class UserJDBCDAO implements UserDAO {
     private final String DBUrl;
     private final String DBUser;
     private final String DBPassword;
     private Map<Integer, CMSUser> dicOfUsers;
 
-    public UserDBDAO(String path) throws IOException {
+    public UserJDBCDAO(String path) throws IOException {
         Properties prop = PropertiesReader.readProperties(path);
         DBUrl = prop.getProperty("db.url");
         DBUser = prop.getProperty("db.user");
