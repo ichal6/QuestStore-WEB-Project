@@ -1,4 +1,4 @@
-package Controller;
+package Controller.mentors;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "MentorUpdateController", urlPatterns = "/mentors/edit")
-public class MentorUpdateController extends HttpServlet {
+@WebServlet(name = "MentorNewController")
+public class MentorNewController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }

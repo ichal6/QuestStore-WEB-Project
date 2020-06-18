@@ -1,4 +1,4 @@
-package Controller;
+package Controller.admins;
 
 import DAO.UserDAO;
 
