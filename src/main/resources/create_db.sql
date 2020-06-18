@@ -41,7 +41,6 @@ CREATE TABLE class(
 );
 
 
-
 CREATE TABLE wallet(
 	wallet_id serial PRIMARY KEY UNIQUE,
 	coins_total integer NOT NULL DEFAULT 0,

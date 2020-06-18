@@ -21,12 +21,11 @@ public class Quest {
         this.pictureUrl = pictureUrl;
     }
 
-    public Quest(String name, String description, int value, String type, Date dateOfAdding, String pictureUrl) {
+    public Quest(String name, String description, int value, String type, String pictureUrl) {
         this.name = name;
         this.description = description;
         this.value = value;
         this.type = QuestType.getTypeByContent(type);
-        this.dateOfAdding = dateOfAdding;
         this.pictureUrl = pictureUrl;
     }
 

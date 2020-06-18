@@ -24,19 +24,18 @@ public class QuestJDBCDAO implements QuestDAO {
     }
 
     @Override
-    public void insertQuest(Quest quest) throws ConnectionException {
+    public void insertQuest(Quest quest) throws ConnectionException, ReadException {
         try (Connection connection = connectToDB()) {
             PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO quest (name, desciption, value, type, date, picture_url) VALUES (?, ?, ?, ?, ?, ?);");
+                    "INSERT INTO quest (name, description, value, type, picture_url) VALUES (?, ?, ?, ?, ?);");
             statement.setString(1, quest.getName());
             statement.setString(2, quest.getDescription());
             statement.setInt(3, quest.getValue());
             statement.setString(4, quest.getType().name());
-            statement.setDate(5, quest.getDateOfAdding());
-            statement.setString(6, quest.getPictureUrl());
+            statement.setString(5, quest.getPictureUrl());
             statement.execute();
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new ReadException("Sorry, couldn't insert this quest to database");
         }
     }
 
