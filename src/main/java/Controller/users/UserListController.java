@@ -1,4 +1,4 @@
-package Controller.admins;
+package Controller.users;
 
 import DAO.UserDAO;
 
@@ -10,16 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import DAO.UserJDBCDAO;
 import Exception.ReadException;
 import Model.CMSUser;
 
 
-@WebServlet(name = "AdminList", urlPatterns = "/admins")
-public class AdminListController extends HttpServlet {
+@WebServlet(name = "UsersList", urlPatterns = "/user-list")
+public class UserListController extends HttpServlet {
     private UserDAO dao;
-    private List<CMSUser> allAdmins;
+    private List<CMSUser> allUsers;
 
     @Override
     public void init() throws ServletException {
@@ -34,18 +35,26 @@ public class AdminListController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Map<String, String[]> parameters = req.getParameterMap();
+        String type = parameters.get("type")[0];
+
         try {
-            allAdmins = dao.getAllAdmins();
+            if(type.equals("admin")){
+                allUsers = dao.getAllAdmins();
+            }else{
+                allUsers = dao.getAllMentors();
+            }
         } catch (ReadException ex) {
             throw new ServletException(ex);
         }
 
-        req.setAttribute("allAdmins", allAdmins);
+        req.setAttribute("allUsers", allUsers);
+        req.setAttribute("type", type);
 
         RequestDispatcher dispatcher
-                = req.getRequestDispatcher("/html-cms/admins_list.jsp");
+                = req.getRequestDispatcher("/html-cms/users_list.jsp");
         dispatcher.forward(req, resp);
 
-        //resp.sendRedirect("/html-cms/admins_list.jsp");
+        //resp.sendRedirect("/html-cms/users_list.jsp");
     }
 }

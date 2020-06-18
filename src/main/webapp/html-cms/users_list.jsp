@@ -18,13 +18,13 @@
         <jsp:include page="../html-common/cms-navigation.jsp" />
 
         <%
-           List<CMSUser> allAdmins = (List<CMSUser>) request.getAttribute("allAdmins");
+           List<CMSUser> allUsers = (List<CMSUser>) request.getAttribute("allUsers");
         %>
         <div class="all-persons-container">
             <div class="upper-section">
                 <div class="h1-button">
-                    <h1>All admins</h1>
-                    <button class="btn" onclick="location.href='/admins/new'">+ Add new admin</button>
+                    <h1>All ${type}s</h1>
+                    <button class="btn" onclick="location.href='/user/new?type=${type}'">+ Add new ${type}</button>
                 </div>
                 <div class="right-section">
                     <p>Items per page</p>
@@ -67,7 +67,7 @@
                 </div>
                 <%
                     int index = 1;
-                    for(CMSUser user: allAdmins){
+                    for(CMSUser user: allUsers){
                 %>
                 <div class="person-row">
                    <div class="person-number"><%=index%>.</div>
@@ -79,38 +79,10 @@
                    <div class="person-city"><%=user.getCity()%></div>
                    <div class="date-of-add"><%=user.getDateOfAdding()%></div>
                    <div class="actions">
-                       <a href="/admins/edit?id=<%=user.getID()%>"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
-                       <a href="/admins/delete?id=<%=user.getID()%>"><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
+                       <a href="/user/edit?id=<%=user.getID()%>"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
+                       <a href="/user/delete?id=<%=user.getID()%>&type=${type}"><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
                    </div>
                 </div>
-<%--                <div class="person-row">--%>
-<%--                    <div class="person-number">2.</div>--%>
-<%--                    <div class="person-img-name">--%>
-<%--                        <img src="../assets/img/admins-images/penelope-cruz.svg" alt="person's-image" class="person-img">--%>
-<%--                        <p class="person-name">Penelope Cruiz</p>--%>
-<%--                    </div>--%>
-<%--                    <div class="person-email">penelope.cruiz@gmail.com</div>--%>
-<%--                    <div class="person-city">Cracow</div>--%>
-<%--                    <div class="date-of-add">11/07/2019</div>--%>
-<%--                    <div class="actions">--%>
-<%--                        <a href="admins_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>--%>
-<%--                        <img src="../assets/img/delete-btn.svg" alt="delete-btn">--%>
-<%--                    </div>--%>
-<%--                 </div>--%>
-<%--                <div class="person-row">--%>
-<%--                    <div class="person-number">3.</div>--%>
-<%--                    <div class="person-img-name">--%>
-<%--                        <img src="../assets/img/admins-images/penelope-cruz.svg" alt="person's-image" class="person-img">--%>
-<%--                        <p class="person-name">Penelope Cruiz</p>--%>
-<%--                    </div>--%>
-<%--                    <div class="person-email">penelopepenelope.cruiz@gmail.com</div>--%>
-<%--                    <div class="person-city">Cracow</div>--%>
-<%--                    <div class="date-of-add">11/07/2019</div>--%>
-<%--                    <div class="actions">--%>
-<%--                        <a href="admins_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>--%>
-<%--                        <img src="../assets/img/delete-btn.svg" alt="delete-btn">--%>
-<%--                    </div>--%>
-<%--                 </div>--%>
                 <%
                         index++;
                     }
@@ -121,7 +93,18 @@
 
     <jsp:include page="../html-common/footer.html" />
     <script>
+        <%
+        String permissions = (String) request.getAttribute("type");
+        if(permissions.equals("admin")){
+        %>
         document.getElementsByClassName('admins-nav')[0].setAttribute('id', 'select-page');
+           <%
+        }else{
+        %>
+        document.getElementsByClassName('mentors-nav')[0].setAttribute('id', 'select-page');
+        <%
+        }
+        %>
     </script>
 </body>
 
