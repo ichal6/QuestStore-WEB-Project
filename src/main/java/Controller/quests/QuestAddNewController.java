@@ -35,21 +35,31 @@ public class QuestAddNewController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String name = request.getParameter("quest-name");
-            String description = request.getParameter("quest-description");
-            int value = Integer.parseInt(request.getParameter("quest-value"));
-            String type = request.getParameter("quest-type");
-            List<String> urlPaths = Arrays.asList("quest_logo_01.svg", "quest_logo_02.svg", "quest_logo_03.svg", "quest_logo_04.svg", "quest_logo_05.svg", "quest_logo_06.svg");
-            Random rand = new Random();
-            String url = urlPaths.get(rand.nextInt(urlPaths.size()));
-
-            Quest quest = new Quest(name, description, value, type, url);
+            Quest quest = extractQuestFromHTTPRequest(request);
             questDAO.insertQuest(quest);
             response.setHeader("Send", "Success");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/quests_list.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/quests_add_new.jsp");
             dispatcher.forward(request, response);
         } catch (ConnectionException | ReadException e) {
             throw new ServletException(e);
         }
+    }
+
+    private Quest extractQuestFromHTTPRequest(HttpServletRequest request) {
+        String name = request.getParameter("quest-name");
+        String description = request.getParameter("quest-description");
+        int value = Integer.parseInt(request.getParameter("quest-value"));
+        String type = request.getParameter("quest-type");
+        String url = getRandomUrlPath();
+
+        return new Quest(name, description, value, type, url);
+    }
+
+    private String getRandomUrlPath() {
+        List<String> urlPaths = Arrays.asList("quest_logo_01.svg", "quest_logo_02.svg", "quest_logo_03.svg",
+                "quest_logo_04.svg", "quest_logo_05.svg", "quest_logo_06.svg");
+        Random rand = new Random();
+
+        return urlPaths.get(rand.nextInt(urlPaths.size()));
     }
 }

@@ -17,7 +17,7 @@
 
         <div class="details-container">
             <h1>Add new quest</h1>
-            <a href="quests">&#60;- Back to the list</a>
+            <a href="/quests">&#60;- Back to the list</a>
             <form class="form" action="" method="POST">
                 <input type="hidden" id="insert" name="insert" action="insert" value="insert">
                 <div class="quest-details">
