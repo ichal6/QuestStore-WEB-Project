@@ -1,4 +1,4 @@
-package Controller.admins;
+package Controller.users;
 
 import DAO.UserDAO;
 import DAO.UserJDBCDAO;
@@ -14,11 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.Calendar;
-import java.util.List;
+import java.util.Map;
 
-@WebServlet(name = "AdminNewController", urlPatterns = "/admins/new")
-public class AdminNewController extends HttpServlet {
+@WebServlet(name = "UserNewController", urlPatterns = "/user/new")
+public class UserNewController extends HttpServlet {
     private UserDAO dao;
+    private boolean isAdmin;
 
     @Override
     public void init() throws ServletException {
@@ -37,8 +38,8 @@ public class AdminNewController extends HttpServlet {
         String email = request.getParameter("person-mail");
         String city = request.getParameter("person-city");
 
-        if(name == null || email == null || city == null){
-            response.sendRedirect("/html-cms/admins_add_new.jsp");
+        if(name == null || email == null || city == null ){
+            response.sendRedirect("/html-cms/users_add_new.jsp");
         }
 
         String defaultPassword = "admin";
@@ -53,7 +54,7 @@ public class AdminNewController extends HttpServlet {
                 userPassword(defaultPassword).
                 userDate(actualDate).
                 userPicture(defaultPicture).
-                userRole(true).
+                userRole(isAdmin).
                 build();
 
         try {
@@ -61,11 +62,21 @@ public class AdminNewController extends HttpServlet {
         } catch (ReadException ex) {
             throw new ServletException(ex);
         }
-        response.sendRedirect("/admins");
+        response.sendRedirect("/user-list?type=" + newAdmin.getRole().toLowerCase());
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("/html-cms/admins_add_new.jsp");
+        Map<String, String[]> parameters = request.getParameterMap();
+        String type = parameters.get("type")[0];
+
+        isAdmin = type.equals("admin");
+
+        request.setAttribute("type", type);
+
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("/html-cms/users_add_new.jsp");
+        dispatcher.forward(request, response);
+        //response.sendRedirect("/html-cms/users_add_new.jsp");
     }
 }

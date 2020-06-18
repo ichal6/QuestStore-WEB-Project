@@ -16,9 +16,9 @@
         <jsp:include page="../html-common/cms-navigation.jsp" />
 
         <div class="details-container">
-            <h1>Add new admin</h1>
-            <a href="/admins">&#60;- Back to the list</a>
-            <form class="personal-details" action="/admins/new" method="post">
+            <h1>Add new ${type}</h1>
+            <a href="/user-list?type=${type}">&#60;- Back to the list</a>
+            <form class="personal-details" action="/user/new" method="post">
                 <h2>Personal details</h2>
                 <label for="person-name">Name*:</label>
                 <input type="text" name="person-name" id="person-name" placeholder="Enter your name">
@@ -28,7 +28,7 @@
                 <input type="text" name="person-city" id="person-city" placeholder="Enter your city">
                 <div class="lower-section">
                     <p>*- Fields marked like that need to be filled to add new entry</p>
-                    <button class="btn" id="add-new-admin">Add new admin</button>
+                    <button class="btn" id="add-new-admin">Add new ${type}</button>
                 </div>
             </form>
         </div>
@@ -36,7 +36,18 @@
 
     <jsp:include page="../html-common/footer.html" />
     <script>
+        <%
+        String permissions = (String) request.getAttribute("type");
+        if(permissions.equals("admin")){
+        %>
         document.getElementsByClassName('admins-nav')[0].setAttribute('id', 'select-page');
+        <%
+     }else{
+     %>
+        document.getElementsByClassName('mentors-nav')[0].setAttribute('id', 'select-page');
+        <%
+        }
+        %>
     </script>
 </body>
 
