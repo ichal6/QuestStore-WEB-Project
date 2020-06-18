@@ -6,10 +6,10 @@ INSERT INTO cms_user
 VALUES (default,'Andrzej Szampan','aszampan@gmail.com','admin123','Krakow',TO_DATE('2020-01-01','YYYY-MM-DD'),'../assets/img/admins-images/penelope-cruz.svg','Y');
 
 INSERT INTO cms_user
-VALUES (default,'Dominik Nowak','dnowak@gmail.com','admin123','Krakow',TO_DATE('2020-01-01','YYYY-MM-DD'),'URL','N');
+VALUES (default,'Dominik Nowak','dnowak@gmail.com','admin123','Krakow',TO_DATE('2020-01-01','YYYY-MM-DD'),'../assets/img/admins-images/penelope-cruz.svg','N');
 
 INSERT INTO cms_user
-VALUES (default,'Paweł Suryk','psuryk@gmail.com','admin123','Krakow',TO_DATE('2020-01-01','YYYY-MM-DD'),'URL','N');
+VALUES (default,'Paweł Suryk','psuryk@gmail.com','admin123','Krakow',TO_DATE('2020-01-01','YYYY-MM-DD'),'../assets/img/admins-images/penelope-cruz.svg','N');
 
 
 INSERT INTO team
