@@ -1,4 +1,4 @@
-package Controller.admins;
+package Controller.users;
 
 import DAO.UserDAO;
 import DAO.UserJDBCDAO;
@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-@WebServlet(name = "AdminUpdateController", urlPatterns = "/admins/edit")
-public class AdminUpdateController extends HttpServlet {
+@WebServlet(name = "UserUpdateController", urlPatterns = "/user/edit")
+public class UserUpdateController extends HttpServlet {
     private UserDAO dao;
     private CMSUser userToEdit;
 
@@ -36,7 +36,7 @@ public class AdminUpdateController extends HttpServlet {
         String city = request.getParameter("person-city");
 
         if(name == null || email == null || city == null){
-            response.sendRedirect("/html-cms/admins_add_new.jsp");
+                response.sendRedirect("/user-list?type=" + userToEdit.getRole().toLowerCase());
         }
 
         userToEdit.setName(name);
@@ -48,7 +48,7 @@ public class AdminUpdateController extends HttpServlet {
         } catch (ReadException ex) {
             throw new ServletException(ex);
         }
-        response.sendRedirect("/admins");
+        response.sendRedirect("/user-list?type=" + userToEdit.getRole().toLowerCase());
     }
 
     @Override
@@ -59,20 +59,24 @@ public class AdminUpdateController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Map<String, String[]> parameters = request.getParameterMap();
         String id = parameters.get("id")[0];
+
         int idUser = 0;
         try {
             idUser = Integer.parseInt(id);
         } catch(NumberFormatException ex){
             //throw new ServletException("You put incorrect path to page!");
-            response.sendRedirect("/admins");
+            response.sendRedirect("/dashboard");
         }
 
         userToEdit = getUser(idUser);
 
+        String type = userToEdit.getRole().toLowerCase();
+
         request.setAttribute("editAdmin", userToEdit);
+        request.setAttribute("type", type);
 
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/html-cms/admins_update.jsp");
+                = request.getRequestDispatcher("/html-cms/users_edit.jsp");
         dispatcher.forward(request, response);
     }
 

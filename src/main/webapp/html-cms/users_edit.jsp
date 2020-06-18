@@ -15,9 +15,9 @@
     <div class="container">
         <jsp:include page="../html-common/cms-navigation.jsp" />
         <div class="details-container">
-            <h1>Admin's details</h1>
-            <a href="/admins">&#60;- Back to the list</a>
-            <form class="personal-details" action="/admins/edit" method="post">
+            <h1>${editAdmin.getRole()}'s details</h1>
+            <a href="/user-list?type=${type}">&#60;- Back to the list</a>
+            <form class="personal-details" action="/user/edit" method="post">
                 <h2>Personal details</h2>
                 <label for="person-name">Name*:</label>
                 <input type="text" name="person-name" id="person-name" value="${editAdmin.getName()}">
@@ -35,7 +35,18 @@
 
     <jsp:include page="../html-common/footer.html" />
     <script>
+        <%
+        String permissions = (String) request.getAttribute("type");
+        if(permissions.equals("admin")){
+        %>
         document.getElementsByClassName('admins-nav')[0].setAttribute('id', 'select-page');
+        <%
+     }else{
+     %>
+        document.getElementsByClassName('mentors-nav')[0].setAttribute('id', 'select-page');
+        <%
+        }
+        %>
     </script>
 </body>
 
