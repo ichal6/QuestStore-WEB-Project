@@ -80,7 +80,7 @@
                    <div class="date-of-add"><%=user.getDateOfAdding()%></div>
                    <div class="actions">
                        <a href="/admins/edit?id=<%=user.getID()%>"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
-                       <img src="../assets/img/delete-btn.svg" alt="delete-btn">
+                       <a href="/admins/delete?id=<%=user.getID()%>"><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
                    </div>
                 </div>
 <%--                <div class="person-row">--%>
