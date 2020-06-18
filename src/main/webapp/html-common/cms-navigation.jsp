@@ -24,7 +24,7 @@
             <li class="codecoolers-nav"><a href="../html-cms/codecoolers_list.jsp"><img src="../assets/icons/codecoolers_icon.png" alt="codecoolers-icon">Codecoolers</a></li>
             <li class="classes-nav"><a href="../html-cms/classes_list.jsp"><img src="../assets/icons/classes_icon.png" alt="classes-icon">Classes</a></li>
             <li class="teams-nav"><a href="../html-cms/teams_list.jsp"><img src="../assets/icons/teams_icon.png" alt="teams-icon">Teams</a></li>
-            <li class="quests-nav"><a href="../html-cms/quests_list.jsp"><img src="../assets/icons/quests_icon.png" alt="quests-icon">Quests</a></li>
+            <li class="quests-nav"><a href="/quests"><img src="../assets/icons/quests_icon.png" alt="quests-icon">Quests</a></li>
             <li class="artifacts-nav"><a href="../html-cms/artifacts_list.jsp"><img src="../assets/icons/artifacts_icon.png" alt="artifacts-icon">Artifacts</a></li>
         </ul>
     </div>
@@ -39,7 +39,7 @@
             <li class="codecoolers-nav"><a href="../html-cms/codecoolers_list.jsp"><img src="../assets/icons/codecoolers_icon.png" alt="codecoolers-icon">Codecoolers</a></li>
             <li class="classes-nav"><a href="../html-cms/classes_list.jsp"><img src="../assets/icons/classes_icon.png" alt="classes-icon">Classes</a></li>
             <li class="teams-nav"><a href="../html-cms/teams_list.jsp"><img src="../assets/icons/teams_icon.png" alt="teams-icon">Teams</a></li>
-            <li class="quests-nav"><a href="../html-cms/quests_list.jsp"><img src="../assets/icons/quests_icon.png" alt="quests-icon">Quests</a></li>
+            <li class="quests-nav"><a href="/quests"><img src="../assets/icons/quests_icon.png" alt="quests-icon">Quests</a></li>
             <li class="artifacts-nav"><a href="../html-cms/artifacts_list.jsp"><img src="../assets/icons/artifacts_icon.png" alt="artifacts-icon">Artifacts</a></li>
         </ul>
     </div>

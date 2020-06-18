@@ -27,7 +27,7 @@
                 <div class="proporties-section">
                     <div class="picture">
                         <p>Picture: </p>
-                        <img id="quest-logo" src="../assets/img/quest_logo_02.svg" alt="logo of quest"><br>
+                        <img id="quest-logo" src="../assets/img/quests-img/quest_logo_02.svg" alt="logo of quest"><br>
                         <a href="#"><img src="../assets/icons/change_picture.svg" alt=" ">Change picture</a> 
                     </div>
                     <div class=proporties>
