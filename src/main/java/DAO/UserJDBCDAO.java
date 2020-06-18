@@ -5,22 +5,21 @@ import Exception.ReadException;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.sql.Date;
+import java.util.*;
 
 public class UserJDBCDAO implements UserDAO {
     private final String DBUrl;
     private final String DBUser;
     private final String DBPassword;
-    private Map<Integer, CMSUser> dicOfUsers;
+    private List<CMSUser> dicOfUsers;
 
     public UserJDBCDAO(String path) throws IOException {
         Properties prop = PropertiesReader.readProperties(path);
         DBUrl = prop.getProperty("db.url");
         DBUser = prop.getProperty("db.user");
         DBPassword = prop.getProperty("db.passwd");
-        dicOfUsers = new HashMap<>();
+        dicOfUsers = new ArrayList<>();
     }
 
     @Override
@@ -95,33 +94,33 @@ public class UserJDBCDAO implements UserDAO {
     }
 
     @Override
-    public Map<Integer, CMSUser> getAllUsers() throws ReadException {
+    public List<CMSUser> getAllUsers() throws ReadException {
         try(Connection con = DriverManager.getConnection(this.DBUrl, this.DBUser, this.DBPassword);
             PreparedStatement pst = con.prepareStatement("SELECT * FROM cms_user")) {
             ResultSet rs = pst.executeQuery();
-            return fillDicOfUsers(rs);
+            return fillListOfUsers(rs);
         } catch (SQLException ex) {
             throw new ReadException("You cannot access to database.");
         }
     }
 
     @Override
-    public Map<Integer, CMSUser> getAllAdmins() throws ReadException {
+    public List<CMSUser> getAllAdmins() throws ReadException {
         try(Connection con = DriverManager.getConnection(this.DBUrl, this.DBUser, this.DBPassword);
             PreparedStatement pst = con.prepareStatement("SELECT * FROM cms_user WHERE is_admin='t'")) {
             ResultSet rs = pst.executeQuery();
-            return fillDicOfUsers(rs);
+            return fillListOfUsers(rs);
         } catch (SQLException ex) {
             throw new ReadException("You cannot access to database.");
         }
     }
 
     @Override
-    public Map<Integer, CMSUser> getAllMentors() throws ReadException {
+    public List<CMSUser> getAllMentors() throws ReadException {
         try(Connection con = DriverManager.getConnection(this.DBUrl, this.DBUser, this.DBPassword);
             PreparedStatement pst = con.prepareStatement("SELECT * FROM cms_user WHERE is_admin='f'")) {
             ResultSet rs = pst.executeQuery();
-            return fillDicOfUsers(rs);
+            return fillListOfUsers(rs);
         } catch (SQLException ex) {
             throw new ReadException("You cannot access to database.");
         }
@@ -169,7 +168,7 @@ public class UserJDBCDAO implements UserDAO {
         }
     }
 
-    private Map<Integer, CMSUser> fillDicOfUsers(ResultSet rs) throws ReadException {
+    private List<CMSUser> fillListOfUsers(ResultSet rs) throws ReadException {
         dicOfUsers.clear();
         try {
             while (rs.next()) {
@@ -184,7 +183,7 @@ public class UserJDBCDAO implements UserDAO {
                         .userRole(rs.getBoolean(8))
                         .build();
 
-                dicOfUsers.put(user.getID(), user);
+                dicOfUsers.add(user);
             }
         } catch (SQLException ex) {
             throw new ReadException("You cannot import list of users.");

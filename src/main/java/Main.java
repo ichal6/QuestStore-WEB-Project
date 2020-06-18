@@ -21,12 +21,12 @@ public class Main {
 
         System.out.println(user);
         System.out.println("List of Admins:");
-        for (Map.Entry<Integer,CMSUser> entry : dao.getAllAdmins().entrySet())
-            System.out.println("Key = " + entry.getKey() +
-                    ", Value = " + entry.getValue());
-        System.out.println("Lista mentorów:");
-        for (Map.Entry<Integer,CMSUser> entry : dao.getAllMentors().entrySet())
-            System.out.println("Key = " + entry.getKey() +
-                    ", Value = " + entry.getValue());
+//        for (Map.Entry<Integer,CMSUser> entry : dao.getAllAdmins().entrySet())
+//            System.out.println("Key = " + entry.getKey() +
+//                    ", Value = " + entry.getValue());
+//        System.out.println("Lista mentorów:");
+//        for (Map.Entry<Integer,CMSUser> entry : dao.getAllMentors().entrySet())
+//            System.out.println("Key = " + entry.getKey() +
+//                    ", Value = " + entry.getValue());
     }
 }
