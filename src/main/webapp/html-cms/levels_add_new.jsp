@@ -17,7 +17,7 @@
 
         <div class="details-container">
             <h1>Add new level</h1>
-      -      <a href="levels_list.jsp">&#60;- Back to the list</a>
+      -      <a href="/levels">&#60;- Back to the list</a>
             <form class="form" action="/levels/add" method="POST">
                 <input type="hidden" id = "insert" name = "insert" action = "insert" value="insert">
 

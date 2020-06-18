@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.LevelDAO;
 import DAO.LevelJDBCDAO;
 import Model.Level;
 
@@ -16,9 +17,19 @@ import static java.lang.Integer.parseInt;
 
 @WebServlet(name = "Levels-add", urlPatterns = "/levels/add")
 public class LevelAddNewController extends HttpServlet {
+    private LevelDAO levelDAO;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        try{
+            levelDAO = new LevelJDBCDAO();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LevelJDBCDAO levelJDBCDAO = new LevelJDBCDAO();
         String name = req.getParameter("level-name");
         String description = req.getParameter("level-description");
         String coins = req.getParameter("level-coins");
@@ -26,7 +37,7 @@ public class LevelAddNewController extends HttpServlet {
         Level level = new Level(name, description, price, "level6.svg");
 
         try {
-            levelJDBCDAO.insertNewLevel(level);
+            levelDAO.insertNewLevel(level);
             resp.setHeader("Send", "Success");
             RequestDispatcher dispatcher
                     = req.getRequestDispatcher("/html-cms/levels_add_new.jsp");

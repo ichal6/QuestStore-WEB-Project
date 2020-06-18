@@ -12,7 +12,6 @@
 </head>
 
 <body>
-
     <%
         ArrayList<Level> allLevels = (ArrayList<Level>) request.getAttribute("levelsList");
     %>
@@ -67,10 +66,12 @@
                     </div>
                 </div>
                     <%
+                        int levelId = 1;
                         for(Level level : allLevels){
+
                     %>
                  <div class="person-row">
-                    <div class="person-number"><%= level.getId()%></div>
+                    <div class="person-number"><%= levelId%></div>
                     <div class="person-img-name">
                         <img src="../assets/img/levels-img/<%=level.getPictureUrl()%>" alt="person's-image" class="person-img">
                         <p class="person-name"><%= level.getName() %></p>
@@ -80,13 +81,15 @@
                     <div class="date-of-add"><%= level.getDateOfAdding()%></div>
                     <div class="actions">
                         <a href="levels_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
-                       <a href="#"><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
+                        <form class="form" action="/levels/delete" method="GET">
+                        <a href="/levels/delete/?id=<%= level.getId()%>"><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
+                        </form>
                     </div>
                  </div>
                 <%
-                    }
+                        levelId++;
+                        }
                 %>
-
 
                  </div>
             </div>
