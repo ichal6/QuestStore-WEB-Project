@@ -44,6 +44,11 @@ public class UserJDBCDAO implements UserDAO {
 
     @Override
     public void addUser(CMSUser user) throws ReadException {
+
+        if(checkEmail(user.getName())){
+            throw new ReadException("You cannot add a new user, because this e-mail is exist in a database");
+        }
+
         String query = "INSERT INTO cms_user VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection con = DriverManager.getConnection(DBUrl, this.DBUser, this.DBPassword);
              PreparedStatement pst = con.prepareStatement(query))
@@ -243,6 +248,21 @@ public class UserJDBCDAO implements UserDAO {
         }
         else{
             throw new ReadException("This user doesn't exist!");
+        }
+    }
+
+    private boolean checkEmail(String email) throws ReadException {
+        try(Connection con = DriverManager.getConnection(this.DBUrl, this.DBUser, this.DBPassword);
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM cms_user WHERE email = ?")) {
+            pst.setString(1, email);
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()) {
+                return true;
+            }else{
+                return false;
+            }
+        } catch (SQLException ex) {
+            throw new ReadException("You cannot access to database.");
         }
     }
 }
