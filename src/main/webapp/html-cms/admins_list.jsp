@@ -79,7 +79,7 @@
                    <div class="person-city"><%=user.getCity()%></div>
                    <div class="date-of-add"><%=user.getDateOfAdding()%></div>
                    <div class="actions">
-                       <a href="admins_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
+                       <a href="/admins/edit?id=<%=user.getID()%>"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
                        <img src="../assets/img/delete-btn.svg" alt="delete-btn">
                    </div>
                 </div>
