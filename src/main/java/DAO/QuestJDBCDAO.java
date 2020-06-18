@@ -1,6 +1,7 @@
 package DAO;
 
 import Model.Quest;
+import Exception.*;
 
 import java.io.IOException;
 import java.sql.*;
@@ -10,36 +11,38 @@ import java.util.Properties;
 
 public class QuestJDBCDAO implements QuestDAO {
 
-    private Connection connectToDB() throws IOException, SQLException {
-        Properties prop = PropertiesReader.readProperties("src/main/resources/database.properties");
-        String url = prop.getProperty("db.url");
-        String user = prop.getProperty("db.user");
-        String password = prop.getProperty("db.passwd");
-
-        return DriverManager.getConnection(url, user, password);
+    private Connection connectToDB() throws ConnectionException {
+        try {
+            Properties prop = PropertiesReader.readProperties("src/main/resources/database.properties");
+            String url = prop.getProperty("db.url");
+            String user = prop.getProperty("db.user");
+            String password = prop.getProperty("db.passwd");
+            return DriverManager.getConnection(url, user, password);
+        } catch (IOException | SQLException e) {
+            throw new ConnectionException("Sorry, couldn't connect to database");
+        }
     }
 
     @Override
-    public void insertQuest(Quest quest) {
+    public void insertQuest(Quest quest) throws ConnectionException {
         try (Connection connection = connectToDB()) {
             PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO quest (name, desciption, value, type, date, picture_url) VALUES (?, ?, ?, ?, ?, ?);");
             statement.setString(1, quest.getName());
             statement.setString(2, quest.getDescription());
             statement.setInt(3, quest.getValue());
-            statement.setInt(4, quest.getType().getValue());
+            statement.setString(4, quest.getType().name());
             statement.setDate(5, quest.getDateOfAdding());
             statement.setString(6, quest.getPictureUrl());
             statement.execute();
-        } catch (SQLException | IOException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public List<Quest> getAllQuests() {
+    public List<Quest> getAllQuests() throws ConnectionException, ReadException {
         List<Quest> questsList = new ArrayList<>();
-
         try (Connection connection = connectToDB()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM quest;");
             ResultSet rs = statement.executeQuery();
@@ -47,24 +50,14 @@ public class QuestJDBCDAO implements QuestDAO {
                 Quest quest = extractQuestFromResultSet(rs);
                 questsList.add(quest);
             }
-        } catch (SQLException | IOException e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new ReadException("Sorry, getting quests from database is currently impossible");
         }
         return questsList;
     }
 
     private Quest extractQuestFromResultSet(ResultSet rs) throws SQLException {
         return new Quest(rs.getInt("quest_id"), rs.getString("name"), rs.getString("description"),
-                rs.getInt("value"), rs.getByte("type"), rs.getDate("date_of_adding"), rs.getString("picture_url"));
+                rs.getInt("value"), rs.getString("type"), rs.getDate("date_of_adding"), rs.getString("picture_url"));
     }
 }
-
-//    CREATE TABLE quest(
-//    quest_id serial PRIMARY KEY UNIQUE,
-//    name varchar(50) NOT NULL,
-//    desciption varchar(100) NOT NULL,
-//    value integer,
-//    type BIT NOT NULL,
-//    date_of_adding date NOT NULL DEFAULT CURRENT_DATE,
-//    picture_url varchar(100)
-//);

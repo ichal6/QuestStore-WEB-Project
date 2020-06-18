@@ -80,9 +80,9 @@ CREATE TABLE codecooler(
 CREATE TABLE quest(
 	quest_id serial PRIMARY KEY UNIQUE,
 	name varchar(50) NOT NULL, 
-	desciption varchar(100) NOT NULL, 
+	description varchar(100) NOT NULL,
 	value integer,
-	type BIT NOT NULL, 
+	type varchar(20) NOT NULL,
 	date_of_adding date NOT NULL DEFAULT CURRENT_DATE,
 	picture_url varchar(100)
 );

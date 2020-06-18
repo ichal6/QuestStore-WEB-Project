@@ -1,24 +1,14 @@
 package Model;
 
 public enum QuestType {
-    BASIC(0),
-    EXTRA(1);
+    BASIC,
+    EXTRA;
 
-    private int value;
-
-    QuestType(int value) {
-        this.value = value;
-    }
-
-    public static QuestType getTypeByNumber(int number) {
-        if (number == 0) {
+    public static QuestType getTypeByContent(String content) {
+        if (content.toLowerCase().equals("basic")) {
             return QuestType.BASIC;
         } else {
             return QuestType.EXTRA;
         }
-    }
-
-    public int getValue() {
-        return value;
     }
 }

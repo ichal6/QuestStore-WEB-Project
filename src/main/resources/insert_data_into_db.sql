@@ -53,22 +53,22 @@ values(default,'Level 6 - Codecool Buddha','There is nothing more.','10000',defa
 
 
 INSERT INTO quest
-values(default,'Passing a checkpoint.','You have passed a checkopint.','500','0',default,'quest1.png');
+values(default,'Passing a checkpoint.','You have passed a checkopint.','500','basic',default,'quest1.png');
 
 INSERT INTO quest
-values(default,'Spot a mistake in the assigment.','You fund a mistake in background materials.','500','1',default,'quest2.png');
+values(default,'Spot a mistake in the assigment.','You fund a mistake in background materials.','500','extra',default,'quest2.png');
 
 INSERT INTO quest
-values(default,'Do a demo for the class.','You did a demo for the class.','1000','1',default,'quest3.png');
+values(default,'Do a demo for the class.','You did a demo for the class.','1000','extra',default,'quest3.png');
 
 INSERT INTO quest
-values(default,'Take a part in student screening.','Blablabla','5000','1',default,'quest4.png');
+values(default,'Take a part in student screening.','Blablabla','5000','extra',default,'quest4.png');
 
 INSERT INTO quest
-values(default,'Attend a month without being late.','Always on time!','10000','1',default,'quest5.png');
+values(default,'Attend a month without being late.','Always on time!','10000','extra',default,'quest5.png');
 
 INSERT INTO quest
-values(default,'Set a smart Goal with your tutorial.','Blablabla','10000','1',default,'quest6.png');
+values(default,'Set a smart Goal with your tutorial.','Blablabla','10000','extra',default,'quest6.png');
 
 
 
