@@ -57,7 +57,7 @@ public class UserJDBCDAO implements UserDAO {
             pst.setBoolean(7, user.isAdmin());
             pst.executeUpdate();
         } catch (SQLException ex) {
-            throw new ReadException("You cannot insert user");
+            throw new ReadException("You cannot insert user" + ex);
         }
     }
 
