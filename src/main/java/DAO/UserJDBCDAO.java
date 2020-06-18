@@ -168,6 +168,34 @@ public class UserJDBCDAO implements UserDAO {
         }
     }
 
+    @Override
+    public int getAdminsCount() throws ReadException {
+        try(Connection con = DriverManager.getConnection(this.DBUrl, this.DBUser, this.DBPassword);
+            PreparedStatement pst = con.prepareStatement("SELECT COUNT(*) FROM cms_user WHERE is_admin='t'")) {
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            throw new ReadException("You cannot access to database.");
+        }
+        throw new ReadException("Problem with data in database");
+    }
+
+    @Override
+    public int getMentorsCount() throws ReadException {
+        try(Connection con = DriverManager.getConnection(this.DBUrl, this.DBUser, this.DBPassword);
+            PreparedStatement pst = con.prepareStatement("SELECT COUNT(*) FROM cms_user WHERE is_admin='f'")) {
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            throw new ReadException("You cannot access to database.");
+        }
+        throw new ReadException("Problem with data in database");
+    }
+
     private List<CMSUser> fillListOfUsers(ResultSet rs) throws ReadException {
         dicOfUsers.clear();
         try {
