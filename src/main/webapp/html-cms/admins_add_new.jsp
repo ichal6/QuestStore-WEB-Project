@@ -17,8 +17,8 @@
 
         <div class="details-container">
             <h1>Add new admin</h1>
-            <a href="admins_list.jsp">&#60;- Back to the list</a>
-            <div class="personal-details">
+            <a href="/admins">&#60;- Back to the list</a>
+            <form class="personal-details" action="admins/new" method="post">
                 <h2>Personal details</h2>
                 <label for="person-name">Name*:</label>
                 <input type="text" id="person-name" placeholder="Enter your name">
@@ -30,7 +30,7 @@
                     <p>*- Fields marked like that need to be filled to add new entry</p>
                     <button class="btn" id="add-new-admin">Add new admin</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 

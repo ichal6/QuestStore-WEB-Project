@@ -24,7 +24,7 @@
             <div class="upper-section">
                 <div class="h1-button">
                     <h1>All admins</h1>
-                    <button class="btn" onclick="location.href='admins_add_new.jsp'">+ Add new admin</button>
+                    <button class="btn" onclick="location.href='/admins/new'">+ Add new admin</button>
                 </div>
                 <div class="right-section">
                     <p>Items per page</p>

@@ -14,6 +14,6 @@ public class AdminNewController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.sendRedirect("/html-cms/admins_add_new.jsp");
     }
 }
