@@ -1,3 +1,5 @@
+<%@ page import="Model.CMSUser" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" onclick="return hideSubMenu()"></html>
 
@@ -15,6 +17,9 @@
     <div class="container">
         <jsp:include page="../html-common/cms-navigation.jsp" />
 
+        <%
+           List<CMSUser> allAdmins = (List<CMSUser>) request.getAttribute("allAdmins");
+        %>
         <div class="all-persons-container">
             <div class="upper-section">
                 <div class="h1-button">
@@ -60,48 +65,56 @@
                         <span>Actions:</span>
                     </div>
                 </div>
+                <%
+                    int index = 1;
+                    for(CMSUser user: allAdmins){
+                %>
                 <div class="person-row">
-                   <div class="person-number">1.</div>
+                   <div class="person-number"><%=index%>.</div>
                    <div class="person-img-name">
-                       <img src="../assets/img/admins-images/penelope-cruz.svg" alt="person's-image" class="person-img">
-                       <p class="person-name">Penelope Cruiz</p>
+                       <img src="<%=user.getPictureURL()%>" alt="person's-image" class="person-img">
+                       <p class="person-name"><%=user.getName()%></p>
                    </div>
-                   <div class="person-email">penelope.cruiz@gmail.com</div>
-                   <div class="person-city">Cracow</div>
-                   <div class="date-of-add">11/07/2019</div>
+                   <div class="person-email"><%=user.getEmail()%></div>
+                   <div class="person-city"><%=user.getCity()%></div>
+                   <div class="date-of-add"><%=user.getDateOfAdding()%></div>
                    <div class="actions">
                        <a href="admins_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
                        <img src="../assets/img/delete-btn.svg" alt="delete-btn">
                    </div>
                 </div>
-                <div class="person-row">
-                    <div class="person-number">2.</div>
-                    <div class="person-img-name">
-                        <img src="../assets/img/admins-images/penelope-cruz.svg" alt="person's-image" class="person-img">
-                        <p class="person-name">Penelope Cruiz</p>
-                    </div>
-                    <div class="person-email">penelope.cruiz@gmail.com</div>
-                    <div class="person-city">Cracow</div>
-                    <div class="date-of-add">11/07/2019</div>
-                    <div class="actions">
-                        <a href="admins_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
-                        <img src="../assets/img/delete-btn.svg" alt="delete-btn">
-                    </div>
-                 </div>
-                 <div class="person-row">
-                    <div class="person-number">3.</div>
-                    <div class="person-img-name">
-                        <img src="../assets/img/admins-images/penelope-cruz.svg" alt="person's-image" class="person-img">
-                        <p class="person-name">Penelope Cruiz</p>
-                    </div>
-                    <div class="person-email">penelopepenelope.cruiz@gmail.com</div>
-                    <div class="person-city">Cracow</div>
-                    <div class="date-of-add">11/07/2019</div>
-                    <div class="actions">
-                        <a href="admins_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
-                        <img src="../assets/img/delete-btn.svg" alt="delete-btn">
-                    </div>
-                 </div>
+<%--                <div class="person-row">--%>
+<%--                    <div class="person-number">2.</div>--%>
+<%--                    <div class="person-img-name">--%>
+<%--                        <img src="../assets/img/admins-images/penelope-cruz.svg" alt="person's-image" class="person-img">--%>
+<%--                        <p class="person-name">Penelope Cruiz</p>--%>
+<%--                    </div>--%>
+<%--                    <div class="person-email">penelope.cruiz@gmail.com</div>--%>
+<%--                    <div class="person-city">Cracow</div>--%>
+<%--                    <div class="date-of-add">11/07/2019</div>--%>
+<%--                    <div class="actions">--%>
+<%--                        <a href="admins_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>--%>
+<%--                        <img src="../assets/img/delete-btn.svg" alt="delete-btn">--%>
+<%--                    </div>--%>
+<%--                 </div>--%>
+<%--                <div class="person-row">--%>
+<%--                    <div class="person-number">3.</div>--%>
+<%--                    <div class="person-img-name">--%>
+<%--                        <img src="../assets/img/admins-images/penelope-cruz.svg" alt="person's-image" class="person-img">--%>
+<%--                        <p class="person-name">Penelope Cruiz</p>--%>
+<%--                    </div>--%>
+<%--                    <div class="person-email">penelopepenelope.cruiz@gmail.com</div>--%>
+<%--                    <div class="person-city">Cracow</div>--%>
+<%--                    <div class="date-of-add">11/07/2019</div>--%>
+<%--                    <div class="actions">--%>
+<%--                        <a href="admins_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>--%>
+<%--                        <img src="../assets/img/delete-btn.svg" alt="delete-btn">--%>
+<%--                    </div>--%>
+<%--                 </div>--%>
+                <%
+                        index++;
+                    }
+                %>
             </div>
         </div>
     </div>

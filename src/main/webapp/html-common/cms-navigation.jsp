@@ -18,7 +18,7 @@
     <div class="nav">
         <ul class="nav-menu">
             <li class="dashboard-nav"><a href="/dashboard"><img src="../assets/icons/home_icon.png" alt="home-icon">Dashboard</a></li>
-            <li class="admins-nav"><a href="../html-cms/admins_list.jsp"><img src="../assets/icons/admins_icon.png" alt="admin-icon">Admins</a></li>
+            <li class="admins-nav"><a href="/admins"><img src="../assets/icons/admins_icon.png" alt="admin-icon">Admins</a></li>
             <li class="mentors-nav"><a href="../html-cms/mentors_list.jsp"><img src="../assets/icons/mentors_icon.png" alt="mentors-icon">Mentors</a></li>
             <li class="levels-nav"><a href="../html-cms/levels_list.jsp"><img src="../assets/icons/levels_icon.png" alt="levels-icon">Levels</a></li>
             <li class="codecoolers-nav"><a href="../html-cms/codecoolers_list.jsp"><img src="../assets/icons/codecoolers_icon.png" alt="codecoolers-icon">Codecoolers</a></li>
