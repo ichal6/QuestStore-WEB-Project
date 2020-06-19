@@ -91,7 +91,7 @@
                     <div class="date-of-add"><%=quest.getDateOfAdding()%></div>
                     <div class="actions">
                         <a href="quests_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
-                        <a href=""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
+                        <a href="/quests/delete?id=<%=quest.getID()%>"><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
                     </div>
                 </div>
                 <%

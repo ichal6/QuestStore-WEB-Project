@@ -55,6 +55,17 @@ public class QuestJDBCDAO implements QuestDAO {
         return questsList;
     }
 
+    @Override
+    public void deleteQuest(int id) throws ConnectionException, ReadException {
+        try (Connection connection = connectToDB()) {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM quest WHERE quest_id = ? ;");
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new ReadException("Sorry, couldn't delete this quest");
+        }
+    }
+
     private Quest extractQuestFromResultSet(ResultSet rs) throws SQLException {
         return new Quest(rs.getInt("quest_id"), rs.getString("name"), rs.getString("description"),
                 rs.getInt("value"), rs.getString("type"), rs.getDate("date_of_adding"), rs.getString("picture_url"));
