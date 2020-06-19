@@ -30,7 +30,7 @@
                     </div>
                 </div>
                 <div class="lower_section">
-                    <p><a href="admins_list.jsp">See list of admins...</a></p>
+                    <p><a href="/user-list?type=admin">See list of admins...</a></p>
                 </div>
             </div>
             <div class="options_rectangle">
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="lower_section">
-                    <p><a href="mentors_list.jsp">See list of mentors...</a></p>
+                    <p><a href="/user-list?type=mentor">See list of mentors...</a></p>
                 </div>
             </div>
             <div class="options_rectangle">

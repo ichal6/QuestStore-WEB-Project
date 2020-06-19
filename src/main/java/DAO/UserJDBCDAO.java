@@ -5,22 +5,21 @@ import Exception.ReadException;
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import java.sql.Date;
+import java.util.*;
 
-public class UserDBDAO implements IUserDAO {
+public class UserJDBCDAO implements UserDAO {
     private final String DBUrl;
     private final String DBUser;
     private final String DBPassword;
-    private Map<Integer, CMSUser> dicOfUsers;
+    private List<CMSUser> dicOfUsers;
 
-    public UserDBDAO(String path) throws IOException {
+    public UserJDBCDAO(String path) throws IOException {
         Properties prop = PropertiesReader.readProperties(path);
         DBUrl = prop.getProperty("db.url");
         DBUser = prop.getProperty("db.user");
         DBPassword = prop.getProperty("db.passwd");
-        dicOfUsers = new HashMap<>();
+        dicOfUsers = new ArrayList<>();
     }
 
     @Override
@@ -45,6 +44,11 @@ public class UserDBDAO implements IUserDAO {
 
     @Override
     public void addUser(CMSUser user) throws ReadException {
+
+        if(checkEmail(user.getName())){
+            throw new ReadException("You cannot add a new user, because this e-mail is exist in a database");
+        }
+
         String query = "INSERT INTO cms_user VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection con = DriverManager.getConnection(DBUrl, this.DBUser, this.DBPassword);
              PreparedStatement pst = con.prepareStatement(query))
@@ -58,7 +62,7 @@ public class UserDBDAO implements IUserDAO {
             pst.setBoolean(7, user.isAdmin());
             pst.executeUpdate();
         } catch (SQLException ex) {
-            throw new ReadException("You cannot insert user");
+            throw new ReadException("You cannot insert user" + ex);
         }
     }
 
@@ -95,33 +99,33 @@ public class UserDBDAO implements IUserDAO {
     }
 
     @Override
-    public Map<Integer, CMSUser> getAllUsers() throws ReadException {
+    public List<CMSUser> getAllUsers() throws ReadException {
         try(Connection con = DriverManager.getConnection(this.DBUrl, this.DBUser, this.DBPassword);
             PreparedStatement pst = con.prepareStatement("SELECT * FROM cms_user")) {
             ResultSet rs = pst.executeQuery();
-            return fillDicOfUsers(rs);
+            return fillListOfUsers(rs);
         } catch (SQLException ex) {
             throw new ReadException("You cannot access to database.");
         }
     }
 
     @Override
-    public Map<Integer, CMSUser> getAllAdmins() throws ReadException {
+    public List<CMSUser> getAllAdmins() throws ReadException {
         try(Connection con = DriverManager.getConnection(this.DBUrl, this.DBUser, this.DBPassword);
             PreparedStatement pst = con.prepareStatement("SELECT * FROM cms_user WHERE is_admin='t'")) {
             ResultSet rs = pst.executeQuery();
-            return fillDicOfUsers(rs);
+            return fillListOfUsers(rs);
         } catch (SQLException ex) {
             throw new ReadException("You cannot access to database.");
         }
     }
 
     @Override
-    public Map<Integer, CMSUser> getAllMentors() throws ReadException {
+    public List<CMSUser> getAllMentors() throws ReadException {
         try(Connection con = DriverManager.getConnection(this.DBUrl, this.DBUser, this.DBPassword);
             PreparedStatement pst = con.prepareStatement("SELECT * FROM cms_user WHERE is_admin='f'")) {
             ResultSet rs = pst.executeQuery();
-            return fillDicOfUsers(rs);
+            return fillListOfUsers(rs);
         } catch (SQLException ex) {
             throw new ReadException("You cannot access to database.");
         }
@@ -169,7 +173,35 @@ public class UserDBDAO implements IUserDAO {
         }
     }
 
-    private Map<Integer, CMSUser> fillDicOfUsers(ResultSet rs) throws ReadException {
+    @Override
+    public int getAdminsCount() throws ReadException {
+        try(Connection con = DriverManager.getConnection(this.DBUrl, this.DBUser, this.DBPassword);
+            PreparedStatement pst = con.prepareStatement("SELECT COUNT(*) FROM cms_user WHERE is_admin='t'")) {
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            throw new ReadException("You cannot access to database.");
+        }
+        throw new ReadException("Problem with data in database");
+    }
+
+    @Override
+    public int getMentorsCount() throws ReadException {
+        try(Connection con = DriverManager.getConnection(this.DBUrl, this.DBUser, this.DBPassword);
+            PreparedStatement pst = con.prepareStatement("SELECT COUNT(*) FROM cms_user WHERE is_admin='f'")) {
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            throw new ReadException("You cannot access to database.");
+        }
+        throw new ReadException("Problem with data in database");
+    }
+
+    private List<CMSUser> fillListOfUsers(ResultSet rs) throws ReadException {
         dicOfUsers.clear();
         try {
             while (rs.next()) {
@@ -184,7 +216,7 @@ public class UserDBDAO implements IUserDAO {
                         .userRole(rs.getBoolean(8))
                         .build();
 
-                dicOfUsers.put(user.getID(), user);
+                dicOfUsers.add(user);
             }
         } catch (SQLException ex) {
             throw new ReadException("You cannot import list of users.");
@@ -216,6 +248,21 @@ public class UserDBDAO implements IUserDAO {
         }
         else{
             throw new ReadException("This user doesn't exist!");
+        }
+    }
+
+    private boolean checkEmail(String email) throws ReadException {
+        try(Connection con = DriverManager.getConnection(this.DBUrl, this.DBUser, this.DBPassword);
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM cms_user WHERE email = ?")) {
+            pst.setString(1, email);
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()) {
+                return true;
+            }else{
+                return false;
+            }
+        } catch (SQLException ex) {
+            throw new ReadException("You cannot access to database.");
         }
     }
 }

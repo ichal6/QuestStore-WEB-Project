@@ -1,14 +1,21 @@
 package Service;
 
 import DAO.PropertiesReader;
+import DAO.UserDAO;
 import Model.SummaryAdmin;
 import Model.SummaryMentor;
+import Exception.ReadException;
 
 import java.io.IOException;
 import java.sql.*;
 import java.util.Properties;
 
 public class SummaryService {
+    private UserDAO userDAO;
+
+    public SummaryService(UserDAO userDAO){
+        this.userDAO = userDAO;
+    }
 
     // all methods with DB queries will gradually be moved to specific DAOs, when they are made
 
@@ -34,7 +41,7 @@ public class SummaryService {
         );
     }
 
-    public SummaryAdmin getSummaryAdmin() throws SQLException, IOException {
+    public SummaryAdmin getSummaryAdmin() throws SQLException, IOException, ReadException {
         Connection connectionToDB = connectToDB();
         Statement statement = connectionToDB.createStatement();
 
@@ -48,6 +55,14 @@ public class SummaryService {
                 getMentorsCount(statement),
                 getLevelsCount(statement)
         );
+    }
+
+    private int getMentorsCount(Statement statement) throws ReadException {
+        return userDAO.getMentorsCount();
+    }
+
+    private int getAdminsCount(Statement statement) throws ReadException {
+        return userDAO.getAdminsCount();
     }
 
     private int getCodecoolersCount(Statement statement) throws SQLException {
@@ -84,22 +99,6 @@ public class SummaryService {
 
     private int getArtifactsCount(Statement statement) throws SQLException {
         ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM artifact; ");
-        if (resultSet.next()) {
-            return resultSet.getInt(1);
-        }
-        throw new SQLException();
-    }
-
-    private int getAdminsCount(Statement statement) throws SQLException {
-        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM cms_user WHERE is_admin='t'; ");
-        if (resultSet.next()) {
-            return resultSet.getInt(1);
-        }
-        throw new SQLException();
-    }
-
-    private int getMentorsCount(Statement statement) throws SQLException {
-        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM cms_user WHERE is_admin='f';");
         if (resultSet.next()) {
             return resultSet.getInt(1);
         }

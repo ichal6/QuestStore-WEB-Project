@@ -1,10 +1,11 @@
 package Controller;
 
-import DAO.PropertiesReader;
+import DAO.UserJDBCDAO;
 import Model.SummaryAdmin;
 import Model.SummaryMentor;
 import Service.SummaryService;
 import Session.SessionManager;
+import Exception.ReadException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.*;
-import java.util.Properties;
 
 @WebServlet(name = "Summary", urlPatterns = "/dashboard")
 
@@ -25,7 +25,11 @@ public class SummaryController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        summaryService = new SummaryService();
+        try {
+            summaryService = new SummaryService(new UserJDBCDAO("src/main/resources/database.properties"));
+        } catch (IOException e) {
+            throw new ServletException("Problem with connect to database");
+        }
     }
 
     @Override
@@ -37,7 +41,7 @@ public class SummaryController extends HttpServlet {
             } else {
                 forwardToDashboardMentor(req, resp);
             }
-        } catch (SQLException e) {
+        } catch (SQLException | ReadException e) {
             e.printStackTrace();
         }
     }
@@ -50,7 +54,7 @@ public class SummaryController extends HttpServlet {
         dispatcher.forward(req, resp);
     }
 
-    private void forwardToDashboardAdmin(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException, ServletException {
+    private void forwardToDashboardAdmin(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException, ServletException, ReadException {
         SummaryAdmin summaryAdmin = summaryService.getSummaryAdmin();
         req.setAttribute("summaryAdmin", summaryAdmin);
         RequestDispatcher dispatcher
