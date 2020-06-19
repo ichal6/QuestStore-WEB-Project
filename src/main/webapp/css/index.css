@@ -11,11 +11,11 @@ body{
 }
 
 .login-container{
-    width: 70vh;
-    height: 54vh;
+    width: 400px;
+    /*height: 54vh;*/
     border-radius: 12px;
     background-color: #F2F2F2;
-    margin: 100px auto 70px auto;
+    margin: auto;
     display: grid;
     align-items: center;
     justify-content: center;
@@ -38,9 +38,11 @@ body{
     font-size: 20px;
     line-height: 30px;
     letter-spacing: 2px;
+    margin-bottom: 30px;
     color: #F2F2F2;
     border:none; 
     cursor: pointer;
+    transition: all 0.2s;
 }
 
 .button:hover{
@@ -55,4 +57,6 @@ label{
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 40px;
     color: #BF343F;
+    margin-top: 20px;
+    margin-bottom: 50px;
 }
