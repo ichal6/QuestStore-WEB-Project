@@ -45,7 +45,7 @@ public class UserJDBCDAO implements UserDAO {
     @Override
     public void addUser(CMSUser user) throws ReadException {
 
-        if(checkEmail(user.getName())){
+        if(checkEmail(user.getEmail())){
             throw new ReadException("You cannot add a new user, because this e-mail is exist in a database");
         }
 
