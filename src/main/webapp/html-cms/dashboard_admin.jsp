@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <div class="lower_section">
-                    <p><a href="levels_list.jsp">See list of all levels...</a></p>
+                    <p><a href="/levels">See list of all levels...</a></p>
                 </div>
             </div>
             <div class="options_rectangle">

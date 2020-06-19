@@ -47,7 +47,7 @@
     margin-bottom: 24px;
 }
 
-.quest-details label, .picture p, .picture a, .proporties, .proporties input, .proporties select {
+.quest-details label, .picture p, .picture a, .properties, .properties input, .properties select {
     color: #545759;
     margin: 12px 0;
 }
@@ -98,7 +98,7 @@
     cursor: pointer;
 }
 
-.type-seletor{
+.type-selector{
     width: 400px;
     height: 50px;
     border-radius: 12px;
@@ -109,7 +109,7 @@
     color: #545759;
 }
 
-.proporties-section{
+.properties-section{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -130,6 +130,6 @@
     margin-left: 10px;
 }
 
-.proporties input{
+.properties input{
     width: 400px;
 }

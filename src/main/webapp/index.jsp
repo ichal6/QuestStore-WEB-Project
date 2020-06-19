@@ -23,7 +23,7 @@
         <div class ="login-container">
             <label>Login as:</label>
             <a href="html-codecooler/codecooler_login.jsp"><input class="button" type ="submit" value ="Student"></a>
-            <a href="html-login-and-account/login.jsp"><input class="button" type ="submit" value ="Mentor/Admin"></a>
+            <a href="CMSUserLogin"><input class="button" type ="submit" value ="Mentor/Admin"></a>
         </div>
     </div>
 
