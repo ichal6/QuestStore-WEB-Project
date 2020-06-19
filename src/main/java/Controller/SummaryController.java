@@ -6,6 +6,7 @@ import Model.SummaryMentor;
 import Service.SummaryService;
 import Session.SessionManager;
 import Exception.ReadException;
+import Exception.SessionException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,8 +35,8 @@ public class SummaryController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        boolean isAdmin = SessionManager.getActualUser().isAdmin();
         try {
+            boolean isAdmin = SessionManager.getActualUser().isAdmin();
             if (isAdmin) {
                 forwardToDashboardAdmin(req, resp);
             } else {
@@ -43,6 +44,8 @@ public class SummaryController extends HttpServlet {
             }
         } catch (SQLException | ReadException e) {
             e.printStackTrace();
+        } catch (SessionException e){
+            throw new ServletException(e);
         }
     }
 
