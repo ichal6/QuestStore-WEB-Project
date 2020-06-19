@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='icon' href='../favicon.ico' type='image/x-icon'>
     <link rel="stylesheet" href="../css/person_add_update.css">
-    <title>Update Admin Details</title>
+    <title>Add new Admin</title>
 </head>
 
 <body>
@@ -16,27 +16,38 @@
         <jsp:include page="../html-common/cms-navigation.jsp" />
 
         <div class="details-container">
-            <h1>Admin's details</h1>
-            <a href="all-admins.jsp">&#60;- Back to the list</a>
-            <div class="personal-details">
+            <h1>Add new ${type}</h1>
+            <a href="/user-list?type=${type}">&#60;- Back to the list</a>
+            <form class="personal-details" action="/user/new" method="post">
                 <h2>Personal details</h2>
                 <label for="person-name">Name*:</label>
-                <input type="text" id="person-name" placeholder="Enter your name">
+                <input type="text" name="person-name" id="person-name" placeholder="Enter your name">
                 <label for="person-mail">Email*:</label>
-                <input type="text" id="person-mail" placeholder="Enter your email">
+                <input type="text" name="person-mail" id="person-mail" placeholder="Enter your email">
                 <label for="person-city">City*:</label>
-                <input type="text" id="person-city" placeholder="Enter your city">
+                <input type="text" name="person-city" id="person-city" placeholder="Enter your city">
                 <div class="lower-section">
-                    <p>*- Fields marked like the need to be filled to add new entry</p>
-                    <button class="btn" id="update-admin">Update</button>
+                    <p>*- Fields marked like that need to be filled to add new entry</p>
+                    <button class="btn" id="add-new-admin">Add new ${type}</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
     <jsp:include page="../html-common/footer.html" />
     <script>
+        <%
+        String permissions = (String) request.getAttribute("type");
+        if(permissions.equals("admin")){
+        %>
         document.getElementsByClassName('admins-nav')[0].setAttribute('id', 'select-page');
+        <%
+     }else{
+     %>
+        document.getElementsByClassName('mentors-nav')[0].setAttribute('id', 'select-page');
+        <%
+        }
+        %>
     </script>
 </body>
 

@@ -1,4 +1,7 @@
+<%@ page import="Model.Quest" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html lang="en" onclick="return hideSubMenu()">
 
 <head>
@@ -10,6 +13,10 @@
 </head>
 
 <body>
+    <%
+        List<Quest> questList = (List<Quest>) request.getAttribute("questsList");
+        int count = 0;
+    %>
     <jsp:include page="../html-common/cms-header.jsp" />
 
     <div class="container">
@@ -19,7 +26,7 @@
             <div class="upper-section">
                 <div class="h1-button">
                     <h1>All quests</h1>
-                    <button class="btn" onclick="location.href='quests_add_new.jsp'">+ Add new quest</button>
+                    <button class="btn" onclick="location.href='/quests/add'">+ Add new quest</button>
                 </div>
                 <div class="right-section">
                     <p>Items per page</p>
@@ -67,107 +74,30 @@
                         <span>Actions:</span>
                     </div>
                 </div>
+                <%
+                    for (Quest quest : questList) {
+                        count++;
+                %>
                 <div class="quest-row">
-                    <div class="quest-number">1.</div>
+                    <div class="quest-number"><%=count%></div>
                     <div class="quest-img-name">
-                        <img src="../assets/img/quest_logo_01.svg" alt="quest's-image"
-                            class="quest-img">
-                        <p class="quest-name">Passing a Checkpoint</p>
+                        <img src="../assets/img/quests-img/<%=quest.getPictureUrl()%>" alt="quest's-image"
+                             class="quest-img">
+                        <p class="quest-name"><%=quest.getName()%></p>
                     </div>
-                    <div class="quest-descriptions">You’ve passed the checkpoint and got to next...</div>
-                    <div class="quest-value">500</div>
-                    <div class="quest-type">Basic</div>
-                    <div class="date-of-add">11/07/2019</div>
+                    <div class="quest-descriptions"><%=quest.getDescription()%></div>
+                    <div class="quest-value"><%=quest.getValue()%></div>
+                    <div class="quest-type"><%=quest.getType().name()%></div>
+                    <div class="date-of-add"><%=quest.getDateOfAdding()%></div>
                     <div class="actions">
                         <a href="quests_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
                         <a href=""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
                     </div>
                 </div>
+                <%
+                    }
+                %>
 
-                <div class="quest-row">
-                    <div class="quest-number">2.</div>
-                    <div class="quest-img-name">
-                        <img src="../assets/img/quest_logo_02.svg" alt="quest's-image"
-                            class="quest-img">
-                        <p class="quest-name">Spot a mistake in the assignment </p>
-                    </div>
-                    <div class="quest-descriptions">You’re super cool and awesome and can be...</div>
-                    <div class="quest-value">500</div>
-                    <div class="quest-type">Extra</div>
-                    <div class="date-of-add">11/07/2019</div>
-                    <div class="actions">
-                        <a href="quests_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
-                        <a href=""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
-                    </div>
-                </div>
-
-                <div class="quest-row">
-                    <div class="quest-number">3.</div>
-                    <div class="quest-img-name">
-                        <img src="../assets/img/quest_logo_03.svg" alt="quest's-image"
-                            class="quest-img">
-                        <p class="quest-name">Do a demo for the class</p>
-                    </div>
-                    <div class="quest-descriptions">Loremskskdkfkfkfkf kfkffkfkfk fk  kfkfkfkfk...</div>
-                    <div class="quest-value">1000</div>
-                    <div class="quest-type">Extra</div>
-                    <div class="date-of-add">11/07/2019</div>
-                    <div class="actions">
-                        <a href="quests_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
-                        <a href=""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
-                    </div>
-                </div>
-
-                <div class="quest-row">
-                    <div class="quest-number">4.</div>
-                    <div class="quest-img-name">
-                        <img src="../assets/img/quest_logo_04.svg" alt="quest's-image"
-                            class="quest-img">
-                        <p class="quest-name">Take part in student screening...</p>
-                    </div>
-                    <div class="quest-descriptions">Loremskskdkfkfkfkf kfkffkfkfk fk  kfkfkfkfk...</div>
-                    <div class="quest-value">5000</div>
-                    <div class="quest-type">Extra</div>
-                    <div class="date-of-add">11/07/2019</div>
-                    <div class="actions">
-                        <a href="quests_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
-                        <a href=""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
-                    </div>
-                </div>
-
-                <div class="quest-row">
-                    <div class="quest-number">5.</div>
-                    <div class="quest-img-name">
-                        <img src="../assets/img/quest_logo_05.svg" alt="quest's-image"
-                            class="quest-img">
-                        <p class="quest-name">Attend one month without being...</p>
-                    </div>
-                    <div class="quest-descriptions">Loremskskdkfkfkfkf kfkffkfkfk fk  kfkfkfkfk...</div>
-                    <div class="quest-value">10000</div>
-                    <div class="quest-type">Extra</div>
-                    <div class="date-of-add">11/07/2019</div>
-                    <div class="actions">
-                        <a href="quests_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
-                        <a href=""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
-                    </div>
-                </div>
-
-                <div class="quest-row">
-                    <div class="quest-number">6.</div>
-                    <div class="quest-img-name">
-                        <img src="../assets/img/quest_logo_06.svg" alt="quest's-image"
-                            class="quest-img">
-                        <p class="quest-name">Set a SMART goal with your tutor...</p>
-                    </div>
-                    <div class="quest-descriptions">Loremskskdkfkfkfkf kfkffkfkfk fk  kfkfkfkfk...</div>
-                    <div class="quest-value">10000</div>
-                    <div class="quest-type">Extra</div>
-                    <div class="date-of-add">11/07/2019</div>
-                    <div class="actions">
-                        <a href="quests_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
-                        <a href=""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

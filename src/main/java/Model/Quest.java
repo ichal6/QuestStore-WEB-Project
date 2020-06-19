@@ -11,22 +11,21 @@ public class Quest {
     private Date dateOfAdding;
     private String pictureUrl;
 
-    public Quest(int ID, String name, String description, int value, int type, Date dateOfAdding, String pictureUrl) {
+    public Quest(int ID, String name, String description, int value, String type, Date dateOfAdding, String pictureUrl) {
         this.ID = ID;
         this.name = name;
         this.description = description;
         this.value = value;
-        this.type = QuestType.getTypeByNumber(type);
+        this.type = QuestType.getTypeByContent(type);
         this.dateOfAdding = dateOfAdding;
         this.pictureUrl = pictureUrl;
     }
 
-    public Quest(String name, String description, int value, int type, Date dateOfAdding, String pictureUrl) {
+    public Quest(String name, String description, int value, String type, String pictureUrl) {
         this.name = name;
         this.description = description;
         this.value = value;
-        this.type = QuestType.getTypeByNumber(type);
-        this.dateOfAdding = dateOfAdding;
+        this.type = QuestType.getTypeByContent(type);
         this.pictureUrl = pictureUrl;
     }
 

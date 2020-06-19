@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
 
-public class LoginData {
+public class PropertiesReader {
 
     public static Properties readProperties(String path) throws IOException {
 

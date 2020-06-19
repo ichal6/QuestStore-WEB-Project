@@ -1,15 +1,17 @@
+INSERT INTO cms_user
+VALUES (default,'Michal Kuk','kuk.michal3@gmail.com','admin123','Krakow',TO_DATE('2020-01-01','YYYY-MM-DD'),'../assets/img/admins-images/penelope-cruz.svg','Y');
 
 INSERT INTO cms_user
-VALUES (default,'Michal Kuk','kuk.michal3@gmail.com','admin123','Krakow',TO_DATE('2020-01-01','YYYY-MM-DD'),'URL','Y');
+VALUES (default,'Jan Truskolaski','jtruskolaski@gmail.com','admin123','Krakow',TO_DATE('2020-01-01','YYYY-MM-DD'),'../assets/img/admins-images/penelope-cruz.svg','Y');
 
 INSERT INTO cms_user
-VALUES (default,'Andrzej Szampan','aszampan@gmail.com','admin123','Krakow',TO_DATE('2020-01-01','YYYY-MM-DD'),'URL','Y');
+VALUES (default,'Andrzej Szampan','aszampan@gmail.com','admin123','Krakow',TO_DATE('2020-01-01','YYYY-MM-DD'),'../assets/img/admins-images/penelope-cruz.svg','Y');
 
 INSERT INTO cms_user
-VALUES (default,'Dominik Nowak','dnowak@gmail.com','admin123','Krakow',TO_DATE('2020-01-01','YYYY-MM-DD'),'URL','N');
+VALUES (default,'Dominik Nowak','dnowak@gmail.com','admin123','Krakow',TO_DATE('2020-01-01','YYYY-MM-DD'),'../assets/img/admins-images/penelope-cruz.svg','N');
 
 INSERT INTO cms_user
-VALUES (default,'Paweł Suryk','psuryk@gmail.com','admin123','Krakow',TO_DATE('2020-01-01','YYYY-MM-DD'),'URL','N');
+VALUES (default,'Paweł Suryk','psuryk@gmail.com','admin123','Krakow',TO_DATE('2020-01-01','YYYY-MM-DD'),'../assets/img/admins-images/penelope-cruz.svg','N');
 
 
 INSERT INTO team
@@ -53,22 +55,22 @@ values(default,'Level 6 - Codecool Buddha','There is nothing more.','10000',defa
 
 
 INSERT INTO quest
-values(default,'Passing a checkpoint.','You have passed a checkopint.','500','0',default,'quest1.png');
+values(default,'Passing a checkpoint.','You have passed a checkopint.','500','basic',default,'quest_logo_01.svg');
 
 INSERT INTO quest
-values(default,'Spot a mistake in the assigment.','You fund a mistake in background materials.','500','1',default,'quest2.png');
+values(default,'Spot a mistake in the assigment.','You fund a mistake in background materials.','500','extra',default,'quest_logo_02.svg');
 
 INSERT INTO quest
-values(default,'Do a demo for the class.','You did a demo for the class.','1000','1',default,'quest3.png');
+values(default,'Do a demo for the class.','You did a demo for the class.','1000','extra',default,'quest_logo_03.svg');
 
 INSERT INTO quest
-values(default,'Take a part in student screening.','Blablabla','5000','1',default,'quest4.png');
+values(default,'Take a part in student screening.','Blablabla','5000','extra',default,'quest_logo_04.svg');
 
 INSERT INTO quest
-values(default,'Attend a month without being late.','Always on time!','10000','1',default,'quest5.png');
+values(default,'Attend a month without being late.','Always on time!','10000','extra',default,'quest_logo_05.svg');
 
 INSERT INTO quest
-values(default,'Set a smart Goal with your tutorial.','Blablabla','10000','1',default,'quest6.png');
+values(default,'Set a smart Goal with your tutorial.','Blablabla','10000','extra',default,'quest_logo_06.svg');
 
 
 

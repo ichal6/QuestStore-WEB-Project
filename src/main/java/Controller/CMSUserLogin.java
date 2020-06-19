@@ -1,9 +1,10 @@
 package Controller;
 
-import DAO.IUserDAO;
-import DAO.ReadException;
-import DAO.UserDBDAO;
+import DAO.UserDAO;
+import Exception.ReadException;
+import DAO.UserJDBCDAO;
 import Model.CMSUser;
+import Session.SessionManager;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,11 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Calendar;
 
 @WebServlet(name = "CMSUserLogin", urlPatterns = "/CMSUserLogin")
 public class CMSUserLogin extends HttpServlet {
-    private IUserDAO dao;
+    private UserDAO dao;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,7 +27,7 @@ public class CMSUserLogin extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        dao = new UserDBDAO("src/main/resources/database.properties");
+        dao = new UserJDBCDAO("src/main/resources/database.properties");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
