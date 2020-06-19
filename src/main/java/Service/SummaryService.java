@@ -1,10 +1,12 @@
 package Service;
 
 import DAO.PropertiesReader;
+import DAO.QuestDAO;
+import DAO.QuestJDBCDAO;
 import DAO.UserDAO;
 import Model.SummaryAdmin;
 import Model.SummaryMentor;
-import Exception.ReadException;
+import Exception.*;
 
 import java.io.IOException;
 import java.sql.*;
@@ -12,9 +14,11 @@ import java.util.Properties;
 
 public class SummaryService {
     private UserDAO userDAO;
+    private QuestDAO questDAO;
 
     public SummaryService(UserDAO userDAO){
         this.userDAO = userDAO;
+        this.questDAO = new QuestJDBCDAO();
     }
 
     // all methods with DB queries will gradually be moved to specific DAOs, when they are made
@@ -28,7 +32,7 @@ public class SummaryService {
         return DriverManager.getConnection(url, user, password);
     }
 
-    public SummaryMentor getSummaryMentor() throws SQLException, IOException {
+    public SummaryMentor getSummaryMentor() throws SQLException, IOException, ConnectionException, ReadException {
         Connection connectionToDB = connectToDB();
         Statement statement = connectionToDB.createStatement();
 
@@ -36,12 +40,12 @@ public class SummaryService {
                 getCodecoolersCount(statement),
                 getClassesCount(statement),
                 getTeamsCount(statement),
-                getQuestsCount(statement),
+                getQuestsCount(),
                 getArtifactsCount(statement)
         );
     }
 
-    public SummaryAdmin getSummaryAdmin() throws SQLException, IOException, ReadException {
+    public SummaryAdmin getSummaryAdmin() throws SQLException, IOException, ReadException, ConnectionException {
         Connection connectionToDB = connectToDB();
         Statement statement = connectionToDB.createStatement();
 
@@ -49,19 +53,19 @@ public class SummaryService {
                 getCodecoolersCount(statement),
                 getClassesCount(statement),
                 getTeamsCount(statement),
-                getQuestsCount(statement),
+                getQuestsCount(),
                 getArtifactsCount(statement),
-                getAdminsCount(statement),
-                getMentorsCount(statement),
+                getAdminsCount(),
+                getMentorsCount(),
                 getLevelsCount(statement)
         );
     }
 
-    private int getMentorsCount(Statement statement) throws ReadException {
+    private int getMentorsCount() throws ReadException {
         return userDAO.getMentorsCount();
     }
 
-    private int getAdminsCount(Statement statement) throws ReadException {
+    private int getAdminsCount() throws ReadException {
         return userDAO.getAdminsCount();
     }
 
@@ -89,12 +93,8 @@ public class SummaryService {
         throw new SQLException();
     }
 
-    private int getQuestsCount(Statement statement) throws SQLException {
-        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM quest; ");
-        if (resultSet.next()) {
-            return resultSet.getInt(1);
-        }
-        throw new SQLException();
+    private int getQuestsCount() throws ConnectionException, ReadException {
+        return questDAO.getQuestsCount();
     }
 
     private int getArtifactsCount(Statement statement) throws SQLException {

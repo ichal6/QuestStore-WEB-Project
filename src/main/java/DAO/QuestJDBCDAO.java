@@ -99,6 +99,20 @@ public class QuestJDBCDAO implements QuestDAO {
         }
     }
 
+    @Override
+    public int getQuestsCount() throws ReadException, ConnectionException {
+        try (Connection connection = connectToDB()) {
+            PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM quest");
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            throw new ReadException("You cannot access the database.");
+        }
+        throw new ReadException("Problem with data in database");
+    }
+
     private Quest extractQuestFromResultSet(ResultSet rs) throws SQLException, ReadException {
         return new Quest(rs.getInt("quest_id"), rs.getString("name"), rs.getString("description"),
                     rs.getInt("value"), rs.getString("type"), rs.getDate("date_of_adding"), rs.getString("picture_url"));
