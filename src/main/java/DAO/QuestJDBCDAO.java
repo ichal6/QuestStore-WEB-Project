@@ -1,5 +1,6 @@
 package DAO;
 
+import Model.CMSUser;
 import Model.Quest;
 import Exception.*;
 
@@ -66,8 +67,25 @@ public class QuestJDBCDAO implements QuestDAO {
         }
     }
 
-    private Quest extractQuestFromResultSet(ResultSet rs) throws SQLException {
+    @Override
+    public Quest getQuestById(int id) throws ConnectionException, ReadException {
+
+        try (Connection connection = connectToDB()) {
+            PreparedStatement pst = connection.prepareStatement("SELECT * FROM quest WHERE quest_id = ?");
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                return extractQuestFromResultSet(rs);
+            }
+            throw new ReadException("Bla");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new ReadException("Sorry, couldn't get this quest");
+        }
+    }
+
+    private Quest extractQuestFromResultSet(ResultSet rs) throws SQLException, ReadException {
         return new Quest(rs.getInt("quest_id"), rs.getString("name"), rs.getString("description"),
-                rs.getInt("value"), rs.getString("type"), rs.getDate("date_of_adding"), rs.getString("picture_url"));
+                    rs.getInt("value"), rs.getString("type"), rs.getDate("date_of_adding"), rs.getString("picture_url"));
     }
 }
