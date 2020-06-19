@@ -15,20 +15,7 @@
 
 <div class="header">
     <div class="left-position">
-        <%
-            if (role.toLowerCase().equals("admin")) {
-        %>
-
-            <a href="../html-cms/dashboard_admin.jsp"> <img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
-
-        <%
-            } else if (role.toLowerCase().equals("mentor")) {
-        %>
-
-            <a href="../html-cms/dashboard_mentor.jsp"> <img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
-        <%
-            }
-        %>
+        <a href="/dashboard"> <img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
     </div>
     <div class="right-position">
         <a id="name"><%=name%></a>
