@@ -80,7 +80,7 @@
                     <div class="coins-number"><%= level.getPrice()%></div>
                     <div class="date-of-add"><%= level.getDateOfAdding()%></div>
                     <div class="actions">
-                        <a href="levels_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
+                        <a href="/levels/edit?id=<%= level.getId()%>"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
                         <form class="form" action="/levels/delete" method="GET">
                         <a href="/levels/delete/?id=<%= level.getId()%>"><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
                         </form>
