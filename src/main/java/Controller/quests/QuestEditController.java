@@ -16,6 +16,7 @@ import java.io.IOException;
 @WebServlet(name = "QuestEditController", urlPatterns = "/quests/edit")
 public class QuestEditController extends HttpServlet {
     private QuestDAO questDAO;
+    private Quest quest;
 
     @Override
     public void init() throws ServletException {
@@ -26,7 +27,7 @@ public class QuestEditController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            Quest quest = questDAO.getQuestById(id);
+            quest = questDAO.getQuestById(id);
             request.setAttribute("quest", quest);
             RequestDispatcher dispatcher
                     = request.getRequestDispatcher("/html-cms/quests_update.jsp");
@@ -36,13 +37,30 @@ public class QuestEditController extends HttpServlet {
         }
     }
 
-
-    // quest-name
-    // quest-description
-    // quest-value
-    // quest-type
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPut(request, response);
     }
 
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            changeQuestDetails(request);
+            questDAO.updateQuest(quest.getID(), quest);
+        } catch (ConnectionException | ReadException e) {
+            throw new ServletException(e);
+        }
+        response.sendRedirect("/quests");
+    }
+
+    private void changeQuestDetails(HttpServletRequest request) {
+        String name = request.getParameter("quest-name");
+        String description = request.getParameter("quest-description");
+        int value = Integer.parseInt(request.getParameter("quest-value"));
+        String type = (request.getParameter("quest-type") != null) ? request.getParameter("quest-type") : quest.getType().name();
+        quest.setName(name);
+        quest.setDescription(description);
+        quest.setValue(value);
+        quest.setType(type);
+    }
 }

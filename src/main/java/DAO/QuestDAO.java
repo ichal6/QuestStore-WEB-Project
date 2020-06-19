@@ -13,4 +13,6 @@ public interface QuestDAO {
     void deleteQuest(int id) throws ConnectionException, ReadException;
 
     Quest getQuestById(int id) throws ConnectionException, ReadException;
+
+    void updateQuest(int ID, Quest quest) throws ConnectionException, ReadException;
 }

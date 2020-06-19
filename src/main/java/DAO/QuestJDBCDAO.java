@@ -1,6 +1,5 @@
 package DAO;
 
-import Model.CMSUser;
 import Model.Quest;
 import Exception.*;
 
@@ -77,10 +76,26 @@ public class QuestJDBCDAO implements QuestDAO {
             while (rs.next()) {
                 return extractQuestFromResultSet(rs);
             }
-            throw new ReadException("Bla");
+            throw new ReadException("Sorry, this quest does not exist");
         } catch (SQLException e) {
-            e.printStackTrace();
             throw new ReadException("Sorry, couldn't get this quest");
+        }
+    }
+
+    @Override
+    public void updateQuest(int ID, Quest quest) throws ReadException, ConnectionException {
+        String query = "UPDATE quest SET name = ?, description = ?, value = ?, type = ?, picture_url = ? WHERE quest_id = ?";
+        try (Connection connection = connectToDB()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, quest.getName());
+            statement.setString(2, quest.getDescription());
+            statement.setInt(3, quest.getValue());
+            statement.setString(4, quest.getType().name());
+            statement.setString(5, quest.getPictureUrl());
+            statement.setInt(6, quest.getID());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            throw new ReadException("You cannot update this user");
         }
     }
 

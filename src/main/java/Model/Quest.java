@@ -56,4 +56,20 @@ public class Quest {
     public String getPictureUrl() {
         return pictureUrl;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public void setType(String type) {
+        this.type = QuestType.getTypeByContent(type);
+    }
 }
