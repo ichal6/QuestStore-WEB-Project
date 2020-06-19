@@ -17,13 +17,16 @@
 
         <div class="details-container">
             <h1>Add new level</h1>
-      -      <a href="levels_list.jsp">&#60;- Back to the list</a>
+      -      <a href="/levels">&#60;- Back to the list</a>
+            <form class="form" action="/levels/add" method="POST">
+                <input type="hidden" id = "insert" name = "insert" action = "insert" value="insert">
+
             <div class="personal-details">
                 <h2>Basic details:</h2>
                 <label for="level-name">Name*:</label>
-                <input type="text" id="level-name">
+                <input type="text" id="level-name" name="level-name">
                 <label for="level-description">Description*:</label>
-                <input type="text" id="level-description">
+                <input type="text" id="level-description" name="level-description">
                 <div class="img-coins">
                     <div>
                         <p>Picture*:</p>
@@ -31,7 +34,7 @@
                     </div>
                     <div class="level-coins">
                         <label for="level-coins">Cost (number of coins to get)*:</label>
-                        <input type="number" id="level-coins">
+                        <input type="number" id="level-coins" name="level-coins">
                     </div>
                 </div>
                 <div class="lower-section">
@@ -39,6 +42,7 @@
                     <button class="btn" id="update-level">Add new level</button>
                 </div>
             </div>
+            </form>
         </div>
     </div>
 
