@@ -42,7 +42,7 @@ public class SummaryController extends HttpServlet {
                 forwardToDashboardMentor(req, resp);
             }
 
-        } catch (SQLException | ReadException | ConnectionException e) {
+        } catch (SQLException | ReadException | ConnectionException | SessionException e ) {
 
             throw new ServletException(e);
         }
