@@ -9,8 +9,9 @@ import java.util.List;
 public interface LevelDAO {
 
     void insertNewLevel(Level level) throws IOException, SQLException;
-    boolean updateLevel();
+    void updateLevel(Level level, int levelId) throws IOException, SQLException;
     void  deleteLevel(int levelId) throws IOException, SQLException;
     List<Level> getLevelsList() throws IOException, SQLException;
+    Level getLevelToUpdate(int levelId) throws IOException, SQLException;
 
 }

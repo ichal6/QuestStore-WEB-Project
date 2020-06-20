@@ -17,13 +17,14 @@
 
         <div class="details-container">
             <h1>Level's details</h1>
-            <a href="levels_list.jsp">&#60;- Back to the list</a>
+            <a href="/levels">&#60;- Back to the list</a>
+            <form class="form" action="/levels/edit" method="POST">
             <div class="personal-details">
                 <h2>Basic details:</h2>
                 <label for="level-name">Name*:</label>
-                <input type="text" id="level-name" value="Level I with super name">
+                <input type="text" name ="level-name" id="level-name" value="${level.getName()}">
                 <label for="level-description">Description*:</label>
-                <textarea id="level-description" >A few words about my super level, how cool I am to get it.</textarea>
+                <input id="level-description" name ="level-description" value="${level.getDescription()}">
                 <div class="img-coins">
                     <div>
                         <p>Picture*:</p>
@@ -32,14 +33,16 @@
                     </div>
                     <div class="level-coins">
                         <label for="level-coins">Cost (number of coins to get)*:</label>
-                        <input type="number" id="level-coins" value="200">
+                        <input type="number"  name ="level-coins" id="level-coins" value="${level.getPrice()}">
                     </div>
                 </div>
-                <div class="lower-section">
+                <div class= "lower-section">
                     <p>*- Fields marked like the need to be filled to add new entry</p>
                     <button class="btn" id="update-level">Update level</button>
                 </div>
             </div>
+        </form>
+
         </div>
     </div>
 
