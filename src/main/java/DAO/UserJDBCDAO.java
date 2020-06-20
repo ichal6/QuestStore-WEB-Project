@@ -45,7 +45,7 @@ public class UserJDBCDAO implements UserDAO {
     @Override
     public void addUser(CMSUser user) throws ReadException {
 
-        if(checkEmail(user.getName())){
+        if(checkEmail(user.getEmail())){
             throw new ReadException("You cannot add a new user, because this e-mail is exist in a database");
         }
 
@@ -68,6 +68,10 @@ public class UserJDBCDAO implements UserDAO {
 
     @Override
     public void editUser(int ID, CMSUser user) throws ReadException {
+        if(checkEmail(user.getEmail())){
+            throw new ReadException("You cannot edit this user, because a provide e-mail is exist in a database");
+        }
+
         String query = "UPDATE cms_user SET name = ?, email = ?, password = ?, city = ?, date_of_adding = ? ,picture_url = ?, is_admin = ? WHERE cms_user_id = ?";
         try (Connection con = DriverManager.getConnection(DBUrl, this.DBUser, this.DBPassword);
              PreparedStatement pst = con.prepareStatement(query))

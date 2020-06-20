@@ -19,7 +19,6 @@
             <h1>Add new quest</h1>
             <a href="/quests">&#60;- Back to the list</a>
             <form class="form" action="" method="POST">
-                <input type="hidden" id="insert" name="insert" action="insert" value="insert">
                 <div class="quest-details">
                     <h2>Basic details</h2>
                     <label for="quest-name">Name*:</label>
