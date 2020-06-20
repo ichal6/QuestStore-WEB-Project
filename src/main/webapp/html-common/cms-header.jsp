@@ -28,7 +28,7 @@
     <div id="dropdown-content">
         <ul>
             <li>
-                <a href="../html-login-and-account/my-account.jsp">My account
+                <a href="/cms-user/my-account">My account
                     <img src="../assets/icons/my_account_icon.svg" alt="my account icon"></a>
             </li>
             <li>
