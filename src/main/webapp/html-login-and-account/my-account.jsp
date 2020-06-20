@@ -21,12 +21,12 @@
                 <h2 id="label-profil">Profile Information</h2>
                 <form action="/cms-user/my-account" method="post">
                     <label>Name*:</label><br>
-                    <input type="text" id="name-and-surname" class="name-surname" value="${SessionManager.getActualUser().getName()}"><br>
+                    <input name="person-name" type="text" id="name-and-surname" class="name-surname" value="${SessionManager.getActualUser().getName()}"><br>
                     <div class="warning hidden">
                         <p>Your name is invalid</p>
                     </div>
                     <label>Email*:</label><br>
-                    <input type="text" id="e-mail" class="email-input" value="${SessionManager.getActualUser().getEmail()}" ><br>
+                    <input name="person-mail" type="text" id="e-mail" class="email-input" value="${SessionManager.getActualUser().getEmail()}" ><br>
                     <div class="warning-email hidden">
                         <p>Your mail is invalid</p>
                     </div>
@@ -38,7 +38,7 @@
                     </div>
                     <a href="#"> <img src="../assets/icons/change_picture.svg" alt="change photo">Change picture</a>
                     <p id="role-content">Role: ${SessionManager.getActualUser().getRole()}</p>
-                    <button type="submit" id="update" disabled>Update</button>
+                    <button type="submit" id="update">Update</button>
                 </div>
                 </form>
             </div>
@@ -58,11 +58,11 @@
                     <div class="warning-equals hidden">
                         <p>Your passwords are not equals.</p>
                     </div>
-                </form>
+
                 <div id="change-password-button" class="button">
                     <button >Change password</button>
                 </div>
-                
+                </form>
             </div>
         </div>
     </div>
