@@ -16,35 +16,37 @@
         <jsp:include page="../html-common/cms-navigation.jsp" />
 
         <div class="details-container">
+            <form action="/artifacts/add" method="post">
             <h1>Add new artifact</h1>
-            <a href="artifacts_list.jsp">&#60;- Back to the list</a>
+            <a href="/artifacts">&#60;- Back to the list</a>
             <div class="artifacts-details">
                 <h2>Basic details</h2>
                 <label for="artifacts-name">Name*:</label>
-                <input type="text" id="artifacts-name">
+                <input type="text" id="artifacts-name" name="artifact-name">
                 <label for="artifacts-descripton">Description*:</label>
-                <textarea id="artifacts-descripton"></textarea> 
+                <textarea id="artifacts-descripton" name="artifact-description"></textarea>
                 <div class="proporties-section">
                     <div class="picture">
                         <p>Picture: </p>
-                        <a href="#"><img src="../assets/icons/change_picture.svg" alt=" ">Add the picture</a> 
+                        <a href="#"><img src="../assets/icons/change_picture.svg" alt=" ">Add the picture</a>
                     </div>
                     <div class=proporties>
                         <label>Value (Number of coins student will get for the artifacts)*:</label><br>
-                        <input type="text"><br>                        
+                        <input type="text" name="artifact-value"><br>
                         <label>Type (Single or Team):</label><br>
-                        <select class= "type-seletor" id="type-selector">
+                        <select class= "type-seletor" id="type-selector" name="type-selector">
                             <option value="" selected disabled hidden>Choose...</option>
                             <option>Single</option>
                             <option>Team</option>
                         </select>
                     </div>
                 </div>
-                <div class="lower-section">
-                    <p>*- Fields marked like the need to be filled to add new entry</p>
-                    <button class="btn" id="add-new-artifact">Add new artifact</button>
-                </div>
+                    <div class="lower-section">
+                        <p>*- Fields marked like the need to be filled to add new entry</p>
+                        <button class="btn" id="add-new-artifact">Add new artifact</button>
+                    </div>
             </div>
+            </form>
         </div>
     </div>
 

@@ -105,7 +105,7 @@ CREATE TABLE artifact(
 	name varchar(50),
 	description varchar(100),
 	value integer, 
-	type BIT, 
+	type varchar(25), 
 	date_of_adding date NOT NULL DEFAULT CURRENT_DATE,
 	picture_url varchar(100)
 );

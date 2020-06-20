@@ -75,22 +75,22 @@ values(default,'Set a smart Goal with your tutorial.','Blablabla','10000','extra
 
 
 INSERT INTO artifact
-values(default,'Private mentoring.','Blablabla','500','0',default,'artifact1.png');
+values(default,'Private mentoring.','Blablabla','500','Single',default,'artifacts_1.svg');
 
 INSERT INTO artifact
-values(default,'Spend a day on home office.','Blablabla','500','0',default,'artifact2.png');
+values(default,'Spend a day on home office.','Blablabla','500','Single',default,'artifacts_2.svg');
 
 INSERT INTO artifact
-values(default,'Extend an SI deadline for a week. ','Blablabla','1000','0',default,'artifact3.png');
+values(default,'Extend an SI deadline for a week. ','Blablabla','1000','Single',default,'artifacts_3.svg');
 
 INSERT INTO artifact
-values(default,'60 minutes workshop by mentor.','Blablabla','5000','1',default,'artifact4.png');
+values(default,'60 minutes workshop by mentor.','Blablabla','5000','Team',default,'artifacts_4.svg');
 
 INSERT INTO artifact
-values(default,'Mentor joins student for 1 hour.','Blablabla','10000','1',default,'artifact5.png');
+values(default,'Mentor joins student for 1 hour.','Blablabla','10000','Team',default,'artifacts_5.svg');
 
 INSERT INTO artifact
-values(default,'Extra materials for chosen topic','Blablabla','10000','1',default,'artifact6.png');
+values(default,'Extra materials for chosen topic','Blablabla','10000','Team',default,'artifacts_6.svg');
 
 
 

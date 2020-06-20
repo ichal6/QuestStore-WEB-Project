@@ -1,3 +1,4 @@
+<%@ page import="Model.Artifact" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" onclick="return hideSubMenu()">
 
@@ -10,32 +11,38 @@
 </head>
 
 <body>
-    <jsp:include page="../html-common/cms-header.jsp" />
+<%
+    Artifact artifact = (Artifact) request.getAttribute("artifact");
+%>
+<jsp:include page="../html-common/cms-header.jsp"/>
 
-    <div class="container">
-        <jsp:include page="../html-common/cms-navigation.jsp" />
+<div class="container">
+    <jsp:include page="../html-common/cms-navigation.jsp"/>
 
         <div class="details-container">
             <h1>Artifact’s details</h1>
-            <a href="artifacts_list.jsp">&#60;- Back to the list</a>
+            <a href="/artifacts">&#60;- Back to the list</a>
+            <form action="/artifacts/update" method="post">
             <div class="artifacts-details">
                 <h2>Basic details</h2>
                 <label for="artifacts-name">Name*:</label>
-                <input type="text" id="artifacts-name" value="1 hour consultation with mentor">
+                <input type="text" id="artifacts-name" value="<%=artifact.getName()%>" name="artifact-name">
                 <label for="artifacts-descripton">Description*:</label>
-                <textarea id="artifacts-descripton">You’ve earned 1 hour consultation with choosen mentor. Contact him/her to settle the details.</textarea> 
+                <textarea id="artifacts-descripton"
+                          name="artifact-description"><%=artifact.getDescription()%>></textarea>
                 <div class="proporties-section">
                     <div class="picture">
                         <p>Picture: </p>
-                        <img id="artifacts-logo" src="../assets/img/artifacts-images/artifacts_7.svg" alt="artifact logo"><br>
-                        <a href="#"><img src="../assets/icons/change_picture.svg" alt=" ">Change picture</a> 
+                        <img id="artifacts-logo" src="../assets/img/artifacts-images/<%=artifact.getPictureUrl()%>"
+                             alt="artifact logo"><br>
+                        <a href="#"><img src="../assets/icons/change_picture.svg" alt=" ">Change picture</a>
                     </div>
                     <div class=proporties>
                         <label>Value (Number of coins student will get for the artifacts)*:</label><br>
-                        <input type="text" value="500"><br>                        
+                        <input type="text" value="<%=artifact.getValue()%>" name="artifact-value"><br>
                         <label>Type (Single or Team):</label><br>
-                        <select class= "type-seletor" id="type-selector">
-                            <option>Single</option>
+                        <select class="type-selector" id="type-selector">
+                            <option name="artifact-type">Single</option>
                             <option>Team</option>
                         </select>
                     </div>
@@ -45,13 +52,15 @@
                     <button class="btn" id="update-admin">Update</button>
                 </div>
             </div>
+            </form>
         </div>
-    </div>
 
-    <jsp:include page="../html-common/footer.html" />
-    <script>
-        document.getElementsByClassName('artifacts-nav')[0].setAttribute('id', 'select-page');
-    </script>
+</div>
+
+<jsp:include page="../html-common/footer.html"/>
+<script>
+    document.getElementsByClassName('artifacts-nav')[0].setAttribute('id', 'select-page');
+</script>
 </body>
 
 </html>

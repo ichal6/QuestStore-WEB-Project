@@ -114,7 +114,7 @@
                     </div>
                 </div>
                 <div class="lower_section">
-                    <p><a href="artifacts_list.jsp">See list of artifacts...</a></p>
+                    <p><a href="/artifacts">See list of artifacts...</a></p>
                 </div>
             </div>
         </div>
