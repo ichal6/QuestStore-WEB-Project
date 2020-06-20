@@ -55,7 +55,7 @@ public class MyAccountCMSUserController extends HttpServlet {
 
         } else if ("change-password".equals(action)) {
             int userId = userToEdit.getID();
-            if (checkIfCorrectPassword(oldPassword) == true) {
+            if(checkIfCorrectPassword(oldPassword)){
                 try {
                     dao.changeUserPassword(userId, newPassword);
                 } catch (ReadException e) {
