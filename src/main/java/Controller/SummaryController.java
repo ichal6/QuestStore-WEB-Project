@@ -5,7 +5,7 @@ import Model.SummaryAdmin;
 import Model.SummaryMentor;
 import Service.SummaryService;
 import Session.SessionManager;
-import Exception.ReadException;
+import Exception.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,12 +41,12 @@ public class SummaryController extends HttpServlet {
             } else {
                 forwardToDashboardMentor(req, resp);
             }
-        } catch (SQLException | ReadException e) {
-            e.printStackTrace();
+        } catch (SQLException | ReadException | ConnectionException e) {
+            throw new ServletException(e);
         }
     }
 
-    private void forwardToDashboardMentor(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException, ServletException {
+    private void forwardToDashboardMentor(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException, ServletException, ConnectionException, ReadException {
         SummaryMentor summaryMentor = summaryService.getSummaryMentor();
         req.setAttribute("summaryMentor", summaryMentor);
         RequestDispatcher dispatcher
@@ -54,7 +54,7 @@ public class SummaryController extends HttpServlet {
         dispatcher.forward(req, resp);
     }
 
-    private void forwardToDashboardAdmin(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException, ServletException, ReadException {
+    private void forwardToDashboardAdmin(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException, ServletException, ReadException, ConnectionException {
         SummaryAdmin summaryAdmin = summaryService.getSummaryAdmin();
         req.setAttribute("summaryAdmin", summaryAdmin);
         RequestDispatcher dispatcher

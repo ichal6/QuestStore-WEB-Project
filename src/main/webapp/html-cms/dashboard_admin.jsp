@@ -102,7 +102,7 @@
                     </div>
                 </div>
                 <div class="lower_section">
-                    <p><a href="quests_list.jsp">See list of quests...</a></p>
+                    <p><a href="/quests">See list of quests...</a></p>
                 </div>
             </div>
             <div class="options_rectangle">

@@ -37,9 +37,7 @@ public class QuestAddNewController extends HttpServlet {
         try {
             Quest quest = extractQuestFromHTTPRequest(request);
             questDAO.insertQuest(quest);
-            response.setHeader("Send", "Success");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/quests_add_new.jsp");
-            dispatcher.forward(request, response);
+            response.sendRedirect("/quests");
         } catch (ConnectionException | ReadException e) {
             throw new ServletException(e);
         }

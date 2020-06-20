@@ -1,3 +1,4 @@
+<%@ page import="Model.Quest" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" onclick="return hideSubMenu()">
 
@@ -14,29 +15,29 @@
 
     <div class="container">
         <jsp:include page="../html-common/cms-navigation.jsp" />
-
         <div class="details-container">
             <h1>Quest's details</h1>
-            <a href="quests_list.jsp">&#60;- Back to the list</a>
-            <div class="quest-details">
+            <a href="/quests">&#60;- Back to the list</a>
+            <form class="quest-details" action="/quests/edit" method="post">
                 <h2>Basic details</h2>
                 <label for="quest-name">Name*:</label>
-                <input type="text" id="quest-name" value="Spot a major mistake in cc assignment">
-                <label for="quest-descripton">Description*:</label>
-                <textarea id="quest-descripton">You’ve found the mistake that our mentors did, congratulations! Contact your mentor to be rewarded for it!</textarea> 
-                <div class="proporties-section">
+                <input name="quest-name" type="text" id="quest-name" value="${quest.getName()}">
+                <label for="quest-description">Description*:</label>
+                <textarea name="quest-description" id="quest-description">${quest.getDescription()}</textarea>
+                <div class="properties-section">
                     <div class="picture">
                         <p>Picture: </p>
-                        <img id="quest-logo" src="../assets/img/quests-img/quest_logo_02.svg" alt="logo of quest"><br>
+                        <img id="quest-logo" src="../assets/img/quests-img/${quest.getPictureUrl()}" alt="logo of quest"><br>
                         <a href="#"><img src="../assets/icons/change_picture.svg" alt=" ">Change picture</a> 
                     </div>
-                    <div class=proporties>
-                        <label>Value (Number of coins student will get for the quest)*:</label><br>
-                        <input type="text" value="500"><br>                        
-                        <label>Type (Basic or Extra):</label><br>
-                        <select class= "type-seletor" id="type-selector">
-                            <option> Basic</option>
-                            <option> Extra</option>
+                    <div class=properties>
+                        <label for="quest-value">Value (Number of coins student will get for the quest)*:</label><br>
+                        <input name="quest-value" id="quest-value" type="text" value="${quest.getValue()}"><br>
+                        <label for="quest-type">Type (Basic or Extra):</label><br>
+                        <select class= "type-selector" id="quest-type" name="quest-type">
+                            <option value="" selected disabled hidden>${quest.getType().name()}</option>
+                            <option>Basic</option>
+                            <option>Extra</option>
                         </select>
                     </div>
                 </div>
@@ -44,7 +45,7 @@
                     <p>*- Fields marked like the need to be filled to add new entry</p>
                     <button class="btn" id="update-admin">Update</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
