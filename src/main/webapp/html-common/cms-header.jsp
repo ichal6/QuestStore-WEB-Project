@@ -32,7 +32,7 @@
                     <img src="../assets/icons/my_account_icon.svg" alt="my account icon"></a>
             </li>
             <li>
-                <a href="../index.jsp">Log out
+                <a href="/logout">Log out
                     <img src="../assets/icons/log_out_icon.svg" alt="log out icon"></a>
             </li>
         </ul>

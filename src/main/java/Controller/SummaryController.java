@@ -34,14 +34,16 @@ public class SummaryController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        boolean isAdmin = SessionManager.getActualUser().isAdmin();
         try {
+            boolean isAdmin = SessionManager.getActualUser().isAdmin();
             if (isAdmin) {
                 forwardToDashboardAdmin(req, resp);
             } else {
                 forwardToDashboardMentor(req, resp);
             }
+
         } catch (SQLException | ReadException | ConnectionException e) {
+
             throw new ServletException(e);
         }
     }

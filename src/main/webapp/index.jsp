@@ -15,9 +15,6 @@
 
 </head>
 <body>
-    <%
-      SessionManager.setActualUser(null);
-    %>
     <div class ="container-1">
         <div class = "logo"> <img src="assets/img/codequest_logo.svg" alt="Simply Easy Learning" ></div>
         <div class ="login-container">
@@ -26,6 +23,5 @@
             <a href="CMSUserLogin"><input class="button" type ="submit" value ="Mentor/Admin"></a>
         </div>
     </div>
-
 </body> 
 </html>
