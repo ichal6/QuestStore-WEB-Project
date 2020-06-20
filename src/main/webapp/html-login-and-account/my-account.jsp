@@ -19,7 +19,8 @@
             <h1 id="label">My Account</h1>
             <div id="information"> 
                 <h2 id="label-profil">Profile Information</h2>
-                <form action="/cms-user/my-account" method="post">
+                <form  action="/cms-user/my-account" method="post" >
+                    <input type="hidden" name="action" value="personal-information">
                     <label>Name*:</label><br>
                     <input name="person-name" type="text" id="name-and-surname" class="name-surname" value="${SessionManager.getActualUser().getName()}"><br>
                     <div class="warning hidden">
@@ -43,13 +44,14 @@
                 </form>
             </div>
 
-            <div id="change-password">
+                <div id="change-password">
                 <h2 id="label-password">Change Password</h2>
-                <form>
+                <form action="/cms-user/my-account" method="post">
+                    <input type="hidden" name="action" value="change-password">
                     <label>Old password*:</label><br>
-                    <input type="password" id="old-password"><br>
+                    <input type="password" id="old-password" name="old-password"><br>
                     <label>New password*:</label><br>
-                    <input type="password" id="new-password" class="passw-input"><br>
+                    <input name = "new-password" type="password" id="new-password" class="passw-input"><br>
                     <div class="warning-password hidden">
                         <p>Your password is invalid</p>
                     </div>

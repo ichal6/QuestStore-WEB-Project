@@ -78,7 +78,8 @@ public class LevelJDBCDAO implements LevelDAO {
     public Level getLevelToUpdate(int levelId) throws IOException, SQLException {
 
         Connection connection = connectToDB();
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM level WHERE level_id =" + levelId + ";");
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM level WHERE level_id = ? ;");
+        preparedStatement.setInt(1, levelId);
         ResultSet rs = preparedStatement.executeQuery();
 
         while (rs.next()) {
