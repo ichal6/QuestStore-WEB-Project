@@ -68,7 +68,8 @@ public class UserJDBCDAO implements UserDAO {
 
     @Override
     public void editUser(int ID, CMSUser user) throws ReadException {
-        if(checkEmail(user.getEmail())){
+        String actualEmail = getCMSUser(ID).getEmail();
+        if(checkEmail(user.getEmail()) && !actualEmail.equals(user.getEmail())){
             throw new ReadException("You cannot edit this user, because a provide e-mail is exist in a database");
         }
 
