@@ -95,14 +95,13 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
             throwables.printStackTrace();
         }
     }
-    
+
     public int getNextAvailableID() {
         String query = "SELECT artifact_id FROM artifact order by artifact_id desc limit 1";
-        Statement statement;
         int nextAvailableId = 0;
 
         try {
-            statement = connectToDB().createStatement();
+            Statement statement = connectToDB().createStatement();
             resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 nextAvailableId = resultSet.getInt(1);
@@ -116,14 +115,13 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
     @Override
     public Artifact getArtifactById(int id) {
         String query = "SELECT * FROM artifact WHERE artifact_id = ?";
-        Artifact artifact = null;
+        Artifact artifact = new Artifact();
         try {
             PreparedStatement preparedStatement = connectToDB().prepareStatement(query);
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                artifact = new Artifact(resultSet);
-                return artifact;
+                return new Artifact(resultSet);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -134,19 +132,27 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
     @Override
     public void updateArtifact(int artifactToUpdateId, Artifact artifactUpdated) {
         String query = "UPDATE artifact set name =?,description = ?, value = ?, type = ? WHERE artifact_id = ?;";
-
-        PreparedStatement preparedStatement = null;
         try {
-            preparedStatement = connectToDB().prepareStatement(query);
+            PreparedStatement preparedStatement = connectToDB().prepareStatement(query);
             preparedStatement.setString(1, artifactUpdated.getName());
             preparedStatement.setString(2, artifactUpdated.getDescription());
             preparedStatement.setInt(3, artifactUpdated.getValue());
             preparedStatement.setString(4, artifactUpdated.getType());
             preparedStatement.setInt(5, artifactToUpdateId);
-            System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    @Override
+    public int getArtifactsCount() throws SQLException {
+        String query = "SELECT COUNT(*) FROM artifact";
+        PreparedStatement preparedStatement = connectToDB().prepareStatement(query);
+        resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getInt(1);
+        }
+        throw new SQLException();
     }
 }

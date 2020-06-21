@@ -1,9 +1,6 @@
 package service;
 
-import DAO.PropertiesReader;
-import DAO.QuestDAO;
-import DAO.QuestJDBCDAO;
-import DAO.UserDAO;
+import DAO.*;
 import model.SummaryAdmin;
 import model.SummaryMentor;
 import exception.*;
@@ -15,10 +12,12 @@ import java.util.Properties;
 public class SummaryService {
     private UserDAO userDAO;
     private QuestDAO questDAO;
+    private ArtifactDAO artifactDAO;
 
-    public SummaryService(UserDAO userDAO){
+    public SummaryService(UserDAO userDAO) {
         this.userDAO = userDAO;
         this.questDAO = new QuestJDBCDAO();
+        this.artifactDAO = new ArtifactJDBCDAO();
     }
 
     // all methods with DB queries will gradually be moved to specific DAOs, when they are made
@@ -41,7 +40,7 @@ public class SummaryService {
                 getClassesCount(statement),
                 getTeamsCount(statement),
                 getQuestsCount(),
-                getArtifactsCount(statement)
+                getArtifactsCount()
         );
     }
 
@@ -54,7 +53,7 @@ public class SummaryService {
                 getClassesCount(statement),
                 getTeamsCount(statement),
                 getQuestsCount(),
-                getArtifactsCount(statement),
+                getArtifactsCount(),
                 getAdminsCount(),
                 getMentorsCount(),
                 getLevelsCount(statement)
@@ -67,6 +66,10 @@ public class SummaryService {
 
     private int getAdminsCount() throws ReadException {
         return userDAO.getAdminsCount();
+    }
+
+    private int getArtifactsCount() throws SQLException {
+        return artifactDAO.getArtifactsCount();
     }
 
     private int getCodecoolersCount(Statement statement) throws SQLException {
@@ -95,14 +98,6 @@ public class SummaryService {
 
     private int getQuestsCount() throws ConnectionException, ReadException {
         return questDAO.getQuestsCount();
-    }
-
-    private int getArtifactsCount(Statement statement) throws SQLException {
-        ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM artifact; ");
-        if (resultSet.next()) {
-            return resultSet.getInt(1);
-        }
-        throw new SQLException();
     }
 
     private int getLevelsCount(Statement statement) throws SQLException {
