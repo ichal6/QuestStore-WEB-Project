@@ -70,7 +70,7 @@
     </div>
 
     <jsp:include page="../html-common/footer.html" />
-    <script src="../js/input-validator.js"></script>
+<%--    <script src="../js/input-validator.js"></script>--%>
 </body>
 
 </html>
