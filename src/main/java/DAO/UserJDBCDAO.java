@@ -1,7 +1,7 @@
 package DAO;
 
-import Model.CMSUser;
-import Exception.ReadException;
+import model.CMSUser;
+import exception.ReadException;
 
 import java.io.IOException;
 import java.sql.*;

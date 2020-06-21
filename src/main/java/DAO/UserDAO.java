@@ -1,7 +1,7 @@
 package DAO;
 
-import Model.CMSUser;
-import Exception.ReadException;
+import model.CMSUser;
+import exception.ReadException;
 
 import java.sql.Date;
 import java.util.List;

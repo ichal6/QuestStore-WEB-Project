@@ -1,7 +1,7 @@
 package DAO;
 
-import Model.Quest;
-import Exception.*;
+import model.Quest;
+import exception.*;
 
 import java.util.List;
 

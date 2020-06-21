@@ -1,4 +1,4 @@
-<%@ page import="Model.Quest" %>
+<%@ page import="model.Quest" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" onclick="return hideSubMenu()">
 

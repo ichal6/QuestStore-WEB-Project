@@ -1,4 +1,4 @@
-<%@ page import="Model.Quest" %>
+<%@ page import="model.Quest" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 

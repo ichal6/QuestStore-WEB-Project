@@ -1,6 +1,6 @@
 package DAO;
 
-import Model.Artifact;
+import model.Artifact;
 
 import java.io.IOException;
 import java.sql.*;
