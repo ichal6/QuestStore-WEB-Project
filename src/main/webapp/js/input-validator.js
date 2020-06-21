@@ -8,8 +8,8 @@ const submitBtn = document.querySelector(".submit-button");
 let correctName = true;
 let correctEmail = true;
 
-function switchButton(){
-    var button = document.getElementById('update');
+function switchButton(id){
+    var button = document.getElementById(id);
     if (correctName && correctEmail) {
         console.log("enabled")
         button.disabled = false;
@@ -32,7 +32,7 @@ function emailValidator() {
         email_paragraph.classList.add("hidden");
         correctEmail = true;
     }
-    switchButton();
+    switchButton("btn-update");
 }
 function passwordValidator() {
     var passwFormat = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
@@ -66,7 +66,7 @@ function nameValidator(){
         correctName = false;
     }
     displayWarning(validName);
-    switchButton();
+    switchButton("btn-update");
 }
 
 

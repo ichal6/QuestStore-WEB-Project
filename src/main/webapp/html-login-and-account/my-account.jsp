@@ -39,7 +39,7 @@
                     </div>
                     <a href="#"> <img src="../assets/icons/change_picture.svg" alt="change photo">Change picture</a>
                     <p id="role-content">Role: ${SessionManager.getActualUser().getRole()}</p>
-                    <button type="submit" id="update">Update</button>
+                    <button type="submit" id="btn-update">Update</button>
                 </div>
                 </form>
             </div>
