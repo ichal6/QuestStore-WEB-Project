@@ -29,7 +29,7 @@
                 <input type="text" id="artifacts-name" value="<%=artifact.getName()%>" name="artifact-name">
                 <label for="artifacts-descripton">Description*:</label>
                 <textarea id="artifacts-descripton"
-                          name="artifact-description"><%=artifact.getDescription()%>></textarea>
+                          name="artifact-description"><%=artifact.getDescription()%></textarea>
                 <div class="proporties-section">
                     <div class="picture">
                         <p>Picture: </p>

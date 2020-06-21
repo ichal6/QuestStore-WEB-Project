@@ -17,6 +17,8 @@ public interface UserDAO {
 
     void deleteUser(int ID) throws ReadException;
 
+    void changeUserPassword(int userId, String newPassword) throws ReadException;
+
     List<CMSUser> getAllUsers() throws ReadException;
 
     List<CMSUser> getAllAdmins() throws ReadException;

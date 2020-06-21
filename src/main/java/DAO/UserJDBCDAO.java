@@ -206,6 +206,22 @@ public class UserJDBCDAO implements UserDAO {
         throw new ReadException("Problem with data in database");
     }
 
+    public void changeUserPassword(int userId, String newPassword) throws ReadException {
+
+        String query = "UPDATE cms_user SET password = ? WHERE cms_user_id = ?";
+        try (Connection con = DriverManager.getConnection(DBUrl, this.DBUser, this.DBPassword);
+             PreparedStatement pst = con.prepareStatement(query))
+        {
+            pst.setString(1, newPassword);
+            pst.setInt(2, userId);
+            pst.executeUpdate();
+
+        } catch (SQLException ex) {
+            throw new ReadException("You cannot update user");
+        }
+
+    }
+
     private List<CMSUser> fillListOfUsers(ResultSet rs) throws ReadException {
         dicOfUsers.clear();
         try {
