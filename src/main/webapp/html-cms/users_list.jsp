@@ -36,29 +36,29 @@
                     <div class="name-div">
                         <span>Name:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="">
-                            <img src="../assets/img/arrow-down.svg" alt="">
+                            <a href="/user-list?type=${type}&sortBy=name&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                            <a href="/user-list?type=${type}&sortBy=name&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                         </div>
                     </div>
                     <div class="email-div">
                         <span>Email:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="">
-                            <img src="../assets/img/arrow-down.svg" alt="">
+                            <a href="/user-list?type=${type}&sortBy=email&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                            <a href="/user-list?type=${type}&sortBy=email&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                         </div>
                     </div>
                     <div class="city-div">
                         <span>City:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="">
-                            <img src="../assets/img/arrow-down.svg" alt="">
+                            <a href="/user-list?type=${type}&sortBy=city&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                            <a href="/user-list?type=${type}&sortBy=city&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                         </div>
                     </div>
                     <div class="date-of-adding-div">
                         <span>Date of adding:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="">
-                            <img src="../assets/img/arrow-down.svg" alt="">
+                            <a href="/user-list?type=${type}&sortBy=date&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                            <a href="/user-list?type=${type}&sortBy=date&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                         </div>
                     </div>
                     <div class="actions-div">

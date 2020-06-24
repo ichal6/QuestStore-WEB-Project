@@ -40,6 +40,28 @@ public class UserListController extends HttpServlet {
         Map<String, String[]> parameters = req.getParameterMap();
         String type = parameters.get("type")[0];
 
+        String sortBy = null;
+        if(parameters.containsKey("sortBy")){
+            sortBy = parameters.get("sortBy")[0];
+        }
+        
+        boolean order = false;
+        if(parameters.containsKey("order")){
+            if(parameters.get("order")[0].equals("ASC")){
+                order = true;
+            }else{
+                order = false;
+            }
+        }
+//     ***Print parameters***
+//        System.out.println("\n\n");
+//        for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
+//            System.out.print(entry.getKey() + " : ");
+//            for(String value: entry.getValue()){
+//                System.out.print(value + " ");
+//            }
+//        }
+
         try {
             if(type.equals("admin")){
                 allUsers = dao.getAllAdmins();
@@ -49,6 +71,12 @@ public class UserListController extends HttpServlet {
         } catch (ReadException ex) {
             throw new ServletException(ex);
         }
+
+        if(sortBy != null){
+            TypeColumn typeColumn = TypeColumn.returnType(sortBy);
+            allUsers = sort(typeColumn, order);
+        }
+
 
         req.setAttribute("allUsers", allUsers);
         req.setAttribute("type", type);
