@@ -1,4 +1,4 @@
-package service;
+package sort;
 
 import controller.users.TypeColumn;
 import exception.NoComparatorException;

@@ -16,9 +16,9 @@ import DAO.UserJDBCDAO;
 import exception.NoComparatorException;
 import exception.ReadException;
 import model.CMSUser;
-import service.ComparatorUser;
-import service.Comparing;
-import service.SortService;
+import sort.ComparatorUser;
+import sort.Comparing;
+import sort.SortService;
 
 
 @WebServlet(name = "UsersList", urlPatterns = "/user-list")
