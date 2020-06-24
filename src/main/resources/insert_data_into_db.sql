@@ -1,17 +1,17 @@
 INSERT INTO cms_user
-VALUES (default,'Michal Kuk','kuk.michal3@gmail.com','admin123','Krakow',TO_DATE('2020-01-01','YYYY-MM-DD'),'../assets/img/admins-images/penelope-cruz.svg','Y');
+VALUES (default,'Michal Kuk','kuk.michal3@gmail.com','admin123','Warsaw',TO_DATE('2009-02-14','YYYY-MM-DD'),'../assets/img/admins-images/penelope-cruz.svg','Y');
 
 INSERT INTO cms_user
-VALUES (default,'Jan Truskolaski','jtruskolaski@gmail.com','admin123','Krakow',TO_DATE('2020-01-01','YYYY-MM-DD'),'../assets/img/admins-images/penelope-cruz.svg','Y');
+VALUES (default,'Jan Truskolaski','jtruskolaski@gmail.com','admin123','Krakow',TO_DATE('2020-05-09','YYYY-MM-DD'),'../assets/img/admins-images/penelope-cruz.svg','Y');
 
 INSERT INTO cms_user
-VALUES (default,'Andrzej Szampan','aszampan@gmail.com','admin123','Krakow',TO_DATE('2020-01-01','YYYY-MM-DD'),'../assets/img/admins-images/penelope-cruz.svg','Y');
+VALUES (default,'Andrzej Szampan','aszampan@gmail.com','admin123','Krakow',TO_DATE('2019-05-02','YYYY-MM-DD'),'../assets/img/admins-images/penelope-cruz.svg','Y');
 
 INSERT INTO cms_user
-VALUES (default,'Dominik Nowak','dnowak@gmail.com','admin123','Krakow',TO_DATE('2020-01-01','YYYY-MM-DD'),'../assets/img/admins-images/penelope-cruz.svg','N');
+VALUES (default,'Dominik Nowak','dnowak@gmail.com','admin123','Warsaw',TO_DATE('2020-01-23','YYYY-MM-DD'),'../assets/img/admins-images/penelope-cruz.svg','N');
 
 INSERT INTO cms_user
-VALUES (default,'Paweł Suryk','psuryk@gmail.com','admin123','Krakow',TO_DATE('2020-01-01','YYYY-MM-DD'),'../assets/img/admins-images/penelope-cruz.svg','N');
+VALUES (default,'Paweł Suryk','psuryk@gmail.com','admin123','Krakow',TO_DATE('2010-07-05','YYYY-MM-DD'),'../assets/img/admins-images/penelope-cruz.svg','N');
 
 
 INSERT INTO team
