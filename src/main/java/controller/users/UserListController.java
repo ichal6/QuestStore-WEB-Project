@@ -9,14 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import DAO.UserJDBCDAO;
+import exception.NoComparatorException;
 import exception.ReadException;
 import model.CMSUser;
+import service.ComparatorUser;
+import service.Comparing;
 import service.SortService;
 
 
@@ -39,6 +40,7 @@ public class UserListController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, String[]> parameters = req.getParameterMap();
         SortService<CMSUser> sortService;
+        Comparing<CMSUser> comparing = new ComparatorUser<>();
         String type = parameters.get("type")[0];
 
 
@@ -74,14 +76,15 @@ public class UserListController extends HttpServlet {
             throw new ServletException(ex);
         }
 
-        sortService = new SortService<>(allUsers);
-
-        if (sortBy != null) {
+        try {
             TypeColumn typeColumn = TypeColumn.returnType(sortBy);
-            allUsers = sortService.sort(typeColumn, order);
+            sortService = new SortService<CMSUser>(allUsers, comparing.getComparator(typeColumn));
+            allUsers = sortService.sort(order);
+        } catch (NoComparatorException e) {
+            e.printStackTrace();
+        } catch (NullPointerException ignored) {
+
         }
-
-
         req.setAttribute("allUsers", allUsers);
         req.setAttribute("type", type);
 
