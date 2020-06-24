@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 import DAO.UserJDBCDAO;
 import exception.ReadException;
 import model.CMSUser;
+import service.SortService;
 
 
 @WebServlet(name = "UsersList", urlPatterns = "/user-list")
@@ -29,8 +30,7 @@ public class UserListController extends HttpServlet {
         super.init();
         try {
             dao = new UserJDBCDAO("src/main/resources/database.properties");
-        }
-        catch(IOException ex){
+        } catch (IOException ex) {
             throw new ServletException(ex);
         }
     }
@@ -38,18 +38,20 @@ public class UserListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, String[]> parameters = req.getParameterMap();
+        SortService<CMSUser> sortService;
         String type = parameters.get("type")[0];
 
+
         String sortBy = null;
-        if(parameters.containsKey("sortBy")){
+        if (parameters.containsKey("sortBy")) {
             sortBy = parameters.get("sortBy")[0];
         }
-        
+
         boolean order = false;
-        if(parameters.containsKey("order")){
-            if(parameters.get("order")[0].equals("ASC")){
+        if (parameters.containsKey("order")) {
+            if (parameters.get("order")[0].equals("ASC")) {
                 order = true;
-            }else{
+            } else {
                 order = false;
             }
         }
@@ -63,18 +65,20 @@ public class UserListController extends HttpServlet {
 //        }
 
         try {
-            if(type.equals("admin")){
+            if (type.equals("admin")) {
                 allUsers = dao.getAllAdmins();
-            }else{
+            } else {
                 allUsers = dao.getAllMentors();
             }
         } catch (ReadException ex) {
             throw new ServletException(ex);
         }
 
-        if(sortBy != null){
+        sortService = new SortService<>(allUsers);
+
+        if (sortBy != null) {
             TypeColumn typeColumn = TypeColumn.returnType(sortBy);
-            allUsers = sort(typeColumn, order);
+            allUsers = sortService.sort(typeColumn, order);
         }
 
 
@@ -86,33 +90,5 @@ public class UserListController extends HttpServlet {
         dispatcher.forward(req, resp);
 
         //resp.sendRedirect("/html-cms/users_list.jsp");
-    }
-
-
-    private List<CMSUser> sort(TypeColumn typeOfColumn, boolean isAscending) throws ServletException{
-        if(allUsers == null){
-            throw new ServletException("The list is empty!");
-        }
-        Comparator<CMSUser> comparator = null;
-        switch(typeOfColumn){
-            case NAME:
-                comparator = Comparator.comparing(CMSUser::getName);
-                break;
-            case EMAIL:
-                comparator = Comparator.comparing(CMSUser::getEmail);
-                break;
-            case CITY:
-                comparator = Comparator.comparing(CMSUser::getCity);
-                break;
-            case DATE:
-                comparator = Comparator.comparing(CMSUser::getDateOfAdding);
-                break;
-            default:
-                return allUsers;
-        }
-        if(!isAscending){
-            comparator = comparator.reversed();
-        }
-        return allUsers.stream().sorted(comparator).collect(Collectors.toList());
     }
 }
