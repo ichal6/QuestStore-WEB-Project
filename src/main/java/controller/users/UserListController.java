@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import DAO.UserJDBCDAO;
 import exception.ReadException;
@@ -56,5 +58,33 @@ public class UserListController extends HttpServlet {
         dispatcher.forward(req, resp);
 
         //resp.sendRedirect("/html-cms/users_list.jsp");
+    }
+
+
+    private List<CMSUser> sort(TypeColumn typeOfColumn, boolean isAscending) throws ServletException{
+        if(allUsers == null){
+            throw new ServletException("The list is empty!");
+        }
+        Comparator<CMSUser> comparator = null;
+        switch(typeOfColumn){
+            case NAME:
+                comparator = Comparator.comparing(CMSUser::getName);
+                break;
+            case EMAIL:
+                comparator = Comparator.comparing(CMSUser::getEmail);
+                break;
+            case CITY:
+                comparator = Comparator.comparing(CMSUser::getCity);
+                break;
+            case DATE:
+                comparator = Comparator.comparing(CMSUser::getDateOfAdding);
+                break;
+            default:
+                return allUsers;
+        }
+        if(!isAscending){
+            comparator = comparator.reversed();
+        }
+        return allUsers.stream().sorted(comparator).collect(Collectors.toList());
     }
 }
