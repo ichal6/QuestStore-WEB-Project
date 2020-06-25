@@ -28,23 +28,6 @@ public class UserService {
         }
     }
 
-    private List<CMSUser> sortList(List<CMSUser> allUsers, boolean order, String sortBy) throws NoComparatorException {
-        Comparing<CMSUser> comparing = new ComparatorUser<>();
-        TypeColumn typeColumn = TypeColumn.returnType(sortBy);
-        Comparator<CMSUser> comparator = comparing.getComparator(typeColumn);
-        SortItems<CMSUser> sortService = new SortItems<CMSUser>(allUsers, comparator);
-        return sortService.sort(order);
-    }
-
-    private List<CMSUser> getListFromDatabase(String type) throws ReadException {
-        if (type.equals("admin")) {
-            allUsers = dao.getAllAdmins();
-        } else {
-            allUsers = dao.getAllMentors();
-        }
-        return allUsers;
-    }
-
     public List<CMSUser> getAllUsers(String userType, String sortBy, Boolean order) throws ReadException{
 
         allUsers = getListFromDatabase(userType);
@@ -57,5 +40,22 @@ public class UserService {
             }
         }
         return allUsers;
+    }
+
+    private List<CMSUser> getListFromDatabase(String type) throws ReadException {
+        if (type.equals("admin")) {
+            allUsers = dao.getAllAdmins();
+        } else {
+            allUsers = dao.getAllMentors();
+        }
+        return allUsers;
+    }
+
+    private List<CMSUser> sortList(List<CMSUser> allUsers, boolean order, String sortBy) throws NoComparatorException {
+        Comparing<CMSUser> comparing = new ComparatorUser<>();
+        TypeColumn typeColumn = TypeColumn.returnType(sortBy);
+        Comparator<CMSUser> comparator = comparing.getComparator(typeColumn);
+        SortItems<CMSUser> sortService = new SortItems<>(allUsers, comparator);
+        return sortService.sort(order);
     }
 }
