@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -39,33 +40,53 @@ public class UserListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, String[]> parameters = req.getParameterMap();
-        SortService<CMSUser> sortService;
-        Comparing<CMSUser> comparing = new ComparatorUser<>();
         String type = parameters.get("type")[0];
 
+        allUsers = getListFromDatabase(type);
 
-        String sortBy = null;
-        if (parameters.containsKey("sortBy")) {
-            sortBy = parameters.get("sortBy")[0];
-        }
-
-        boolean order = false;
-        if (parameters.containsKey("order")) {
-            if (parameters.get("order")[0].equals("ASC")) {
-                order = true;
-            } else {
-                order = false;
+        Boolean order = getOrder(parameters);
+        String sortBy = getSortBy(parameters);
+        if(order != null && sortBy != null) {
+            try {
+                allUsers = sortList(allUsers, order, sortBy);
+            } catch (NoComparatorException e) {
+                //here should be the message for user, that the user cannot sorting the table
+                e.printStackTrace();
             }
         }
-//     ***Print parameters***
-//        System.out.println("\n\n");
-//        for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
-//            System.out.print(entry.getKey() + " : ");
-//            for(String value: entry.getValue()){
-//                System.out.print(value + " ");
-//            }
-//        }
 
+        req.setAttribute("allUsers", allUsers);
+        req.setAttribute("type", type);
+
+        RequestDispatcher dispatcher
+                = req.getRequestDispatcher("/html-cms/users_list.jsp");
+        dispatcher.forward(req, resp);
+
+    }
+
+    private Boolean getOrder(Map<String, String[]> parameters){
+        if (parameters.containsKey("order")) {
+             return parameters.get("order")[0].equals("ASC");
+        }
+        return null;
+    }
+
+    private String getSortBy(Map<String, String[]> parameters){
+        if (parameters.containsKey("sortBy")) {
+            return parameters.get("sortBy")[0];
+        }
+        return null;
+    }
+
+    private List<CMSUser> sortList(List<CMSUser> allUsers, boolean order, String sortBy) throws NoComparatorException{
+        Comparing<CMSUser> comparing = new ComparatorUser<>();
+        TypeColumn typeColumn = TypeColumn.returnType(sortBy);
+        Comparator<CMSUser> comparator = comparing.getComparator(typeColumn);
+        SortService<CMSUser> sortService = new SortService<CMSUser>(allUsers, comparator);
+        return sortService.sort(order);
+    }
+
+    private List<CMSUser> getListFromDatabase(String type) throws ServletException {
         try {
             if (type.equals("admin")) {
                 allUsers = dao.getAllAdmins();
@@ -75,23 +96,6 @@ public class UserListController extends HttpServlet {
         } catch (ReadException ex) {
             throw new ServletException(ex);
         }
-
-        try {
-            TypeColumn typeColumn = TypeColumn.returnType(sortBy);
-            sortService = new SortService<CMSUser>(allUsers, comparing.getComparator(typeColumn));
-            allUsers = sortService.sort(order);
-        } catch (NoComparatorException e) {
-            e.printStackTrace();
-        } catch (NullPointerException ignored) {
-
-        }
-        req.setAttribute("allUsers", allUsers);
-        req.setAttribute("type", type);
-
-        RequestDispatcher dispatcher
-                = req.getRequestDispatcher("/html-cms/users_list.jsp");
-        dispatcher.forward(req, resp);
-
-        //resp.sendRedirect("/html-cms/users_list.jsp");
+        return allUsers;
     }
 }
