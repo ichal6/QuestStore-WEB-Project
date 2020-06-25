@@ -8,7 +8,7 @@
 <body>
 
 <%
-    String role = SessionManager.getActualUser().getRole();
+    String role = SessionManager.getActualUser(request).getRole();
 %>
 
 <aside>

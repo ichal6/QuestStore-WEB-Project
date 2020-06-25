@@ -3,27 +3,40 @@ package session;
 import model.CMSUser;
 import exception.SessionException;
 
-public class SessionManager {
-    private static CMSUser actualUser;
-    private static boolean isLogin;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
-    public static void setActualUser(CMSUser actualUser) {
-        SessionManager.actualUser = actualUser;
-        isLogin = true;
+public class SessionManager {
+    private static HttpSession session;
+
+    public static void setSession(HttpSession session, CMSUser user){
+        SessionManager.session = session;
+        session.setAttribute("actualUser", user);
     }
 
-    public static CMSUser getActualUser() throws SessionException {
+    public static CMSUser getActualUser(HttpServletRequest request) throws SessionException {
         //Here we should throw our exception (for example NoSessionException) when actualUser equals null.
         // If user try bypass login page , when we should display error page ex. HTTP 403 forbidden.
-        if(isLogin){
-            return actualUser;
+        session = request.getSession(false);
+
+        if(session != null){
+            return (CMSUser) session.getAttribute("actualUser");
+        }else{
+            throw new SessionException("Access denied. You are not log in.");
+        }
+    }
+
+    public static CMSUser getActualUser(HttpSession session) throws SessionException{
+        if(session != null){
+            return (CMSUser) session.getAttribute("actualUser");
         }else{
             throw new SessionException("Access denied. You are not log in.");
         }
     }
 
     public static void logout(){
-        isLogin = false;
-        actualUser = null;
+        if (session != null) {
+            session.invalidate();
+        }
     }
 }

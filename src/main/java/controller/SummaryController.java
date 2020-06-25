@@ -35,7 +35,7 @@ public class SummaryController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            boolean isAdmin = SessionManager.getActualUser().isAdmin();
+            boolean isAdmin = SessionManager.getActualUser(req).isAdmin();
             if (isAdmin) {
                 forwardToDashboardAdmin(req, resp);
             } else {
