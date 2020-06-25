@@ -4,11 +4,11 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SortService<T> {
+public class SortItems<T> {
     private List<T> allItems;
     private Comparator<T> comparator;
 
-    public SortService(List<T> allItems, Comparator<T> comparator){
+    public SortItems(List<T> allItems, Comparator<T> comparator){
         this.allItems = allItems;
         this.comparator = comparator;
     }

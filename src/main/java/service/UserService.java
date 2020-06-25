@@ -9,7 +9,7 @@ import exception.ReadException;
 import model.CMSUser;
 import sort.ComparatorUser;
 import sort.Comparing;
-import sort.SortService;
+import sort.SortItems;
 
 import java.io.IOException;
 import java.util.Comparator;
@@ -32,7 +32,7 @@ public class UserService {
         Comparing<CMSUser> comparing = new ComparatorUser<>();
         TypeColumn typeColumn = TypeColumn.returnType(sortBy);
         Comparator<CMSUser> comparator = comparing.getComparator(typeColumn);
-        SortService<CMSUser> sortService = new SortService<CMSUser>(allUsers, comparator);
+        SortItems<CMSUser> sortService = new SortItems<CMSUser>(allUsers, comparator);
         return sortService.sort(order);
     }
 

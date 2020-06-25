@@ -1,7 +1,5 @@
 package controller.users;
 
-import DAO.UserDAO;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,18 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import DAO.UserJDBCDAO;
-import exception.NoComparatorException;
 import exception.ReadException;
 import model.CMSUser;
 import service.UserService;
-import sort.ComparatorUser;
-import sort.Comparing;
-import sort.SortService;
 
 
 @WebServlet(name = "UsersList", urlPatterns = "/user-list")
