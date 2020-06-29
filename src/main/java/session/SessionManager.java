@@ -12,6 +12,8 @@ public class SessionManager {
     public static void setSession(HttpSession session, CMSUser user){
         SessionManager.session = session;
         session.setAttribute("actualUser", user);
+        //Set session timeout in seconds:
+        //session.setMaxInactiveInterval(10);
     }
 
     public static CMSUser getActualUser(HttpServletRequest request) throws SessionException {
