@@ -61,8 +61,8 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>9.4.14.v20181114</version>
                 <configuration>
-                    <reload>automatic</reload>
-                    <scanIntervalSeconds>1</scanIntervalSeconds>
+                    <reload>manual</reload>
+<!--                    <scanIntervalSeconds>1</scanIntervalSeconds>-->
 <!--                    <webAppConfig>-->
 <!--                        <contextPath>-->
 <!--                            /students-->

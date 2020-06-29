@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "CMSUserLogin", urlPatterns = "/CMSUserLogin")
@@ -44,7 +45,9 @@ public class CMSUserLogin extends HttpServlet {
             } catch (ReadException e) {
                 throw new ServletException(e);
             }
-            SessionManager.setActualUser(user);
+            HttpSession session = request.getSession(true);
+            SessionManager.setSession(session, user);
+            //SessionManager.setActualUser(user);
             response.sendRedirect("/dashboard");
         }
         else{
