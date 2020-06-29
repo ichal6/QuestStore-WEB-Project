@@ -1,5 +1,6 @@
 package DAO;
 
+import exception.ConnectionException;
 import model.CMSUser;
 import exception.ReadException;
 
@@ -16,6 +17,19 @@ public class UserJDBCDAO implements UserDAO {
 
     public UserJDBCDAO(String path) throws IOException {
         Properties prop = PropertiesReader.readProperties(path);
+        DBUrl = prop.getProperty("db.url");
+        DBUser = prop.getProperty("db.user");
+        DBPassword = prop.getProperty("db.passwd");
+        dicOfUsers = new ArrayList<>();
+    }
+
+    public UserJDBCDAO() throws ConnectionException {
+        Properties prop = null;
+        try {
+            prop = PropertiesReader.readProperties("src/main/resources/database.properties");
+        } catch (IOException e) {
+            throw new ConnectionException(e.getMessage());
+        }
         DBUrl = prop.getProperty("db.url");
         DBUser = prop.getProperty("db.user");
         DBPassword = prop.getProperty("db.passwd");
