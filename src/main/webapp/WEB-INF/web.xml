@@ -5,7 +5,7 @@
          version="4.0">
 
     <session-config>
-        <!--Time in minutes-->
+        <!--Timeout session in minutes. This time measure from last "click" on page-->
         <session-timeout>40</session-timeout>
     </session-config>
 <!--    <error-page>-->
