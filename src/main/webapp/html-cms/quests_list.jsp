@@ -32,6 +32,7 @@
                     <p>Items per page</p>
                 </div>
             </div>
+            <br>${message}
             <div class="list-of-quests">
                 <div class="header-for-list">
                     <span></span>

@@ -1,6 +1,6 @@
 package exception;
 
-public class ConnectionException extends Exception {
+public class ConnectionException extends RuntimeException {
     public ConnectionException(String errorMessage) {
         super(errorMessage);
     }

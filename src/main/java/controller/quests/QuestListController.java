@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -28,10 +29,15 @@ public class QuestListController extends HttpServlet {
         try {
             List<Quest> questsList = questDAO.getAllQuests();
             request.setAttribute("questsList", questsList);
+            if (questsList.size() == 0) {
+                request.setAttribute("message", "There are no quests available");
+            }
             RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/quests_list.jsp");
             dispatcher.forward(request, response);
-        } catch (ConnectionException | ReadException e) {
-            throw new ServletException(e);
+        } catch (ReadException e) {
+            request.setAttribute("error_message", e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/error_page.jsp");
+            dispatcher.forward(request, response);
         }
     }
 }
