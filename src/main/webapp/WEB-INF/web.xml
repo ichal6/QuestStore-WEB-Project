@@ -8,18 +8,11 @@
         <!--Timeout session in minutes. This time measure from last "click" on page-->
         <session-timeout>40</session-timeout>
     </session-config>
-<!--    <error-page>-->
-<!--        <exception-type>java.lang.Throwable</exception-type>-->
-<!--        <location>/errorPage</location>-->
-<!--    </error-page>-->
-    <filter>
-        <filter-name>GeneralFilter</filter-name>
-        <filter-class>filter.GeneralFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>GeneralFilter</filter-name>
-        <url-pattern>/index.jsp</url-pattern>
-    </filter-mapping>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/errorPage</location>
+    </error-page>
+
 
     <filter>
         <filter-name>AuthenticationFilter</filter-name>
@@ -27,6 +20,10 @@
     </filter>
     <filter-mapping>
         <filter-name>AuthenticationFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/dashboard</url-pattern>
+        <url-pattern>/user-list/*</url-pattern>
+        <url-pattern>/levels/*</url-pattern>
+        <url-pattern>/quests/*</url-pattern>
+        <url-pattern>/artifacts/*</url-pattern>
     </filter-mapping>
 </web-app>

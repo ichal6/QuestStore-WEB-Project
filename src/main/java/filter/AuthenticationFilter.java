@@ -26,8 +26,9 @@ public class AuthenticationFilter implements Filter {
 
         try {
             CMSUser user = SessionManager.getActualUser(request);
-        } catch (NullPointerException | SessionException e) {
-            e.printStackTrace();
+
+        } catch (SessionException e) {
+            //e.printStackTrace();
             response.sendRedirect("/logout");
         }
 
