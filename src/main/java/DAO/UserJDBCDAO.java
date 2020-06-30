@@ -135,7 +135,7 @@ public class UserJDBCDAO implements UserDAO {
             ResultSet rs = pst.executeQuery();
             return fillListOfUsers(rs);
         } catch (SQLException ex) {
-            throw new ReadException("You cannot access to database.");
+            throw new ReadException("You cannot access to database.\n" + ex);
         }
     }
 
@@ -146,7 +146,7 @@ public class UserJDBCDAO implements UserDAO {
             ResultSet rs = pst.executeQuery();
             return fillListOfUsers(rs);
         } catch (SQLException ex) {
-            throw new ReadException("You cannot access to database.");
+            throw new ReadException("You cannot access to database.\n " + ex);
         }
     }
 
@@ -159,7 +159,7 @@ public class UserJDBCDAO implements UserDAO {
             ResultSet rs = pst.executeQuery();
             return createNewUser(rs);
         } catch (SQLException ex) {
-            throw new ReadException("You cannot access to database.");
+            throw new ReadException("You cannot access to database. " + ex);
         }
     }
 
@@ -171,7 +171,7 @@ public class UserJDBCDAO implements UserDAO {
             ResultSet rs = pst.executeQuery();
             return createNewUser(rs);
         } catch (SQLException ex) {
-            throw new ReadException("You cannot access to database.");
+            throw new ReadException("You cannot access to database.\n " + ex);
         }
     }
 
@@ -188,7 +188,7 @@ public class UserJDBCDAO implements UserDAO {
                 return false;
             }
         } catch (SQLException ex) {
-            throw new ReadException("You cannot access to database.");
+            throw new ReadException("You cannot access to database.\n " + ex);
         }
     }
 
@@ -201,9 +201,9 @@ public class UserJDBCDAO implements UserDAO {
                 return rs.getInt(1);
             }
         } catch (SQLException ex) {
-            throw new ReadException("You cannot access to database.");
+            throw new ReadException("You cannot access to database. \n" + ex);
         }
-        throw new ReadException("Problem with data in database");
+        throw new ReadException("Problem with data in database.");
     }
 
     @Override
@@ -215,9 +215,9 @@ public class UserJDBCDAO implements UserDAO {
                 return rs.getInt(1);
             }
         } catch (SQLException ex) {
-            throw new ReadException("You cannot access to database.");
+            throw new ReadException("You cannot access to database.\n " + ex);
         }
-        throw new ReadException("Problem with data in database");
+        throw new ReadException("Problem with data in database.");
     }
 
     public void changeUserPassword(int userId, String newPassword) throws ReadException {
@@ -231,7 +231,7 @@ public class UserJDBCDAO implements UserDAO {
             pst.executeUpdate();
 
         } catch (SQLException ex) {
-            throw new ReadException("You cannot update user");
+            throw new ReadException("You cannot update user. \n" + ex);
         }
 
     }
@@ -254,7 +254,7 @@ public class UserJDBCDAO implements UserDAO {
                 dicOfUsers.add(user);
             }
         } catch (SQLException ex) {
-            throw new ReadException("You cannot import list of users.");
+            throw new ReadException("You cannot import list of users. " + ex);
         }
         return dicOfUsers;
     }
@@ -297,7 +297,7 @@ public class UserJDBCDAO implements UserDAO {
                 return false;
             }
         } catch (SQLException ex) {
-            throw new ReadException("You cannot access to database.");
+            throw new ReadException("You cannot access to database.\n " + ex);
         }
     }
 }

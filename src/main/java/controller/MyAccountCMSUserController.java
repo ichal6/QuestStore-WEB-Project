@@ -26,8 +26,7 @@ public class MyAccountCMSUserController extends HttpServlet {
         super.init();
         try {
             dao = new UserJDBCDAO("src/main/resources/database.properties");
-            userToEdit = SessionManager.getActualUser();
-        } catch (IOException | SessionException ex) {
+        } catch (IOException ex) {
             throw new ServletException(ex);
         }
     }
@@ -41,6 +40,12 @@ public class MyAccountCMSUserController extends HttpServlet {
 
         if (name == null || email == null) {
             response.sendRedirect("/dashboard");
+        }
+
+        try {
+            userToEdit = SessionManager.getActualUser(request);
+        } catch (SessionException e) {
+            throw new ServletException(e);
         }
 
         if ("personal-information".equals(action)) {
@@ -67,6 +72,13 @@ public class MyAccountCMSUserController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            userToEdit = (CMSUser) SessionManager.getActualUser(request);
+        } catch (SessionException e) {
+            throw new ServletException(e);
+        }
+        request.setAttribute("userToEdit", userToEdit);
+
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("/html-login-and-account/my-account.jsp");
         dispatcher.forward(request, response);
