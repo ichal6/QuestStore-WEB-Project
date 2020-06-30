@@ -21,11 +21,13 @@ public class SessionManager {
         // If user try bypass login page , when we should display error page ex. HTTP 403 forbidden.
         session = request.getSession(false);
 
-        if(session != null || session.getAttribute("actualUser") != null){
-            return (CMSUser) session.getAttribute("actualUser");
-        }else{
-            throw new SessionException("Access denied. You are not log in.");
+        if (session != null) {
+            if (session.getAttribute("actualUser") != null) {
+                return (CMSUser) session.getAttribute("actualUser");
+            }
         }
+        throw new SessionException("Access denied. You are not log in.");
+
     }
 
     public static void logout(){
