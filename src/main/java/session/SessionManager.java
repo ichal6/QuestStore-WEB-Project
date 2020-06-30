@@ -28,14 +28,6 @@ public class SessionManager {
         }
     }
 
-    public static CMSUser getActualUser(HttpSession session) throws SessionException{
-        if(session != null){
-            return (CMSUser) session.getAttribute("actualUser");
-        }else{
-            throw new SessionException("Access denied. You are not log in.");
-        }
-    }
-
     public static void logout(){
         if (session != null) {
             session.invalidate();
