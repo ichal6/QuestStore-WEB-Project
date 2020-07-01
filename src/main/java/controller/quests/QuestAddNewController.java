@@ -4,6 +4,7 @@ import DAO.QuestDAO;
 import DAO.QuestJDBCDAO;
 import model.Quest;
 import exception.*;
+import validation.Validator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,14 +19,19 @@ import java.util.Random;
 
 import static java.lang.Integer.parseInt;
 
+// czy nie wydzielić servisu???
+// oddzielna metoda do validowania i setowania atrybutów?
+
 @WebServlet(name = "QuestAddNewController", urlPatterns = "quests/add")
 public class QuestAddNewController extends HttpServlet {
     private QuestDAO questDAO;
+    private Validator validator;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        questDAO = new QuestJDBCDAO();
+        this.questDAO = new QuestJDBCDAO();
+        this.validator = new Validator();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,13 +44,20 @@ public class QuestAddNewController extends HttpServlet {
             Quest quest = extractQuestFromHTTPRequest(request);
             questDAO.insertQuest(quest);
             response.sendRedirect("/quests");
-        } catch (ConnectionException | ReadException e) {
-            throw new ServletException(e);
+        } catch (NameFormatException e) {
+            request.setAttribute("name_validation_message", e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/quests_add_new.jsp");
+            dispatcher.forward(request, response);
+        } catch (ReadException e) {
+            request.setAttribute("error_message", e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/errorPage");
+            dispatcher.forward(request, response);
         }
     }
 
-    private Quest extractQuestFromHTTPRequest(HttpServletRequest request) {
+    private Quest extractQuestFromHTTPRequest(HttpServletRequest request) throws NameFormatException {
         String name = request.getParameter("quest-name");
+        validator.validateName(name, 3, 50);
         String description = request.getParameter("quest-description");
         int value = Integer.parseInt(request.getParameter("quest-value"));
         String type = request.getParameter("quest-type");

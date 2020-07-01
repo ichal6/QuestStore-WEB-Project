@@ -23,6 +23,7 @@
                     <h2>Basic details</h2>
                     <label for="quest-name">Name*:</label>
                     <input type="text" id="quest-name" name="quest-name">
+                    <p class="validation-message">${name_validation_message}</p>
                     <label for="quest-description">Description*:</label>
                     <textarea id="quest-description" name="quest-description"></textarea>
                     <div class="properties-section">
