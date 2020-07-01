@@ -28,12 +28,18 @@ public class UserService {
         }
     }
 
-    private List<CMSUser> sortList(List<CMSUser> allUsers, boolean order, String sortBy) throws NoComparatorException {
-        Comparing<CMSUser> comparing = new ComparatorUser();
-        TypeColumn typeColumn = TypeColumn.returnType(sortBy);
-        Comparator<CMSUser> comparator = comparing.getComparator(typeColumn);
-        SortItems<CMSUser> sortItems = new SortItems<>(allUsers, comparator);
-        return sortItems.sort(order);
+    public List<CMSUser> getAllUsers(String userType, String sortBy, Boolean order) throws ReadException {
+
+        allUsers = getListFromDatabase(userType);
+        if (order != null && sortBy != null) {
+            try {
+                allUsers = sortList(allUsers, order, sortBy);
+            } catch (NoComparatorException e) {
+                //here should be the message for user, that the user cannot sorting the table
+                e.printStackTrace();
+            }
+        }
+        return allUsers;
     }
 
     private List<CMSUser> getListFromDatabase(String type) throws ReadException {
@@ -45,17 +51,12 @@ public class UserService {
         return allUsers;
     }
 
-    public List<CMSUser> getAllUsers(String userType, String sortBy, Boolean order) throws ReadException{
-
-        allUsers = getListFromDatabase(userType);
-        if(order != null && sortBy != null) {
-            try {
-                allUsers = sortList(allUsers, order, sortBy);
-            } catch (NoComparatorException e) {
-                //here should be the message for user, that the user cannot sorting the table
-                e.printStackTrace();
-            }
-        }
-        return allUsers;
+    private List<CMSUser> sortList(List<CMSUser> allUsers, boolean order, String sortBy) throws NoComparatorException {
+        Comparing<CMSUser> comparing = new ComparatorUser();
+        TypeColumn typeColumn = TypeColumn.returnType(sortBy);
+        Comparator<CMSUser> comparator = comparing.getComparator(typeColumn);
+        SortItems<CMSUser> sortItems = new SortItems<>(allUsers, comparator);
+        return sortItems.sort(order);
     }
+
 }
