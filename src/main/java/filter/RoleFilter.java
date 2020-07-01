@@ -1,6 +1,5 @@
 package filter;
 
-import exception.SessionException;
 import model.CMSUser;
 
 import javax.servlet.*;
@@ -10,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-public class AuthenticationFilter implements Filter {
+public class RoleFilter implements Filter {
 
     private ServletContext context;
 
@@ -25,12 +24,14 @@ public class AuthenticationFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("user") == null) {
-            this.context.log("Unauthorized access request");
-            response.sendRedirect(request.getContextPath() + "/logout");
-        } else {
-            filterChain.doFilter(request, response);
+        CMSUser user = (CMSUser) session.getAttribute("user");
+
+        if(!user.isAdmin()){
+            this.context.log("Unauthorized access request. User with Mentor access tried to access Admin features");
+            response.sendRedirect("/dashboard");
         }
+
+        filterChain.doFilter(request, response);
     }
 
     @Override
@@ -38,3 +39,4 @@ public class AuthenticationFilter implements Filter {
 
     }
 }
+
