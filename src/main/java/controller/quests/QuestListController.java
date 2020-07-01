@@ -36,7 +36,7 @@ public class QuestListController extends HttpServlet {
             dispatcher.forward(request, response);
         } catch (ReadException e) {
             request.setAttribute("error_message", e.getMessage());
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/error_page.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/errorPage");
             dispatcher.forward(request, response);
         }
     }
