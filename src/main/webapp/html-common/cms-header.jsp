@@ -1,4 +1,3 @@
-<%@ page import="session.SessionManager" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -8,19 +7,14 @@
 </head>
 <body>
 
-<%
-    String name = SessionManager.getActualUser(request).getName();
-    String role = SessionManager.getActualUser(request).getRole();
-%>
-
 <div class="header">
     <div class="left-position">
         <a href="/dashboard"> <img src="../assets/icons/codecool_logo_color.png" alt="logo" class="logo"></a>
     </div>
     <div class="right-position">
-        <a id="name"><%=name%></a>
+        <a id="name">${sessionScope['user'].getName()}</a>
         <a>&nbsp;&nbsp;|&nbsp;&nbsp;</a>
-        <a id="role"><%=role%></a>
+        <a id="role">${sessionScope['user'].getRole()}</a>
         <img class="right-position image" src="../assets/icons/user_icon.png" alt="user icon" onmouseover="return displayDropdown()">
         <div id="arrow-up">
         </div>

@@ -1,7 +1,7 @@
 package filter;
+
 import exception.SessionException;
 import model.CMSUser;
-import session.SessionManager;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -24,20 +24,13 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        try {
-            CMSUser user = SessionManager.getActualUser(request);
-
-        } catch (SessionException e) {
-            //e.printStackTrace();
-            response.sendRedirect("/logout");
-        }
-
-//        if (session == null || session.getAttribute("actualUser") == null) {
-//            this.context.log("Unauthorized access request");
-//            response.sendRedirect(request.getContextPath() + "index.jsp");
-//        } else {
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("user") == null) {
+            this.context.log("Unauthorized access request");
+            response.sendRedirect(request.getContextPath() + "/CMSUserLogin");
+        } else {
             filterChain.doFilter(request, response);
-
+        }
     }
 
     @Override
