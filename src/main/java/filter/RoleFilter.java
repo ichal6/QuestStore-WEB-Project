@@ -6,11 +6,10 @@ import session.SessionManager;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-public class GeneralFilter implements Filter {
+public class RoleFilter implements Filter {
 
     private ServletContext context;
 
@@ -24,19 +23,17 @@ public class GeneralFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-//        try {
-//            CMSUser user = SessionManager.getActualUser(request);
-//        } catch (NullPointerException | SessionException e) {
-//            e.printStackTrace();
-//            response.sendRedirect("/logout");
-//        }
+        CMSUser user = (CMSUser) request.getAttribute("user");
 
-//        if (session == null || session.getAttribute("actualUser") == null) {
-//            this.context.log("Unauthorized access request");
-//            response.sendRedirect(request.getContextPath() + "index.jsp");
-//        } else {
-//        filterChain.doFilter(request, response);
+        if(user == null){
+            response.sendRedirect("/logout");
+        }
+        
+        if(!user.isAdmin()){
+            response.sendRedirect("/dashboard");
+        }
 
+        filterChain.doFilter(request, response);
     }
 
     @Override

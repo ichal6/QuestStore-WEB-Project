@@ -6,17 +6,13 @@ import session.SessionManager;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
 public class AuthenticationFilter implements Filter {
 
-    private ServletContext context;
-
     @Override
     public void init(FilterConfig filterConfig) {
-        this.context = filterConfig.getServletContext();
     }
 
     @Override
@@ -26,18 +22,12 @@ public class AuthenticationFilter implements Filter {
 
         try {
             CMSUser user = SessionManager.getActualUser(request);
-
+            request.setAttribute("user", user);
         } catch (SessionException e) {
-            //e.printStackTrace();
             response.sendRedirect("/logout");
         }
 
-//        if (session == null || session.getAttribute("actualUser") == null) {
-//            this.context.log("Unauthorized access request");
-//            response.sendRedirect(request.getContextPath() + "index.jsp");
-//        } else {
-            filterChain.doFilter(request, response);
-
+        filterChain.doFilter(request, response);
     }
 
     @Override
