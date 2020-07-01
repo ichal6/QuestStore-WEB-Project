@@ -13,7 +13,7 @@ public class SortItems<T> {
         this.comparator = comparator;
     }
 
-    public List sort(boolean isAscending){
+    public List<T> sort(boolean isAscending){
         if(!isAscending){
             comparator = comparator.reversed();
         }

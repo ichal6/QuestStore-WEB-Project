@@ -2,7 +2,7 @@ package service;
 
 import DAO.UserDAO;
 import DAO.UserJDBCDAO;
-import controller.users.TypeColumn;
+import sort.TypeColumn;
 import exception.ConnectionException;
 import exception.NoComparatorException;
 import exception.ReadException;
@@ -29,11 +29,11 @@ public class UserService {
     }
 
     private List<CMSUser> sortList(List<CMSUser> allUsers, boolean order, String sortBy) throws NoComparatorException {
-        Comparing<CMSUser> comparing = new ComparatorUser<>();
+        Comparing<CMSUser> comparing = new ComparatorUser();
         TypeColumn typeColumn = TypeColumn.returnType(sortBy);
         Comparator<CMSUser> comparator = comparing.getComparator(typeColumn);
-        SortItems<CMSUser> sortService = new SortItems<CMSUser>(allUsers, comparator);
-        return sortService.sort(order);
+        SortItems<CMSUser> sortItems = new SortItems<>(allUsers, comparator);
+        return sortItems.sort(order);
     }
 
     private List<CMSUser> getListFromDatabase(String type) throws ReadException {

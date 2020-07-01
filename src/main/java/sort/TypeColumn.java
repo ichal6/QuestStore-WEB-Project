@@ -1,4 +1,4 @@
-package controller.users;
+package sort;
 
 public enum TypeColumn {
     NAME(), EMAIL(), CITY(), DATE();
