@@ -18,8 +18,8 @@ public interface ArtifactDAO {
 
     int getNextAvailableID();
 
-    void updateArtifact(int artifactToUpdateId, Artifact artifactUpdated);
+    void updateArtifact(int artifactToUpdateId, Artifact artifactUpdated) throws ReadException;
 
-    int getArtifactsCount() throws SQLException;
+    int getArtifactsCount() throws ReadException;
 
 }

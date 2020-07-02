@@ -123,7 +123,7 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
     }
 
     @Override
-    public void updateArtifact(int artifactToUpdateId, Artifact artifactUpdated) {
+    public void updateArtifact(int artifactToUpdateId, Artifact artifactUpdated) throws ReadException {
         String query = "UPDATE artifact set name =?,description = ?, value = ?, type = ? WHERE artifact_id = ?;";
         try {
             PreparedStatement preparedStatement = connectToDB().prepareStatement(query);
@@ -134,18 +134,22 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
             preparedStatement.setInt(5, artifactToUpdateId);
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new ReadException("You cannot update this artifact");
         }
     }
 
     @Override
-    public int getArtifactsCount() throws SQLException {
-        String query = "SELECT COUNT(*) FROM artifact";
-        PreparedStatement preparedStatement = connectToDB().prepareStatement(query);
-        resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()) {
-            return resultSet.getInt(1);
+    public int getArtifactsCount() throws ReadException,ConnectionException {
+        try {
+            String query = "SELECT COUNT(*) FROM artifact";
+            PreparedStatement preparedStatement = connectToDB().prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new ReadException("You cannot access the database.");
         }
-        throw new SQLException();
+        throw new ReadException("Problem with data in database");
     }
 }
