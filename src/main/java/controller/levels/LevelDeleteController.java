@@ -1,8 +1,10 @@
-package controller;
+package controller.levels;
 
 import DAO.LevelDAO;
 import DAO.LevelJDBCDAO;
+import exception.ReadException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,11 +33,12 @@ import java.util.Map;
         Map<String, String[]> parameters = req.getParameterMap();
         int id = Integer.parseInt(parameters.get("id")[0]);
 
-
         try {
             levelDAO.deleteLevel(id);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (ReadException e){
+            req.setAttribute("error_message", e.getMessage());
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/error-page");
+            dispatcher.forward(req,resp);
         }
 
         resp.sendRedirect("/levels");

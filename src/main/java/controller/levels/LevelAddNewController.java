@@ -3,6 +3,7 @@ package controller.levels;
 
 import DAO.LevelDAO;
 import DAO.LevelJDBCDAO;
+import exception.ReadException;
 import model.Level;
 
 import javax.servlet.RequestDispatcher;
@@ -30,7 +31,7 @@ public class LevelAddNewController extends HttpServlet {
         }
     }
 
-    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String name = req.getParameter("level-name");
         String description = req.getParameter("level-description");
         String coins = req.getParameter("level-coins");
@@ -43,8 +44,10 @@ public class LevelAddNewController extends HttpServlet {
             RequestDispatcher dispatcher
                     = req.getRequestDispatcher("/html-cms/levels_add_new.jsp");
             dispatcher.forward(req, resp);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (ReadException e) {
+            req.setAttribute("error_message", e.getMessage());
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/errorPage");
+            dispatcher.forward(req, resp);
         }
     }
 

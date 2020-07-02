@@ -1,7 +1,12 @@
 package DAO;
 
+import exception.ConnectionException;
+import exception.ReadException;
 import model.Level;
+
+import javax.servlet.ServletException;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,81 +15,100 @@ import java.util.Properties;
 public class LevelJDBCDAO implements LevelDAO {
     public Level level;
 
-    public LevelJDBCDAO() throws IOException, SQLException {
-    }
+    private Connection connectToDB() throws IOException, ConnectionException {
+        try {
+            Properties prop = PropertiesReader.readProperties("src/main/resources/database.properties");
+            String url = prop.getProperty("db.url");
+            String user = prop.getProperty("db.user");
+            String password = prop.getProperty("db.passwd");
+            return DriverManager.getConnection(url, user, password);
 
-    private Connection connectToDB() throws IOException, SQLException {
-        Properties prop = PropertiesReader.readProperties("src/main/resources/database.properties");
-        String url = prop.getProperty("db.url");
-        String user = prop.getProperty("db.user");
-        String password = prop.getProperty("db.passwd");
-
-        return DriverManager.getConnection(url, user, password);
-    }
-
-    @Override
-    public void insertNewLevel(Level level) throws IOException, SQLException {
-        Connection connection = connectToDB();
-
-        PreparedStatement statement = connection.prepareStatement("INSERT INTO level (name, description, price, picture_url)" +
-                "VALUES (?, ?, ?, ?);");
-        statement.setString(1, level.getName());
-        statement.setString(2, level.getDescription());
-        statement.setInt(3, level.getPrice());
-        statement.setString(4, level.getPictureUrl());
-        statement.executeUpdate();
-    }
-
-    @Override
-    public void updateLevel(Level level, int levelId) throws IOException, SQLException {
-        Connection connection = connectToDB();
-
-        PreparedStatement statement = connection.prepareStatement("UPDATE level SET name = ?," +
-                " description  = ?, price = ?, picture_url = ? WHERE level_id =" +levelId + ";");
-        statement.setString(1, level.getName());
-        statement.setString(2, level.getDescription());
-        statement.setInt(3, level.getPrice());
-        statement.setString(4, level.getPictureUrl());
-        statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new ConnectException("You cannot connect to Database");
         }
-
-    @Override
-    public void deleteLevel(int levelId) throws IOException, SQLException {
-        Connection connection = connectToDB();
-
-        PreparedStatement statement = connection.prepareStatement("DELETE FROM level WHERE level_id=" + " ? ;");
-        statement.setInt(1, levelId);
-        statement.executeUpdate();
     }
 
     @Override
-    public List<Level> getLevelsList() throws IOException, SQLException {
-        Connection connection = connectToDB();
+    public void insertNewLevel(Level level) throws IOException, ReadException {
+        try {
+            Connection connection = connectToDB();
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO level (name, description, price, picture_url)" +
+                    "VALUES (?, ?, ?, ?);");
+            statement.setString(1, level.getName());
+            statement.setString(2, level.getDescription());
+            statement.setInt(3, level.getPrice());
+            statement.setString(4, level.getPictureUrl());
+            statement.executeUpdate();
+        }catch(SQLException e){
+            throw new ReadException("Connection with database failed. Please try again");
+        }
+    }
+
+    @Override
+    public void updateLevel(Level level, int levelId) throws IOException, ReadException {
+        try(Connection connection = connectToDB()) {
+
+            PreparedStatement statement = connection.prepareStatement("UPDATE level SET name = ?," +
+                    " description  = ?, price = ?, picture_url = ? WHERE level_id =" + levelId + ";");
+            statement.setString(1, level.getName());
+            statement.setString(2, level.getDescription());
+            statement.setInt(3, level.getPrice());
+            statement.setString(4, level.getPictureUrl());
+            statement.executeUpdate();
+        }catch(SQLException e){
+            throw new ReadException("Connection with database failed. Please try again.");
+
+        }
+    }
+
+    @Override
+    public void deleteLevel(int levelId) throws IOException, ReadException {
+
+        try(Connection connection = connectToDB()) {
+
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM level WHERE level_id=" + " ? ;");
+            statement.setInt(1, levelId);
+            statement.executeUpdate();
+        }catch(SQLException e){
+            throw new ReadException("Connection with database failed, please try again!");
+        }
+    }
+
+    @Override
+    public List<Level> getLevelsList() throws IOException, ReadException {
         List<Level> levelsList = new ArrayList<>();
         ResultSet rs;
 
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM level;");
-        rs = statement.executeQuery();
+        try (Connection connection = connectToDB()) {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM level;");
+            rs = statement.executeQuery();
 
-        while (rs.next()) {
-            Level level = new Level(rs.getInt("level_id"), rs.getString("name"),
-                    rs.getString("description"), rs.getInt("price"), rs.getDate("date_of_adding"),
-                    rs.getString("picture_url"));
-            levelsList.add(level);
+            while (rs.next()) {
+                Level level = new Level(rs.getInt("level_id"), rs.getString("name"),
+                        rs.getString("description"), rs.getInt("price"), rs.getDate("date_of_adding"),
+                        rs.getString("picture_url"));
+                levelsList.add(level);
+            }
+        } catch (SQLException e) {
+            throw new ReadException("something went wrong!");
         }
+
         return levelsList;
     }
 
-    public Level getLevelToUpdate(int levelId) throws IOException, SQLException {
+    public Level getLevelToUpdate(int levelId) throws IOException, ReadException {
 
-        Connection connection = connectToDB();
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM level WHERE level_id = ? ;");
-        preparedStatement.setInt(1, levelId);
-        ResultSet rs = preparedStatement.executeQuery();
+        try(Connection connection = connectToDB()) {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM level WHERE level_id = ? ;");
+            preparedStatement.setInt(1, levelId);
+            ResultSet rs = preparedStatement.executeQuery();
 
-        while (rs.next()) {
-            level = new Level(rs.getInt("level_id"), rs.getString("name"), rs.getString("description"),
-                    rs.getInt("price"), rs.getDate("date_of_adding"), rs.getString("picture_url"));
+            while (rs.next()) {
+                level = new Level(rs.getInt("level_id"), rs.getString("name"), rs.getString("description"),
+                        rs.getInt("price"), rs.getDate("date_of_adding"), rs.getString("picture_url"));
+            }
+        }catch(SQLException e){
+            throw new ReadException("Unable to connect with database, please try again!");
         }
         return level;
 
