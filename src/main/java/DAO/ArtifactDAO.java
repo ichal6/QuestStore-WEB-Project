@@ -1,5 +1,6 @@
 package DAO;
 
+import exception.ReadException;
 import model.Artifact;
 
 import java.sql.SQLException;
@@ -7,7 +8,7 @@ import java.util.List;
 
 public interface ArtifactDAO {
 
-    List<Artifact> getAllArtifacts();
+    List<Artifact> getAllArtifacts() throws ReadException;
 
     Artifact getArtifactById(int id);
 

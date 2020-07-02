@@ -1,5 +1,7 @@
 package DAO;
 
+import exception.ConnectionException;
+import exception.ReadException;
 import model.Artifact;
 
 import java.io.IOException;
@@ -12,24 +14,16 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
 
     private ResultSet resultSet;
 
-    private Connection connectToDB() {
-        Properties prop = null;
+    private Connection connectToDB() throws ConnectionException {
         try {
-            prop = PropertiesReader.readProperties("src/main/resources/database.properties");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String url = prop.getProperty("db.url");
-        String user = prop.getProperty("db.user");
-        String password = prop.getProperty("db.passwd");
-
-        try {
+            Properties prop = PropertiesReader.readProperties("src/main/resources/database.properties");
+            String url = prop.getProperty("db.url");
+            String user = prop.getProperty("db.user");
+            String password = prop.getProperty("db.passwd");
             return DriverManager.getConnection(url, user, password);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        }catch(SQLException | IOException e){
+            throw new ConnectionException("Sorry, data base is currently not available.");
         }
-
-        return connectToDB();
     }
 
     private ResultSet askForAllArtifacts() {
@@ -45,7 +39,7 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
     }
 
     @Override
-    public List<Artifact> getAllArtifacts() {
+    public List<Artifact> getAllArtifacts() throws ReadException {
         List<Artifact> allArtifacts = new ArrayList<Artifact>();
         resultSet = askForAllArtifacts();
         try {
@@ -61,8 +55,8 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
                         .build();
                 allArtifacts.add(artifact);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            throw new ReadException("Sorry, getting artifacts from database is currently impossible");
         }
         return allArtifacts;
     }
