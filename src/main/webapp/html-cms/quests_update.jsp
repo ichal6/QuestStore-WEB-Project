@@ -18,12 +18,15 @@
         <div class="details-container">
             <h1>Quest's details</h1>
             <a href="/quests">&#60;- Back to the list</a>
+            <p class="validation-message">${message}</p>
             <form class="quest-details" action="/quests/edit" method="post">
                 <h2>Basic details</h2>
                 <label for="quest-name">Name*:</label>
                 <input name="quest-name" type="text" id="quest-name" value="${quest.getName()}">
+                <p class="validation-message">${name_validation_message}</p>
                 <label for="quest-description">Description*:</label>
                 <textarea name="quest-description" id="quest-description">${quest.getDescription()}</textarea>
+                <p class="validation-message">${description_validation_message}</p>
                 <div class="properties-section">
                     <div class="picture">
                         <p>Picture: </p>
@@ -33,12 +36,14 @@
                     <div class=properties>
                         <label for="quest-value">Value (Number of coins student will get for the quest)*:</label><br>
                         <input name="quest-value" id="quest-value" type="text" value="${quest.getValue()}"><br>
+                        <p class="validation-message">${value_validation_message}</p>
                         <label for="quest-type">Type (Basic or Extra):</label><br>
                         <select class= "type-selector" id="quest-type" name="quest-type">
-                            <option value="" selected disabled hidden>${quest.getType().name()}</option>
+                            <option value=${quest.getType().name()} selected>${quest.getType().name()}</option>
                             <option>Basic</option>
                             <option>Extra</option>
                         </select>
+                        <p class="validation-message">${type_validation_message}</p>
                     </div>
                 </div>
                 <div class="lower-section">

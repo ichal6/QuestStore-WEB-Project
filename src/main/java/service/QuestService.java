@@ -38,6 +38,19 @@ public class QuestService {
         return new Quest(name, description, value, type, url);
     }
 
+    public Quest changeQuestDetails(HttpServletRequest request, Quest quest) {
+        String name = request.getParameter("quest-name");
+        String description = request.getParameter("quest-description");
+        int value = Integer.parseInt(request.getParameter("quest-value"));
+        String type = (request.getParameter("quest-type") != null) ? request.getParameter("quest-type") : quest.getType().name();
+        quest.setName(name);
+        quest.setDescription(description);
+        quest.setValue(value);
+        quest.setType(type);
+
+        return quest;
+    }
+
     private boolean callNameValidation(HttpServletRequest request, boolean isInputValid, int min, int max) {
         try {
             validator.validateStringLength(request.getParameter("quest-name"), min, max);
