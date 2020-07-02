@@ -40,30 +40,67 @@ public class QuestAddNewController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
+        boolean isInputValid = callInputsValidation(request);
+        if (isInputValid) {
             Quest quest = extractQuestFromHTTPRequest(request);
-            questDAO.insertQuest(quest);
-            response.sendRedirect("/quests");
-        } catch (NameFormatException e) {
-            request.setAttribute("name_validation_message", e.getMessage());
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/quests_add_new.jsp");
-            dispatcher.forward(request, response);
-        } catch (ReadException e) {
-            request.setAttribute("error_message", e.getMessage());
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/errorPage");
-            dispatcher.forward(request, response);
+            callQuestInsert(quest, request, response);
+            request.setAttribute("message", "Quest successfully added!");
         }
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/quests_add_new.jsp");
+        dispatcher.forward(request, response);
     }
 
-    private Quest extractQuestFromHTTPRequest(HttpServletRequest request) throws NameFormatException {
+    private boolean callInputsValidation(HttpServletRequest request) {
+        boolean isInputValid = true;
+        try {
+            validator.validateStringLength(request.getParameter("quest-name"), 3, 50);
+        } catch (StringLengthFormatException e) {
+            request.setAttribute("name_validation_message", e.getMessage());
+            isInputValid = false;
+        }
+
+        try {
+            validator.validateStringLength(request.getParameter("quest-description"), 3, 100);
+        } catch (StringLengthFormatException e) {
+            request.setAttribute("description_validation_message", e.getMessage());
+            isInputValid = false;
+        }
+
+        try {
+            validator.validateValue(request.getParameter("quest-value"), 0, 1000000);
+        } catch (ValueFormatException e) {
+            request.setAttribute("value_validation_message", e.getMessage());
+            isInputValid = false;
+        }
+
+        try {
+            validator.validateType(request.getParameter("quest-type"), "BASIC", "EXTRA");
+        } catch (TypeFormatException e) {
+            request.setAttribute("type_validation_message", e.getMessage());
+            isInputValid = false;
+        }
+
+        return isInputValid;
+    }
+
+    private Quest extractQuestFromHTTPRequest(HttpServletRequest request) {
         String name = request.getParameter("quest-name");
-        validator.validateName(name, 3, 50);
         String description = request.getParameter("quest-description");
         int value = Integer.parseInt(request.getParameter("quest-value"));
         String type = request.getParameter("quest-type");
         String url = getRandomUrlPath();
 
         return new Quest(name, description, value, type, url);
+    }
+
+    private void callQuestInsert(Quest quest, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        try {
+            questDAO.insertQuest(quest);
+        } catch (ReadException e) {
+            request.setAttribute("error_message", e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/errorPage");
+            dispatcher.forward(request, response);
+        }
     }
 
     private String getRandomUrlPath() {
