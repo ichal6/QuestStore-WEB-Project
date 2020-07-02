@@ -14,7 +14,7 @@ public interface ArtifactDAO {
 
     void addArtifact(Artifact artifact);
 
-    void deleteArtifact(int id);
+    void deleteArtifact(int id) throws ReadException;
 
     int getNextAvailableID();
 

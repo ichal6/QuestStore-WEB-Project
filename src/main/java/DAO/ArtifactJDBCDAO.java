@@ -21,7 +21,7 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
             String user = prop.getProperty("db.user");
             String password = prop.getProperty("db.passwd");
             return DriverManager.getConnection(url, user, password);
-        }catch(SQLException | IOException e){
+        } catch (SQLException | IOException e) {
             throw new ConnectionException("Sorry, data base is currently not available.");
         }
     }
@@ -79,14 +79,14 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
     }
 
     @Override
-    public void deleteArtifact(int id) {
+    public void deleteArtifact(int id) throws ReadException {
         String query = "delete from artifact where artifact_id = ?;";
         try {
             PreparedStatement preparedStatement = connectToDB().prepareStatement(query);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new ReadException("Sorry, this artifacts could not be deleted.");
         }
     }
 
