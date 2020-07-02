@@ -10,9 +10,9 @@ public interface ArtifactDAO {
 
     List<Artifact> getAllArtifacts() throws ReadException;
 
-    Artifact getArtifactById(int id);
+    Artifact getArtifactById(int id) throws ReadException;
 
-    void addArtifact(Artifact artifact);
+    void addArtifact(Artifact artifact) throws ReadException;
 
     void deleteArtifact(int id) throws ReadException;
 

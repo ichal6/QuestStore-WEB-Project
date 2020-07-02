@@ -62,7 +62,7 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
     }
 
     @Override
-    public void addArtifact(Artifact artifact) {
+    public void addArtifact(Artifact artifact) throws ReadException {
         String query = "INSERT INTO artifact values(default,?,?,?,?,default,?);";
         try {
             PreparedStatement preparedStatement = connectToDB().prepareStatement(query);
@@ -74,7 +74,7 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
             preparedStatement.executeUpdate();
 
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new ReadException("Adding of artifacts is currently not available.");
         }
     }
 
@@ -91,10 +91,9 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
     }
 
     public int getNextAvailableID() {
-        String query = "SELECT artifact_id FROM artifact order by artifact_id desc limit 1";
         int nextAvailableId = 0;
-
         try {
+            String query = "SELECT artifact_id FROM artifact order by artifact_id desc limit 1";
             Statement statement = connectToDB().createStatement();
             resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
@@ -107,7 +106,7 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
     }
 
     @Override
-    public Artifact getArtifactById(int id) {
+    public Artifact getArtifactById(int id) throws ReadException {
         String query = "SELECT * FROM artifact WHERE artifact_id = ?";
         Artifact artifact = new Artifact();
         try {
@@ -117,8 +116,8 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
             while (resultSet.next()) {
                 return new Artifact(resultSet);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            throw new ReadException("This artifact is currently not available");
         }
         return artifact;
     }
