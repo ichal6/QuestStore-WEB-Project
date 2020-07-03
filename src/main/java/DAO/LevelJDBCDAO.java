@@ -15,23 +15,22 @@ import java.util.Properties;
 public class LevelJDBCDAO implements LevelDAO {
     public Level level;
 
-    private Connection connectToDB() throws IOException, ConnectionException {
+    private Connection connectToDB() {
         try {
             Properties prop = PropertiesReader.readProperties("src/main/resources/database.properties");
             String url = prop.getProperty("db.url");
             String user = prop.getProperty("db.user");
             String password = prop.getProperty("db.passwd");
             return DriverManager.getConnection(url, user, password);
-
-        } catch (SQLException e) {
-            throw new ConnectException("You cannot connect to Database");
+        } catch (IOException | SQLException e) {
+            throw new ConnectionException("Sorry, couldn't connect to database");
         }
     }
 
     @Override
-    public void insertNewLevel(Level level) throws IOException, ReadException {
-        try {
-            Connection connection = connectToDB();
+    public void insertNewLevel(Level level) throws ReadException {
+
+        try(Connection connection = connectToDB()) {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO level (name, description, price, picture_url)" +
                     "VALUES (?, ?, ?, ?);");
             statement.setString(1, level.getName());
@@ -45,9 +44,9 @@ public class LevelJDBCDAO implements LevelDAO {
     }
 
     @Override
-    public void updateLevel(Level level, int levelId) throws IOException, ReadException {
-        try(Connection connection = connectToDB()) {
+    public void updateLevel(Level level, int levelId) throws ReadException {
 
+        try(Connection connection = connectToDB()) {
             PreparedStatement statement = connection.prepareStatement("UPDATE level SET name = ?," +
                     " description  = ?, price = ?, picture_url = ? WHERE level_id =" + levelId + ";");
             statement.setString(1, level.getName());
@@ -62,7 +61,7 @@ public class LevelJDBCDAO implements LevelDAO {
     }
 
     @Override
-    public void deleteLevel(int levelId) throws IOException, ReadException {
+    public void deleteLevel(int levelId) throws  ReadException {
 
         try(Connection connection = connectToDB()) {
 
@@ -75,7 +74,7 @@ public class LevelJDBCDAO implements LevelDAO {
     }
 
     @Override
-    public List<Level> getLevelsList() throws IOException, ReadException {
+    public List<Level> getLevelsList() throws ReadException {
         List<Level> levelsList = new ArrayList<>();
         ResultSet rs;
 
@@ -96,7 +95,7 @@ public class LevelJDBCDAO implements LevelDAO {
         return levelsList;
     }
 
-    public Level getLevelToUpdate(int levelId) throws IOException, ReadException {
+    public Level getLevelToUpdate(int levelId) throws  ReadException {
 
         try(Connection connection = connectToDB()) {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM level WHERE level_id = ? ;");

@@ -9,10 +9,10 @@ import java.util.List;
 
 public interface LevelDAO {
 
-    void insertNewLevel(Level level) throws IOException, ReadException;
-    void updateLevel(Level level, int levelId) throws IOException, ReadException;
-    void  deleteLevel(int levelId) throws IOException, ReadException;
-    List<Level> getLevelsList() throws IOException, ReadException;
-    Level getLevelToUpdate(int levelId) throws IOException, ReadException;
+    void insertNewLevel(Level level) throws  ReadException;
+    void updateLevel(Level level, int levelId) throws  ReadException;
+    void  deleteLevel(int levelId) throws  ReadException;
+    List<Level> getLevelsList() throws  ReadException;
+    Level getLevelToUpdate(int levelId) throws  ReadException;
 
 }

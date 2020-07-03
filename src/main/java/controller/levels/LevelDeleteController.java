@@ -35,15 +35,13 @@ import java.util.Map;
 
         try {
             levelDAO.deleteLevel(id);
+            resp.sendRedirect("/levels");
         } catch (ReadException e){
             req.setAttribute("error_message", e.getMessage());
             RequestDispatcher dispatcher = req.getRequestDispatcher("/error-page");
             dispatcher.forward(req,resp);
         }
-
-        resp.sendRedirect("/levels");
     }
-
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doDelete(request, response);
