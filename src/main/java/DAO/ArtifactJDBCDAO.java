@@ -1,5 +1,6 @@
 package DAO;
 
+import exception.ReadException;
 import model.Artifact;
 
 import java.io.IOException;
@@ -32,23 +33,21 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
         return connectToDB();
     }
 
-    private ResultSet askForAllArtifacts() {
+    private ResultSet askForAllArtifacts() throws SQLException {
         String query = "SELECT * FROM artifact";
         Statement statement;
-        try {
             statement = connectToDB().createStatement();
             resultSet = statement.executeQuery(query);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+
         return resultSet;
     }
 
     @Override
-    public List<Artifact> getAllArtifacts() {
+    public List<Artifact> getAllArtifacts() throws ReadException {
         List<Artifact> allArtifacts = new ArrayList<Artifact>();
-        resultSet = askForAllArtifacts();
         try {
+            resultSet = askForAllArtifacts();
+
             while (resultSet.next()) {
                 Artifact artifact = new Artifact.Builder()
                         .id(resultSet.getInt(1))
@@ -61,8 +60,9 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
                         .build();
                 allArtifacts.add(artifact);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        }catch(SQLException e){
+            throw new ReadException("you cannot connect do DB");
+
         }
         return allArtifacts;
     }

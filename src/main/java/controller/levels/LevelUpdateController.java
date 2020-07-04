@@ -2,6 +2,7 @@ package controller.levels;
 
 import DAO.LevelDAO;
 import DAO.LevelJDBCDAO;
+import exception.ReadException;
 import model.Level;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,10 +38,12 @@ public class LevelUpdateController  extends HttpServlet {
 
         try {
             levelDAO.updateLevel(new Level(name, description, price, "level6.svg"), levelId);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        } catch (ReadException e){
+            request.setAttribute("error_message", e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/error-page");
+            dispatcher.forward(request,response);
 
+        }
         response.sendRedirect("/levels");
     }
 
@@ -57,7 +60,7 @@ public class LevelUpdateController  extends HttpServlet {
 
         try {
             levelToEdit = levelDAO.getLevelToUpdate(levelId);
-        } catch (SQLException throwables) {
+        } catch (ReadException throwables) {
             throwables.printStackTrace();
         }
 
