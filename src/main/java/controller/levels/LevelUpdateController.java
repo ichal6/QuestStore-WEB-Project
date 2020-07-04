@@ -23,11 +23,7 @@ public class LevelUpdateController  extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        try{
-            levelDAO = new LevelJDBCDAO();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        levelDAO = new LevelJDBCDAO();
     }
 
     public void doPut(HttpServletRequest request, HttpServletResponse response)
@@ -42,7 +38,6 @@ public class LevelUpdateController  extends HttpServlet {
             request.setAttribute("error_message", e.getMessage());
             RequestDispatcher dispatcher = request.getRequestDispatcher("/error-page");
             dispatcher.forward(request,response);
-
         }
         response.sendRedirect("/levels");
     }
@@ -60,8 +55,8 @@ public class LevelUpdateController  extends HttpServlet {
 
         try {
             levelToEdit = levelDAO.getLevelToUpdate(levelId);
-        } catch (ReadException throwables) {
-            throwables.printStackTrace();
+        } catch (ReadException e) {
+            request.setAttribute("error_message", e.getMessage());
         }
 
         request.setAttribute("level", levelToEdit);

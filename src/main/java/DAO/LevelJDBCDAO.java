@@ -39,7 +39,7 @@ public class LevelJDBCDAO implements LevelDAO {
             statement.setString(4, level.getPictureUrl());
             statement.executeUpdate();
         }catch(SQLException e){
-            throw new ReadException("Connection with database failed. Please try again");
+            throw new ReadException("Insertion failed. Please try again");
         }
     }
 
@@ -55,7 +55,7 @@ public class LevelJDBCDAO implements LevelDAO {
             statement.setString(4, level.getPictureUrl());
             statement.executeUpdate();
         }catch(SQLException e){
-            throw new ReadException("Connection with database failed. Please try again.");
+            throw new ReadException("We have a problem to update. Please try again.");
 
         }
     }
@@ -69,7 +69,7 @@ public class LevelJDBCDAO implements LevelDAO {
             statement.setInt(1, levelId);
             statement.executeUpdate();
         }catch(SQLException e){
-            throw new ReadException("Connection with database failed, please try again!");
+            throw new ReadException("We couldn't delete this level. please try again!");
         }
     }
 
@@ -89,7 +89,7 @@ public class LevelJDBCDAO implements LevelDAO {
                 levelsList.add(level);
             }
         } catch (SQLException e) {
-            throw new ReadException("something went wrong!");
+            throw new ReadException("Something went wrong!");
         }
 
         return levelsList;
@@ -107,7 +107,7 @@ public class LevelJDBCDAO implements LevelDAO {
                         rs.getInt("price"), rs.getDate("date_of_adding"), rs.getString("picture_url"));
             }
         }catch(SQLException e){
-            throw new ReadException("Unable to connect with database, please try again!");
+            throw new ReadException("We are unable to update this level. Please try again!");
         }
         return level;
 
