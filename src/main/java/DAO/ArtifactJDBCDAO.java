@@ -1,5 +1,7 @@
 package DAO;
 
+import exception.ConnectionException;
+import exception.ReadException;
 import model.Artifact;
 
 import java.io.IOException;
@@ -12,24 +14,16 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
 
     private ResultSet resultSet;
 
-    private Connection connectToDB() {
-        Properties prop = null;
+    private Connection connectToDB() throws ConnectionException {
         try {
-            prop = PropertiesReader.readProperties("src/main/resources/database.properties");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String url = prop.getProperty("db.url");
-        String user = prop.getProperty("db.user");
-        String password = prop.getProperty("db.passwd");
-
-        try {
+            Properties prop = PropertiesReader.readProperties("src/main/resources/database.properties");
+            String url = prop.getProperty("db.url");
+            String user = prop.getProperty("db.user");
+            String password = prop.getProperty("db.passwd");
             return DriverManager.getConnection(url, user, password);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException | IOException e) {
+            throw new ConnectionException("Sorry, data base is currently not available.");
         }
-
-        return connectToDB();
     }
 
     private ResultSet askForAllArtifacts() {
@@ -45,7 +39,7 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
     }
 
     @Override
-    public List<Artifact> getAllArtifacts() {
+    public List<Artifact> getAllArtifacts() throws ReadException {
         List<Artifact> allArtifacts = new ArrayList<Artifact>();
         resultSet = askForAllArtifacts();
         try {
@@ -61,14 +55,14 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
                         .build();
                 allArtifacts.add(artifact);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            throw new ReadException("Sorry, getting artifacts from database is currently impossible");
         }
         return allArtifacts;
     }
 
     @Override
-    public void addArtifact(Artifact artifact) {
+    public void addArtifact(Artifact artifact) throws ReadException {
         String query = "INSERT INTO artifact values(default,?,?,?,?,default,?);";
         try {
             PreparedStatement preparedStatement = connectToDB().prepareStatement(query);
@@ -80,27 +74,26 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
             preparedStatement.executeUpdate();
 
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new ReadException("Adding of artifacts is currently not available.");
         }
     }
 
     @Override
-    public void deleteArtifact(int id) {
+    public void deleteArtifact(int id) throws ReadException {
         String query = "delete from artifact where artifact_id = ?;";
         try {
             PreparedStatement preparedStatement = connectToDB().prepareStatement(query);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new ReadException("Sorry, this artifacts could not be deleted.");
         }
     }
 
     public int getNextAvailableID() {
-        String query = "SELECT artifact_id FROM artifact order by artifact_id desc limit 1";
         int nextAvailableId = 0;
-
         try {
+            String query = "SELECT artifact_id FROM artifact order by artifact_id desc limit 1";
             Statement statement = connectToDB().createStatement();
             resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
@@ -113,7 +106,7 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
     }
 
     @Override
-    public Artifact getArtifactById(int id) {
+    public Artifact getArtifactById(int id) throws ReadException {
         String query = "SELECT * FROM artifact WHERE artifact_id = ?";
         Artifact artifact = new Artifact();
         try {
@@ -123,14 +116,14 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
             while (resultSet.next()) {
                 return new Artifact(resultSet);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            throw new ReadException("This artifact is currently not available");
         }
         return artifact;
     }
 
     @Override
-    public void updateArtifact(int artifactToUpdateId, Artifact artifactUpdated) {
+    public void updateArtifact(int artifactToUpdateId, Artifact artifactUpdated) throws ReadException {
         String query = "UPDATE artifact set name =?,description = ?, value = ?, type = ? WHERE artifact_id = ?;";
         try {
             PreparedStatement preparedStatement = connectToDB().prepareStatement(query);
@@ -141,18 +134,22 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
             preparedStatement.setInt(5, artifactToUpdateId);
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new ReadException("You cannot update this artifact");
         }
     }
 
     @Override
-    public int getArtifactsCount() throws SQLException {
-        String query = "SELECT COUNT(*) FROM artifact";
-        PreparedStatement preparedStatement = connectToDB().prepareStatement(query);
-        resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()) {
-            return resultSet.getInt(1);
+    public int getArtifactsCount() throws ReadException,ConnectionException {
+        try {
+            String query = "SELECT COUNT(*) FROM artifact";
+            PreparedStatement preparedStatement = connectToDB().prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new ReadException("You cannot access the database.");
         }
-        throw new SQLException();
+        throw new ReadException("Problem with data in database");
     }
 }

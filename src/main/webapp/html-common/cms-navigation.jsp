@@ -1,4 +1,4 @@
-<%@ page import="session.SessionManager" %>
+<%@ page import="model.CMSUser" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -8,7 +8,8 @@
 <body>
 
 <%
-    String role = SessionManager.getActualUser(request).getRole();
+    CMSUser user = (CMSUser) session.getAttribute("user");
+    String role = user.getRole();
 %>
 
 <aside>

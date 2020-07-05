@@ -19,10 +19,10 @@
 <div class="container">
     <jsp:include page="../html-common/cms-navigation.jsp"/>
 
-        <div class="details-container">
-            <h1>Artifact’s details</h1>
-            <a href="/artifacts">&#60;- Back to the list</a>
-            <form action="/artifacts/update" method="post">
+    <div class="details-container">
+        <h1>Artifact’s details</h1>
+        <a href="/artifacts">&#60;- Back to the list</a>
+        <form action="/artifacts/update" method="post">
             <div class="artifacts-details">
                 <h2>Basic details</h2>
                 <label for="artifacts-name">Name*:</label>
@@ -41,10 +41,10 @@
                         <label>Value (Number of coins student will get for the artifacts)*:</label><br>
                         <input type="text" value="<%=artifact.getValue()%>" name="artifact-value"><br>
                         <label>Type (Single or Team):</label><br>
-                        <select class="type-selector" id="type-selector">
+                        <select class="type-selector" id="type-selector" name="type-selector">
                             <option value="" selected disabled hidden>${artifact.getType()}</option>
                             <option name="artifact-type">Single</option>
-                            <option>Team</option>
+                            <option name="artifact-type">Team</option>
                         </select>
                     </div>
                 </div>
@@ -53,8 +53,8 @@
                     <button class="btn" id="update-admin">Update</button>
                 </div>
             </div>
-            </form>
-        </div>
+        </form>
+    </div>
 
 </div>
 

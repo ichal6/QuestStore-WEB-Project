@@ -1,4 +1,3 @@
-<%@ page import="session.SessionManager" %>
 <%@ page import="model.CMSUser" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" onclick="return hideSubMenu()">
@@ -13,9 +12,10 @@
 
 <body onload="checkName();checkEmail();checkPasswordForRegEx();checkIfPasswordsAreEquals();">
     <jsp:include page="../html-common/cms-header.jsp" />
+
     <div class="container">
         <jsp:include page="../html-common/cms-navigation.jsp" />
-        <jsp:useBean id="userToEdit" scope="request" class="model.CMSUser"/>
+
         <div id="content">
             <h1 id="label">My Account</h1>
             <div id="information"> 
@@ -23,12 +23,12 @@
                 <form  action="/cms-user/my-account" method="post" >
                     <input type="hidden" name="action" value="personal-information">
                     <label>Name*:</label><br>
-                    <input name="person-name" type="text" id="name-and-surname" class="name-surname" value="${userToEdit.getName()}"><br>
+                    <input name="person-name" type="text" id="name-and-surname" class="name-surname" value="${sessionScope['user'].getName()}"><br>
                     <div class="warning hidden">
                         <p>Your name is invalid</p>
                     </div>
                     <label>Email*:</label><br>
-                    <input name="person-mail" type="text" id="e-mail" class="email-input" value="${userToEdit.getEmail()}" ><br>
+                    <input name="person-mail" type="text" id="e-mail" class="email-input" value="${sessionScope['user'].getEmail()}" ><br>
                     <div class="warning-email hidden">
                         <p>Your mail is invalid</p>
                     </div>
@@ -36,10 +36,10 @@
                 <div id="information-bottom">
                     <div id="picture">
                         <p>Picture:</p>
-                        <img src="${userToEdit.getPictureURL()}" alt="profile photo"><br>
+                        <img src="${sessionScope['user'].getPictureURL()}" alt="profile photo"><br>
                     </div>
                     <a href="#"> <img src="../assets/icons/change_picture.svg" alt="change photo">Change picture</a>
-                    <p id="role-content">Role: ${userToEdit.getRole()}</p>
+                    <p id="role-content">Role: ${sessionScope['user'].getRole()}</p>
                     <button type="submit" id="btn-update">Update</button>
                 </div>
                 </form>
