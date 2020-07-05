@@ -56,7 +56,13 @@ public class ArtifactUpdateController extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        dao.updateArtifact(artifactId, createUpdatedArtifact(req));
+        try {
+            dao.updateArtifact(artifactId, createUpdatedArtifact(req));
+        } catch (ReadException e) {
+            req.setAttribute("error_message", e.getMessage());
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/html-cms/error_page.jsp");
+            dispatcher.forward(req, resp);
+        }
         resp.sendRedirect("/artifacts");
     }
 }
