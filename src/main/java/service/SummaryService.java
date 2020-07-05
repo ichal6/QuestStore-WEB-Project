@@ -7,6 +7,7 @@ import exception.*;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.Collection;
 import java.util.Properties;
 
 public class SummaryService {
@@ -108,3 +109,4 @@ public class SummaryService {
         throw new SQLException();
     }
 }
+

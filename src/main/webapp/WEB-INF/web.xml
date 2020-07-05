@@ -12,6 +12,7 @@
         <exception-type>java.lang.Throwable</exception-type>
         <location>/errorPage</location>
     </error-page>
+
     <error-page>
         <error-code>404</error-code>
         <location>/dashboard</location>
@@ -39,5 +40,6 @@
         <url-pattern>/user-list/*</url-pattern>
         <url-pattern>/levels/*</url-pattern>
     </filter-mapping>
+
 
 </web-app>
