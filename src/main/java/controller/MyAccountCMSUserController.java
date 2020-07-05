@@ -4,7 +4,6 @@ import DAO.UserDAO;
 import DAO.UserJDBCDAO;
 import model.CMSUser;
 import exception.ReadException;
-import session.SessionManager;
 import exception.SessionException;
 
 import javax.servlet.RequestDispatcher;
@@ -13,13 +12,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "MyAccountCMSUSer", urlPatterns = "/cms-user/my-account")
 public class MyAccountCMSUserController extends HttpServlet {
     private UserDAO dao;
     private CMSUser userToEdit;
-    private String oldPassword;
 
     @Override
     public void init() throws ServletException {
@@ -42,11 +41,8 @@ public class MyAccountCMSUserController extends HttpServlet {
             response.sendRedirect("/dashboard");
         }
 
-        try {
-            userToEdit = SessionManager.getActualUser(request);
-        } catch (SessionException e) {
-            throw new ServletException(e);
-        }
+        HttpSession session = request.getSession();
+        userToEdit = (CMSUser) session.getAttribute("user");
 
         if ("personal-information".equals(action)) {
             userToEdit.setName(name);
@@ -60,7 +56,7 @@ public class MyAccountCMSUserController extends HttpServlet {
 
         } else if ("change-password".equals(action)) {
             int userId = userToEdit.getID();
-            if(checkIfCorrectPassword(oldPassword)){
+            if (checkIfCorrectPassword(oldPassword)) {
                 try {
                     dao.changeUserPassword(userId, newPassword);
                 } catch (ReadException e) {
@@ -72,11 +68,8 @@ public class MyAccountCMSUserController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            userToEdit = (CMSUser) SessionManager.getActualUser(request);
-        } catch (SessionException e) {
-            throw new ServletException(e);
-        }
+        HttpSession session = request.getSession();
+        userToEdit = (CMSUser) session.getAttribute("user");
         request.setAttribute("userToEdit", userToEdit);
 
         RequestDispatcher dispatcher
@@ -85,10 +78,7 @@ public class MyAccountCMSUserController extends HttpServlet {
     }
 
     private boolean checkIfCorrectPassword(String oldPassword) {
-        if (userToEdit.getPassword().equals(oldPassword)) {
-            return true;
-
-        }else return false;
+        return userToEdit.getPassword().equals(oldPassword);
     }
 
 }

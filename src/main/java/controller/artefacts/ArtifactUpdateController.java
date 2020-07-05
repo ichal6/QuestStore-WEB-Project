@@ -2,6 +2,7 @@ package controller.artefacts;
 
 import DAO.ArtifactDAO;
 import DAO.ArtifactJDBCDAO;
+import exception.ReadException;
 import model.Artifact;
 
 import javax.servlet.RequestDispatcher;
@@ -17,6 +18,15 @@ import java.io.IOException;
 public class ArtifactUpdateController extends HttpServlet {
     ArtifactDAO dao;
     Artifact artifactToEdit;
+    int artifactId;
+
+    private Artifact createUpdatedArtifact(HttpServletRequest req) {
+        String name = req.getParameter("artifact-name");
+        String description = req.getParameter("artifact-description");
+        Integer value = Integer.parseInt(req.getParameter("artifact-value"));
+        String type = req.getParameter("type-selector");
+        return new Artifact(name, description, value, type);
+    }
 
     @Override
     public void init() throws ServletException {
@@ -26,33 +36,33 @@ public class ArtifactUpdateController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int artifactId = Integer.parseInt(req.getParameterMap().get("id")[0]);
-        artifactToEdit = dao.getArtifactById(artifactId);
-        req.setAttribute("artifact", artifactToEdit);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/html-cms/artifacts_update.jsp");
-        dispatcher.forward(req, resp);
+        try {
+            artifactId = Integer.parseInt(req.getParameterMap().get("id")[0]);
+            artifactToEdit = dao.getArtifactById(artifactId);
+            req.setAttribute("artifact", artifactToEdit);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/html-cms/artifacts_update.jsp");
+            dispatcher.forward(req, resp);
+        } catch (ReadException e) {
+            req.setAttribute("error_message", e.getMessage());
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/html-cms/error_page.jsp");
+            dispatcher.forward(req, resp);
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPut(req,resp);
+        doPut(req, resp);
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int artifactId = artifactToEdit.getId();
-        System.out.println(artifactId);
-        String name = req.getParameter("artifact-name");
-        String description = req.getParameter("artifact-description");
-        Integer value = Integer.parseInt(req.getParameter("artifact-value"));
-        String type = req.getParameter("artifact-type");
-
-        Artifact updatedArtifact = new Artifact(name, description, value, type);
-
-        dao.updateArtifact(artifactId, updatedArtifact);
-
+        try {
+            dao.updateArtifact(artifactId, createUpdatedArtifact(req));
+        } catch (ReadException e) {
+            req.setAttribute("error_message", e.getMessage());
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/html-cms/error_page.jsp");
+            dispatcher.forward(req, resp);
+        }
         resp.sendRedirect("/artifacts");
     }
-
-
 }
