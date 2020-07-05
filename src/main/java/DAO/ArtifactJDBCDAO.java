@@ -26,23 +26,21 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
         }
     }
 
-    private ResultSet askForAllArtifacts() {
+    private ResultSet askForAllArtifacts() throws SQLException {
         String query = "SELECT * FROM artifact";
         Statement statement;
-        try {
             statement = connectToDB().createStatement();
             resultSet = statement.executeQuery(query);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+
         return resultSet;
     }
 
     @Override
     public List<Artifact> getAllArtifacts() throws ReadException {
         List<Artifact> allArtifacts = new ArrayList<Artifact>();
-        resultSet = askForAllArtifacts();
         try {
+            resultSet = askForAllArtifacts();
+
             while (resultSet.next()) {
                 Artifact artifact = new Artifact.Builder()
                         .id(resultSet.getInt(1))

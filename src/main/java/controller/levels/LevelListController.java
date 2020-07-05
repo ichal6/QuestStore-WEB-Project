@@ -3,6 +3,7 @@ package controller.levels;
 
 import DAO.LevelDAO;
 import DAO.LevelJDBCDAO;
+import exception.ReadException;
 import model.Level;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,25 +22,23 @@ public class LevelListController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-
-        try{
-            levelDAO = new LevelJDBCDAO();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        levelDAO = new LevelJDBCDAO();
     }
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            try {
+                List<Level> levelsList = levelDAO.getLevelsList();
+                req.setAttribute("levelsList", levelsList);
+                RequestDispatcher dispatcher
+                        = req.getRequestDispatcher("/html-cms/levels_list.jsp");
+                dispatcher.forward(req, resp);
+            }catch (ReadException e){
+                req.setAttribute("error_message", e.getMessage());
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/html-cms/error_page.jsp");
+                dispatcher.forward(req, resp);
 
-        try {
-            List<Level> levelsList = levelDAO.getLevelsList();
-            req.setAttribute("levelsList", levelsList);
-            RequestDispatcher dispatcher
-                    = req.getRequestDispatcher("/html-cms/levels_list.jsp");
-            dispatcher.forward(req, resp);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            }
         }
     }
-}
+

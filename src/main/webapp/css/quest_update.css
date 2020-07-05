@@ -133,3 +133,9 @@
 .properties input{
     width: 400px;
 }
+
+.validation-message {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: #BF343F;
+}

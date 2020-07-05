@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public class QuestJDBCDAO implements QuestDAO {
 
-    private Connection connectToDB() throws ConnectionException {
+    private Connection connectToDB() {
         try {
             Properties prop = PropertiesReader.readProperties("src/main/resources/database.properties");
             String url = prop.getProperty("db.url");
@@ -24,7 +24,7 @@ public class QuestJDBCDAO implements QuestDAO {
     }
 
     @Override
-    public void insertQuest(Quest quest) throws ConnectionException, ReadException {
+    public void insertQuest(Quest quest) throws ReadException {
         try (Connection connection = connectToDB()) {
             PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO quest (name, description, value, type, picture_url) VALUES (?, ?, ?, ?, ?);");
@@ -40,7 +40,7 @@ public class QuestJDBCDAO implements QuestDAO {
     }
 
     @Override
-    public List<Quest> getAllQuests() throws ConnectionException, ReadException {
+    public List<Quest> getAllQuests() throws ReadException {
         List<Quest> questsList = new ArrayList<>();
         try (Connection connection = connectToDB()) {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM quest;");
@@ -56,9 +56,9 @@ public class QuestJDBCDAO implements QuestDAO {
     }
 
     @Override
-    public void deleteQuest(int id) throws ConnectionException, ReadException {
+    public void deleteQuest(int id) throws ReadException {
         try (Connection connection = connectToDB()) {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM quest WHERE quest_id = ? ;");
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM quest WHERE quest_id = ?;");
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -67,7 +67,7 @@ public class QuestJDBCDAO implements QuestDAO {
     }
 
     @Override
-    public Quest getQuestById(int id) throws ConnectionException, ReadException {
+    public Quest getQuestById(int id) throws ReadException {
 
         try (Connection connection = connectToDB()) {
             PreparedStatement pst = connection.prepareStatement("SELECT * FROM quest WHERE quest_id = ?");
@@ -83,7 +83,7 @@ public class QuestJDBCDAO implements QuestDAO {
     }
 
     @Override
-    public void updateQuest(int ID, Quest quest) throws ReadException, ConnectionException {
+    public void updateQuest(int ID, Quest quest) throws ReadException {
         String query = "UPDATE quest SET name = ?, description = ?, value = ?, type = ?, picture_url = ? WHERE quest_id = ?";
         try (Connection connection = connectToDB()) {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -100,7 +100,7 @@ public class QuestJDBCDAO implements QuestDAO {
     }
 
     @Override
-    public int getQuestsCount() throws ReadException, ConnectionException {
+    public int getQuestsCount() throws ReadException {
         try (Connection connection = connectToDB()) {
             PreparedStatement statement = connection.prepareStatement("SELECT COUNT(*) FROM quest");
             ResultSet rs = statement.executeQuery();
@@ -113,7 +113,7 @@ public class QuestJDBCDAO implements QuestDAO {
         throw new ReadException("Problem with data in database");
     }
 
-    private Quest extractQuestFromResultSet(ResultSet rs) throws SQLException, ReadException {
+    private Quest extractQuestFromResultSet(ResultSet rs) throws SQLException {
         return new Quest(rs.getInt("quest_id"), rs.getString("name"), rs.getString("description"),
                     rs.getInt("value"), rs.getString("type"), rs.getDate("date_of_adding"), rs.getString("picture_url"));
     }

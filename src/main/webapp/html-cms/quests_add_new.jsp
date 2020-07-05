@@ -18,13 +18,16 @@
         <div class="details-container">
             <h1>Add new quest</h1>
             <a href="/quests">&#60;- Back to the list</a>
+            <p class="validation-message">${message}</p>
             <form class="form" action="" method="POST">
                 <div class="quest-details">
                     <h2>Basic details</h2>
                     <label for="quest-name">Name*:</label>
                     <input type="text" id="quest-name" name="quest-name">
+                    <p class="validation-message">${name_validation_message}</p>
                     <label for="quest-description">Description*:</label>
                     <textarea id="quest-description" name="quest-description"></textarea>
+                    <p class="validation-message">${description_validation_message}</p>
                     <div class="properties-section">
                         <div class="picture">
                             <p>Picture: </p>
@@ -33,12 +36,14 @@
                         <div class=properties>
                             <label for="quest-value">Value (Number of coins student will get for the quest)*:</label><br>
                             <input id="quest-value" type="text" name="quest-value"><br>
+                            <p class="validation-message">${value_validation_message}</p>
                             <label for="quest-type">Type (Basic or Extra):</label><br>
                             <select class= "type-selector" id="quest-type" name="quest-type">
                                 <option value="" selected disabled hidden>Choose...</option>
                                 <option>Basic</option>
                                 <option>Extra</option>
                             </select>
+                            <p class="validation-message">${type_validation_message}</p>
                         </div>
                     </div>
                     <div class="lower-section">
