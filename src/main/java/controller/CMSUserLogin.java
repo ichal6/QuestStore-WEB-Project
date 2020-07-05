@@ -4,7 +4,6 @@ import DAO.UserDAO;
 import exception.ReadException;
 import DAO.UserJDBCDAO;
 import model.CMSUser;
-import session.SessionManager;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,6 +31,7 @@ public class CMSUserLogin extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
+        invalidateOldSession(request);
         boolean isCorrectLogIn = false;
         try {
             isCorrectLogIn = dao.checkUser(email, password);
@@ -39,16 +39,14 @@ public class CMSUserLogin extends HttpServlet {
             throw new ServletException(e);
         }
         if(isCorrectLogIn){
-            CMSUser user = null;
             try {
-                user = dao.getCMSUser(email, password);
+                CMSUser user = dao.getCMSUser(email, password);
+                HttpSession session = request.getSession(true);
+                session.setAttribute("user", user);
+                response.sendRedirect("/dashboard");
             } catch (ReadException e) {
                 throw new ServletException(e);
             }
-            HttpSession session = request.getSession(true);
-            SessionManager.setSession(session, user);
-            //SessionManager.setActualUser(user);
-            response.sendRedirect("/dashboard");
         }
         else{
             String message = "<p class=\"warning-incorrect-login\">You put incorrect data!<p>";
@@ -56,6 +54,13 @@ public class CMSUserLogin extends HttpServlet {
             RequestDispatcher dispatcher
                     = request.getRequestDispatcher("/html-login-and-account/login.jsp");
             dispatcher.forward(request, response);
+        }
+    }
+
+    private void invalidateOldSession(HttpServletRequest request) {
+        HttpSession oldSession = request.getSession(false);
+        if (oldSession != null) {
+            oldSession.invalidate();
         }
     }
 }

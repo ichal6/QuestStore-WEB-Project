@@ -32,7 +32,7 @@
                     <p>Items per page</p>
                 </div>
             </div>
-            <br>${message}
+            <p class="validation-message">${message}</p>
             <div class="list-of-quests">
                 <div class="header-for-list">
                     <span></span>

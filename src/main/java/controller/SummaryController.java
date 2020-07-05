@@ -1,10 +1,10 @@
 package controller;
 
 import DAO.UserJDBCDAO;
+import model.CMSUser;
 import model.SummaryAdmin;
 import model.SummaryMentor;
 import service.SummaryService;
-import session.SessionManager;
 import exception.*;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.*;
 
@@ -35,15 +36,16 @@ public class SummaryController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            boolean isAdmin = SessionManager.getActualUser(req).isAdmin();
+            HttpSession session = req.getSession();
+            CMSUser user = (CMSUser) session.getAttribute("user");
+            boolean isAdmin = user.isAdmin();
             if (isAdmin) {
                 forwardToDashboardAdmin(req, resp);
             } else {
                 forwardToDashboardMentor(req, resp);
             }
 
-        } catch (SQLException | ReadException | ConnectionException | SessionException e ) {
-
+        } catch (SQLException | ReadException | ConnectionException e ) {
             throw new ServletException(e);
         }
     }

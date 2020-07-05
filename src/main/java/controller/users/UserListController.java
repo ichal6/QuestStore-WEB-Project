@@ -1,7 +1,5 @@
 package controller.users;
 
-import DAO.UserDAO;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,40 +10,34 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import DAO.UserJDBCDAO;
 import exception.ReadException;
 import model.CMSUser;
+import service.UserService;
 
 
 @WebServlet(name = "UsersList", urlPatterns = "/user-list")
 public class UserListController extends HttpServlet {
-    private UserDAO dao;
-    private List<CMSUser> allUsers;
+        private UserService userService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        try {
-            dao = new UserJDBCDAO("src/main/resources/database.properties");
-        }
-        catch(IOException ex){
-            throw new ServletException(ex);
-        }
+        userService = new UserService();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, String[]> parameters = req.getParameterMap();
         String type = parameters.get("type")[0];
+        Boolean order = getOrder(parameters);
+        String sortBy = getSortBy(parameters);
+
+        List<CMSUser> allUsers;
 
         try {
-            if(type.equals("admin")){
-                allUsers = dao.getAllAdmins();
-            }else{
-                allUsers = dao.getAllMentors();
-            }
-        } catch (ReadException ex) {
-            throw new ServletException(ex);
+            allUsers = userService.getAllUsers(type, sortBy, order);
+        } catch (ReadException e) {
+            throw new ServletException(e);
         }
 
         req.setAttribute("allUsers", allUsers);
@@ -55,6 +47,20 @@ public class UserListController extends HttpServlet {
                 = req.getRequestDispatcher("/html-cms/users_list.jsp");
         dispatcher.forward(req, resp);
 
-        //resp.sendRedirect("/html-cms/users_list.jsp");
     }
+
+    private Boolean getOrder(Map<String, String[]> parameters){
+        if (parameters.containsKey("order")) {
+            return parameters.get("order")[0].equals("ASC");
+        }
+        return null;
+    }
+
+    private String getSortBy(Map<String, String[]> parameters){
+        if (parameters.containsKey("sortBy")) {
+            return parameters.get("sortBy")[0];
+        }
+        return null;
+    }
+
 }

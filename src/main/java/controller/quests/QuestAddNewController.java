@@ -4,6 +4,8 @@ import DAO.QuestDAO;
 import DAO.QuestJDBCDAO;
 import model.Quest;
 import exception.*;
+import service.QuestService;
+import validation.Validator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,11 +23,13 @@ import static java.lang.Integer.parseInt;
 @WebServlet(name = "QuestAddNewController", urlPatterns = "quests/add")
 public class QuestAddNewController extends HttpServlet {
     private QuestDAO questDAO;
+    private QuestService questService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        questDAO = new QuestJDBCDAO();
+        this.questDAO = new QuestJDBCDAO();
+        this.questService = new QuestService();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,30 +38,19 @@ public class QuestAddNewController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            Quest quest = extractQuestFromHTTPRequest(request);
-            questDAO.insertQuest(quest);
-            response.sendRedirect("/quests");
-        } catch (ConnectionException | ReadException e) {
-            throw new ServletException(e);
+        boolean isInputValid = questService.callInputsValidation(request);
+        if (isInputValid) {
+            try {
+                Quest quest = questService.extractQuestFromHTTPRequest(request);
+                questDAO.insertQuest(quest);
+                request.setAttribute("message", "Quest successfully added!");
+            } catch (ReadException e) {
+                request.setAttribute("error_message", e.getMessage());
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/errorPage");
+                dispatcher.forward(request, response);
+            }
         }
-    }
-
-    private Quest extractQuestFromHTTPRequest(HttpServletRequest request) {
-        String name = request.getParameter("quest-name");
-        String description = request.getParameter("quest-description");
-        int value = Integer.parseInt(request.getParameter("quest-value"));
-        String type = request.getParameter("quest-type");
-        String url = getRandomUrlPath();
-
-        return new Quest(name, description, value, type, url);
-    }
-
-    private String getRandomUrlPath() {
-        List<String> urlPaths = Arrays.asList("quest_logo_01.svg", "quest_logo_02.svg", "quest_logo_03.svg",
-                "quest_logo_04.svg", "quest_logo_05.svg", "quest_logo_06.svg");
-        Random rand = new Random();
-
-        return urlPaths.get(rand.nextInt(urlPaths.size()));
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/quests_add_new.jsp");
+        dispatcher.forward(request, response);
     }
 }

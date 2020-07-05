@@ -13,4 +13,33 @@
         <location>/errorPage</location>
     </error-page>
 
+    <error-page>
+        <error-code>404</error-code>
+        <location>/dashboard</location>
+    </error-page>
+
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>filter.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/dashboard</url-pattern>
+        <url-pattern>/user-list/*</url-pattern>
+        <url-pattern>/levels/*</url-pattern>
+        <url-pattern>/quests/*</url-pattern>
+        <url-pattern>/artifacts/*</url-pattern>
+        <url-pattern>/cms-user/my-account</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>RoleFilter</filter-name>
+        <filter-class>filter.RoleFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>RoleFilter</filter-name>
+        <url-pattern>/user-list/*</url-pattern>
+        <url-pattern>/levels/*</url-pattern>
+    </filter-mapping>
+
+
 </web-app>

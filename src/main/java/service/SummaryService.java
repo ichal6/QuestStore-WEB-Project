@@ -69,7 +69,7 @@ public class SummaryService {
         return userDAO.getAdminsCount();
     }
 
-    private int getArtifactsCount() throws SQLException {
+    private int getArtifactsCount() throws ConnectionException, ReadException {
         return artifactDAO.getArtifactsCount();
     }
 

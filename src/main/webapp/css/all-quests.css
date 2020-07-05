@@ -135,3 +135,8 @@
 .actions {
     max-width: 20px;
 }
+
+.validation-message {
+    padding: 12px;
+    color: #BF343F;
+}

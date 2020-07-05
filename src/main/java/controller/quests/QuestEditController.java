@@ -4,6 +4,7 @@ import DAO.QuestDAO;
 import DAO.QuestJDBCDAO;
 import model.Quest;
 import exception.*;
+import service.QuestService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,24 +17,29 @@ import java.io.IOException;
 @WebServlet(name = "QuestEditController", urlPatterns = "/quests/edit")
 public class QuestEditController extends HttpServlet {
     private QuestDAO questDAO;
+    private QuestService questService;
     private Quest quest;
+    private Integer id;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        questDAO = new QuestJDBCDAO();
+        this.questDAO = new QuestJDBCDAO();
+        this.questService = new QuestService();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            int id = Integer.parseInt(request.getParameter("id"));
+            id = (id == null) ? Integer.parseInt(request.getParameter("id")) : id;
             quest = questDAO.getQuestById(id);
             request.setAttribute("quest", quest);
             RequestDispatcher dispatcher
                     = request.getRequestDispatcher("/html-cms/quests_update.jsp");
             dispatcher.forward(request, response);
-        } catch (ConnectionException | ReadException e) {
-            throw new ServletException(e);
+        } catch (ReadException e) {
+            request.setAttribute("error_message", e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/errorPage");
+            dispatcher.forward(request, response);
         }
     }
 
@@ -44,23 +50,18 @@ public class QuestEditController extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            changeQuestDetails(request);
-            questDAO.updateQuest(quest.getID(), quest);
-        } catch (ConnectionException | ReadException e) {
-            throw new ServletException(e);
+        boolean isInputValid = questService.callInputsValidation(request);
+        if (isInputValid) {
+            try {
+                quest = questService.changeQuestDetails(request, quest);
+                questDAO.updateQuest(quest.getID(), quest);
+                request.setAttribute("message", "Quest successfully modified!");
+            } catch (ReadException e) {
+                request.setAttribute("error_message", e.getMessage());
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/errorPage");
+                dispatcher.forward(request, response);
+            }
         }
-        response.sendRedirect("/quests");
-    }
-
-    private void changeQuestDetails(HttpServletRequest request) {
-        String name = request.getParameter("quest-name");
-        String description = request.getParameter("quest-description");
-        int value = Integer.parseInt(request.getParameter("quest-value"));
-        String type = (request.getParameter("quest-type") != null) ? request.getParameter("quest-type") : quest.getType().name();
-        quest.setName(name);
-        quest.setDescription(description);
-        quest.setValue(value);
-        quest.setType(type);
+        doGet(request, response);
     }
 }
