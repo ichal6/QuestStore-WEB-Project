@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CMSUserTest {
+public class CMSUserTest {
 
     @Test
     @DisplayName("shouldReturnAdminRoleAsString")
-    void getRoleTest1() {
+    public void getRoleTest1() {
        // given
         CMSUser user = new CMSUser.Builder()
                 .userRole(true)
@@ -23,7 +23,7 @@ class CMSUserTest {
 
     @Test
     @DisplayName("It should return Mentor as String")
-    void shouldReturnMentorRoleAsString() {
+    public void shouldReturnMentorRoleAsString() {
         // given
         CMSUser user = new CMSUser.Builder()
                 .userRole(false)
