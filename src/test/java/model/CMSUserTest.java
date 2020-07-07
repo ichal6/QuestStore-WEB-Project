@@ -8,9 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CMSUserTest {
 
     @Test
-    @DisplayName("shouldReturnAdminRoleAsString")
-    public void getRoleTest1() {
-       // given
+    @DisplayName("It should return Admin as String")
+    public void shouldReturnAdminRoleAsString() {
+        //given
         CMSUser user = new CMSUser.Builder()
                 .userRole(true)
                 .build();
