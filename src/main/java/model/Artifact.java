@@ -12,13 +12,14 @@ public class Artifact {
     private String type;
     private Date dateOfAdding;
     private String pictureUrl;
-
+    private boolean isUsed;
 
     public Artifact(String name, String description, int value, String type) {
         this.name = name;
         this.description = description;
         this.value = value;
         this.type = type;
+        this.isUsed = false;
     }
 
     public Artifact(ResultSet resultSet) {
@@ -30,6 +31,7 @@ public class Artifact {
             this.type = resultSet.getString(5);
             this.dateOfAdding = resultSet.getDate(6);
             this.pictureUrl = resultSet.getString(7);
+            this.isUsed = false;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -54,6 +56,7 @@ public class Artifact {
         private String type;
         private Date dateOfAdding;
         private String pictureUrl;
+        private boolean isUsed;
 
         public Builder id(int id) {
             this.id = id;
@@ -99,6 +102,7 @@ public class Artifact {
             artifact.type = this.type;
             artifact.dateOfAdding = this.dateOfAdding;
             artifact.pictureUrl = this.pictureUrl;
+            artifact.isUsed = false;
             return artifact;
         }
     }
@@ -129,5 +133,13 @@ public class Artifact {
 
     public String getPictureUrl() {
         return pictureUrl;
+    }
+
+    public boolean isUsed() {
+        return isUsed;
+    }
+
+    public void setUsed(boolean used) {
+        isUsed = used;
     }
 }
