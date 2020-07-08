@@ -26,7 +26,7 @@
             <div class="upper-section">
                 <div class="h1-button">
                     <h1>All Teams</h1>
-                    <button onclick="location.href='teams_add_new.jsp'" type="button" class="btn">+ Add new team</button>
+                    <button onclick="location.href='/teams/add'" type="button" class="btn">+ Add new team</button>
                 </div>
                 <div class="right-section">
                     <p>Items per page</p>

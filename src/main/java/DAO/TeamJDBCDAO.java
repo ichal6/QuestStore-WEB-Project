@@ -25,7 +25,16 @@ public class TeamJDBCDAO implements TeamDAO {
 
     @Override
     public void addTeam(Team team) throws ReadException {
-
+        try (Connection connection = connectToDB()) {
+            PreparedStatement statement = connection.prepareStatement(
+                    "INSERT INTO team (name, city, start_date) VALUES (?, ?, ?);");
+            statement.setString(1, team.getName());
+            statement.setString(2, team.getCity());
+            statement.setDate(3, team.getStartDate());
+            statement.execute();
+        } catch (SQLException e) {
+            throw new ReadException("Sorry, couldn't insert this team to database");
+        }
     }
 
     @Override

@@ -15,25 +15,30 @@
     <div class="container">
         <jsp:include page="../html-common/cms-navigation.jsp" />
 
-        <div class="details-container"> 
-
+        <div class="details-container">
             <h1>Add new team</h1>
-            <a href="teams_list.jsp">&#60;- Back to the list</a>
-            <div class="personal-details">
-                <h2>Basic details</h2>
-
-                    <div class ="details">
-                        
-                        <div class="person"> Name*: <input type="text" id="person-name" placeholder=""></div>
-                        <div class="person"> City: <input type="text" id="person-city" placeholder=""></div>
-                        <div class="person"> Start date*:<input type="text" id="person-start-date" placeholder=""></div>
-                    
-                        <div class="lower-section">
-                            <p>*- Fields marked like these need to be filled to add new entry</p>
-                            <button class="btn" id="update-admin">Add new</button>
+            <a href="/teams">&#60;- Back to the list</a>
+            <p class="validation-message">${message}</p>
+            <form class="form" action="" method="POST">
+                <div class="personal-details">
+                    <h2>Basic details</h2>
+                        <div class ="details">
+                            <label for="team-name">Name*: </label><br>
+                            <input type="text" id="team-name" name="team-name" placeholder="">
+                            <p class="validation-message">${name_validation_message}</p>
+                            <label for="team-name">City*: </label><br>
+                            <input type="text" id="team-city" name="team-city" placeholder="">
+                            <p class="validation-message">${city_validation_message}</p>
+                            <label for="team-name">Start date*: </label><br>
+                            <input type="text" id="team-start-date" name="team-start-date" placeholder="">
+                            <p class="validation-message">${start_date_validation_message}</p>
+                            <div class="lower-section">
+                                <p>*- Fields marked like these need to be filled to add new entry</p>
+                                <button class="btn" id="update-admin">Add new</button>
+                            </div>
                         </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 

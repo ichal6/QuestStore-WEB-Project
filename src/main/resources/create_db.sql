@@ -19,7 +19,6 @@ CREATE TABLE level(
 	picture_url varchar(100)
 );
 
-
 CREATE TABLE cms_user(
 	cms_user_id serial PRIMARY KEY UNIQUE,
 	name varchar(25) NOT NULL,
@@ -31,7 +30,6 @@ CREATE TABLE cms_user(
 	is_admin BOOLEAN NOT NULL
 );
 
-
 CREATE TABLE class(
 	class_id serial PRIMARY KEY UNIQUE,
 	name varchar(100) NOT NULL,
@@ -39,7 +37,6 @@ CREATE TABLE class(
 	start_date date NOT NULL,
 	end_date date NOT NULL
 );
-
 
 CREATE TABLE wallet(
 	wallet_id serial PRIMARY KEY UNIQUE,

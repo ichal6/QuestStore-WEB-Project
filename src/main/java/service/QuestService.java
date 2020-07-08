@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 public class QuestService {
-    private Validator validator;
+    private final Validator validator;
 
     public QuestService() {
         this.validator = new Validator();
