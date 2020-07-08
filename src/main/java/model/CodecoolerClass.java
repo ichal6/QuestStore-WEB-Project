@@ -114,4 +114,10 @@ public class CodecoolerClass {
     public void setMembers(List<Codecooler> members) {
         this.members = members;
     }
+
+    @Override
+    public String toString(){
+        return String.format("ID = %d, name = %s, city = %s, day of start = %s, day of end = %s"
+                ,id, name, city, startDate, endDate);
+    }
 }
