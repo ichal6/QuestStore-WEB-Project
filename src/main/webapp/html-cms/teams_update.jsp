@@ -1,4 +1,6 @@
 <%@ page import="model.Team" %>
+<%@ page import="model.Codecooler" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" onclick="return hideSubMenu()">
 
@@ -23,86 +25,78 @@
             <p class="validation-message">${message}</p>
 
             <form class="form" action="/quests/edit" method="post">
-            <div class="personal-details">
-                <h2>Basic details</h2>
-                <div class ="details">
-                    <label for="team-name">Name*: </label><br>
-                    <input type="text" id="team-name" name="team-name" value="${team.getName()}">
-                    <p class="validation-message">${name_validation_message}</p>
-                    <label for="team-name">City*: </label><br>
-                    <input type="text" id="team-city" name="team-city" value="${team.getCity()}">
-                    <p class="validation-message">${city_validation_message}</p>
-                    <label for="team-name">Start date*: </label><br>
-                    <input type="text" id="team-start-date" name="team-start-date" value="${team.getStartDate()}">
-                    <p class="validation-message">${start_date_validation_message}</p>
-                    <div class="lower-section">
-                        <p>*- Fields marked like these need to be filled to add new entry</p>
-                        <button class="btn" id="update-admin">Update</button>
-                    </div>
-                </div>
-            </div>
-        </form>
-
-            <div class="personal-details">
-                <div class ="details">
-                    <h2>Codecoolers in the team</h2>
-                </div>
-
-                <div class="codecoolers-in-team">
-                    <div class="header-for-list">
-                        <div> </div>
-                        <div class="name-div">
-                            <span>Name:</span>
+                <div class="personal-details">
+                    <h2>Basic details</h2>
+                    <div class ="details">
+                        <label for="team-name">Name*: </label><br>
+                        <input type="text" id="team-name" name="team-name" value="${team.getName()}">
+                        <p class="validation-message">${name_validation_message}</p>
+                        <label for="team-name">City*: </label><br>
+                        <input type="text" id="team-city" name="team-city" value="${team.getCity()}">
+                        <p class="validation-message">${city_validation_message}</p>
+                        <label for="team-name">Start date*: </label><br>
+                        <input type="text" id="team-start-date" name="team-start-date" value="${team.getStartDate()}">
+                        <p class="validation-message">${start_date_validation_message}</p>
+                        <div class="lower-section">
+                            <p>*- Fields marked like these need to be filled to add new entry</p>
+                            <button class="btn" id="update-admin">Update</button>
                         </div>
-                        <div class="email-div">
-                            <span>Email</span>
-                        </div>
-                        <div class="actions-div">
-                            <span>Actions:</span>
-                        </div>
-
+                    </div>
                 </div>
-                <div class ="team-members">
-                    <div class="team-members-number">1 </div>
-                    <div class="team-members-name">James Bons</div>
-                    <div class="team-members-email">james.bond007@gmail.com</div>
-                    <div class="actions">
-                        <a href=""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
+            </form>
+
+            <form class="form" action="" method="post">
+                <div class="personal-details">
+                    <div class ="details">
+                        <h2>Codecoolers in the team</h2>
                     </div>
 
-                </div> 
-                <div class ="team-members">
-                    <div class="team-members-number">2</div>
-                    <div class="team-members-name">James Bons</div>
-                    <div class="team-members-email">james.bond007@gmail.com</div>
-                    <div class="actions">
-                        <a href=""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
+                    <div class="codecoolers-in-team">
+                        <div class="header-for-list">
+                            <div> </div>
+                            <div class="name-div">
+                                <span>Name:</span>
+                            </div>
+                            <div class="email-div">
+                                <span>Email</span>
+                            </div>
+                            <div class="actions-div">
+                                <span>Actions:</span>
+                            </div>
+                        </div>
+                        <%
+                            List<Codecooler> teamCodecoolersList = (List<Codecooler>) request.getAttribute("teamCodecoolersList");
+                            int count = 0;
+                            for (Codecooler codecooler : teamCodecoolersList) {
+                                count++;
+                        %>
+                        <div class ="team-members">
+                            <div class="team-members-number"><%=count%></div>
+                            <div class="team-members-name"><%=codecooler.getName()%></div>
+                            <div class="team-members-email"><%=codecooler.getEmail()%></div>
+                            <div class="actions">
+                                <a href=""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
+                            </div>
+                        </div>
+                        <%
+                            }
+                        %>
+
+                        <div class="add-new-codecooler">
+                            <label class="title">Add new Student</label><br>
+                            <select class="student-name" id="selector">
+                                <option value="" disabled selected>Select Student </option>
+                                <option>Grażyna Kowalska</option>
+                                <option>Janusz Adamczyk</option>
+                                <option>Ewelina Cielińska</option>
+                            </select>
+                        </div>
+
+                        <button class="btn" id="add-codecooler">Add new</button>
                     </div>
-
-                </div> 
-                <div class ="team-members">
-                    <div class="team-members-number">3</div>
-                    <div class="team-members-name">James Bons</div>
-                    <div class="team-members-email">james.bond007@gmail.com</div>
-                    <div class="actions">
-                        <a href=""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
-                    </div>
-
-                </div> 
-
-                <div class="add-new-codecooler">
-                    <label class="title">Add new Student</label><br>
-                   <select class="student-name" id="selector">
-                        <option value="" disabled selected>Select Student </option>
-                       <option>Grażyna Kowalska</option>
-                       <option>Janusz Adamczyk</option>
-                       <option>Ewelina Cielińska</option>
-                   </select>
                 </div>
+            </form>
 
-                <button class="btn" id="add-codecooler">Add new</button>
-            </div>  
-        </div>
             <div class="personal-details">
                 <h2>Bought artifacts</h2>
                 <div class="list-of-artifacts">
@@ -156,7 +150,7 @@
                 </div>
                 <div class="button-position"> <button class="btn" id="update-quests">Save changes</button></div>
             </div>
-     </div>
+        </div>
      </div>
 
     <jsp:include page="../html-common/footer.html" />
