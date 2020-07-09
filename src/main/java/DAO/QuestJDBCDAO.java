@@ -68,7 +68,6 @@ public class QuestJDBCDAO implements QuestDAO {
 
     @Override
     public Quest getQuestById(int id) throws ReadException {
-
         try (Connection connection = connectToDB()) {
             PreparedStatement pst = connection.prepareStatement("SELECT * FROM quest WHERE quest_id = ?");
             pst.setInt(1, id);

@@ -1,3 +1,4 @@
+<%@ page import="model.Team" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" onclick="return hideSubMenu()">
 
@@ -19,23 +20,28 @@
 
             <h1>Team details</h1>
             <a href="teams_list.jsp">&#60;- Back to the list</a>
+            <p class="validation-message">${message}</p>
+
+            <form class="form" action="/quests/edit" method="post">
             <div class="personal-details">
                 <h2>Basic details</h2>
-
-                    <div class ="details">
-                        
-                        <div class="person"> Name*: <input type="text" id="person-name" value="Tomato-TicTacToe-Team"></div>
-                        <div class="person"> City: <input type="text" id="person-city" value="Cracow"></div>
-                        <div class="person"> Start date*:<input type="text" id="person-start-date" value="05/05/2019"></div>
-                    
-                        <div class="lower-section">
-                            <p>*- Fields marked like these need to be filled</p>
-                            <button class="btn" id="update-admin">Update</button>
-                        </div>
+                <div class ="details">
+                    <label for="team-name">Name*: </label><br>
+                    <input type="text" id="team-name" name="team-name" value="${team.getName()}">
+                    <p class="validation-message">${name_validation_message}</p>
+                    <label for="team-name">City*: </label><br>
+                    <input type="text" id="team-city" name="team-city" value="${team.getCity()}">
+                    <p class="validation-message">${city_validation_message}</p>
+                    <label for="team-name">Start date*: </label><br>
+                    <input type="text" id="team-start-date" name="team-start-date" value="${team.getStartDate()}">
+                    <p class="validation-message">${start_date_validation_message}</p>
+                    <div class="lower-section">
+                        <p>*- Fields marked like these need to be filled to add new entry</p>
+                        <button class="btn" id="update-admin">Update</button>
+                    </div>
                 </div>
-
-               
             </div>
+        </form>
 
             <div class="personal-details">
                 <div class ="details">

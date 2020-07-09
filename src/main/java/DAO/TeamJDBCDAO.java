@@ -67,7 +67,17 @@ public class TeamJDBCDAO implements TeamDAO {
 
     @Override
     public Team getTeamById(int id) throws ReadException {
-        return null;
+        try (Connection connection = connectToDB()) {
+            PreparedStatement pst = connection.prepareStatement("SELECT * FROM team WHERE team_id = ?");
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                return extractTeamFromResultSet(rs);
+            }
+            throw new ReadException("Sorry, this quest does not exist");
+        } catch (SQLException e) {
+            throw new ReadException("Sorry, couldn't get this quest");
+        }
     }
 
     @Override

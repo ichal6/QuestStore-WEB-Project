@@ -19,6 +19,7 @@
             <h1>Quest's details</h1>
             <a href="/quests">&#60;- Back to the list</a>
             <p class="validation-message">${message}</p>
+
             <form class="quest-details" action="/quests/edit" method="post">
                 <h2>Basic details</h2>
                 <label for="quest-name">Name*:</label>
