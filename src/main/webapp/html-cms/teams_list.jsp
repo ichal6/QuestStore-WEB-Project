@@ -73,8 +73,8 @@
                     <div class="team-city"><%=team.getCity()%></div>
                     <div class="date-of-add"><%=team.getStartDate()%></div>
                     <div class="actions">
-                        <a href="teams_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
-                        <a href="#"><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
+                        <a href="/teams/edit?id=<%=team.getId()%>"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
+                        <a href="/teams/delete?id=<%=team.getId()%>"><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
                     </div>
                 </div>
                 <%

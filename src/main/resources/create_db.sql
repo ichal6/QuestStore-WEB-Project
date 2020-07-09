@@ -67,7 +67,8 @@ CREATE TABLE codecooler(
 	ON UPDATE CASCADE,
 	CONSTRAINT codecooler_team_id FOREIGN KEY (team_id)
 	REFERENCES team (team_id)
-	ON UPDATE CASCADE,
+	ON UPDATE CASCADE
+	ON DELETE SET NULL,
 	CONSTRAINT codecooler_wallet_id FOREIGN KEY (wallet_id)
 	REFERENCES wallet (wallet_id)
 	ON UPDATE CASCADE

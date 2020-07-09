@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Properties;
 
 public class TeamJDBCDAO implements TeamDAO {
+
     private Connection connectToDB() {
         try {
             Properties prop = PropertiesReader.readProperties("src/main/resources/database.properties");
@@ -39,7 +40,13 @@ public class TeamJDBCDAO implements TeamDAO {
 
     @Override
     public void deleteTeam(int id) throws ReadException {
-
+        try (Connection connection = connectToDB()) {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM team WHERE team_id = ?;");
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new ReadException("Sorry, couldn't delete this team");
+        }
     }
 
     @Override
