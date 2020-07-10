@@ -35,7 +35,7 @@ public class CodecoolerClassJDBCDAO implements CodecoolerClassDAO{
             ResultSet rs = pst.executeQuery();
             createListOfClasses(rs, classes);
         }catch (SQLException ex){
-            throw new ReadException("You cannot access to database. " + ex.getMessage());
+            throw new ReadException("You cannot access to classes. " + ex.getMessage());
         }
         return classes;
     }
@@ -48,7 +48,7 @@ public class CodecoolerClassJDBCDAO implements CodecoolerClassDAO{
             ResultSet rs = pst.executeQuery();
             return createNewClass(rs);
         } catch (SQLException ex) {
-            throw new ReadException("You cannot access to database. " + ex);
+            throw new ReadException("You cannot access to this class. " + ex);
         }
     }
 
