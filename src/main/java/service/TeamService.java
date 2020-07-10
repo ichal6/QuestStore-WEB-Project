@@ -38,6 +38,17 @@ public class TeamService {
                 .build();
     }
 
+    public Team changeTeamDetails(HttpServletRequest request, Team team) {
+        String name = request.getParameter("team-name");
+        String city = request.getParameter("team-city");
+        Date date = Date.valueOf(request.getParameter("team-start-date"));
+        team.setName(name);
+        team.setCity(city);
+        team.setStartDate(date);
+
+        return team;
+    }
+
     private boolean callNameValidation(HttpServletRequest request, boolean isInputValid, int min, int max) {
         try {
             validator.validateStringLength(request.getParameter("team-name"), min, max);

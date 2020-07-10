@@ -82,7 +82,17 @@ public class TeamJDBCDAO implements TeamDAO {
 
     @Override
     public void editTeam(int id, Team team) throws ReadException {
-
+        String query = "UPDATE team SET name = ?, city = ?, start_date = ? WHERE team_id = ?";
+        try (Connection connection = connectToDB()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, team.getName());
+            statement.setString(2, team.getCity());
+            statement.setDate(3, team.getStartDate());
+            statement.setInt(4, team.getId());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            throw new ReadException("You cannot update this team!");
+        }
     }
 
     private Team extractTeamFromResultSet(ResultSet rs) throws SQLException {

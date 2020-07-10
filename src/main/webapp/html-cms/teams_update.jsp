@@ -21,10 +21,11 @@
         <div class="details-container"> 
 
             <h1>Team details</h1>
-            <a href="teams_list.jsp">&#60;- Back to the list</a>
+            <a href="/teams">&#60;- Back to the list</a>
             <p class="validation-message">${message}</p>
 
-            <form class="form" action="/quests/edit" method="post">
+            <form class="form" action="" method="post">
+                <input type="hidden" name="action" value="basic-information">
                 <div class="personal-details">
                     <h2>Basic details</h2>
                     <div class ="details">
@@ -38,7 +39,7 @@
                         <input type="text" id="team-start-date" name="team-start-date" value="${team.getStartDate()}">
                         <p class="validation-message">${start_date_validation_message}</p>
                         <div class="lower-section">
-                            <p>*- Fields marked like these need to be filled to add new entry</p>
+                            <p>*- Fields marked like these need to be filled to edit the team.</p>
                             <button class="btn" id="update-admin">Update</button>
                         </div>
                     </div>
@@ -75,7 +76,10 @@
                             <div class="team-members-name"><%=codecooler.getName()%></div>
                             <div class="team-members-email"><%=codecooler.getEmail()%></div>
                             <div class="actions">
-                                <a href=""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
+                                <%
+                                    Team team = (Team) request.getAttribute("team");
+                                %>
+                                <a href="/teams/edit/delete_codecooler?team_id=<%=team.getId()%>&codecooler_id=<%=codecooler.getId()%>"><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
                             </div>
                         </div>
                         <%

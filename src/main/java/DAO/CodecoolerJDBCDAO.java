@@ -69,7 +69,7 @@ public class CodecoolerJDBCDAO implements CodecoolerDAO {
             pst.setInt(1, teamId);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                Codecooler codecooler = extractLimitedCodecoolerFromResultSet(rs);
+                Codecooler codecooler = extractCodecoolerFromResultSet(rs);
                 codecoolerList.add(codecooler);
             }
         } catch (SQLException e) {
@@ -88,6 +88,18 @@ public class CodecoolerJDBCDAO implements CodecoolerDAO {
         return 0;
     }
 
+    @Override
+    public void clearCodecoolerTeamId(int id) throws ReadException {
+        String query = "UPDATE codecooler SET team_id = NULL WHERE codecooler_id = ?";
+        try (Connection connection = connectToDB()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            throw new ReadException("You cannot delete this codecooler from the team!");
+        }
+    }
+
     private Codecooler extractCodecoolerFromResultSet(ResultSet rs) throws SQLException, ReadException {
         return new Codecooler.Builder()
                 .withID(rs.getInt("team_id"))
@@ -100,18 +112,6 @@ public class CodecoolerJDBCDAO implements CodecoolerDAO {
                 .withClassId(rs.getInt("class_id"))
                 .withTeamId(rs.getInt("team_id"))
                 .withWallet(getWalletById(rs.getInt("wallet_id")))
-                .build();
-    }
-
-    private Codecooler extractLimitedCodecoolerFromResultSet(ResultSet rs) throws SQLException {
-        return new Codecooler.Builder()
-                .withID(rs.getInt("team_id"))
-                .withName(rs.getString("name"))
-                .withEmail(rs.getString("email"))
-                .withCity(rs.getString("city"))
-                .withDateOfAdding(rs.getDate("date_of_adding"))
-                .withClassId(rs.getInt("class_id"))
-                .withTeamId(rs.getInt("team_id"))
                 .build();
     }
 

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class TeamEditController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            id = (id == null) ? Integer.parseInt(request.getParameter("id")) : id;
+            updateTeamIdFromRequestIfExists(request);
             team = teamDAO.getTeamById(id);
             teamCodecoolersList = codecoolerDAO.getCodecoolersByTeamId(id);
             request.setAttribute("team", team);
@@ -57,6 +58,35 @@ public class TeamEditController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPut(request, response);
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+
+        if (action.equals("basic-information")) {
+            boolean isInputValid = teamService.callInputsValidation(request);
+            if (isInputValid) {
+                try {
+                    team = teamService.changeTeamDetails(request, team);
+                    teamDAO.editTeam(id, team);
+                    request.setAttribute("message", "Team successfully modified!");
+                } catch (ReadException e) {
+                    request.setAttribute("error_message", e.getMessage());
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/errorPage");
+                    dispatcher.forward(request, response);
+                }
+            }
+            doGet(request, response);
+        }
+    }
+
+    private void updateTeamIdFromRequestIfExists(HttpServletRequest request) {
+        try {
+            id = Integer.parseInt(request.getParameter("id"));
+        } catch (NumberFormatException e) {
+            // clause left empty on purpose - if we don't jave "id" parameter, the id field already has a value
+        }
     }
 
 //    @Override
