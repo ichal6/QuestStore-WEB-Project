@@ -7,6 +7,7 @@ import model.CodecoolerClass;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CodecoolerClassJDBCDAO implements CodecoolerClassDAO{
@@ -28,7 +29,15 @@ public class CodecoolerClassJDBCDAO implements CodecoolerClassDAO{
 
     @Override
     public List<CodecoolerClass> getAllCodecoolerClasss() throws ReadException {
-        return null;
+        List<CodecoolerClass> classes = new ArrayList<>();
+        try(Connection con = this.dataSource.getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM class")){
+            ResultSet rs = pst.executeQuery();
+            createListOfClasses(rs, classes);
+        }catch (SQLException ex){
+            throw new ReadException("You cannot access to database. " + ex.getMessage());
+        }
+        return classes;
     }
 
     @Override
@@ -39,7 +48,7 @@ public class CodecoolerClassJDBCDAO implements CodecoolerClassDAO{
             ResultSet rs = pst.executeQuery();
             return createNewClass(rs);
         } catch (SQLException ex) {
-            throw new ReadException("You cannot access to database." + ex);
+            throw new ReadException("You cannot access to database. " + ex);
         }
     }
 
@@ -67,5 +76,25 @@ public class CodecoolerClassJDBCDAO implements CodecoolerClassDAO{
         else{
             throw new ReadException("This class doesn't exist!");
         }
+    }
+
+    private List<CodecoolerClass> createListOfClasses(ResultSet rs, List<CodecoolerClass> listOfClasses) throws SQLException, ReadException {
+        while(rs.next()) {
+            int id = rs.getInt(1);
+            String name = rs.getString(2);
+            String city = rs.getString(3);
+            Date startDate = rs.getDate(4);
+            Date endDate = rs.getDate(5);
+
+            listOfClasses.add(new CodecoolerClass.Builder()
+                    .withID(id)
+                    .withName(name)
+                    .withCity(city)
+                    .withStartDate(startDate)
+                    .withEndDate(endDate)
+                    .build());
+        }
+
+        return listOfClasses;
     }
 }

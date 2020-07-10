@@ -7,16 +7,10 @@ import model.CodecoolerClass;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        CodecoolerClass simpleClass = new CodecoolerClass
-                .Builder()
-                .withID(1)
-                .withCity("Mielec")
-                .withName("Nasza Klasa")
-                .build();
-
         PGSimpleDataSource dataSource = null;
 
         try {
@@ -28,7 +22,9 @@ public class Main {
         CodecoolerClassDAO dao = new CodecoolerClassJDBCDAO(dataSource);
 
         try {
-            System.out.println(dao.getCodecoolerClassById(1));
+            List<CodecoolerClass> classes = dao.getAllCodecoolerClasss();
+            classes.stream().forEach(x -> System.out.println(x));
+            //System.out.println(dao.getAllCodecoolerClasss());
         } catch (ReadException e) {
             e.printStackTrace();
         }
