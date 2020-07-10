@@ -47,11 +47,11 @@
             </form>
 
             <form class="form" action="" method="post">
+                <input type="hidden" name="action" value="team-members">
                 <div class="personal-details">
                     <div class ="details">
                         <h2>Codecoolers in the team</h2>
                     </div>
-
                     <div class="codecoolers-in-team">
                         <div class="header-for-list">
                             <div> </div>
@@ -67,6 +67,7 @@
                         </div>
                         <%
                             List<Codecooler> teamCodecoolersList = (List<Codecooler>) request.getAttribute("teamCodecoolersList");
+                            Team team = (Team) request.getAttribute("team");
                             int count = 0;
                             for (Codecooler codecooler : teamCodecoolersList) {
                                 count++;
@@ -76,26 +77,26 @@
                             <div class="team-members-name"><%=codecooler.getName()%></div>
                             <div class="team-members-email"><%=codecooler.getEmail()%></div>
                             <div class="actions">
-                                <%
-                                    Team team = (Team) request.getAttribute("team");
-                                %>
                                 <a href="/teams/edit/delete_codecooler?team_id=<%=team.getId()%>&codecooler_id=<%=codecooler.getId()%>"><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
                             </div>
                         </div>
                         <%
                             }
                         %>
-
                         <div class="add-new-codecooler">
-                            <label class="title">Add new Student</label><br>
-                            <select class="student-name" id="selector">
+                            <label for="selector" class="title">Add new Student</label><br>
+                            <select name="student" class="student-name" id="selector">
                                 <option value="" disabled selected>Select Student </option>
-                                <option>Grażyna Kowalska</option>
-                                <option>Janusz Adamczyk</option>
-                                <option>Ewelina Cielińska</option>
+                                <%
+                                    List<Codecooler> allCodecoolersList = (List<Codecooler>) request.getAttribute("allRemainingCodecoolersList");
+                                    for (Codecooler codecooler : allCodecoolersList) {
+                                %>
+                                <option value=<%=codecooler.getId()%>><%=codecooler.getName()%></option>
+                                <%
+                                    }
+                                %>
                             </select>
                         </div>
-
                         <button class="btn" id="add-codecooler">Add new</button>
                     </div>
                 </div>

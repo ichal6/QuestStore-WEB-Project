@@ -38,12 +38,33 @@ public class CodecoolerJDBCDAO implements CodecoolerDAO {
 
     @Override
     public List<Codecooler> getAllCodecoolers() throws ReadException {
-        return null;
+        List<Codecooler> codecoolerList = new ArrayList<>();
+        try (Connection connection = connectToDB()) {
+            PreparedStatement pst = connection.prepareStatement("SELECT * FROM codecooler");
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Codecooler codecooler = extractCodecoolerFromResultSet(rs);
+                codecoolerList.add(codecooler);
+            }
+        } catch (SQLException e) {
+            throw new ReadException("Sorry, couldn't get codecoolers list");
+        }
+        return codecoolerList;
     }
 
     @Override
     public Codecooler getCodecoolerById(int id) throws ReadException {
-        return null;
+        try (Connection connection = connectToDB()) {
+            PreparedStatement pst = connection.prepareStatement("SELECT * FROM codecooler WHERE codecooler_id = ?");
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                return extractCodecoolerFromResultSet(rs);
+            }
+            throw new ReadException("Sorry, this codecooler does not exist");
+        } catch (SQLException e) {
+            throw new ReadException("Sorry, couldn't get this codecooler");
+        }
     }
 
     @Override
@@ -53,7 +74,22 @@ public class CodecoolerJDBCDAO implements CodecoolerDAO {
 
     @Override
     public void editCodecooler(int id, Codecooler codecooler) throws ReadException {
-
+        String query = "UPDATE codecooler SET name = ?, email = ?, password = ?, city = ?, date_of_adding = ?, picture_url = ?, class_id = ?, team_id = ? WHERE codecooler_id = ?";
+        try (Connection connection = connectToDB()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, codecooler.getName());
+            statement.setString(2, codecooler.getEmail());
+            statement.setString(3, codecooler.getPassword());
+            statement.setString(4, codecooler.getCity());
+            statement.setDate(5, codecooler.getDateOfAdding());
+            statement.setString(6, codecooler.getPictureURL());
+            statement.setInt(7, codecooler.getClassId());
+            statement.setInt(8, codecooler.getTeamId());
+            statement.setInt(9, codecooler.getId());
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            throw new ReadException("You cannot update this codecooler");
+        }
     }
 
     @Override
@@ -102,7 +138,7 @@ public class CodecoolerJDBCDAO implements CodecoolerDAO {
 
     private Codecooler extractCodecoolerFromResultSet(ResultSet rs) throws SQLException, ReadException {
         return new Codecooler.Builder()
-                .withID(rs.getInt("team_id"))
+                .withID(rs.getInt("codecooler_id"))
                 .withName(rs.getString("name"))
                 .withEmail(rs.getString("email"))
                 .withPassword(rs.getString("password"))

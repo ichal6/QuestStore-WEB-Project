@@ -27,6 +27,7 @@ public class TeamEditController extends HttpServlet {
     private CodecoolerDAO codecoolerDAO;
     private Team team;
     private List<Codecooler> teamCodecoolersList;
+    private List<Codecooler> allRemainingCodecoolersList;
     private Integer id;
 
     @Override
@@ -36,15 +37,22 @@ public class TeamEditController extends HttpServlet {
         this.teamService = new TeamService();
         this.codecoolerDAO = new CodecoolerJDBCDAO();
         this.teamCodecoolersList = new ArrayList<>();
+        this.allRemainingCodecoolersList = new ArrayList<>();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             updateTeamIdFromRequestIfExists(request);
+
             team = teamDAO.getTeamById(id);
             teamCodecoolersList = codecoolerDAO.getCodecoolersByTeamId(id);
+            allRemainingCodecoolersList = codecoolerDAO.getAllCodecoolers();
+            allRemainingCodecoolersList.removeAll(teamCodecoolersList);
+
             request.setAttribute("team", team);
             request.setAttribute("teamCodecoolersList", teamCodecoolersList);
+            request.setAttribute("allRemainingCodecoolersList", allRemainingCodecoolersList);
+
             RequestDispatcher dispatcher
                     = request.getRequestDispatcher("/html-cms/teams_update.jsp");
             dispatcher.forward(request, response);
@@ -77,8 +85,20 @@ public class TeamEditController extends HttpServlet {
                     dispatcher.forward(request, response);
                 }
             }
-            doGet(request, response);
+        } else if (action.equals("team-members")) {
+            try {
+                int studentId = Integer.parseInt(request.getParameter("student"));
+                Codecooler codecooler = codecoolerDAO.getCodecoolerById(studentId);
+                codecooler.setTeamId(id);
+                codecoolerDAO.editCodecooler(studentId, codecooler);
+                request.setAttribute("message", "Codecooler succesfully added to this team!");
+            } catch (NumberFormatException e) {
+                request.setAttribute("message", "You have to choose a codecooler to add!");
+            } catch (ReadException e) {
+                request.setAttribute("message", e.getMessage());
+            }
         }
+        doGet(request, response);
     }
 
     private void updateTeamIdFromRequestIfExists(HttpServletRequest request) {
