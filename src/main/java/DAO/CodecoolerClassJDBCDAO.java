@@ -24,7 +24,13 @@ public class CodecoolerClassJDBCDAO implements CodecoolerClassDAO{
 
     @Override
     public void deleteCodecoolerClass(int id) throws ReadException {
-
+        try(Connection con = this.dataSource.getConnection();
+            PreparedStatement pst = con.prepareStatement("DELETE FROM class WHERE class_id = ?")){
+            pst.setInt(1, id);
+            pst.execute();
+        }catch(SQLException ex){
+            throw new ReadException("You cannot delete this class. " + ex.getMessage());
+        }
     }
 
     @Override
