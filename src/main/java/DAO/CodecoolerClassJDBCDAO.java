@@ -19,7 +19,17 @@ public class CodecoolerClassJDBCDAO implements CodecoolerClassDAO{
 
     @Override
     public void addCodecoolerClass(CodecoolerClass codecoolerClass) throws ReadException {
+        try(Connection con = this.dataSource.getConnection();
+            PreparedStatement pst = con.prepareStatement("INSERT INTO class VALUES (DEFAULT, ?,?,?,?)")){
+            pst.setString(1, codecoolerClass.getName());
+            pst.setString(2, codecoolerClass.getCity());
+            pst.setDate(3, codecoolerClass.getStartDate());
+            pst.setDate(4, codecoolerClass.getEndDate());
 
+            pst.execute();
+        }catch(SQLException ex){
+            throw new ReadException("You cannot add class. " + ex.getMessage());
+        }
     }
 
     @Override
