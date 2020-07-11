@@ -1,6 +1,7 @@
 <%@ page import="model.Team" %>
 <%@ page import="model.Codecooler" %>
 <%@ page import="java.util.List" %>
+<%@ page import="model.Artifact" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" onclick="return hideSubMenu()">
 
@@ -102,59 +103,47 @@
                 </div>
             </form>
 
-            <div class="personal-details">
-                <h2>Bought artifacts</h2>
-                <div class="list-of-artifacts">
-                    <div class="header-for-list">
-                        <span></span>
-                        <div class="name-div"><span>Name:</span></div>
-                        <div class="type-div"><span>Type:</span></div>
-                        <div class="when-div"><span>When:</span></div>
-                        <div class="earned-div"><span>Cost:</span></div>
-                        <div class="actions"><span>Used/Not Used:</span></div>
+            <form class="form" action="" method="post">
+                <input type="hidden" name="action" value="team-artifacts">
+                <div class="personal-details">
+                    <h2>Bought artifacts</h2>
+                    <div class="list-of-artifacts">
+                        <div class="header-for-list">
+                            <span></span>
+                            <div class="name-div"><span>Name:</span></div>
+                            <div class="type-div"><span>Type:</span></div>
+                            <div class="when-div"><span>When:</span></div>
+                            <div class="earned-div"><span>Cost:</span></div>
+                            <div class="actions"><span>Used/Not Used:</span></div>
+                        </div>
                     </div>
-                </div>
-                <div class="quest-details">
-                    <div class="quest-number">1.</div>
-                    <div class="quest-name">Private Mentoring</div>
-                    <div class="quest-type">Single</div>
-                    <div class="quest-date">11/07/2020</div>
-                    <div class="class">50</div>
-                    <div class="used-not">
-                        <select class="selector">
-                            <option> Used</option>
-                            <option> Not Used</option>
-                        </select>
+                    <%
+                        List<Artifact> artifactsList = (List<Artifact>) request.getAttribute("teamArtifactsList");
+                        count = 0;
+                        for (Artifact artifact : artifactsList) {
+                            count++;
+                            String selectedValue = String.valueOf(artifact.isUsed());
+                    %>
+                    <div class="quest-details">
+                        <div class="quest-number"><%=count%></div>
+                        <div class="quest-name"><%=artifact.getName()%></div>
+                        <div class="quest-type"><%=artifact.getType()%></div>
+                        <div class="quest-date"><%=artifact.getDateOfAdding()%></div>
+                        <div class="class"><%=artifact.getValue()%></div>
+                        <div class="used-not">
+                            <select class="selector" name="is-used">
+                                <option selected><%=artifact.isUsedtoString()%></option>
+                                <option>Used</option>
+                                <option>Not Used</option>
+                            </select>
+                        </div>
                     </div>
+                    <%
+                        }
+                    %>
+                    <div class="button-position"> <button class="btn" id="update-quests">Save changes</button></div>
                 </div>
-                <div class="quest-details">
-                    <div class="quest-number">2.</div>
-                    <div class="quest-name">Extra material for current topic</div>
-                    <div class="quest-type">Team</div>
-                    <div class="quest-date">11/07/2020</div>
-                    <div class="class">300</div>
-                    <div class="used-not">
-                        <select class="selector">
-                            <option> Used</option>
-                            <option> Not Used</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="quest-details">
-                    <div class="quest-number">1.</div>
-                    <div class="quest-name">Private Mentoring</div>
-                    <div class="quest-type">Single</div>
-                    <div class="quest-date">11/07/2020</div>
-                    <div class="class">50</div>
-                    <div class="used-not">
-                        <select class="selector">
-                            <option> Used</option>
-                            <option> Not Used</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="button-position"> <button class="btn" id="update-quests">Save changes</button></div>
-            </div>
+            </form>
         </div>
      </div>
 

@@ -139,6 +139,10 @@ public class Artifact {
         return isUsed;
     }
 
+    public String isUsedtoString() {
+        return (isUsed) ? "Used" : "Not Used";
+    }
+
     public void setUsed(boolean used) {
         isUsed = used;
     }

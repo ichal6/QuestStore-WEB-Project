@@ -175,7 +175,7 @@ INSERT INTO team_artifacts
 values(default, 1, 1, TO_DATE('2020-04-01','YYYY-MM-DD'), FALSE);
 
 INSERT INTO team_artifacts
-values(default, 1, 1, TO_DATE('2020-04-05','YYYY-MM-DD'), FALSE);
+values(default, 1, 3, TO_DATE('2020-04-05','YYYY-MM-DD'), FALSE);
 
 INSERT INTO team_artifacts
 values(default, 1, 2, TO_DATE('2020-06-01','YYYY-MM-DD'), TRUE);

@@ -1,10 +1,8 @@
 package controller.teams;
 
-import DAO.CodecoolerDAO;
-import DAO.CodecoolerJDBCDAO;
-import DAO.TeamDAO;
-import DAO.TeamJDBCDAO;
+import DAO.*;
 import exception.ReadException;
+import model.Artifact;
 import model.Codecooler;
 import model.Team;
 import service.TeamService;
@@ -19,16 +17,17 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "TeamEditController", urlPatterns = "/teams/edit")
 public class TeamEditController extends HttpServlet {
     private TeamDAO teamDAO;
     private TeamService teamService;
     private CodecoolerDAO codecoolerDAO;
+    private ArtifactDAO artifactDAO;
     private Team team;
-    private List<Codecooler> teamCodecoolersList;
-    private List<Codecooler> allRemainingCodecoolersList;
     private Integer id;
+    private List<Artifact> artifactsList;
 
     @Override
     public void init() throws ServletException {
@@ -36,8 +35,8 @@ public class TeamEditController extends HttpServlet {
         this.teamDAO = new TeamJDBCDAO();
         this.teamService = new TeamService();
         this.codecoolerDAO = new CodecoolerJDBCDAO();
-        this.teamCodecoolersList = new ArrayList<>();
-        this.allRemainingCodecoolersList = new ArrayList<>();
+        this.artifactDAO = new ArtifactJDBCDAO();
+        this.artifactsList = new ArrayList<>();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -45,13 +44,15 @@ public class TeamEditController extends HttpServlet {
             updateTeamIdFromRequestIfExists(request);
 
             team = teamDAO.getTeamById(id);
-            teamCodecoolersList = codecoolerDAO.getCodecoolersByTeamId(id);
-            allRemainingCodecoolersList = codecoolerDAO.getAllCodecoolers();
+            List<Codecooler> teamCodecoolersList = codecoolerDAO.getCodecoolersByTeamId(id);
+            List<Codecooler> allRemainingCodecoolersList = codecoolerDAO.getAllCodecoolers();
             allRemainingCodecoolersList.removeAll(teamCodecoolersList);
+            artifactsList = artifactDAO.getArtifactsByTeamId(id);
 
             request.setAttribute("team", team);
             request.setAttribute("teamCodecoolersList", teamCodecoolersList);
             request.setAttribute("allRemainingCodecoolersList", allRemainingCodecoolersList);
+            request.setAttribute("teamArtifactsList", artifactsList);
 
             RequestDispatcher dispatcher
                     = request.getRequestDispatcher("/html-cms/teams_update.jsp");
@@ -85,6 +86,7 @@ public class TeamEditController extends HttpServlet {
                     dispatcher.forward(request, response);
                 }
             }
+
         } else if (action.equals("team-members")) {
             try {
                 int studentId = Integer.parseInt(request.getParameter("student"));
@@ -94,6 +96,17 @@ public class TeamEditController extends HttpServlet {
                 request.setAttribute("message", "Codecooler succesfully added to this team!");
             } catch (NumberFormatException e) {
                 request.setAttribute("message", "You have to choose a codecooler to add!");
+            } catch (ReadException e) {
+                request.setAttribute("message", e.getMessage());
+            }
+
+        } else if (action.equals("team-artifacts")) {
+            try {
+                String[] strings = request.getParameterMap().get("is-used");
+                callArtifactUsageChange(strings);
+                request.setAttribute("message", "You've successfully changed this team's quest!");
+            } catch (NullPointerException e) {
+                request.setAttribute("message", "You can't edit quests if the team doesn't have any!");
             } catch (ReadException e) {
                 request.setAttribute("message", e.getMessage());
             }
@@ -109,20 +122,23 @@ public class TeamEditController extends HttpServlet {
         }
     }
 
-//    @Override
-//    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        boolean isInputValid = questService.callInputsValidation(request);
-//        if (isInputValid) {
-//            try {
-//                quest = questService.changeQuestDetails(request, quest);
-//                questDAO.updateQuest(quest.getID(), quest);
-//                request.setAttribute("message", "Quest successfully modified!");
-//            } catch (ReadException e) {
-//                request.setAttribute("error_message", e.getMessage());
-//                RequestDispatcher dispatcher = request.getRequestDispatcher("/errorPage");
-//                dispatcher.forward(request, response);
-//            }
-//        }
-//        doGet(request, response);
-//    }
+    private boolean changeIsUsedTextIntoBoolean(String text) {
+        return text.toUpperCase().trim().equals("USED");
+    }
+
+    private void callArtifactUsageChange(String[] booleansArray) throws ReadException {
+        int count = 0;
+        if (booleansArray.length == 0) {
+            throw new NullPointerException();
+        }
+        while (count < artifactsList.size()) {
+            boolean isUsed = changeIsUsedTextIntoBoolean(booleansArray[count]);
+            Artifact artifact = artifactsList.get(count);
+            if (isUsed != artifact.isUsed()) {
+                artifactDAO.markIfArtifactUsed(artifact.getId(), isUsed);
+                artifact.setUsed(isUsed);
+            }
+            count++;
+        }
+    }
 }
