@@ -113,13 +113,15 @@ CREATE TABLE codecooler_artifacts(
 	codecooler_id integer,
 	artifact_id integer,
 	date_of_buying date NOT NULL DEFAULT CURRENT_DATE,
-	is_used boolean,
+	is_used boolean DEFAULT FALSE,
 	CONSTRAINT codecooler_artifacts_codecooler_id FOREIGN KEY(codecooler_id)
 	REFERENCES codecooler(codecooler_id)
-	ON UPDATE CASCADE,
+	ON UPDATE CASCADE
+	ON DELETE CASCADE,
 	CONSTRAINT codecooler_artifacts_artifact_id FOREIGN KEY(artifact_id)
 	REFERENCES artifact(artifact_id)
 	ON UPDATE CASCADE
+	ON DELETE CASCADE
 	);
 
 CREATE TABLE team_artifacts(
@@ -127,11 +129,13 @@ CREATE TABLE team_artifacts(
 	team_id integer,
 	artifact_id integer,
 	date_of_buying date NOT NULL DEFAULT CURRENT_DATE,
-	is_used boolean,
+	is_used boolean DEFAULT FALSE,
 	CONSTRAINT team_artifacts_team_id FOREIGN KEY(team_id)
 	REFERENCES team(team_id)
-	ON UPDATE CASCADE,
+	ON UPDATE CASCADE
+	ON DELETE CASCADE,
 	CONSTRAINT team_artifacts_artifact_id FOREIGN KEY(artifact_id)
  	REFERENCES artifact(artifact_id)
 	ON UPDATE CASCADE
+	ON DELETE CASCADE
 );

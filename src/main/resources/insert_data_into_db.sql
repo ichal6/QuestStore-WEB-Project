@@ -100,9 +100,6 @@ values(default,'Extra materials for chosen topic','Blablabla','10000','Team',def
 
 
 
-
-
-
 INSERT INTO wallet
 values(default);
 
@@ -174,4 +171,20 @@ TO_DATE('2020-04-01','YYYY-MM-DD'),
 1,
 default);
 
+INSERT INTO team_artifacts
+values(default, 1, 1, TO_DATE('2020-04-01','YYYY-MM-DD'), FALSE);
 
+INSERT INTO team_artifacts
+values(default, 1, 1, TO_DATE('2020-04-05','YYYY-MM-DD'), FALSE);
+
+INSERT INTO team_artifacts
+values(default, 1, 2, TO_DATE('2020-06-01','YYYY-MM-DD'), TRUE);
+
+INSERT INTO team_artifacts
+values(default, 2, 3, TO_DATE('2020-04-01','YYYY-MM-DD'), FALSE);
+
+INSERT INTO team_artifacts
+values(default, 3, 1, TO_DATE('2020-07-01','YYYY-MM-DD'), TRUE);
+
+INSERT INTO team_artifacts
+values(default, 3, 4, TO_DATE('2020-04-15','YYYY-MM-DD'), FALSE);
