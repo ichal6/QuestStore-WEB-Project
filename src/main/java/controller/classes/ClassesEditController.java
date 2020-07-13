@@ -1,10 +1,9 @@
 package controller.classes;
 
-import DAO.CodecoolerClassDAO;
-import DAO.CodecoolerClassJDBCDAO;
-import DAO.DataSourceReader;
+import DAO.*;
 import exception.ConnectionException;
 import exception.ReadException;
+import model.Codecooler;
 import model.CodecoolerClass;
 import org.postgresql.ds.PGSimpleDataSource;
 
@@ -15,12 +14,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @WebServlet(name = "ClassesEditController", urlPatterns = "/classes/edit")
 public class ClassesEditController extends HttpServlet {
     private PGSimpleDataSource ds;
-    private CodecoolerClassDAO dao;
+    private CodecoolerClassDAO classDAO;
+    private CodecoolerDAO codecoolerDAO;
+    private Integer id = null;
 
     @Override
     public void init() throws ServletException {
@@ -30,7 +33,8 @@ public class ClassesEditController extends HttpServlet {
         } catch (IOException e) {
             throw new ConnectionException(e.getMessage());
         }
-        dao = new CodecoolerClassJDBCDAO(ds);
+        classDAO = new CodecoolerClassJDBCDAO(ds);
+        codecoolerDAO = new CodecoolerJDBCDAO(ds);
     }
 
     @Override
@@ -41,13 +45,27 @@ public class ClassesEditController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         fillDetailsAboutClass(request, response);
+        fillDetailsAboutAvailableCodecoolers(request, response);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/classes_update.jsp");
         dispatcher.forward(request, response);
     }
 
-    public void fillDetailsAboutClass(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    private void fillDetailsAboutAvailableCodecoolers(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        List<Codecooler> codecoolerList = null;
+        try{
+            codecoolerList = codecoolerDAO.getAllCodecoolers();
+        } catch(ReadException ex){
+            response.sendRedirect("/classes");
+        }
+        codecoolerList = codecoolerList.stream()
+                .filter(x -> x.getClassId() != id)
+                .collect(Collectors.toList());
+
+        request.setAttribute("codecoolerList", codecoolerList);
+    }
+
+    private void fillDetailsAboutClass(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Map<String, String[]> parameters = request.getParameterMap();
-        Integer id = null;
         CodecoolerClass codecoolerClass = null;
         try{
            id = Integer.parseInt(parameters.get("id")[0]);
@@ -58,7 +76,7 @@ public class ClassesEditController extends HttpServlet {
         }
 
         try {
-            codecoolerClass = dao.getCodecoolerClassById(id);
+            codecoolerClass = classDAO.getCodecoolerClassById(id);
         } catch (ReadException e) {
             response.sendRedirect("/classes");
         }

@@ -73,17 +73,21 @@
                         }
                     %>
 
-                <div class="add-new-codecooler">
+                <form class="add-new-codecooler">
                     <label class="title">Add new Student</label><br>
                    <select class="student-name" id="selector">
                         <option value="" disabled selected>Select Student </option>
-                        <option>Grażyna Kowalska</option>
-                        <option>Janusz Adamczyk</option>
-                        <option>Ewelina Cielińska</option>
+                       <jsp:useBean id="codecoolerList" type="java.util.List<model.Codecooler>" scope="request" />
+                       <%
+                           for(Codecooler codecooler: codecoolerList){
+                       %>
+                        <option><%=codecooler.getName()%></option>
+                       <%
+                           }
+                       %>
                    </select>
-                </div>
-
-                <button class="btn" id="add-codecooler">Add new</button>
+                <button type="submit" class="btn" id="add-codecooler">Add new</button>
+                </form>
             </div>  
         </div>
         </div>
