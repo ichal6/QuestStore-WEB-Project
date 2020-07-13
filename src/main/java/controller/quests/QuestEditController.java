@@ -30,7 +30,7 @@ public class QuestEditController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            id = (id == null) ? Integer.parseInt(request.getParameter("id")) : id;
+            updateQuestIdFromRequestIfExists(request);
             quest = questDAO.getQuestById(id);
             request.setAttribute("quest", quest);
             RequestDispatcher dispatcher
@@ -63,5 +63,13 @@ public class QuestEditController extends HttpServlet {
             }
         }
         doGet(request, response);
+    }
+
+    private void updateQuestIdFromRequestIfExists(HttpServletRequest request) {
+        try {
+            id = Integer.parseInt(request.getParameter("id"));
+        } catch (NumberFormatException e) {
+            // clause left empty on purpose - if we don't jave "id" parameter, the id field already has a value
+        }
     }
 }

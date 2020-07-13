@@ -20,14 +20,6 @@ public class ArtifactUpdateController extends HttpServlet {
     Artifact artifactToEdit;
     int artifactId;
 
-    private Artifact createUpdatedArtifact(HttpServletRequest req) {
-        String name = req.getParameter("artifact-name");
-        String description = req.getParameter("artifact-description");
-        Integer value = Integer.parseInt(req.getParameter("artifact-value"));
-        String type = req.getParameter("type-selector");
-        return new Artifact(name, description, value, type);
-    }
-
     @Override
     public void init() throws ServletException {
         super.init();
@@ -64,5 +56,13 @@ public class ArtifactUpdateController extends HttpServlet {
             dispatcher.forward(req, resp);
         }
         resp.sendRedirect("/artifacts");
+    }
+
+    private Artifact createUpdatedArtifact(HttpServletRequest req) {
+        String name = req.getParameter("artifact-name");
+        String description = req.getParameter("artifact-description");
+        Integer value = Integer.parseInt(req.getParameter("artifact-value"));
+        String type = req.getParameter("type-selector");
+        return new Artifact(name, description, value, type);
     }
 }

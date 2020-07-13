@@ -23,6 +23,12 @@ values(default,'DAO dream team.','Krakow',TO_DATE('2020-07-07','YYYY-MM-DD'));
 INSERT INTO team
 values(default,'Clean-code team.','Krakow',TO_DATE('2020-07-07','YYYY-MM-DD'));
 
+INSERT INTO team
+values(default,'Tic Tac Toe Masters','Warszawa',TO_DATE('2020-04-07','YYYY-MM-DD'));
+
+INSERT INTO team
+values(default,'Clean-code team.','Bucharest',TO_DATE('2019-07-07','YYYY-MM-DD'));
+
 
 INSERT INTO class
 VALUES(default,'KRK-2020-06-Fullstack-Weekend','Krakow',TO_DATE('2020-06-01','YYYY-MM-DD'),TO_DATE('2021-06-01','YYYY-MM-DD'));
@@ -94,9 +100,6 @@ values(default,'Extra materials for chosen topic','Blablabla','10000','Team',def
 
 
 
-
-
-
 INSERT INTO wallet
 values(default);
 
@@ -140,4 +143,48 @@ TO_DATE('2020-06-01','YYYY-MM-DD'),
 1,
 default);
 
+INSERT INTO wallet
+values(default);
 
+INSERT INTO codecooler
+values(default,'Karolina Budzik',
+'kbudzik@gmail.com',
+'kbudzik123',
+'Krakow',
+TO_DATE('2020-07-01','YYYY-MM-DD'),
+'astoch.jpg',
+1,
+1,
+default);
+
+INSERT INTO wallet
+values(default);
+
+INSERT INTO codecooler
+values(default,'Patrycja Cebula',
+'patacebula@gmail.com',
+'pcebula123',
+'Warszawa',
+TO_DATE('2020-04-01','YYYY-MM-DD'),
+'astoch.jpg',
+1,
+1,
+default);
+
+INSERT INTO team_artifacts
+values(default, 1, 1, TO_DATE('2020-04-01','YYYY-MM-DD'), FALSE);
+
+INSERT INTO team_artifacts
+values(default, 1, 3, TO_DATE('2020-04-05','YYYY-MM-DD'), FALSE);
+
+INSERT INTO team_artifacts
+values(default, 1, 2, TO_DATE('2020-06-01','YYYY-MM-DD'), TRUE);
+
+INSERT INTO team_artifacts
+values(default, 2, 3, TO_DATE('2020-04-01','YYYY-MM-DD'), FALSE);
+
+INSERT INTO team_artifacts
+values(default, 3, 1, TO_DATE('2020-07-01','YYYY-MM-DD'), TRUE);
+
+INSERT INTO team_artifacts
+values(default, 3, 4, TO_DATE('2020-04-15','YYYY-MM-DD'), FALSE);

@@ -3,6 +3,7 @@ package DAO;
 import exception.ConnectionException;
 import exception.ReadException;
 import model.Artifact;
+import model.Codecooler;
 
 import java.io.IOException;
 import java.sql.*;
@@ -122,7 +123,7 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
 
     @Override
     public void updateArtifact(int artifactToUpdateId, Artifact artifactUpdated) throws ReadException {
-        String query = "UPDATE artifact set name =?,description = ?, value = ?, type = ? WHERE artifact_id = ?;";
+        String query = "UPDATE artifact set name = ?, description = ?, value = ?, type = ? WHERE artifact_id = ?;";
         try {
             PreparedStatement preparedStatement = connectToDB().prepareStatement(query);
             preparedStatement.setString(1, artifactUpdated.getName());
@@ -149,5 +150,37 @@ public class ArtifactJDBCDAO implements ArtifactDAO {
             throw new ReadException("You cannot access the database.");
         }
         throw new ReadException("Problem with data in database");
+    }
+
+    @Override
+    public List<Artifact> getArtifactsByTeamId(int id) throws ReadException {
+        List<Artifact> artifactList = new ArrayList<>();
+        try {
+            String query = "SELECT artifact_id, is_used FROM team_artifacts WHERE team_id = ?";
+            PreparedStatement pst = connectToDB().prepareStatement(query);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                Artifact artifact = getArtifactById(rs.getInt("artifact_id"));
+                artifact.setUsed(rs.getBoolean("is_used"));
+                artifactList.add(artifact);
+            }
+        } catch (SQLException e) {
+            throw new ReadException("Sorry, couldn't get the artifacts!");
+        }
+        return artifactList;
+    }
+
+    @Override
+    public void markIfArtifactUsed(int id, boolean isUsed) throws ReadException {
+        try {
+            String query = "UPDATE team_artifacts SET is_used = ? WHERE artifact_id = ?";
+            PreparedStatement pst = connectToDB().prepareStatement(query);
+            pst.setBoolean(1, isUsed);
+            pst.setInt(2, id);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            throw new ReadException("Sorry, couldn't edit this artifact!");
+        }
     }
 }
