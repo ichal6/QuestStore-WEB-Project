@@ -32,13 +32,30 @@ public class CodecoolerClassJDBCDAO implements CodecoolerClassDAO {
 
     @Override
     public void deleteCodecoolerClass(int id) throws ReadException {
-        deleteCodecoolerAssignToClasses(id);
-        try (Connection con = this.dataSource.getConnection();
-             PreparedStatement pst = con.prepareStatement("DELETE FROM class WHERE class_id = ?")) {
+        Connection con = null;
+        PreparedStatement pst = null;
+        try {
+            con = this.dataSource.getConnection();
+            con.setAutoCommit(false);
+            deleteCodecoolerAssignToClasses(con, id);
+            pst = con.prepareStatement("DELETE FROM class WHERE class_id = ?");
             pst.setInt(1, id);
             pst.execute();
+            con.commit();
         } catch (SQLException ex) {
+            try {
+                con.rollback();
+            } catch (SQLException throwables) {
+                throw new ReadException("The transaction has failed. Rollback is not possible. ");
+            }
             throw new ReadException("You cannot delete this class. " + ex.getMessage());
+        } finally {
+            try{
+                pst.close();
+                con.setAutoCommit(true);
+            } catch(SQLException ex){
+                throw new ReadException("The problem with close connection. " + ex.getMessage());
+            }
         }
     }
 
@@ -124,13 +141,9 @@ public class CodecoolerClassJDBCDAO implements CodecoolerClassDAO {
         return listOfClasses;
     }
 
-    private void deleteCodecoolerAssignToClasses(int id) throws ReadException{
-        try(Connection con = dataSource.getConnection();
-            PreparedStatement pst = con.prepareStatement("DELETE FROM codecooler WHERE class_id=?")){
-            pst.setInt(1, id);
-            pst.execute();
-        }catch (SQLException ex){
-            throw new ReadException("You cannot delete codecoolers. " + ex.getMessage());
-        }
+    private void deleteCodecoolerAssignToClasses(Connection con, int id) throws SQLException{
+        PreparedStatement pst = con.prepareStatement("DELETE FROM codecooler WHERE class_id=?");
+        pst.setInt(1, id);
+        pst.execute();
     }
 }
