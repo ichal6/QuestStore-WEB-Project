@@ -21,7 +21,7 @@
             <div class="upper-section">
                 <div class="h1-button">
                     <h1>All classes</h1>
-                    <button onclick="location.href='classes_add_new.jsp'" class="btn">+ Add new class</button>
+                    <button onclick="location.href='/classes/add'" class="btn">+ Add new class</button>
                 </div>
                 <div class="right-section">
                     <p>Items per page</p>

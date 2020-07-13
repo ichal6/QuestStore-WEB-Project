@@ -177,6 +177,11 @@
     margin-left: auto;
 }
 
+.information{
+    color: #BF343F;
+    margin: 10px;
+}
+
 /* Preventing layout from collapsing on mobile devices: */
 .header {
     min-width: 1100px;
