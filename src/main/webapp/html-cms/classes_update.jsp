@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<jsp:useBean id="classToEdit" scope="request" type="model.CodecoolerClass"/>
 <html lang="en" onclick="return hideSubMenu()">
 
 <head>
@@ -17,15 +18,15 @@
 
         <div class="details-container">
             <h1>Class details</h1>
-            <a href="classes_list.jsp">&#60;- Back to the list</a>
+            <a href="/classes">&#60;- Back to the list</a>
             <div class="personal-details">
                 <h2>Basic details</h2>
                     <div class ="details">
                         
-                        <div class="class"> Name*: <br><input type="text" id="class-name" value="KRK-2020-Fullstack"></div>
-                        <div class="class"> City: <br><input type="text" id="class-city" value="Cracow"></div>
-                        <div class="class"> Start date*:<br><input type="text" id="class-start-date" value="05/05/2019"></div>
-                        <div class="class"> End date*:<br><input type="text" id="class-end-date" value="05/09/2019"></div>
+                        <div class="class"> Name*: <br><input type="text" name="class-name" id="class-name" value="${classToEdit.name}"></div>
+                        <div class="class"> City: <br><input type="text" name="class-city" id="class-city" value="${classToEdit.city}"></div>
+                        <div class="class"> Start date*:<br><input type="text" name="class-start-date" id="class-start-date" value="${classToEdit.startDate}"></div>
+                        <div class="class"> End date*:<br><input type="text" name="class-end-date" id="class-end-date" value="${classToEdit.endDate}"></div>
 
                         <div class="lower-section">
                             <p>*- Fields marked like these need to be filled<br></p>

@@ -74,7 +74,7 @@
                    <div class="class-start-date"><%=codecoolerClass.getStartDate()%></div>
                    <div class="class-end-date"><%=codecoolerClass.getEndDate()%></div>
                    <div class="actions">
-                       <a href="classes_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
+                       <a href="/classes/edit?id=<%=codecoolerClass.getId()%>"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
                        <a href="/classes/delete?id=<%=codecoolerClass.getId()%>"><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
                    </div>
                 </div>
