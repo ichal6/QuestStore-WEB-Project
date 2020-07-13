@@ -34,6 +34,11 @@ public class ClassesDeleteController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        this.doDelete(request, response);
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Map<String, String[]> parameters = request.getParameterMap();
         String id = parameters.get("id")[0];
         int idClass = 0;
@@ -51,5 +56,4 @@ public class ClassesDeleteController extends HttpServlet {
         }
         response.sendRedirect("/classes");
     }
-
 }
