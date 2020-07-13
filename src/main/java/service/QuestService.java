@@ -1,21 +1,45 @@
 package service;
 
-import exception.StringLengthFormatException;
-import exception.TypeFormatException;
-import exception.ValueFormatException;
+import DAO.QuestDAO;
+import exception.*;
+import model.CMSUser;
 import model.Quest;
+import sort.*;
 import validation.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
 public class QuestService {
     private final Validator validator;
+    private final QuestDAO questDAO;
 
-    public QuestService() {
+    public QuestService(QuestDAO questDAO) {
         this.validator = new Validator();
+        this.questDAO = questDAO;
+    }
+
+    public List<Quest> getAllQuests(String sortBy, Boolean order) throws ReadException {
+        List<Quest> allQuests = questDAO.getAllQuests();
+        if (order != null && sortBy != null) {
+            try {
+                allQuests = sortList(allQuests, order, sortBy);
+            } catch (NoComparatorException e) {
+                throw new ReadException(e.getMessage());
+            }
+        }
+        return allQuests;
+    }
+
+    private List<Quest> sortList(List<Quest> allQuests, boolean order, String sortBy) throws NoComparatorException {
+        Comparing<Quest> comparing = new ComparatorQuest();
+        TypeColumn typeColumn = TypeColumn.returnType(sortBy);
+        Comparator<Quest> comparator = comparing.getComparator(typeColumn);
+        SortItems<Quest> sortItems = new SortItems<>(allQuests, comparator);
+        return sortItems.sort(order);
     }
 
     public boolean callInputsValidation(HttpServletRequest request) {

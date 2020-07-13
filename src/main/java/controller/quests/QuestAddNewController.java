@@ -29,7 +29,7 @@ public class QuestAddNewController extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         this.questDAO = new QuestJDBCDAO();
-        this.questService = new QuestService();
+        this.questService = new QuestService(questDAO);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
