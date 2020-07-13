@@ -1,3 +1,5 @@
+<%@ page import="model.CodecoolerClass" %>
+<%@ page import="model.Codecooler" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="classToEdit" scope="request" type="model.CodecoolerClass"/>
 <html lang="en" onclick="return hideSubMenu()">
@@ -54,30 +56,22 @@
                         </div>
 
                 </div>
+                    <%
+                        int count = 1;
+                        for(Codecooler codecooler: classToEdit.getMembers()){
+                    %>
                 <div class ="class-members">
-                    <div class="class-members-number">1</div>
-                    <div class="class-members-name">James Bons</div>
-                    <div class="class-members-email">james.bond007@gmail.com</div>
+                    <div class="class-members-number"><%=count%></div>
+                    <div class="class-members-name"><%=codecooler.getName()%></div>
+                    <div class="class-members-email"><%=codecooler.getEmail()%></div>
                     <div class="actions">
                         <a href=""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
                     </div>
-                </div> 
-                <div class ="class-members">
-                    <div class="class-members-number">2</div>
-                    <div class="class-members-name">James Bons</div>
-                    <div class="class-members-email">james.bond007@gmail.com</div>
-                    <div class="actions">
-                        <a href=""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
-                    </div>
-                </div> 
-                <div class ="class-members">
-                    <div class="class-members-number">3</div>
-                    <div class="class-members-name">James Bons</div>
-                    <div class="class-members-email">james.bond007@gmail.com</div>
-                    <div class="actions">
-                        <a href=""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
-                    </div>
-                </div> 
+                </div>
+                    <%
+                        count++;
+                        }
+                    %>
 
                 <div class="add-new-codecooler">
                     <label class="title">Add new Student</label><br>

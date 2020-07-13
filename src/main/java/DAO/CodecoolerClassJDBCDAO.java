@@ -1,11 +1,13 @@
 package DAO;
 
 import exception.ReadException;
+import model.Codecooler;
 import model.CodecoolerClass;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class CodecoolerClassJDBCDAO implements CodecoolerClassDAO {
@@ -74,13 +76,29 @@ public class CodecoolerClassJDBCDAO implements CodecoolerClassDAO {
 
     @Override
     public CodecoolerClass getCodecoolerClassById(int id) throws ReadException {
-        try (Connection con = this.dataSource.getConnection();
-             PreparedStatement pst = con.prepareStatement("SELECT * FROM class WHERE class_id = ?")) {
+        Connection con = null;
+        try {
+            con = this.dataSource.getConnection();
+            con.setAutoCommit(false);
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM class WHERE class_id = ?");
             pst.setInt(1, id);
-            ResultSet rs = pst.executeQuery();
-            return createNewClass(rs);
+            CodecoolerClass newClass = createNewClass(pst, con);
+            con.commit();
+
+            return newClass;
         } catch (SQLException ex) {
+            try {
+                con.rollback();
+            } catch (SQLException e) {
+                throw new ReadException("Problem with rollback. " + e);
+            }
             throw new ReadException("You cannot access to this class. " + ex);
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException ex) {
+                throw new ReadException("A problem with close connection. " + ex);
+            }
         }
     }
 
@@ -101,7 +119,8 @@ public class CodecoolerClassJDBCDAO implements CodecoolerClassDAO {
         }
     }
 
-    private CodecoolerClass createNewClass(ResultSet rs) throws SQLException, ReadException {
+    private CodecoolerClass createNewClass(PreparedStatement pst, Connection con) throws SQLException, ReadException {
+        ResultSet rs = pst.executeQuery();
         if (rs.next()) {
             int id = rs.getInt(1);
             String name = rs.getString(2);
@@ -109,12 +128,15 @@ public class CodecoolerClassJDBCDAO implements CodecoolerClassDAO {
             Date startDate = rs.getDate(4);
             Date endDate = rs.getDate(5);
 
+            List<Codecooler> codecoolerList = addMembersToClass(con, id);
+
             return new CodecoolerClass.Builder()
                     .withID(id)
                     .withName(name)
                     .withCity(city)
                     .withStartDate(startDate)
                     .withEndDate(endDate)
+                    .withMembers(codecoolerList)
                     .build();
         } else {
             throw new ReadException("This class doesn't exist!");
@@ -145,5 +167,26 @@ public class CodecoolerClassJDBCDAO implements CodecoolerClassDAO {
         PreparedStatement pst = con.prepareStatement("DELETE FROM codecooler WHERE class_id=?");
         pst.setInt(1, id);
         pst.execute();
+    }
+
+    private List<Codecooler> addMembersToClass(Connection con, int id) throws SQLException {
+        PreparedStatement pst = con.prepareStatement("SELECT * FROM codecooler WHERE class_id=?");
+        pst.setInt(1, id);
+        ResultSet rs = pst.executeQuery();
+        List<Codecooler> codecoolerList = new LinkedList<>();
+
+        while(rs.next()){
+            String name = rs.getString(2);
+            String email = rs.getString(3);
+
+            Codecooler codecooler = new Codecooler.Builder()
+                    .withName(name)
+                    .withEmail(email)
+                    .build();
+
+            codecoolerList.add(codecooler);
+        }
+
+        return codecoolerList;
     }
 }
