@@ -1,9 +1,7 @@
 package service;
 
-import DAO.ArtifactDAO;
 import DAO.QuestDAO;
 import exception.ReadException;
-import model.Artifact;
 import model.Quest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,10 +11,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 
 class QuestServiceTest {
@@ -46,15 +41,16 @@ class QuestServiceTest {
         // then:
         Assertions.assertEquals(questListBeforeSort.get(0).getID(), questListFromService.get(0).getID());
         Assertions.assertEquals(questListBeforeSort.get(1).getID(), questListFromService.get(1).getID());
+        Assertions.assertEquals(questListBeforeSort.get(2).getID(), questListFromService.get(2).getID());
     }
 
     private List<Quest> prepareMockData() {
         Quest quest1 = new Quest();
         quest1.setID(11);
         Quest quest2 = new Quest();
-        quest2.setID(12);
+        quest2.setID(8);
         Quest quest3 = new Quest();
-        quest3.setID(13);
+        quest3.setID(22);
         List<Quest> questList = new ArrayList<>();
         questList.add(quest1);
         questList.add(quest2);
