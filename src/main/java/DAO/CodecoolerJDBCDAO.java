@@ -35,10 +35,12 @@ public class CodecoolerJDBCDAO implements CodecoolerDAO{
             PreparedStatement pst = con.prepareStatement("SELECT * FROM codecooler");
             ResultSet rs = pst.executeQuery()){
             while(rs.next()){
+                int id = rs.getInt(1);
                 String name = rs.getString(2);
                 String email = rs.getString(3);
                 int classId = rs.getInt(8);
                 Codecooler newCodecooler = new Codecooler.Builder()
+                        .withID(id)
                         .withName(name)
                         .withEmail(email)
                         .withClassId(classId)
@@ -64,7 +66,15 @@ public class CodecoolerJDBCDAO implements CodecoolerDAO{
 
     @Override
     public void editCodecooler(int id, Codecooler codecooler) throws ReadException {
+        try(Connection con = ds.getConnection();
+            PreparedStatement pst = con.prepareStatement("UPDATE codecooler SET class_id = ? WHERE codecooler_id = ?")){
+            pst.setInt(1, codecooler.getClassId());
+            pst.setInt(2, id);
 
+            pst.executeUpdate();
+        } catch (SQLException ex){
+            throw new ReadException("You cannot edit codecooler! " + ex.getMessage());
+        }
     }
 
     @Override

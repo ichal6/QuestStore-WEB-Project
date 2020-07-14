@@ -140,4 +140,18 @@ TO_DATE('2020-06-01','YYYY-MM-DD'),
 1,
 default);
 
+INSERT INTO wallet
+values(default);
+
+INSERT INTO codecooler
+values(default,'Ktoś nowy',
+       'calkiem@wp.pl',
+       'astoch123',
+       'Krakow',
+       TO_DATE('2020-06-01','YYYY-MM-DD'),
+       'astoch.jpg',
+       NULL,
+       NULL,
+       default);
+
 

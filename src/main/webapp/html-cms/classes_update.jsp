@@ -73,9 +73,10 @@
                         }
                     %>
 
-                <form class="add-new-codecooler">
+                <form method="post" action="/classes/edit" class="add-new-codecooler">
+                    <input type="hidden" name="action" value="add-new-codecooler"/>
                     <label class="title">Add new Student</label><br>
-                   <select class="student-name" id="selector">
+                    <select class="student-name" name="select-new-student" id="selector">
                         <option value="" disabled selected>Select Student </option>
                        <jsp:useBean id="codecoolerList" type="java.util.List<model.Codecooler>" scope="request" />
                        <%
@@ -85,7 +86,7 @@
                        <%
                            }
                        %>
-                   </select>
+                    </select>
                 <button type="submit" class="btn" id="add-codecooler">Add new</button>
                 </form>
             </div>  
