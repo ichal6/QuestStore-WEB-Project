@@ -39,22 +39,22 @@
                     <div class="name-div">
                         <span>Name:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="">
-                            <img src="../assets/img/arrow-down.svg" alt="">
+                            <a href="/teams?sortBy=name&order=ASC"><img src="../assets/img/arrow-up.svg" alt=""></a>
+                            <a href="/teams?sortBy=name&order=DESC"><img src="../assets/img/arrow-down.svg" alt=""></a>
                         </div>
                     </div>
                     <div class="city-div">
                         <span>City:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="">
-                            <img src="../assets/img/arrow-down.svg" alt="">
+                            <a href="/teams?sortBy=city&order=ASC"><img src="../assets/img/arrow-up.svg" alt=""></a>
+                            <a href="/teams?sortBy=city&order=DESC"><img src="../assets/img/arrow-down.svg" alt=""></a>
                         </div>
                     </div>
                     <div class="date-of-start-div">
                         <span>Start date:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="">
-                            <img src="../assets/img/arrow-down.svg" alt="">
+                            <a href="/teams?sortBy=date&order=ASC"><img src="../assets/img/arrow-up.svg" alt=""></a>
+                            <a href="/teams?sortBy=date&order=DESC"><img src="../assets/img/arrow-down.svg" alt=""></a>
                         </div>
                     </div>
                     <div class="actions-div">

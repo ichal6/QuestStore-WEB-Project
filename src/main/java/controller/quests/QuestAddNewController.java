@@ -5,6 +5,8 @@ import DAO.QuestJDBCDAO;
 import model.Quest;
 import exception.*;
 import service.QuestService;
+import validation.ValidationHelper;
+import validation.ValidationHelperQuest;
 import validation.Validator;
 
 import javax.servlet.RequestDispatcher;
@@ -24,12 +26,14 @@ import static java.lang.Integer.parseInt;
 public class QuestAddNewController extends HttpServlet {
     private QuestDAO questDAO;
     private QuestService questService;
+    private ValidationHelper validationHelper;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.questDAO = new QuestJDBCDAO();
-        this.questService = new QuestService();
+        this.questService = new QuestService(questDAO);
+        this.validationHelper = new ValidationHelperQuest();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,7 +42,7 @@ public class QuestAddNewController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        boolean isInputValid = questService.callInputsValidation(request);
+        boolean isInputValid = validationHelper.callInputsValidation(request);
         if (isInputValid) {
             try {
                 Quest quest = questService.extractQuestFromHTTPRequest(request);

@@ -5,6 +5,8 @@ import DAO.TeamJDBCDAO;
 import exception.ReadException;
 import model.Team;
 import service.TeamService;
+import validation.ValidationHelper;
+import validation.ValidationHelperTeam;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,12 +20,14 @@ import java.io.IOException;
 public class TeamAddNewController extends HttpServlet {
     private TeamDAO teamDAO;
     private TeamService teamService;
+    private ValidationHelper validationHelper;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.teamDAO = new TeamJDBCDAO();
-        this.teamService = new TeamService();
+        this.teamService = new TeamService(teamDAO);
+        this.validationHelper = new ValidationHelperTeam();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,7 +36,7 @@ public class TeamAddNewController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        boolean isInputValid = teamService.callInputsValidation(request);
+        boolean isInputValid = validationHelper.callInputsValidation(request);
         if (isInputValid) {
             try {
                 Team team = teamService.extractTeamFromHTTPRequest(request);
