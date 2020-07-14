@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @WebServlet(name = "ClassesDeleteCodecooler",urlPatterns = "/classes/delete-codecooler")
-public class ClassesDeleteCodecooler extends HttpServlet {
+public class ClassesDeleteCodecoolerController extends HttpServlet {
     private PGSimpleDataSource ds;
     private CodecoolerDAO dao;
 
