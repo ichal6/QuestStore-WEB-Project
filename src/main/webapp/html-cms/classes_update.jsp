@@ -23,8 +23,8 @@
             <a href="/classes">&#60;- Back to the list</a>
             <div class="personal-details">
                 <h2>Basic details</h2>
-                    <div class ="details">
-                        
+                    <form action="/classes/edit" method="post" class ="details">
+                        <input name="action" type="hidden" value="update-details"/>
                         <div class="class"> Name*: <br><input type="text" name="class-name" id="class-name" value="${classToEdit.name}"></div>
                         <div class="class"> City: <br><input type="text" name="class-city" id="class-city" value="${classToEdit.city}"></div>
                         <div class="class"> Start date*:<br><input type="text" name="class-start-date" id="class-start-date" value="${classToEdit.startDate}"></div>
@@ -32,9 +32,9 @@
 
                         <div class="lower-section">
                             <p>*- Fields marked like these need to be filled<br></p>
-                            <button class="btn" id="update-class">Update</button>
+                            <button type="submit" class="btn" id="update-class">Update</button>
                         </div>
-                    </div>
+                    </form>
             </div>
 
             <div class="personal-details">

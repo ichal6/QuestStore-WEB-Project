@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -60,9 +62,46 @@ public class ClassesEditController extends HttpServlet {
                 dispatcher.forward(req, resp);
             }
         }else if(typeOfAction.equals("update-details")){
+            String name = req.getParameter("class-name");
+            String city = req.getParameter("class-city");
+            String startDateAsString = req.getParameter("class-start-date");
+            String endDateAsString = req.getParameter("class-end-date");
 
+            if(name == null || startDateAsString == null || endDateAsString == null){
+                resp.sendRedirect("/classes");
+            }
+
+            if(name.length() == 0){
+                req.setAttribute("infoMessage", "You should input name of class.");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/html-cms/classes_add_new.jsp");
+                dispatcher.forward(req, resp);
+            }
+
+            try {
+                new SimpleDateFormat("yyyy-MM-dd").parse(startDateAsString);
+                new SimpleDateFormat("yyyy-MM-dd").parse(endDateAsString);
+            } catch (ParseException e) {
+                req.setAttribute("infoMessage", "You put incorrect date. You should input in format: YYYY-MM-DD .");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/html-cms/classes_add_new.jsp");
+                dispatcher.forward(req, resp);
+            }
+
+            try{
+                CodecoolerClass codecoolerClass = classDAO.getCodecoolerClassById(this.id);
+
+                codecoolerClass.setName(name);
+                codecoolerClass.setCity(city);
+                codecoolerClass.setStartDate(java.sql.Date.valueOf(startDateAsString));
+                codecoolerClass.setEndDate(java.sql.Date.valueOf(endDateAsString));
+
+                classDAO.editCodecoolerClass(this.id, codecoolerClass);
+            }catch (ReadException ex){
+                req.setAttribute("error_message", ex.getMessage());
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/html-cms/error_page.jsp");
+                dispatcher.forward(req, resp);
+            }
         }
-        resp.sendRedirect("/classes");
+        resp.sendRedirect("/classes/edit?id=" + this.id);
     }
 
     @Override
