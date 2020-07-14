@@ -65,7 +65,7 @@
                     <div class="class-members-name"><%=codecooler.getName()%></div>
                     <div class="class-members-email"><%=codecooler.getEmail()%></div>
                     <div class="actions">
-                        <a href=""><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
+                        <a href="/classes/delete-codecooler?id=<%=codecooler.getId()%>"><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
                     </div>
                 </div>
                     <%

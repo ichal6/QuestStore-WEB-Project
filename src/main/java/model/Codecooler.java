@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Codecooler {
-    private int id;
+    private Integer id;
     private String name;
     private String email;
     private String password;
@@ -183,7 +183,7 @@ public class Codecooler {
         return classId;
     }
 
-    public void setClassId(int classId) {
+    public void setClassId(Integer classId) {
         this.classId = classId;
     }
 
