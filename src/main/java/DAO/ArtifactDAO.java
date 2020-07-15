@@ -22,4 +22,7 @@ public interface ArtifactDAO {
 
     int getArtifactsCount() throws ReadException;
 
+    List<Artifact> getArtifactsByTeamId(int id) throws ReadException;
+
+    void markIfArtifactUsed(int id, boolean isUsed) throws ReadException;
 }

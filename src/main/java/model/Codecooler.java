@@ -3,6 +3,7 @@ package model;
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class Codecooler {
     private Integer id;
@@ -191,7 +192,7 @@ public class Codecooler {
         return teamId;
     }
 
-    public void setTeamId(int teamId) {
+    public void setTeamId(Integer teamId) {
         this.teamId = teamId;
     }
 
@@ -209,5 +210,18 @@ public class Codecooler {
 
     public void setArtifactBought(Map<Artifact, Date> artifactBought) {
         this.artifactBought = artifactBought;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Codecooler that = (Codecooler) o;
+        return getId() == that.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

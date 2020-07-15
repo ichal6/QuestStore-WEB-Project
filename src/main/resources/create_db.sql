@@ -19,7 +19,6 @@ CREATE TABLE level(
 	picture_url varchar(100)
 );
 
-
 CREATE TABLE cms_user(
 	cms_user_id serial PRIMARY KEY UNIQUE,
 	name varchar(25) NOT NULL,
@@ -31,7 +30,6 @@ CREATE TABLE cms_user(
 	is_admin BOOLEAN NOT NULL
 );
 
-
 CREATE TABLE class(
 	class_id serial PRIMARY KEY UNIQUE,
 	name varchar(100) NOT NULL,
@@ -39,7 +37,6 @@ CREATE TABLE class(
 	start_date date NOT NULL,
 	end_date date NOT NULL
 );
-
 
 CREATE TABLE wallet(
 	wallet_id serial PRIMARY KEY UNIQUE,
@@ -70,7 +67,8 @@ CREATE TABLE codecooler(
 	ON UPDATE CASCADE,
 	CONSTRAINT codecooler_team_id FOREIGN KEY (team_id)
 	REFERENCES team (team_id)
-	ON UPDATE CASCADE,
+	ON UPDATE CASCADE
+	ON DELETE SET NULL,
 	CONSTRAINT codecooler_wallet_id FOREIGN KEY (wallet_id)
 	REFERENCES wallet (wallet_id)
 	ON UPDATE CASCADE
@@ -115,13 +113,15 @@ CREATE TABLE codecooler_artifacts(
 	codecooler_id integer,
 	artifact_id integer,
 	date_of_buying date NOT NULL DEFAULT CURRENT_DATE,
-	is_used boolean,
+	is_used boolean DEFAULT FALSE,
 	CONSTRAINT codecooler_artifacts_codecooler_id FOREIGN KEY(codecooler_id)
 	REFERENCES codecooler(codecooler_id)
-	ON UPDATE CASCADE,
+	ON UPDATE CASCADE
+	ON DELETE CASCADE,
 	CONSTRAINT codecooler_artifacts_artifact_id FOREIGN KEY(artifact_id)
 	REFERENCES artifact(artifact_id)
 	ON UPDATE CASCADE
+	ON DELETE CASCADE
 	);
 
 CREATE TABLE team_artifacts(
@@ -129,11 +129,13 @@ CREATE TABLE team_artifacts(
 	team_id integer,
 	artifact_id integer,
 	date_of_buying date NOT NULL DEFAULT CURRENT_DATE,
-	is_used boolean,
+	is_used boolean DEFAULT FALSE,
 	CONSTRAINT team_artifacts_team_id FOREIGN KEY(team_id)
 	REFERENCES team(team_id)
-	ON UPDATE CASCADE,
+	ON UPDATE CASCADE
+	ON DELETE CASCADE,
 	CONSTRAINT team_artifacts_artifact_id FOREIGN KEY(artifact_id)
  	REFERENCES artifact(artifact_id)
 	ON UPDATE CASCADE
+	ON DELETE CASCADE
 );

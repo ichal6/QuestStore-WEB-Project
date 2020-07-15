@@ -1,13 +1,12 @@
-package controller.quests;
+package controller.teams;
 
-import DAO.QuestDAO;
-import DAO.QuestJDBCDAO;
-import model.Quest;
-import exception.*;
-import service.QuestService;
+import DAO.TeamDAO;
+import DAO.TeamJDBCDAO;
+import exception.ReadException;
+import model.Team;
+import service.TeamService;
 import validation.ValidationHelper;
-import validation.ValidationHelperQuest;
-import validation.Validator;
+import validation.ValidationHelperTeam;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,28 +15,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
 
-import static java.lang.Integer.parseInt;
-
-@WebServlet(name = "QuestAddNewController", urlPatterns = "quests/add")
-public class QuestAddNewController extends HttpServlet {
-    private QuestDAO questDAO;
-    private QuestService questService;
+@WebServlet(name = "TeamAddNewController", urlPatterns = "teams/add")
+public class TeamAddNewController extends HttpServlet {
+    private TeamDAO teamDAO;
+    private TeamService teamService;
     private ValidationHelper validationHelper;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.questDAO = new QuestJDBCDAO();
-        this.questService = new QuestService(questDAO);
-        this.validationHelper = new ValidationHelperQuest();
+        this.teamDAO = new TeamJDBCDAO();
+        this.teamService = new TeamService(teamDAO);
+        this.validationHelper = new ValidationHelperTeam();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/quests_add_new.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/teams_add_new.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -45,16 +39,16 @@ public class QuestAddNewController extends HttpServlet {
         boolean isInputValid = validationHelper.callInputsValidation(request);
         if (isInputValid) {
             try {
-                Quest quest = questService.extractQuestFromHTTPRequest(request);
-                questDAO.insertQuest(quest);
-                request.setAttribute("message", "Quest successfully added!");
+                Team team = teamService.extractTeamFromHTTPRequest(request);
+                teamDAO.addTeam(team);
+                request.setAttribute("message", "Team successfully added!");
             } catch (ReadException e) {
                 request.setAttribute("error_message", e.getMessage());
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/errorPage");
                 dispatcher.forward(request, response);
             }
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/quests_add_new.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/teams_add_new.jsp");
         dispatcher.forward(request, response);
     }
 }
