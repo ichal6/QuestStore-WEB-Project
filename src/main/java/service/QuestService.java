@@ -32,14 +32,6 @@ public class QuestService {
         return allQuests;
     }
 
-    private List<Quest> sortList(List<Quest> allQuests, boolean order, String sortBy) throws NoComparatorException {
-        Comparing<Quest> comparing = new ComparatorQuest();
-        TypeColumn typeColumn = TypeColumn.returnType(sortBy);
-        Comparator<Quest> comparator = comparing.getComparator(typeColumn);
-        SortItems<Quest> sortItems = new SortItems<>(allQuests, comparator);
-        return sortItems.sort(order);
-    }
-
     public Quest extractQuestFromHTTPRequest(HttpServletRequest request) {
         String name = request.getParameter("quest-name");
         String description = request.getParameter("quest-description");
@@ -61,6 +53,14 @@ public class QuestService {
         quest.setType(type);
 
         return quest;
+    }
+
+    private List<Quest> sortList(List<Quest> allQuests, boolean order, String sortBy) throws NoComparatorException {
+        Comparing<Quest> comparing = new ComparatorQuest();
+        TypeColumn typeColumn = TypeColumn.returnType(sortBy);
+        Comparator<Quest> comparator = comparing.getComparator(typeColumn);
+        SortItems<Quest> sortItems = new SortItems<>(allQuests, comparator);
+        return sortItems.sort(order);
     }
 
     private String getRandomUrlPath() {

@@ -56,7 +56,7 @@ public class Artifact {
         private String type;
         private Date dateOfAdding;
         private String pictureUrl;
-        private boolean isUsed;
+        private boolean isUsed = false;
 
         public Builder id(int id) {
             this.id = id;
@@ -93,6 +93,11 @@ public class Artifact {
             return this;
         }
 
+        public Builder isUsed(boolean isUsed) {
+            this.isUsed = isUsed;
+            return this;
+        }
+
         public Artifact build() {
             Artifact artifact = new Artifact();
             artifact.id = this.id;
@@ -102,7 +107,7 @@ public class Artifact {
             artifact.type = this.type;
             artifact.dateOfAdding = this.dateOfAdding;
             artifact.pictureUrl = this.pictureUrl;
-            artifact.isUsed = false;
+            artifact.isUsed = this.isUsed;
             return artifact;
         }
     }
