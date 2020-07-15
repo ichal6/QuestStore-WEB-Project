@@ -40,18 +40,20 @@ public class CodecoolerClassJDBCDAOTest {
     @Test
     @DisplayName("Try create and upload to database new class.")
     public void shouldAddNewClassWithoutExceptions() throws SQLException, ReadException {
+        //given:
         when(mockDataSource.getConnection()).thenReturn(mockCon);
         when(mockCon.prepareStatement("INSERT INTO class VALUES (DEFAULT, ?,?,?,?)")).thenReturn(mockPst);
 
+        //when:
         CodecoolerClassJDBCDAO dao = new CodecoolerClassJDBCDAO(mockDataSource);
-
         dao.addCodecoolerClass(new CodecoolerClass.Builder()
                 .withName("SuperKlasa")
                 .withCity("Mielec")
                 .withStartDate(new java.sql.Date(213423653423L))
                 .withEndDate(new java.sql.Date(3456754345654L))
                 .build());
-
+        
+        //then:
         verify(mockCon, times(1)).prepareStatement(anyString());
         verify(mockPst, times(2)).setString(anyInt(), anyString());
         verify(mockPst, times(2)).setDate(anyInt(), any(Date.class));
