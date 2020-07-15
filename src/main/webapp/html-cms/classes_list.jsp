@@ -1,3 +1,4 @@
+<%@ page import="model.CodecoolerClass" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" onclick="return hideSubMenu()">
 
@@ -14,12 +15,13 @@
     
     <div class="container">
         <jsp:include page="../html-common/cms-navigation.jsp" />
+        <jsp:useBean id="allClassList" scope="request" type="java.util.List<model.CodecoolerClass>" />
 
         <div class="all-classes-container">
             <div class="upper-section">
                 <div class="h1-button">
                     <h1>All classes</h1>
-                    <button onclick="location.href='classes_add_new.jsp'" class="btn">+ Add new class</button>
+                    <button onclick="location.href='/classes/add'" class="btn">+ Add new class</button>
                 </div>
                 <div class="right-section">
                     <p>Items per page</p>
@@ -60,39 +62,25 @@
                         <span>Actions:</span>
                     </div>
                 </div>
+                <%
+                    int count = 0;
+                    for(CodecoolerClass codecoolerClass :allClassList){
+                       count++;
+                %>
                 <div class="class-row">
-                   <div class="class-number">1.</div>
-                   <div class="class-name">KRK-2020-08-Fullstack-Weekend</div>
-                   <div class="class-city">Cracow</div>
-                   <div class="class-start-date">11/07/2019</div>
-                   <div class="class-end-date">11/07/2020</div>
+                   <div class="class-number"><%=count%></div>
+                   <div class="class-name"><%=codecoolerClass.getName()%></div>
+                   <div class="class-city"><%=codecoolerClass.getCity()%></div>
+                   <div class="class-start-date"><%=codecoolerClass.getStartDate()%></div>
+                   <div class="class-end-date"><%=codecoolerClass.getEndDate()%></div>
                    <div class="actions">
-                       <a href="classes_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
-                       <img src="../assets/img/delete-btn.svg" alt="delete-btn">
+                       <a href="/classes/edit?id=<%=codecoolerClass.getId()%>"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
+                       <a href="/classes/delete?id=<%=codecoolerClass.getId()%>"><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
                    </div>
                 </div>
-                <div class="class-row">
-                    <div class="class-number">2.</div>
-                    <div class="class-name">KRK-2020-08-Fullstack-Weekdays</div>
-                    <div class="class-city">Cracow</div>
-                    <div class="class-start-date">11/07/2019</div>
-                    <div class="class-end-date">11/07/2020</div>
-                    <div class="actions">
-                        <a href="classes_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
-                        <img src="../assets/img/delete-btn.svg" alt="delete-btn">
-                    </div>
-                 </div>
-                 <div class="class-row">
-                    <div class="class-number">1.</div>
-                    <div class="class-name">WAW-2019-JAVA-Weekend</div>
-                    <div class="class-city">Warsaw</div>
-                    <div class="class-start-date">15/02/2019</div>
-                    <div class="class-end-date">11/02/2020</div>
-                    <div class="actions">
-                        <a href="classes_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
-                        <img src="../assets/img/delete-btn.svg" alt="delete-btn">
-                    </div>
-                 </div>
+                <%
+                    }
+                %>
             </div>
         </div>
     </div>

@@ -1,18 +1,33 @@
 package DAO;
 
-import exception.ConnectionException;
 import exception.ReadException;
 import model.Codecooler;
-import model.Team;
+import org.postgresql.ds.PGSimpleDataSource;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import java.util.List;
+import exception.ConnectionException;
 import model.Wallet;
 
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
-public class CodecoolerJDBCDAO implements CodecoolerDAO {
+public class CodecoolerJDBCDAO implements CodecoolerDAO{
+    private PGSimpleDataSource ds;
+
+    public CodecoolerJDBCDAO(){
+
+    }
+
+    public CodecoolerJDBCDAO(PGSimpleDataSource ds) {
+        this.ds = ds;
+    }
 
     private Connection connectToDB() {
         try {
@@ -83,7 +98,11 @@ public class CodecoolerJDBCDAO implements CodecoolerDAO {
             statement.setString(4, codecooler.getCity());
             statement.setDate(5, codecooler.getDateOfAdding());
             statement.setString(6, codecooler.getPictureURL());
-            statement.setInt(7, codecooler.getClassId());
+            if(codecooler.getClassId() == null){
+                statement.setNull(7, Types.INTEGER);
+            }else{
+                statement.setInt(7, codecooler.getClassId());
+            }
             statement.setInt(8, codecooler.getTeamId());
             statement.setInt(9, codecooler.getId());
             statement.executeUpdate();
