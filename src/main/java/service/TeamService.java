@@ -1,29 +1,44 @@
 package service;
 
-import exception.DateFormatException;
-import exception.StringLengthFormatException;
-import exception.ValueFormatException;
+import DAO.TeamDAO;
+import exception.NoComparatorException;
+import exception.ReadException;
 import model.Quest;
 import model.Team;
-import validation.Validator;
+import sort.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
+import java.util.Comparator;
+import java.util.List;
 
 public class TeamService {
-    private final Validator validator;
 
-    public TeamService() {
-        this.validator = new Validator();
+    private TeamDAO teamDAO;
+
+    public TeamService(TeamDAO teamDAO) {
+        this.teamDAO = teamDAO;
     }
 
-    public boolean callInputsValidation(HttpServletRequest request) {
-        boolean isInputValid = true;
-        isInputValid = callNameValidation(request, isInputValid, 3, 25);
-        isInputValid = callCityValidation(request, isInputValid, 3, 25);
-        isInputValid = callDateValidation(request, isInputValid, "yyyy-mm-dd");
+    public List<Team> getAllTeams(String sortBy, Boolean order) throws ReadException {
+        List<Team> allTeams = teamDAO.getAllTeams();
+        if (order != null && sortBy != null) {
+            try {
+                allTeams = sortList(allTeams, order, sortBy);
+            } catch (NoComparatorException e) {
+                throw new ReadException(e.getMessage());
+            }
+        }
+        return allTeams;
+    }
 
-        return isInputValid;
+    private List<Team> sortList(List<Team> allTeams, boolean order, String sortBy) throws NoComparatorException {
+        Comparing<Team> comparing = new ComparatorTeam();
+        TypeColumn typeColumn = TypeColumn.returnType(sortBy);
+        Comparator<Team> comparator = comparing.getComparator(typeColumn);
+        SortItems<Team> sortItems = new SortItems<>(allTeams, comparator);
+
+        return sortItems.sort(order);
     }
 
     public Team extractTeamFromHTTPRequest(HttpServletRequest request) {
@@ -47,35 +62,5 @@ public class TeamService {
         team.setStartDate(date);
 
         return team;
-    }
-
-    private boolean callNameValidation(HttpServletRequest request, boolean isInputValid, int min, int max) {
-        try {
-            validator.validateStringLength(request.getParameter("team-name"), min, max);
-        } catch (StringLengthFormatException e) {
-            request.setAttribute("name_validation_message", e.getMessage());
-            isInputValid = false;
-        }
-        return isInputValid;
-    }
-
-    private boolean callCityValidation(HttpServletRequest request, boolean isInputValid, int min, int max) {
-        try {
-            validator.validateStringLength(request.getParameter("team-city"), min, max);
-        } catch (StringLengthFormatException e) {
-            request.setAttribute("city_validation_message", e.getMessage());
-            isInputValid = false;
-        }
-        return isInputValid;
-    }
-
-    private boolean callDateValidation(HttpServletRequest request, boolean isInputValid, String allowedFormat) {
-        try {
-            validator.validateDate(request.getParameter("team-start-date"), allowedFormat);
-        } catch (DateFormatException e) {
-            request.setAttribute("start_date_validation_message", e.getMessage());
-            isInputValid = false;
-        }
-        return isInputValid;
     }
 }

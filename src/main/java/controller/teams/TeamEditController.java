@@ -5,7 +5,10 @@ import exception.ReadException;
 import model.Artifact;
 import model.Codecooler;
 import model.Team;
+import service.ArtifactService;
 import service.TeamService;
+import validation.ValidationHelper;
+import validation.ValidationHelperTeam;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,46 +17,42 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet(name = "TeamEditController", urlPatterns = "/teams/edit")
 public class TeamEditController extends HttpServlet {
     private TeamDAO teamDAO;
     private TeamService teamService;
+    private ValidationHelper validationHelper;
     private CodecoolerDAO codecoolerDAO;
     private ArtifactDAO artifactDAO;
+    private ArtifactService artifactService;
     private Team team;
     private Integer id;
     private List<Artifact> artifactsList;
+    private List<Codecooler> teamCodecoolersList;
+    private List<Codecooler> allRemainingCodecoolersList;
 
     @Override
     public void init() throws ServletException {
         super.init();
         this.teamDAO = new TeamJDBCDAO();
-        this.teamService = new TeamService();
+        this.teamService = new TeamService(teamDAO);
+        this.validationHelper = new ValidationHelperTeam();
         this.codecoolerDAO = new CodecoolerJDBCDAO();
         this.artifactDAO = new ArtifactJDBCDAO();
+        this.artifactService = new ArtifactService(artifactDAO);
         this.artifactsList = new ArrayList<>();
+        this.teamCodecoolersList = new ArrayList<>();
+        this.allRemainingCodecoolersList = new ArrayList<>();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             updateTeamIdFromRequestIfExists(request);
-
-            team = teamDAO.getTeamById(id);
-            List<Codecooler> teamCodecoolersList = codecoolerDAO.getCodecoolersByTeamId(id);
-            List<Codecooler> allRemainingCodecoolersList = codecoolerDAO.getAllCodecoolers();
-            allRemainingCodecoolersList.removeAll(teamCodecoolersList);
-            artifactsList = artifactDAO.getArtifactsByTeamId(id);
-
-            request.setAttribute("team", team);
-            request.setAttribute("teamCodecoolersList", teamCodecoolersList);
-            request.setAttribute("allRemainingCodecoolersList", allRemainingCodecoolersList);
-            request.setAttribute("teamArtifactsList", artifactsList);
-
+            loadRequiredData();
+            setAttributesToRequest(request);
             RequestDispatcher dispatcher
                     = request.getRequestDispatcher("/html-cms/teams_update.jsp");
             dispatcher.forward(request, response);
@@ -72,46 +71,77 @@ public class TeamEditController extends HttpServlet {
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
+        switch (action) {
+            case "basic-information":
+                triggerInformationUpdate(request, response);
+                break;
 
-        if (action.equals("basic-information")) {
-            boolean isInputValid = teamService.callInputsValidation(request);
-            if (isInputValid) {
-                try {
-                    team = teamService.changeTeamDetails(request, team);
-                    teamDAO.editTeam(id, team);
-                    request.setAttribute("message", "Team successfully modified!");
-                } catch (ReadException e) {
-                    request.setAttribute("error_message", e.getMessage());
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/errorPage");
-                    dispatcher.forward(request, response);
-                }
-            }
+            case "team-members":
+                triggerMembersUpdate(request, response);
+                break;
 
-        } else if (action.equals("team-members")) {
+            case "team-artifacts":
+                triggerArtifactsUpdate(request, response);
+                break;
+        }
+
+        doGet(request, response);
+    }
+
+    private void loadRequiredData() throws ReadException {
+        team = teamDAO.getTeamById(id);
+        teamCodecoolersList = codecoolerDAO.getCodecoolersByTeamId(id);
+        allRemainingCodecoolersList = codecoolerDAO.getAllCodecoolers();
+        allRemainingCodecoolersList.removeAll(teamCodecoolersList);
+        artifactsList = artifactDAO.getArtifactsByTeamId(id);
+    }
+
+    private void setAttributesToRequest(HttpServletRequest request) {
+        request.setAttribute("team", team);
+        request.setAttribute("teamCodecoolersList", teamCodecoolersList);
+        request.setAttribute("allRemainingCodecoolersList", allRemainingCodecoolersList);
+        request.setAttribute("teamArtifactsList", artifactsList);
+    }
+
+    private void triggerInformationUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        boolean isInputValid = validationHelper.callInputsValidation(request);
+        if (isInputValid) {
             try {
-                int studentId = Integer.parseInt(request.getParameter("student"));
-                Codecooler codecooler = codecoolerDAO.getCodecoolerById(studentId);
-                codecooler.setTeamId(id);
-                codecoolerDAO.editCodecooler(studentId, codecooler);
-                request.setAttribute("message", "Codecooler succesfully added to this team!");
-            } catch (NumberFormatException e) {
-                request.setAttribute("message", "You have to choose a codecooler to add!");
+                team = teamService.changeTeamDetails(request, team);
+                teamDAO.editTeam(id, team);
+                request.setAttribute("message", "Team successfully modified!");
             } catch (ReadException e) {
-                request.setAttribute("message", e.getMessage());
-            }
-
-        } else if (action.equals("team-artifacts")) {
-            try {
-                String[] strings = request.getParameterMap().get("is-used");
-                callArtifactUsageChange(strings);
-                request.setAttribute("message", "You've successfully changed this team's quest!");
-            } catch (NullPointerException e) {
-                request.setAttribute("message", "You can't edit quests if the team doesn't have any!");
-            } catch (ReadException e) {
-                request.setAttribute("message", e.getMessage());
+                request.setAttribute("error_message", e.getMessage());
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/errorPage");
+                dispatcher.forward(request, response);
             }
         }
-        doGet(request, response);
+    }
+
+    private void triggerMembersUpdate(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            int studentId = Integer.parseInt(request.getParameter("student"));
+            Codecooler codecooler = codecoolerDAO.getCodecoolerById(studentId);
+            codecooler.setTeamId(id);
+            codecoolerDAO.editCodecooler(studentId, codecooler);
+            request.setAttribute("message", "Codecooler succesfully added to this team!");
+        } catch (NumberFormatException e) {
+            request.setAttribute("message", "You have to choose a codecooler to add!");
+        } catch (ReadException e) {
+            request.setAttribute("message", e.getMessage());
+        }
+    }
+
+    private void triggerArtifactsUpdate(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            String[] strings = request.getParameterMap().get("is-used");
+            artifactsList = artifactService.callArtifactUsageChange(strings, artifactsList);
+            request.setAttribute("message", "You've successfully changed this team's quest!");
+        } catch (NullPointerException e) {
+            request.setAttribute("message", "You can't edit quests if the team doesn't have any!");
+        } catch (ReadException e) {
+            request.setAttribute("message", e.getMessage());
+        }
     }
 
     private void updateTeamIdFromRequestIfExists(HttpServletRequest request) {
@@ -119,26 +149,6 @@ public class TeamEditController extends HttpServlet {
             id = Integer.parseInt(request.getParameter("id"));
         } catch (NumberFormatException e) {
             // clause left empty on purpose - if we don't jave "id" parameter, the id field already has a value
-        }
-    }
-
-    private boolean changeIsUsedTextIntoBoolean(String text) {
-        return text.toUpperCase().trim().equals("USED");
-    }
-
-    private void callArtifactUsageChange(String[] booleansArray) throws ReadException {
-        int count = 0;
-        if (booleansArray.length == 0) {
-            throw new NullPointerException();
-        }
-        while (count < artifactsList.size()) {
-            boolean isUsed = changeIsUsedTextIntoBoolean(booleansArray[count]);
-            Artifact artifact = artifactsList.get(count);
-            if (isUsed != artifact.isUsed()) {
-                artifactDAO.markIfArtifactUsed(artifact.getId(), isUsed);
-                artifact.setUsed(isUsed);
-            }
-            count++;
         }
     }
 }
