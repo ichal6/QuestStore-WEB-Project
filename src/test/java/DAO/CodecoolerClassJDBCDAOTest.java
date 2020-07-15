@@ -52,9 +52,8 @@ public class CodecoolerClassJDBCDAOTest {
                 .withStartDate(new java.sql.Date(213423653423L))
                 .withEndDate(new java.sql.Date(3456754345654L))
                 .build());
-        
+
         //then:
-        verify(mockCon, times(1)).prepareStatement(anyString());
         verify(mockPst, times(2)).setString(anyInt(), anyString());
         verify(mockPst, times(2)).setDate(anyInt(), any(Date.class));
         verify(mockPst, times(1)).execute();
