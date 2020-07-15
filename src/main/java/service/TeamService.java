@@ -14,7 +14,7 @@ import java.util.List;
 
 public class TeamService {
 
-    private TeamDAO teamDAO;
+    private final TeamDAO teamDAO;
 
     public TeamService(TeamDAO teamDAO) {
         this.teamDAO = teamDAO;

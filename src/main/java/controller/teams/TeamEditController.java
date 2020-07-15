@@ -137,7 +137,7 @@ public class TeamEditController extends HttpServlet {
             String[] strings = request.getParameterMap().get("is-used");
             artifactsList = artifactService.callArtifactUsageChange(strings, artifactsList);
             request.setAttribute("message", "You've successfully changed this team's quest!");
-        } catch (NullPointerException e) {
+        } catch (IllegalArgumentException e) {
             request.setAttribute("message", "You can't edit quests if the team doesn't have any!");
         } catch (ReadException e) {
             request.setAttribute("message", e.getMessage());
