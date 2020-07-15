@@ -5,6 +5,8 @@ import DAO.LevelDAO;
 import DAO.LevelJDBCDAO;
 import exception.ReadException;
 import model.Level;
+import service.LevelService;
+//import service.LevelService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,13 +15,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 import static java.lang.Integer.parseInt;
 
 @WebServlet(name = "Levels-add", urlPatterns = "/levels/add")
 public class LevelAddNewController extends HttpServlet {
     private LevelDAO levelDAO;
+
 
     @Override
     public void init() throws ServletException {
@@ -32,25 +34,28 @@ public class LevelAddNewController extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        String name = req.getParameter("level-name");
-        String description = req.getParameter("level-description");
-        String coins = req.getParameter("level-coins");
-        int price = parseInt(coins);
-        Level level = new Level(name, description, price, "level6.svg");
+        LevelService levelService = new LevelService();
+        boolean validateInput = levelService.mainValidator(req);
 
-        try {
-            levelDAO.insertNewLevel(level);
-            resp.setHeader("Send", "Success");
-            RequestDispatcher dispatcher
-                    = req.getRequestDispatcher("/html-cms/levels_add_new.jsp");
-            dispatcher.forward(req, resp);
-        } catch (ReadException e) {
-            req.setAttribute("error_message", e.getMessage());
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/errorPage");
-            dispatcher.forward(req, resp);
+        if(validateInput == true) {
+            try {
+                Level level = levelService.getInformationFromServlet(req);
+                levelDAO.insertNewLevel(level);
+                resp.setHeader("Send", "Success");
+                RequestDispatcher dispatcher
+                        = req.getRequestDispatcher("/html-cms/levels_add_new.jsp");
+                dispatcher.forward(req, resp);
+            } catch (ReadException e) {
+                req.setAttribute("error_message", e.getMessage());
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/errorPage");
+                dispatcher.forward(req, resp);
+            }
         }
-    }
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/html-cms/levels_add_new.jsp");
+        dispatcher.forward(req, resp);
 
+
+    }
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
 

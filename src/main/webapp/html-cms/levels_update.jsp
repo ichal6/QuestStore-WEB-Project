@@ -22,9 +22,13 @@
             <div class="personal-details">
                 <h2>Basic details:</h2>
                 <label for="level-name">Name*:</label>
+                <p class="error">${name_validation_message}</p>
                 <input type="text" name ="level-name" id="level-name" value="${level.getName()}">
+
                 <label for="level-description">Description*:</label>
+                <p class="error">${description_validation_message}</p>
                 <input id="level-description" name ="level-description" value="${level.getDescription()}">
+
                 <div class="img-coins">
                     <div>
                         <p>Picture*:</p>
@@ -33,7 +37,9 @@
                     </div>
                     <div class="level-coins">
                         <label for="level-coins">Cost (number of coins to get)*:</label>
+                        <p class="error">${value_validation_message}</p>
                         <input type="number"  name ="level-coins" id="level-coins" value="${level.getPrice()}">
+
                     </div>
                 </div>
                 <div class= "lower-section">
