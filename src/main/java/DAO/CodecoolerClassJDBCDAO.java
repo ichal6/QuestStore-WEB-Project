@@ -176,10 +176,12 @@ public class CodecoolerClassJDBCDAO implements CodecoolerClassDAO {
         List<Codecooler> codecoolerList = new LinkedList<>();
 
         while(rs.next()){
+            Integer idCodecooler = rs.getInt(1);
             String name = rs.getString(2);
             String email = rs.getString(3);
 
             Codecooler codecooler = new Codecooler.Builder()
+                    .withID(idCodecooler)
                     .withName(name)
                     .withEmail(email)
                     .build();

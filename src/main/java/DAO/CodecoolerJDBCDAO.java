@@ -56,6 +56,25 @@ public class CodecoolerJDBCDAO implements CodecoolerDAO{
 
     @Override
     public Codecooler getCodecoolerById(int id) throws ReadException {
+        try(Connection con = ds.getConnection();
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM codecooler WHERE codecooler_id = ?");)   {
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                String name = rs.getString(2);
+                String email = rs.getString(3);
+                int classId = rs.getInt(8);
+                Codecooler newCodecooler = new Codecooler.Builder()
+                        .withID(id)
+                        .withName(name)
+                        .withEmail(email)
+                        .withClassId(classId)
+                        .build();
+                return newCodecooler;
+            }
+        } catch (SQLException throwables) {
+            throw new ReadException(throwables.getMessage());
+        }
         return null;
     }
 
@@ -68,7 +87,11 @@ public class CodecoolerJDBCDAO implements CodecoolerDAO{
     public void editCodecooler(int id, Codecooler codecooler) throws ReadException {
         try(Connection con = ds.getConnection();
             PreparedStatement pst = con.prepareStatement("UPDATE codecooler SET class_id = ? WHERE codecooler_id = ?")){
-            pst.setInt(1, codecooler.getClassId());
+            if(codecooler.getClassId() == null){
+                pst.setNull(1, java.sql.Types.INTEGER);
+            }else{
+                pst.setInt(1, codecooler.getClassId());
+            }
             pst.setInt(2, id);
 
             pst.executeUpdate();
