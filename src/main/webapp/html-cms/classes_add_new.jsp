@@ -18,16 +18,26 @@
         <div class="details-container">
             <h1>Add new class</h1>
             <a href="/classes">&#60;- Back to the list</a>
+            <p class="validation-message">${message}</p>
             <div class="personal-details">
                 <h2>Basic details</h2>
-                <p class="information">${infoMessage}</p>
                     <form action="/classes/add" method="post" class ="details">
-                        
-                        <div class="class"> Name*: <br><input type="text" name="class-name" id="class-name"></div>
-                        <div class="class"> City: <br><input type="text" name="class-city" id="class-city"></div>
-                        <div class="class"> Start date*:<br><input type="text" name="class-start-date" id="class-start-date"></div>
-                        <div class="class"> End date*:<br><input type="text" name="class-end-date" id="class-end-date"></div>
-
+                        <div class="class"> Name*: <br>
+                            <input type="text" name="class-name" id="class-name">
+                            <p class="validation-message">${name_validation_message}</p>
+                        </div>
+                        <div class="class"> City*: <br>
+                            <input type="text" name="class-city" id="class-city">
+                            <p class="validation-message">${city_validation_message}</p>
+                        </div>
+                        <div class="class"> Start date*:<br>
+                            <input type="text" name="class-start-date" id="class-start-date">
+                            <p class="validation-message">${start_date_validation_message}</p>
+                        </div>
+                        <div class="class"> End date*:<br>
+                            <input type="text" name="class-end-date" id="class-end-date">
+                            <p class="validation-message">${end_date_validation_message}</p>
+                        </div>
                         <div class="lower-section">
                             <p>*- Fields marked like these need to be filled to add new class<br></p>
                             <button type="submit" class="btn" id="update-class">Add class</button>

@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.List;
+
 import exception.ConnectionException;
 import model.Wallet;
 
@@ -18,11 +19,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Properties;
 
-public class CodecoolerJDBCDAO implements CodecoolerDAO{
+public class CodecoolerJDBCDAO implements CodecoolerDAO {
     private PGSimpleDataSource ds;
 
-    public CodecoolerJDBCDAO(){
-
+    public CodecoolerJDBCDAO() {
     }
 
     public CodecoolerJDBCDAO(PGSimpleDataSource ds) {
@@ -98,9 +98,9 @@ public class CodecoolerJDBCDAO implements CodecoolerDAO{
             statement.setString(4, codecooler.getCity());
             statement.setDate(5, codecooler.getDateOfAdding());
             statement.setString(6, codecooler.getPictureURL());
-            if(codecooler.getClassId() == null){
+            if (codecooler.getClassId() == null) {
                 statement.setNull(7, Types.INTEGER);
-            }else{
+            } else {
                 statement.setInt(7, codecooler.getClassId());
             }
             statement.setInt(8, codecooler.getTeamId());
