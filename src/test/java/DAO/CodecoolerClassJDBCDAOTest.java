@@ -2,9 +2,12 @@ package DAO;
 
 import exception.ReadException;
 import model.CodecoolerClass;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import java.sql.*;
@@ -29,16 +32,14 @@ public class CodecoolerClassJDBCDAOTest {
     @Mock
     private ResultSet mockRs;
 
-    public CodecoolerClassJDBCDAOTest() {
-        mockDataSource = mock(PGSimpleDataSource.class);
-        mockCon = mock(Connection.class);
-        mockPst = mock(PreparedStatement.class);
-        mockRs = mock(ResultSet.class);
+    @BeforeEach
+    public void init(){
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
     @DisplayName("Try create and upload to database new class.")
-    public void testAddNewClassWithoutExceptions() throws SQLException, ReadException {
+    public void shouldAddNewClassWithoutExceptions() throws SQLException, ReadException {
         when(mockDataSource.getConnection()).thenReturn(mockCon);
         when(mockCon.prepareStatement("INSERT INTO class VALUES (DEFAULT, ?,?,?,?)")).thenReturn(mockPst);
 
