@@ -27,4 +27,6 @@ public interface CodecoolerDAO {
     int getCodecoolersCount() throws ReadException;
 
     void clearCodecoolerTeamId(int id) throws ReadException;
+
+    void clearCodecoolerClassId(int id) throws ReadException;
 }

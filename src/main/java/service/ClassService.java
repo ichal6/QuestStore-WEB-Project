@@ -1,10 +1,7 @@
 package service;
 
 import DAO.CodecoolerClassDAO;
-import DAO.QuestDAO;
 import model.CodecoolerClass;
-import model.Quest;
-import model.Team;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.Date;
@@ -28,5 +25,19 @@ public class ClassService {
                 .withStartDate(startDate)
                 .withEndDate(endDate)
                 .build();
+    }
+
+    public CodecoolerClass changeClassDetails(HttpServletRequest request, CodecoolerClass codecoolerclass) {
+        String name = request.getParameter("class-name");
+        String city = request.getParameter("class-city");
+        Date startDate = Date.valueOf(request.getParameter("class-start-date"));
+        Date endDate = Date.valueOf(request.getParameter("class-end-date"));
+
+        codecoolerclass.setName(name);
+        codecoolerclass.setCity(city);
+        codecoolerclass.setStartDate(startDate);
+        codecoolerclass.setEndDate(endDate);
+
+        return codecoolerclass;
     }
 }

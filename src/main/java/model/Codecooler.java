@@ -15,7 +15,7 @@ public class Codecooler {
     private String pictureURL;
     private Wallet wallet;
     private Integer classId;
-    private int teamId;
+    private Integer teamId;
     private Map<Quest, Date> questAchieved;
     private Map<Artifact, Date> artifactBought;
 
@@ -32,8 +32,8 @@ public class Codecooler {
         private Date dateOfAdding;
         private String pictureURL;
         private Wallet wallet;
-        private int classId;
-        private int teamId;
+        private Integer classId;
+        private Integer teamId;
         private Map<Quest, Date> questAchieved;
         private Map<Artifact, Date> artifactBought;
 
@@ -188,7 +188,7 @@ public class Codecooler {
         this.classId = classId;
     }
 
-    public int getTeamId() {
+    public Integer getTeamId() {
         return teamId;
     }
 

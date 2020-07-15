@@ -16,7 +16,7 @@ public class ValidationHelperClass implements ValidationHelper {
     @Override
     public boolean callInputsValidation(HttpServletRequest request) {
         boolean isInputValid = true;
-        isInputValid = callNameValidation(request, isInputValid, 3, 25);
+        isInputValid = callNameValidation(request, isInputValid, 3, 45);
         isInputValid = callCityValidation(request, isInputValid, 3, 25);
         isInputValid = callStartDateValidation(request, isInputValid, "yyyy-mm-dd");
         isInputValid = callEndDateValidation(request, isInputValid, "yyyy-mm-dd");

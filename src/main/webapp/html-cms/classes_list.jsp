@@ -27,6 +27,7 @@
                     <p>Items per page</p>
                 </div>
             </div>
+            <p class="validation-message">${message}</p>
             <div class="list-of-classes">
                 <div class="header-for-list">
                     <span></span>

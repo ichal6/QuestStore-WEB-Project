@@ -21,14 +21,27 @@
         <div class="details-container">
             <h1>Class details</h1>
             <a href="/classes">&#60;- Back to the list</a>
+            <p class="validation-message">${message}</p>
             <div class="personal-details">
                 <h2>Basic details</h2>
                     <form action="/classes/edit" method="post" class ="details">
                         <input name="action" type="hidden" value="update-details"/>
-                        <div class="class"> Name*: <br><input type="text" name="class-name" id="class-name" value="${classToEdit.name}"></div>
-                        <div class="class"> City: <br><input type="text" name="class-city" id="class-city" value="${classToEdit.city}"></div>
-                        <div class="class"> Start date*:<br><input type="text" name="class-start-date" id="class-start-date" value="${classToEdit.startDate}"></div>
-                        <div class="class"> End date*:<br><input type="text" name="class-end-date" id="class-end-date" value="${classToEdit.endDate}"></div>
+                        <div class="class"> Name*: <br>
+                            <input type="text" name="class-name" id="class-name" value="${classToEdit.name}">
+                            <p class="validation-message">${name_validation_message}</p>
+                        </div>
+                        <div class="class"> City: <br>
+                            <input type="text" name="class-city" id="class-city" value="${classToEdit.city}">
+                            <p class="validation-message">${city_validation_message}</p>
+                        </div>
+                        <div class="class"> Start date*:<br>
+                            <input type="text" name="class-start-date" id="class-start-date" value="${classToEdit.startDate}">
+                            <p class="validation-message">${start_date_validation_message}</p>
+                        </div>
+                        <div class="class"> End date*:<br>
+                            <input type="text" name="class-end-date" id="class-end-date" value="${classToEdit.endDate}">
+                            <p class="validation-message">${end_date_validation_message}</p>
+                        </div>
 
                         <div class="lower-section">
                             <p>*- Fields marked like these need to be filled<br></p>
@@ -65,7 +78,7 @@
                     <div class="class-members-name"><%=codecooler.getName()%></div>
                     <div class="class-members-email"><%=codecooler.getEmail()%></div>
                     <div class="actions">
-                        <a href="/classes/delete-codecooler?id=<%=codecooler.getId()%>"><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
+                        <a href="/classes/delete-codecooler?id=<%=codecooler.getId()%>&class_id=<%=classToEdit.getId()%>"><img src="../assets/img/delete-btn.svg" alt="delete-btn"></a>
                     </div>
                 </div>
                     <%
@@ -82,7 +95,7 @@
                        <%
                            for(Codecooler codecooler: codecoolerList){
                        %>
-                        <option><%=codecooler.getName()%></option>
+                        <option value=<%=codecooler.getId()%>><%=codecooler.getName()%></option>
                        <%
                            }
                        %>

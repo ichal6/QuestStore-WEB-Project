@@ -6,6 +6,9 @@ import exception.ReadException;
 import model.Codecooler;
 import model.CodecoolerClass;
 import org.postgresql.ds.PGSimpleDataSource;
+import service.ClassService;
+import validation.ValidationHelper;
+import validation.ValidationHelperClass;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,7 +29,9 @@ public class ClassesEditController extends HttpServlet {
     private PGSimpleDataSource ds;
     private CodecoolerClassDAO classDAO;
     private CodecoolerDAO codecoolerDAO;
-    private Integer id = null;
+    private ClassService classService;
+    private ValidationHelper validationHelper;
+    private Integer id;
 
     @Override
     public void init() throws ServletException {
@@ -38,75 +43,8 @@ public class ClassesEditController extends HttpServlet {
         }
         classDAO = new CodecoolerClassJDBCDAO(ds);
         codecoolerDAO = new CodecoolerJDBCDAO(ds);
-    }
-
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String typeOfAction = req.getParameter("action");
-
-        if(typeOfAction.equals("add-new-codecooler")){
-            String nameOfCodecooler = req.getParameter("select-new-student");
-            try {
-                List<Codecooler> codecoolerList = codecoolerDAO.getAllCodecoolers();
-                Codecooler newCodecooler = null;
-                try{
-                    newCodecooler = codecoolerList.stream().filter(x -> x.getName().equals(nameOfCodecooler)).findFirst().get();
-                } catch(NoSuchElementException ex){
-                    resp.sendRedirect("/classes/edit?id=" + this.id);
-                }
-                newCodecooler.setClassId(this.id);
-                codecoolerDAO.editCodecooler(newCodecooler.getId(), newCodecooler);
-            } catch (ReadException e) {
-                req.setAttribute("error-message", "You cannot add new codecooler. " + e.getMessage());
-                RequestDispatcher dispatcher = req.getRequestDispatcher("/html-cms/error_page.jsp");
-                dispatcher.forward(req, resp);
-            }
-        }else if(typeOfAction.equals("update-details")){
-            String name = req.getParameter("class-name");
-            String city = req.getParameter("class-city");
-            String startDateAsString = req.getParameter("class-start-date");
-            String endDateAsString = req.getParameter("class-end-date");
-
-            if(name == null || startDateAsString == null || endDateAsString == null){
-                resp.sendRedirect("/classes");
-            }
-
-            if(name.length() == 0){
-                req.setAttribute("infoMessage", "You should input name of class.");
-                RequestDispatcher dispatcher = req.getRequestDispatcher("/html-cms/classes_add_new.jsp");
-                dispatcher.forward(req, resp);
-            }
-
-            try {
-                new SimpleDateFormat("yyyy-MM-dd").parse(startDateAsString);
-                new SimpleDateFormat("yyyy-MM-dd").parse(endDateAsString);
-            } catch (ParseException e) {
-                req.setAttribute("infoMessage", "You put incorrect date. You should input in format: YYYY-MM-DD .");
-                RequestDispatcher dispatcher = req.getRequestDispatcher("/html-cms/classes_add_new.jsp");
-                dispatcher.forward(req, resp);
-            }
-
-            try{
-                CodecoolerClass codecoolerClass = classDAO.getCodecoolerClassById(this.id);
-
-                codecoolerClass.setName(name);
-                codecoolerClass.setCity(city);
-                codecoolerClass.setStartDate(java.sql.Date.valueOf(startDateAsString));
-                codecoolerClass.setEndDate(java.sql.Date.valueOf(endDateAsString));
-
-                classDAO.editCodecoolerClass(this.id, codecoolerClass);
-            }catch (ReadException ex){
-                req.setAttribute("error_message", ex.getMessage());
-                RequestDispatcher dispatcher = req.getRequestDispatcher("/html-cms/error_page.jsp");
-                dispatcher.forward(req, resp);
-            }
-        }
-        resp.sendRedirect("/classes/edit?id=" + this.id);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPut(request, response);
+        classService = new ClassService(classDAO);
+        validationHelper = new ValidationHelperClass();
     }
 
     @Override
@@ -117,37 +55,82 @@ public class ClassesEditController extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    private void fillDetailsAboutAvailableCodecoolers(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        List<Codecooler> codecoolerList = null;
-        try{
-            codecoolerList = codecoolerDAO.getAllCodecoolers();
-        } catch(ReadException ex){
-            response.sendRedirect("/classes");
-        }
-        codecoolerList = codecoolerList.stream()
-                .filter(x -> x.getClassId() != id)
-                .collect(Collectors.toList());
-
-        request.setAttribute("codecoolerList", codecoolerList);
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPut(request, response);
     }
 
-    private void fillDetailsAboutClass(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        Map<String, String[]> parameters = request.getParameterMap();
-        CodecoolerClass codecoolerClass = null;
-        try{
-           id = Integer.parseInt(parameters.get("id")[0]);
-        } catch(NumberFormatException ex){
-            response.sendRedirect("/classes");
-        }  catch (NullPointerException ex) {
-            response.sendRedirect("/classes");
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String typeOfAction = req.getParameter("action");
+        switch (typeOfAction) {
+            case "update-details":
+                triggerDetailsUpdate(req, resp);
+                break;
+            case "add-new-codecooler":
+                triggerAddingCodecooler(req, resp);
+                break;
         }
+        doGet(req, resp);
+    }
 
+    private void fillDetailsAboutClass(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        updateClassIdFromRequestIfExists(request);
         try {
-            codecoolerClass = classDAO.getCodecoolerClassById(id);
+            CodecoolerClass codecoolerClass = classDAO.getCodecoolerClassById(id);
+            request.setAttribute("classToEdit", codecoolerClass);
         } catch (ReadException e) {
             response.sendRedirect("/classes");
         }
+    }
 
-        request.setAttribute("classToEdit", codecoolerClass);
+    private void fillDetailsAboutAvailableCodecoolers(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            List<Codecooler> codecoolerList = codecoolerDAO.getAllCodecoolers();
+            codecoolerList = codecoolerList.stream()
+                    .filter(x -> x.getClassId() != id)
+                    .collect(Collectors.toList());
+
+            request.setAttribute("codecoolerList", codecoolerList);
+        } catch (ReadException ex) {
+            response.sendRedirect("/classes");
+        }
+    }
+
+    private void triggerDetailsUpdate(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        boolean isInputValid = validationHelper.callInputsValidation(req);
+        if (isInputValid) {
+            try {
+                CodecoolerClass codecoolerClass = classDAO.getCodecoolerClassById(this.id);
+                codecoolerClass = classService.changeClassDetails(req, codecoolerClass);
+                classDAO.editCodecoolerClass(this.id, codecoolerClass);
+                req.setAttribute("message", "Class successfully modified!");
+            } catch (ReadException ex) {
+                req.setAttribute("error_message", ex.getMessage());
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/html-cms/error_page.jsp");
+                dispatcher.forward(req, resp);
+            }
+        }
+    }
+
+    private void triggerAddingCodecooler(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int newCodecoolerId = Integer.parseInt(req.getParameter("select-new-student"));
+        try {
+            Codecooler newCodecooler = codecoolerDAO.getCodecoolerById(newCodecoolerId);
+            newCodecooler.setClassId(this.id);
+            codecoolerDAO.editCodecooler(newCodecooler.getId(), newCodecooler);
+        } catch (ReadException e) {
+            req.setAttribute("error-message", "You cannot add new codecooler. " + e.getMessage());
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/html-cms/error_page.jsp");
+            dispatcher.forward(req, resp);
+        }
+    }
+
+    private void updateClassIdFromRequestIfExists(HttpServletRequest request) {
+        try {
+            id = Integer.parseInt(request.getParameter("id"));
+        } catch (NumberFormatException e) {
+            // clause left empty on purpose - if we don't jave "id" parameter, the id field already has a value
+        }
     }
 }

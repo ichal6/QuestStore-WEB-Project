@@ -41,19 +41,18 @@ public class ClassesDeleteController extends HttpServlet {
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Map<String, String[]> parameters = request.getParameterMap();
         String id = parameters.get("id")[0];
-        int idClass = 0;
         try {
-            idClass = Integer.parseInt(id);
+            int idClass = Integer.parseInt(id);
+            dao.deleteCodecoolerClass(idClass);
+            request.setAttribute("message", "Class successfully deleted!");
         } catch(NumberFormatException ex){
             response.sendRedirect("/dashboard");
-        }
-        try {
-            dao.deleteCodecoolerClass(idClass);
         } catch (ReadException ex) {
             request.setAttribute("error_message", ex.getMessage());
             RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/error_page.jsp");
             dispatcher.forward(request, response);
         }
-        response.sendRedirect("/classes");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/classes");
+        dispatcher.forward(request, response);
     }
 }

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-@WebServlet(name = "ClassesDeleteCodecooler",urlPatterns = "/classes/delete-codecooler")
+@WebServlet(name = "ClassesDeleteCodecooler", urlPatterns = "/classes/delete-codecooler")
 public class ClassesDeleteCodecoolerController extends HttpServlet {
     private PGSimpleDataSource ds;
     private CodecoolerDAO dao;
@@ -34,11 +34,6 @@ public class ClassesDeleteCodecoolerController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         this.doDelete(request, response);
     }
@@ -46,22 +41,18 @@ public class ClassesDeleteCodecoolerController extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Map<String, String[]> parameters = request.getParameterMap();
+        int class_id = Integer.parseInt(request.getParameter("class_id"));
         String id = parameters.get("id")[0];
-        int idCodecooler = 0;
         try {
-            idCodecooler = Integer.parseInt(id);
-        } catch(NumberFormatException ex){
-            response.sendRedirect("/dashboard");
-        }
-        try {
-            Codecooler codecooler = dao.getCodecoolerById(idCodecooler);
-            codecooler.setClassId(null);
-            dao.editCodecooler(idCodecooler, codecooler);
+            int idCodecooler = Integer.parseInt(id);
+            dao.clearCodecoolerClassId(idCodecooler);
+        } catch (NumberFormatException ex) {
+            request.setAttribute("message", ex.getMessage());
         } catch (ReadException ex) {
             request.setAttribute("error_message", ex.getMessage());
             RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/error_page.jsp");
             dispatcher.forward(request, response);
         }
-        response.sendRedirect("/classes");
+        response.sendRedirect("/classes/edit?id=" + class_id);
     }
 }
