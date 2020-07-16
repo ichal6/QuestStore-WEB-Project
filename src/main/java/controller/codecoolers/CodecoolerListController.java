@@ -35,9 +35,9 @@ public class CodecoolerListController extends HttpServlet {
         Boolean order = getOrder(parameters);
         String sortBy = getSortBy(parameters);
         try {
-            Map<Codecooler, Map<String, String>> codecoolersList = codecoolerService.getAllCodecoolersWithClassNameAndTeamName(sortBy, order);
-            request.setAttribute("codecoolersList", codecoolersList);
-            if (codecoolersList.size() == 0) {
+            Map<Codecooler, List<String>> codecoolersMap = codecoolerService.getAllCodecoolersWithClassNameAndTeamName(sortBy, order);
+            request.setAttribute("codecoolersMap", codecoolersMap);
+            if (codecoolersMap.size() == 0) {
                 request.setAttribute("message", "There are no quests available");
             }
             RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/codecoolers_list.jsp");

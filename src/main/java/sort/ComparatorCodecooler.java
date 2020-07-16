@@ -33,9 +33,9 @@ public class ComparatorCodecooler implements Comparing<Codecooler> {
                             try {
                                 String className1 = classDAO.getCodecoolerClassById(id1).getName();
                                 String className2 = classDAO.getCodecoolerClassById(id2).getName();
-                                return className2.compareTo(className1);
+                                return className1.compareTo(className2);
                             } catch (ReadException e) {
-                                return id2.compareTo(id1);
+                                return id1.compareTo(id2);
                             }
                         }
                 );
@@ -45,9 +45,9 @@ public class ComparatorCodecooler implements Comparing<Codecooler> {
                             try {
                                 String teamName1 = teamDAO.getTeamById(id1).getName();
                                 String teamName2 = teamDAO.getTeamById(id2).getName();
-                                return teamName2.compareTo(teamName1);
+                                return teamName1.compareTo(teamName2);
                             } catch (ReadException e) {
-                                return id2.compareTo(id1);
+                                return id1.compareTo(id2);
                             }
                         }
                 );

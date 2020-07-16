@@ -8,10 +8,7 @@ import org.postgresql.ds.PGSimpleDataSource;
 import sort.*;
 
 import java.io.IOException;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CodecoolerService {
     private final CodecoolerDAO codecoolerDAO;
@@ -24,7 +21,7 @@ public class CodecoolerService {
         this.teamDAO = teamDAO;
     }
 
-    public Map<Codecooler, Map<String, String>> getAllCodecoolersWithClassNameAndTeamName(String sortBy, Boolean order) throws ReadException, IOException {
+    public Map<Codecooler, List<String>> getAllCodecoolersWithClassNameAndTeamName(String sortBy, Boolean order) throws ReadException, IOException {
         List<Codecooler> allCodecoolers = codecoolerDAO.getAllCodecoolers();
         if (order != null && sortBy != null) {
             try {
@@ -33,8 +30,7 @@ public class CodecoolerService {
                 throw new ReadException(e.getMessage());
             }
         }
-        Map<Codecooler, Map<String, String>> codecoolersWithClassNamesAndTeamNames = addDetailsToCodecoolersList(allCodecoolers);
-        return codecoolersWithClassNamesAndTeamNames;
+        return addDetailsToCodecoolersList(allCodecoolers);
     }
 
     private List<Codecooler> sortList(List<Codecooler> allCodecoolers, boolean order, String sortBy) throws NoComparatorException, IOException {
@@ -47,16 +43,22 @@ public class CodecoolerService {
         return sortItems.sort(order);
     }
 
-    private Map<Codecooler, Map<String, String>> addDetailsToCodecoolersList(List<Codecooler> allCodecoolers) {
-        Map<Codecooler, Map<String, String>> codecoolersWithDetails = new HashMap<>();
+    private Map<Codecooler, List<String>> addDetailsToCodecoolersList(List<Codecooler> allCodecoolers) throws ReadException {
+        Map<Codecooler, List<String>> codecoolersWithDetails = new LinkedHashMap<>();
 
         for (int i = 0; i < allCodecoolers.size(); i++) {
             Codecooler codecooler = allCodecoolers.get(i);
-            String className = classDAO.getCodecoolerClassById(codecooler.getClassId())
-
-                    // null?
+            String className = "";
+            String teamName = "";
+            if (codecooler.getClassId() != null && codecooler.getClassId() != 0) {
+                className = classDAO.getCodecoolerClassById(codecooler.getClassId()).getName();
+            }
+            if (codecooler.getTeamId() != null && codecooler.getTeamId() != 0) {
+                teamName = teamDAO.getTeamById(codecooler.getTeamId()).getName();
+            }
+            List<String> details = List.of(className, teamName);
+            codecoolersWithDetails.put(codecooler, details);
         }
-
         return codecoolersWithDetails;
     }
 }
