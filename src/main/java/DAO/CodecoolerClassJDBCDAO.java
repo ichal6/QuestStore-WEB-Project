@@ -1,10 +1,12 @@
 package DAO;
 
+import exception.ConnectionException;
 import exception.ReadException;
 import model.Codecooler;
 import model.CodecoolerClass;
 import org.postgresql.ds.PGSimpleDataSource;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -15,6 +17,14 @@ public class CodecoolerClassJDBCDAO implements CodecoolerClassDAO {
 
     public CodecoolerClassJDBCDAO(PGSimpleDataSource ds) {
         this.dataSource = ds;
+    }
+
+    public CodecoolerClassJDBCDAO() {
+        try {
+            dataSource = DataSourceReader.getDataSource("src/main/resources/database.properties");
+        } catch (IOException e) {
+            throw new ConnectionException("Sorry, couldn't connect to database");
+        }
     }
 
     @Override

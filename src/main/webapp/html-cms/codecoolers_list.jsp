@@ -1,3 +1,5 @@
+<%@ page import="model.Codecooler" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" onclick="return hideSubMenu()">
 
@@ -11,7 +13,7 @@
 
 <body>
     <jsp:include page="../html-common/cms-header.jsp" />
-    
+
     <div class="container">
         <jsp:include page="../html-common/cms-navigation.jsp" />
 
@@ -25,60 +27,67 @@
                     <p>Items per page</p>
                 </div>
             </div>
+            <p class="validation-message">${message}</p>
             <div class="list-of-students">
                 <div class="header-for-list">
                     <span></span>
                     <div class="name-div">
                         <span>Name:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="^">
-                            <img src="../assets/img/arrow-down.svg" alt="v">
+                            <a href="/codecoolers?sortBy=name&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                            <a href="/codecoolers?sortBy=name&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                         </div>
                     </div>
                     <div class="email-div">
                         <span>Email:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="^">
-                            <img src="../assets/img/arrow-down.svg" alt="v">
+                            <a href="/codecoolers?sortBy=email&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                            <a href="/codecoolers?sortBy=email&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                         </div>
                     </div>
                     <div class="city-div">
                         <span>City:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="^">
-                            <img src="../assets/img/arrow-down.svg" alt="v">
+                            <a href="/codecoolers?sortBy=city&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                            <a href="/codecoolers?sortBy=city&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                         </div>
                     </div>
                     <div class="class-div">
                         <span>Class:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="^">
-                            <img src="../assets/img/arrow-down.svg" alt="v">
+                            <a href="/codecoolers?sortBy=class&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                            <a href="/codecoolers?sortBy=class&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                         </div>
                     </div>
                     <div class="team-div">
                         <span>Team:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="^">
-                            <img src="../assets/img/arrow-down.svg" alt="v">
+                            <a href="/codecoolers?sortBy=team&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                            <a href="/codecoolers?sortBy=team&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                         </div>
                     </div>
                     <div class="date-of-adding-div">
                         <span>Date of adding:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="^">
-                            <img src="../assets/img/arrow-down.svg" alt="v">
+                            <a href="/codecoolers?sortBy=date&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                            <a href="/codecoolers?sortBy=date&order=ASC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                         </div>
                     </div>
                     <div class="actions">
                         <span>Actions:</span>
                     </div>
                 </div>
+                <%
+                    List<Codecooler> codecoolersList = (List<Codecooler>) request.getAttribute("codecoolersList");
+                    int count = 0;
+                    for (Codecooler codecooler : codecoolersList) {
+                        count++;
+                %>
                 <div class="person-row">
-                   <div class="person-number">1.</div>
-                   <div class="person-name">Joanna Krupa</div>
-                   <div class="person-email">joanna.krupa@onet.pl</div>
-                   <div class="person-city">Cracow</div>
+                   <div class="person-number"><%=count%></div>
+                   <div class="person-name"><%=codecooler.getName()%></div>
+                   <div class="person-email"><%=codecooler.getEmail()%></div>
+                   <div class="person-city"><%=codecooler.getCity()%></div>
                    <div class="class">FS-KRK-2020</div>
                    <div class="team">Tomato Team</div>
                    <div class="date-of-add">07/11/2000</div>
@@ -87,79 +96,14 @@
                        <img src="../assets/img/delete-btn.svg" alt="delete-btn">
                    </div>
                 </div>
-                <div class="person-row">
-                    <div class="person-number">2.</div>
-                    <div class="person-name">Joanna Krupa</div>
-                    <div class="person-email">joanna.krupa@onet.pl</div>
-                    <div class="person-city">Cracow</div>
-                    <div class="class">FS-KRK-2020</div>
-                    <div class="team">Tomato Team</div>
-                    <div class="date-of-add">07/11/2000</div>
-                    <div class="actions">
-                        <a href="codecoolers_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
-                        <img src="../assets/img/delete-btn.svg" alt="delete-btn">
-                    </div>
-                 </div>
-                 <div class="person-row">
-                    <div class="person-number">3.</div>
-                    <div class="person-name">Joanna Krupa</div>
-                    <div class="person-email">joanna.krupa@onet.pl</div>
-                    <div class="person-city">Cracow</div>
-                    <div class="class">FS-KRK-2020</div>
-                    <div class="team">Tomato Team</div>
-                    <div class="date-of-add">07/11/2000</div>
-                    <div class="actions">
-                        <a href="codecoolers_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
-                        <img src="../assets/img/delete-btn.svg" alt="delete-btn">
-                    </div>
-                 </div>
-                 <div class="person-row">
-                    <div class="person-number">4.</div>
-                    <div class="person-name">Joanna Krupa</div>
-                    <div class="person-email">joanna.krupa@onet.pl</div>
-                    <div class="person-city">Cracow</div>
-                    <div class="class">FS-KRK-2020</div>
-                    <div class="team">Tomato Team</div>
-                    <div class="date-of-add">07/11/2000</div>
-                    <div class="actions">
-                        <a href="codecoolers_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
-                        <img src="../assets/img/delete-btn.svg" alt="delete-btn">
-                    </div>
-                 </div>
-                 <div class="person-row">
-                    <div class="person-number">5.</div>
-                    <div class="person-name">Joanna Krupa</div>
-                    <div class="person-email">joanna.krupa@onet.pl</div>
-                    <div class="person-city">Cracow</div>
-                    <div class="class">FS-KRK-2020</div>
-                    <div class="team">Tomato Team</div>
-                    <div class="date-of-add">07/11/2000</div>
-                    <div class="actions">
-                        <a href="codecoolers_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
-                        <img src="../assets/img/delete-btn.svg" alt="delete-btn">
-                    </div>
-                 </div>
-                 <div class="person-row">
-                    <div class="person-number">6.</div>
-                    <div class="person-name">Joanna Krupa</div>
-                    <div class="person-email">joanna.krupa@onet.pl</div>
-                    <div class="person-city">Cracow</div>
-                    <div class="class">FS-KRK-2020</div>
-                    <div class="team">Tomato Team</div>
-                    <div class="date-of-add">07/11/2000</div>
-                    <div class="actions">
-                        <a href="codecoolers_update.jsp"><img src="../assets/img/edit-btn.svg" alt="edit-btn"></a>
-                        <img src="../assets/img/delete-btn.svg" alt="delete-btn">
-                    </div>
-                 </div>
             </div>
-            <div class="selector"> 
+            <div class="selector">
                 <a href="#" class="first">&lt;&lt;</a>
                 <a href="#">1</a>
                 <a href="#">2</a>
                 <a href="#">3</a>
                 <a href="#">>></a>
-            </div> 
+            </div>
         </div>
     </div>
 
