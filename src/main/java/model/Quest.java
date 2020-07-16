@@ -11,6 +11,10 @@ public class Quest {
     private Date dateOfAdding;
     private String pictureUrl;
 
+    public Quest() {
+
+    }
+
     public Quest(int ID, String name, String description, int value, String type, Date dateOfAdding, String pictureUrl) {
         this.ID = ID;
         this.name = name;
@@ -55,6 +59,10 @@ public class Quest {
 
     public String getPictureUrl() {
         return pictureUrl;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public void setName(String name) {

@@ -15,8 +15,8 @@ public class ArtifactService {
 
     public List<Artifact> callArtifactUsageChange(String[] booleansArray, List<Artifact> artifactsList) throws ReadException {
         int count = 0;
-        if (booleansArray.length == 0) {
-            throw new NullPointerException();
+        if (booleansArray == null || artifactsList == null || booleansArray.length == 0 || booleansArray.length != artifactsList.size()) {
+            throw new IllegalArgumentException();
         }
         while (count < artifactsList.size()) {
             boolean isUsed = booleansArray[count].toUpperCase().trim().equals("USED");
