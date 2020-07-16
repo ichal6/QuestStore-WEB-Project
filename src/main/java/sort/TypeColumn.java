@@ -1,7 +1,7 @@
 package sort;
 
 public enum TypeColumn {
-    NAME, EMAIL, CITY, DATE, DESCRIPTION, VALUE, TYPE;
+    NAME, EMAIL, CITY, DATE, DESCRIPTION, VALUE, TYPE, START_DATE, END_DATE;
 
     public static TypeColumn returnType(String type){
         type = type.toLowerCase();
@@ -27,6 +27,12 @@ public enum TypeColumn {
                 break;
             case "type":
                 typeColumn = TYPE;
+                break;
+            case "start-date":
+                typeColumn = START_DATE;
+                break;
+            case "end-date":
+                typeColumn = END_DATE;
                 break;
             default:
                 throw new TypeNotPresentException(type,

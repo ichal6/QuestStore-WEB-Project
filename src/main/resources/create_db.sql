@@ -64,7 +64,8 @@ CREATE TABLE codecooler(
 	wallet_id serial NOT NULL,
 	CONSTRAINT codecooler_class_id FOREIGN KEY (class_id)
 	REFERENCES class (class_id)
-	ON UPDATE CASCADE,
+	ON UPDATE CASCADE
+	ON DELETE SET NULL,
 	CONSTRAINT codecooler_team_id FOREIGN KEY (team_id)
 	REFERENCES team (team_id)
 	ON UPDATE CASCADE

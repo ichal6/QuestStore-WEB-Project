@@ -34,29 +34,29 @@
                     <div class="name-div">
                         <span>Name:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="^">
-                            <img src="../assets/img/arrow-down.svg" alt="v">
+                            <a href="/classes?sortBy=name&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                            <a href="/classes?sortBy=name&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                         </div>
                     </div>
                     <div class="city-div">
                         <span>City:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="^">
-                            <img src="../assets/img/arrow-down.svg" alt="v">
+                            <a href="/classes?sortBy=city&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                            <a href="/classes?sortBy=city&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                         </div>
                     </div>
                     <div class="start-date-div">
                         <span>Start date:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="^">
-                            <img src="../assets/img/arrow-down.svg" alt="v">
+                            <a href="/classes?sortBy=start-date&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                            <a href="/classes?sortBy=start-date&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                         </div>
                     </div>
                     <div class="end-date-div">
                         <span>End-date:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="^">
-                            <img src="../assets/img/arrow-down.svg" alt="v">
+                            <a href="/classes?sortBy=end-date&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                            <a href="/classes?sortBy=end-date&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                         </div>
                     </div>
                     <div class="actions-div">

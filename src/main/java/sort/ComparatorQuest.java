@@ -6,6 +6,8 @@ import model.Quest;
 import java.util.Comparator;
 
 public class ComparatorQuest implements Comparing<Quest> {
+
+    @Override
     public Comparator<Quest> getComparator(TypeColumn typeColumn) throws NoComparatorException {
         switch (typeColumn) {
             case NAME:

@@ -52,10 +52,10 @@ public class CodecoolerClassJDBCDAO implements CodecoolerClassDAO {
             }
             throw new ReadException("You cannot delete this class. " + ex.getMessage());
         } finally {
-            try{
+            try {
                 pst.close();
                 con.setAutoCommit(true);
-            } catch(SQLException ex){
+            } catch (SQLException ex) {
                 throw new ReadException("The problem with close connection. " + ex.getMessage());
             }
         }
@@ -163,7 +163,7 @@ public class CodecoolerClassJDBCDAO implements CodecoolerClassDAO {
         return listOfClasses;
     }
 
-    private void deleteCodecoolerAssignToClasses(Connection con, int id) throws SQLException{
+    private void deleteCodecoolerAssignToClasses(Connection con, int id) throws SQLException {
         PreparedStatement pst = con.prepareStatement("DELETE FROM codecooler WHERE class_id=?");
         pst.setInt(1, id);
         pst.execute();
@@ -175,7 +175,7 @@ public class CodecoolerClassJDBCDAO implements CodecoolerClassDAO {
         ResultSet rs = pst.executeQuery();
         List<Codecooler> codecoolerList = new LinkedList<>();
 
-        while(rs.next()){
+        while (rs.next()) {
             Integer idCodecooler = rs.getInt(1);
             String name = rs.getString(2);
             String email = rs.getString(3);
