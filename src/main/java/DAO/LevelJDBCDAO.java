@@ -3,6 +3,7 @@ package DAO;
 import exception.ConnectionException;
 import exception.ReadException;
 import model.Level;
+import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
@@ -14,6 +15,11 @@ import java.util.Properties;
 
 public class LevelJDBCDAO implements LevelDAO {
     public Level level;
+    private PGSimpleDataSource dataSource;
+
+    public LevelJDBCDAO(PGSimpleDataSource dataSource){
+        this.dataSource = dataSource;
+    }
 
     private Connection connectToDB() {
         try {
@@ -30,7 +36,7 @@ public class LevelJDBCDAO implements LevelDAO {
     @Override
     public void insertNewLevel(Level level) throws ReadException {
 
-        try(Connection connection = connectToDB()) {
+        try(Connection connection = this.dataSource.connectToDB()) {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO level (name, description, price, picture_url)" +
                     "VALUES (?, ?, ?, ?);");
             statement.setString(1, level.getName());

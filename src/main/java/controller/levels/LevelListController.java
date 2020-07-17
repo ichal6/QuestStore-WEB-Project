@@ -5,6 +5,8 @@ import DAO.LevelDAO;
 import DAO.LevelJDBCDAO;
 import exception.ReadException;
 import model.Level;
+import org.postgresql.ds.PGSimpleDataSource;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,11 +20,12 @@ import java.util.List;
 @WebServlet(name = "Levels", urlPatterns = "/levels")
 public class LevelListController extends HttpServlet {
     private LevelDAO levelDAO;
+    private PGSimpleDataSource pgSimpleDataSource;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        levelDAO = new LevelJDBCDAO();
+        levelDAO = new LevelJDBCDAO(pgSimpleDataSource);
     }
 
     @Override
