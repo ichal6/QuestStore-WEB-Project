@@ -60,6 +60,7 @@ public class QuestService {
         TypeColumn typeColumn = TypeColumn.returnType(sortBy);
         Comparator<Quest> comparator = comparing.getComparator(typeColumn);
         SortItems<Quest> sortItems = new SortItems<>(allQuests, comparator);
+
         return sortItems.sort(order);
     }
 

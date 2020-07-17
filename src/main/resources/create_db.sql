@@ -59,12 +59,13 @@ CREATE TABLE codecooler(
 	city varchar(25) NOT NULL,
 	date_of_adding date NOT NULL DEFAULT CURRENT_DATE,
 	picture_url varchar(100),
-	class_id integer,
-	team_id integer,
+	class_id integer DEFAULT NULL,
+	team_id integer DEFAULT NULL,
 	wallet_id serial NOT NULL,
 	CONSTRAINT codecooler_class_id FOREIGN KEY (class_id)
 	REFERENCES class (class_id)
-	ON UPDATE CASCADE,
+	ON UPDATE CASCADE
+	ON DELETE SET NULL,
 	CONSTRAINT codecooler_team_id FOREIGN KEY (team_id)
 	REFERENCES team (team_id)
 	ON UPDATE CASCADE

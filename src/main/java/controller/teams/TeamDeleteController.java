@@ -32,6 +32,7 @@ public class TeamDeleteController extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         try {
             teamDAO.deleteTeam(id);
+            request.setAttribute("message", "Team successfully deleted!");
         } catch (ReadException e) {
             request.setAttribute("message", e.getMessage());
         }

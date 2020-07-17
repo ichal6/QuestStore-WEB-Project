@@ -23,7 +23,12 @@ public class TeamDeleteCodecoolerController extends HttpServlet {
         codecoolerDAO = new CodecoolerJDBCDAO();
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        this.doDelete(request, response);
+    }
+
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int team_id = Integer.parseInt(request.getParameter("team_id"));
         int codecooler_id = Integer.parseInt(request.getParameter("codecooler_id"));
         try {

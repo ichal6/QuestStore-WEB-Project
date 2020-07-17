@@ -1,18 +1,33 @@
 package DAO;
 
-import exception.ConnectionException;
 import exception.ReadException;
 import model.Codecooler;
-import model.Team;
+import org.postgresql.ds.PGSimpleDataSource;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import java.util.List;
+
+import exception.ConnectionException;
 import model.Wallet;
 
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 public class CodecoolerJDBCDAO implements CodecoolerDAO {
+    private PGSimpleDataSource ds;
+
+    public CodecoolerJDBCDAO() {
+    }
+
+    public CodecoolerJDBCDAO(PGSimpleDataSource ds) {
+        this.ds = ds;
+    }
 
     private Connection connectToDB() {
         try {
@@ -83,8 +98,19 @@ public class CodecoolerJDBCDAO implements CodecoolerDAO {
             statement.setString(4, codecooler.getCity());
             statement.setDate(5, codecooler.getDateOfAdding());
             statement.setString(6, codecooler.getPictureURL());
-            statement.setInt(7, codecooler.getClassId());
-            statement.setInt(8, codecooler.getTeamId());
+
+            if (codecooler.getClassId() == 0) {
+                statement.setNull(7, 4);
+            } else {
+                statement.setInt(7, codecooler.getClassId());
+            }
+
+            if (codecooler.getTeamId() == 0) {
+                statement.setNull(8, 4);
+            } else {
+                statement.setInt(8, codecooler.getTeamId());
+            }
+
             statement.setInt(9, codecooler.getId());
             statement.executeUpdate();
         } catch (SQLException ex) {
@@ -127,6 +153,18 @@ public class CodecoolerJDBCDAO implements CodecoolerDAO {
     @Override
     public void clearCodecoolerTeamId(int id) throws ReadException {
         String query = "UPDATE codecooler SET team_id = NULL WHERE codecooler_id = ?";
+        try (Connection connection = connectToDB()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            throw new ReadException("You cannot delete this codecooler from the team!");
+        }
+    }
+
+    @Override
+    public void clearCodecoolerClassId(int id) throws ReadException {
+        String query = "UPDATE codecooler SET class_id = NULL WHERE codecooler_id = ?";
         try (Connection connection = connectToDB()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, id);
