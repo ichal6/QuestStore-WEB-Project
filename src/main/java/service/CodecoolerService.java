@@ -4,10 +4,13 @@ import DAO.*;
 import exception.NoComparatorException;
 import exception.ReadException;
 import model.Codecooler;
+import model.Team;
 import org.postgresql.ds.PGSimpleDataSource;
 import sort.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.*;
 
 public class CodecoolerService {
@@ -31,6 +34,34 @@ public class CodecoolerService {
             }
         }
         return addDetailsToCodecoolersList(allCodecoolers);
+    }
+
+    public Codecooler extractCodecoolerFromHTTPRequest(HttpServletRequest request) {
+        String name = request.getParameter("person-name");
+        String email = request.getParameter("person-email");
+        String city = request.getParameter("person-city");
+        String defaultPassword = "codecooler";
+        String defaultPictureURL = "../assets/img/admins-images/penelope-cruz.svg";
+        Integer class_id = null;
+        Integer team_id = null;
+
+        if (request.getParameterMap().containsKey("person-class")) {
+            class_id = Integer.parseInt(request.getParameter("person-class"));
+        }
+
+        if (request.getParameterMap().containsKey("person-team")) {
+            team_id = Integer.parseInt(request.getParameter("person-team"));
+        }
+
+        return new Codecooler.Builder()
+                .withName(name)
+                .withPassword(defaultPassword)
+                .withEmail(email)
+                .withCity(city)
+                .withPictureURL(defaultPictureURL)
+                .withClassId(class_id)
+                .withTeamId(team_id)
+                .build();
     }
 
     private List<Codecooler> sortList(List<Codecooler> allCodecoolers, boolean order, String sortBy) throws NoComparatorException, IOException {

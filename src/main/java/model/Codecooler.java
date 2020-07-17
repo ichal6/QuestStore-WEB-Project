@@ -77,12 +77,12 @@ public class Codecooler {
             return this;
         }
 
-        public Builder withTeamId(int teamId){
+        public Builder withTeamId(Integer teamId){
             this.teamId = teamId;
             return this;
         }
 
-        public Builder withClassId(int classId){
+        public Builder withClassId(Integer classId){
             this.classId = classId;
             return this;
         }

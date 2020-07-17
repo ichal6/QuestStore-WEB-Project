@@ -43,7 +43,33 @@ public class CodecoolerJDBCDAO implements CodecoolerDAO {
 
     @Override
     public void addCodecooler(Codecooler codecooler) throws ReadException {
+        try (Connection connection = connectToDB()) {
+            int wallet_id = addNewWallet();
+            PreparedStatement statement = connection.prepareStatement(
+                    "INSERT INTO codecooler (name, email, password, city, picture_url, class_id, team_id, wallet_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
+            statement.setString(1, codecooler.getName());
+            statement.setString(2, codecooler.getEmail());
+            statement.setString(3, codecooler.getPassword());
+            statement.setString(4, codecooler.getCity());
+            statement.setString(5, codecooler.getPictureURL());
 
+            if (codecooler.getClassId() == null || codecooler.getClassId() == 0) {
+                statement.setNull(6, 4);
+            } else {
+                statement.setInt(6, codecooler.getClassId());
+            }
+
+            if (codecooler.getTeamId() == null || codecooler.getTeamId() == 0) {
+                statement.setNull(7, 4);
+            } else {
+                statement.setInt(7, codecooler.getTeamId());
+            }
+
+            statement.setInt(8, wallet_id);
+            statement.execute();
+        } catch (SQLException e) {
+            throw new ReadException("Sorry, couldn't insert this team to database");
+        }
     }
 
     @Override
@@ -209,5 +235,19 @@ public class CodecoolerJDBCDAO implements CodecoolerDAO {
         int coinsAvailable = rs.getInt("coins_available");
 
         return new Wallet(walletId, coinsTotal, coinsAvailable);
+    }
+
+    private int addNewWallet() throws ReadException {
+        try (Connection connection = connectToDB()) {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO wallet (coins_total, coins_available) VALUES (0, 0) RETURNING wallet_id;");
+            statement.execute();
+            ResultSet rs = statement.getResultSet();
+            if(rs.next()) {
+                return rs.getInt(1);
+            }
+            throw new ReadException("Sorry, couldn't create wallet for the codecooler");
+        } catch (SQLException e) {
+            throw new ReadException("Sorry, couldn't create wallet for the codecooler");
+        }
     }
 }

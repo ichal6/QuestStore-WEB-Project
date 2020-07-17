@@ -42,13 +42,15 @@ public class Validator {
     }
 
     public void validateEmail(String text, int min, int max) throws EmailFormatException {
+        if ((text == null || text.length() < min || text.length() > max)) {
+            throw new EmailFormatException(min, max);
+        }
+
         String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
-
         Pattern pattern = Pattern.compile(regex);
-
         Matcher matcher = pattern.matcher(text);
 
-        if ((!matcher.matches()) || text.length() < min || text.length() > max) {
+        if ((!matcher.matches())) {
             throw new EmailFormatException(min, max);
         }
     }

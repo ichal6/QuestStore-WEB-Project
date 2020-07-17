@@ -3,6 +3,7 @@ package controller.codecoolers;
 import DAO.*;
 
 import exception.ReadException;
+import model.Codecooler;
 import model.CodecoolerClass;
 import model.Team;
 import service.ClassService;
@@ -54,22 +55,21 @@ public class CodecoolerAddNewController extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-//    @Override
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        boolean isInputValid = validationHelper.callInputsValidation(request);
-//        if (isInputValid) {
-//            try {
-//                Team team = teamService.extractTeamFromHTTPRequest(request);
-//                teamDAO.addTeam(team);
-//                request.setAttribute("message", "Team successfully added!");
-//            } catch (ReadException e) {
-//                request.setAttribute("error_message", e.getMessage());
-//                RequestDispatcher dispatcher = request.getRequestDispatcher("/errorPage");
-//                dispatcher.forward(request, response);
-//            }
-//        }
-//        RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/teams_add_new.jsp");
-//        dispatcher.forward(request, response);
-//    }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        boolean isInputValid = validationHelper.callInputsValidation(request);
+        if (isInputValid) {
+            try {
+                Codecooler codecooler = codecoolerService.extractCodecoolerFromHTTPRequest(request);
+                codecoolerDAO.addCodecooler(codecooler);
+                request.setAttribute("message", "Codecooler successfully added!");
+            } catch (ReadException e) {
+                request.setAttribute("error_message", e.getMessage());
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/errorPage");
+                dispatcher.forward(request, response);
+            }
+        }
+        doGet(request, response);
+    }
 }
 
