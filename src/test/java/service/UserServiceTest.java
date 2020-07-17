@@ -3,7 +3,6 @@ package service;
 import DAO.UserJDBCDAO;
 import exception.ReadException;
 import model.CMSUser;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,6 @@ import org.mockito.MockitoAnnotations;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
@@ -44,6 +42,18 @@ class UserServiceTest {
         Assertions.assertEquals("Michal", sortedListByName.get(1).getName());
         Assertions.assertEquals("Rafal", sortedListByName.get(2).getName());
         verify(dao, times(1)).getAllAdmins();
+    }
+    @Test
+    void should_throw_read_exception() throws ReadException {
+        //given:
+        String userType = "admin";
+        String sortBy = "name";
+        Boolean order = true;
+        //when:
+        given(dao.getAllAdmins()).willThrow(new ReadException(" "));
+        //then:
+        Assertions.assertThrows(ReadException.class, ()->userService.getAllUsers(userType, sortBy, order));
+
     }
 
     private List<CMSUser> prepareMockData() {
