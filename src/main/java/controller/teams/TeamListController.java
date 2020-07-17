@@ -26,6 +26,7 @@ public class TeamListController extends HttpServlet {
         this.teamService = new TeamService(new TeamJDBCDAO());
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Map<String, String[]> parameters = request.getParameterMap();
         Boolean order = getOrder(parameters);

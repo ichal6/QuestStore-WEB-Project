@@ -30,11 +30,13 @@ public class TeamAddNewController extends HttpServlet {
         this.validationHelper = new ValidationHelperTeam();
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/teams_add_new.jsp");
         dispatcher.forward(request, response);
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean isInputValid = validationHelper.callInputsValidation(request);
         if (isInputValid) {

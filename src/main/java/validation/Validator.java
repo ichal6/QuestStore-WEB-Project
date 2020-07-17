@@ -3,6 +3,8 @@ package validation;
 import exception.*;
 
 import java.sql.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Validator {
 
@@ -36,6 +38,18 @@ public class Validator {
             Date.valueOf(text);
         } catch (IllegalArgumentException e) {
             throw new DateFormatException(allowedFormat);
+        }
+    }
+
+    public void validateEmail(String text, int min, int max) throws EmailFormatException {
+        String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+
+        Pattern pattern = Pattern.compile(regex);
+
+        Matcher matcher = pattern.matcher(text);
+
+        if ((!matcher.matches()) || text.length() < min || text.length() > max) {
+            throw new EmailFormatException(min, max);
         }
     }
 }

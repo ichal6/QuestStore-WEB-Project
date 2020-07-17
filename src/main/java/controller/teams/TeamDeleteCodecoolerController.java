@@ -28,6 +28,7 @@ public class TeamDeleteCodecoolerController extends HttpServlet {
         this.doDelete(request, response);
     }
 
+    @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int team_id = Integer.parseInt(request.getParameter("team_id"));
         int codecooler_id = Integer.parseInt(request.getParameter("codecooler_id"));
