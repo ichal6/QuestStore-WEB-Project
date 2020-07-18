@@ -4,7 +4,6 @@ import DAO.LevelDAO;
 import DAO.LevelJDBCDAO;
 import exception.ReadException;
 import model.Level;
-import org.postgresql.ds.PGSimpleDataSource;
 import service.LevelService;
 
 import javax.servlet.RequestDispatcher;
@@ -22,12 +21,11 @@ public class LevelUpdateController  extends HttpServlet {
     private LevelDAO levelDAO;
     public int levelId;
     public Level levelToEdit;
-    private PGSimpleDataSource pgSimpleDataSource;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        levelDAO = new LevelJDBCDAO(pgSimpleDataSource);
+        levelDAO = new LevelJDBCDAO();
     }
 
     public void doPut(HttpServletRequest request, HttpServletResponse response)

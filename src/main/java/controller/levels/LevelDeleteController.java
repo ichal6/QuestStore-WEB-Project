@@ -3,7 +3,6 @@ package controller.levels;
 import DAO.LevelDAO;
 import DAO.LevelJDBCDAO;
 import exception.ReadException;
-import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,13 +17,12 @@ import java.util.Map;
 @WebServlet(urlPatterns = "/levels/delete/")
     public class LevelDeleteController extends HttpServlet {
         private LevelDAO levelDAO;
-        private PGSimpleDataSource pgSimpleDataSource;
 
         @Override
         public void init() throws ServletException {
             super.init();
             try{
-                levelDAO = new LevelJDBCDAO(pgSimpleDataSource);
+                levelDAO = new LevelJDBCDAO();
             } catch (Exception e) {
                 e.printStackTrace();
             }

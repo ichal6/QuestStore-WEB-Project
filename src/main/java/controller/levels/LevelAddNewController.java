@@ -5,7 +5,6 @@ import DAO.LevelDAO;
 import DAO.LevelJDBCDAO;
 import exception.ReadException;
 import model.Level;
-import org.postgresql.ds.PGSimpleDataSource;
 import service.LevelService;
 //import service.LevelService;
 
@@ -22,14 +21,13 @@ import static java.lang.Integer.parseInt;
 @WebServlet(name = "Levels-add", urlPatterns = "/levels/add")
 public class LevelAddNewController extends HttpServlet {
     private LevelDAO levelDAO;
-    private PGSimpleDataSource pgSimpleDataSource;
 
 
     @Override
     public void init() throws ServletException {
         super.init();
         try{
-            levelDAO = new LevelJDBCDAO(pgSimpleDataSource);
+            levelDAO = new LevelJDBCDAO();
         } catch (Exception e) {
             e.printStackTrace();
         }
