@@ -18,6 +18,7 @@ public class LevelJDBCDAO implements LevelDAO {
     private PGSimpleDataSource dataSource;
 
     public LevelJDBCDAO(PGSimpleDataSource dataSource){
+
         this.dataSource = dataSource;
     }
 
@@ -36,7 +37,7 @@ public class LevelJDBCDAO implements LevelDAO {
     @Override
     public void insertNewLevel(Level level) throws ReadException {
 
-        try(Connection connection = this.dataSource.connectToDB()) {
+        try(Connection connection = this.dataSource.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO level (name, description, price, picture_url)" +
                     "VALUES (?, ?, ?, ?);");
             statement.setString(1, level.getName());
