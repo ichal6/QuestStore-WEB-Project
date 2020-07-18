@@ -1,17 +1,44 @@
 package service;
 
+import DAO.LevelDAO;
+import exception.NoComparatorException;
+import exception.ReadException;
 import exception.StringLengthFormatException;
 import exception.ValueFormatException;
+import model.Artifact;
 import model.Level;
+import sort.*;
 import validation.Validator;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Comparator;
+import java.util.List;
+
 import static java.lang.Integer.parseInt;
 
 
 public class LevelService {
-
     Validator validator = new Validator();
+    private LevelDAO dao;
 
+    public LevelService(){
+
+    }
+
+    public LevelService(LevelDAO dao){
+        this.dao = dao;
+    }
+
+    public List<Level> getAllLevels(String sortBy, Boolean order) throws ReadException {
+        List<Level> allLevels = dao.getLevelsList();
+        if (order != null && sortBy != null) {
+            try {
+                allLevels = sortList(allLevels, order, sortBy);
+            } catch (NoComparatorException e) {
+                throw new ReadException(e.getMessage());
+            }
+        }
+        return allLevels;
+    }
 
     public boolean mainValidator(HttpServletRequest request){
 
@@ -90,6 +117,12 @@ public class LevelService {
         return isInputValid;
     }
 
+    private List<Level> sortList(List<Level> allArtifacts, boolean order, String sortBy) throws NoComparatorException {
+        Comparing<Level> comparing = new ComparatorLevel();
+        TypeColumn typeColumn = TypeColumn.returnType(sortBy);
+        Comparator<Level> comparator = comparing.getComparator(typeColumn);
+        SortItems<Level> sortItems = new SortItems<>(allArtifacts, comparator);
 
-
+        return sortItems.sort(order);
+    }
 }

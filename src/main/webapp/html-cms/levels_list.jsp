@@ -36,29 +36,29 @@
                     <div class="name-div">
                         <span>Name:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="">
-                            <img src="../assets/img/arrow-down.svg" alt="">
+                            <a href="/levels?sortBy=name&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                            <a href="/levels?sortBy=name&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                         </div>
                     </div>
                     <div class="description-div">
                         <span>Description snippet:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="">
-                            <img src="../assets/img/arrow-down.svg" alt="">
+                            <a href="/levels?sortBy=description&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                            <a href="/levels?sortBy=description&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                         </div>
                     </div>
                     <div class="coins-div">
                         <span>No. coins to get:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="">
-                            <img src="../assets/img/arrow-down.svg" alt="">
+                            <a href="/levels?sortBy=coins&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                            <a href="/levels?sortBy=coins&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                         </div>
                     </div>
                     <div class="date-of-adding-div">
                         <span>Date of adding:</span>
                         <div class="arrows">
-                            <img src="../assets/img/arrow-up.svg" alt="">
-                            <img src="../assets/img/arrow-down.svg" alt="">
+                            <a href="/levels?sortBy=date&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                            <a href="/levels?sortBy=date&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                         </div>
                     </div>
                     <div class="actions-div">
