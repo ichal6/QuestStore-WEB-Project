@@ -3,7 +3,6 @@ package service;
 import DAO.UserJDBCDAO;
 import exception.ReadException;
 import model.CMSUser;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,6 @@ import org.mockito.MockitoAnnotations;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
@@ -45,7 +43,6 @@ class UserServiceTest {
         Assertions.assertEquals("Rafal", sortedListByName.get(2).getName());
         verify(dao, times(1)).getAllAdmins();
     }
-
     @Test
     void should_throw_read_exception() throws ReadException {
         //given:
@@ -58,6 +55,7 @@ class UserServiceTest {
         Assertions.assertThrows(ReadException.class, ()->userService.getAllUsers(userType, sortBy, order));
 
     }
+
 
     private List<CMSUser> prepareMockData() {
         CMSUser user1 = new CMSUser.Builder()
