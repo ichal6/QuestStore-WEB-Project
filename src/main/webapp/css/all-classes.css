@@ -126,3 +126,9 @@
 .actions {
     max-width: 20px;
 }
+
+body .all-classes-container .validation-message {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: #BF343F;
+}

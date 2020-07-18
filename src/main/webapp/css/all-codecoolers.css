@@ -10,9 +10,13 @@
     src: url("../assets/fonts/SourceSansPro-SemiBold.ttf");
 }
 
+@font-face {
+    font-family: "Source Sans Regular";
+    src: url("../assets/fonts/SourceSansPro-Regular.ttf");
+}
 
 .container {
-    font-family: "Source Sans Pro";
+    font-family: "Source Sans Regular";
     display: flex;
     flex-direction: row;
     background-color: #DFDFDF;
@@ -20,7 +24,7 @@
 }
 
 .all-persons-container {
-    font-family: 'Source Sans Pro';
+    font-family: 'Source Sans Regular';
     width: 100%;
     margin: 12px;
 }
@@ -156,4 +160,11 @@
     color: #F2F2F2;
     background-color:#418FBF;
     text-decoration: none;
+}
+
+
+.all-persons-container .validation-message {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: #BF343F;
 }

@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Codecooler {
-    private int id;
+    private Integer id;
     private String name;
     private String email;
     private String password;
@@ -14,8 +14,8 @@ public class Codecooler {
     private Date dateOfAdding;
     private String pictureURL;
     private Wallet wallet;
-    private int classId;
-    private int teamId;
+    private Integer classId;
+    private Integer teamId;
     private Map<Quest, Date> questAchieved;
     private Map<Artifact, Date> artifactBought;
 
@@ -32,8 +32,8 @@ public class Codecooler {
         private Date dateOfAdding;
         private String pictureURL;
         private Wallet wallet;
-        private int classId;
-        private int teamId;
+        private Integer classId;
+        private Integer teamId;
         private Map<Quest, Date> questAchieved;
         private Map<Artifact, Date> artifactBought;
 
@@ -77,12 +77,12 @@ public class Codecooler {
             return this;
         }
 
-        public Builder withTeamId(int teamId){
+        public Builder withTeamId(Integer teamId){
             this.teamId = teamId;
             return this;
         }
 
-        public Builder withClassId(int classId){
+        public Builder withClassId(Integer classId){
             this.classId = classId;
             return this;
         }
@@ -180,15 +180,15 @@ public class Codecooler {
         this.wallet = wallet;
     }
 
-    public int getClassId() {
+    public Integer getClassId() {
         return classId;
     }
 
-    public void setClassId(int classId) {
+    public void setClassId(Integer classId) {
         this.classId = classId;
     }
 
-    public int getTeamId() {
+    public Integer getTeamId() {
         return teamId;
     }
 

@@ -131,8 +131,7 @@
     display: grid;
     grid-template-columns: auto auto;
     grid-template-rows: auto auto;
-    grid-gap: 10px;
-
+    grid-gap: 25px;
 }
 
 input {
@@ -153,7 +152,6 @@ input {
     border: 1px solid #DFDFDF;
     border-radius: 26px;
     font-size: 15px;
-    ;
     font-weight: 700;
     background-color: #F2F2F2;
 }
@@ -190,4 +188,10 @@ input {
     font-size: 16px;
     font-family: "Source Sans Pro";
     color: #545759;
+}
+
+.validation-message {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: #BF343F;
 }

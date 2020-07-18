@@ -56,6 +56,19 @@ class UserServiceTest {
 
     }
 
+    @Test
+    void should_throw_read_exception() throws ReadException {
+        //given:
+        String userType = "admin";
+        String sortBy = "name";
+        Boolean order = true;
+        //when:
+        given(dao.getAllAdmins()).willThrow(new ReadException(" "));
+        //then:
+        Assertions.assertThrows(ReadException.class, ()->userService.getAllUsers(userType, sortBy, order));
+
+    }
+
     private List<CMSUser> prepareMockData() {
         CMSUser user1 = new CMSUser.Builder()
                 .userName("Michal")
