@@ -4,6 +4,8 @@ import DAO.LevelDAO;
 import DAO.LevelJDBCDAO;
 import exception.ReadException;
 import model.Level;
+import service.LevelService;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,19 +30,30 @@ public class LevelUpdateController  extends HttpServlet {
 
     public void doPut(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String name = request.getParameter("level-name");
-        String description = request.getParameter("level-description");
-        int price = Integer.parseInt(request.getParameter("level-coins"));
 
-        try {
-            levelDAO.updateLevel(new Level(name, description, price, "level6.svg"), levelId);
-        } catch (ReadException e){
-            request.setAttribute("error_message", e.getMessage());
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/error-page");
-            dispatcher.forward(request,response);
+        LevelService levelService = new LevelService();
+        boolean validateInput = levelService.mainValidator(request);
+
+        if(validateInput == true) {
+            try {
+                Level level = levelService.getInformationToUpdate(request, levelToEdit);
+                levelDAO.updateLevel(level, levelId);
+                response.setHeader("Send", "Success");
+                RequestDispatcher dispatcher
+                        = request.getRequestDispatcher("/html-cms/levels_update.jsp");
+                dispatcher.forward(request, response);
+            } catch (ReadException e) {
+                request.setAttribute("error_message", e.getMessage());
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/errorPage");
+                dispatcher.forward(request, response);
+            }
         }
-        response.sendRedirect("/levels");
+        request.setAttribute("level", levelToEdit);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/levels_update.jsp");
+        dispatcher.forward(request, response);
+
     }
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

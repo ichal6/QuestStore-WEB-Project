@@ -29,6 +29,7 @@
     color: #418FBF;
 }
 
+
 .personal-details {
     font-family: "Source Sans Pro";
     display: flex;
@@ -125,6 +126,6 @@
     align-items: flex-start;
 }
 
-.level-coins input{
-    width: 100%;
+.error{
+    color: #BF343F !important;
 }

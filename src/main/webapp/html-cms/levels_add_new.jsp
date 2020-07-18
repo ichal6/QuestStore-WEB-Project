@@ -24,8 +24,10 @@
             <div class="personal-details">
                 <h2>Basic details:</h2>
                 <label for="level-name">Name*:</label>
+                <div class="error"> <p>${name_validation_message}</p> </div>
                 <input type="text" id="level-name" name="level-name">
                 <label for="level-description">Description*:</label>
+                <p class="error">${description_validation_message}</p>
                 <input type="text" id="level-description" name="level-description">
                 <div class="img-coins">
                     <div>
@@ -34,6 +36,7 @@
                     </div>
                     <div class="level-coins">
                         <label for="level-coins">Cost (number of coins to get)*:</label>
+                        <p class="error">${value_validation_message}</p>
                         <input type="number" id="level-coins" name="level-coins">
                     </div>
                 </div>
