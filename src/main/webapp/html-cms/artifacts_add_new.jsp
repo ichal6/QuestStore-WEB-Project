@@ -19,6 +19,7 @@
             <form action="/artifacts/add" method="post">
             <h1>Add new artifact</h1>
             <a href="/artifacts">&#60;- Back to the list</a>
+                <p class="validation-message">${message}</p>
             <div class="artifacts-details">
                 <h2>Basic details</h2>
                 <label for="artifacts-name">Name*:</label>

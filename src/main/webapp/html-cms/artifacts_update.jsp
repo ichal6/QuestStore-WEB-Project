@@ -22,14 +22,17 @@
     <div class="details-container">
         <h1>Artifact’s details</h1>
         <a href="/artifacts">&#60;- Back to the list</a>
+        <p class="validation-message">${message}</p>
         <form action="/artifacts/update" method="post">
             <div class="artifacts-details">
                 <h2>Basic details</h2>
                 <label for="artifacts-name">Name*:</label>
                 <input type="text" id="artifacts-name" value="<%=artifact.getName()%>" name="artifact-name">
+                <p class="validation-message">${name_validation_message}</p>
                 <label for="artifacts-descripton">Description*:</label>
                 <textarea id="artifacts-descripton"
                           name="artifact-description"><%=artifact.getDescription()%></textarea>
+                <p class="validation-message">${description_validation_message}</p>
                 <div class="proporties-section">
                     <div class="picture">
                         <p>Picture: </p>
@@ -40,12 +43,14 @@
                     <div class=proporties>
                         <label>Value (Number of coins student will get for the artifacts)*:</label><br>
                         <input type="text" value="<%=artifact.getValue()%>" name="artifact-value"><br>
-                        <label>Type (Single or Team):</label><br>
+                        <p class="validation-message">${value_validation_message}</p>
+                        <label>Type (Single or Team)*:</label><br>
                         <select class="type-selector" id="type-selector" name="type-selector">
                             <option selected hidden>${artifact.getType()}</option>
                             <option name="artifact-type">Single</option>
                             <option name="artifact-type">Team</option>
                         </select>
+                        <p class="validation-message">${type_validation_message}</p>
                     </div>
                 </div>
                 <div class="lower-section">
