@@ -38,36 +38,36 @@
                 <div class="name-div">
                     <span>Name:</span>
                     <div class="arrows">
-                        <img src="../assets/img/arrow-up.svg" alt="">
-                        <img src="../assets/img/arrow-down.svg" alt="">
+                        <a href="/artifacts?sortBy=name&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                        <a href="/artifacts?sortBy=name&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                     </div>
                 </div>
                 <div class="description-div">
                     <span>Description snippet</span>
                     <div class="arrows">
-                        <img src="../assets/img/arrow-up.svg" alt="">
-                        <img src="../assets/img/arrow-down.svg" alt="">
+                        <a href="/artifacts?sortBy=description&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                        <a href="/artifacts?sortBy=description&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                     </div>
                 </div>
                 <div class="value-div">
                     <span>Value:</span>
                     <div class="arrows">
-                        <img src="../assets/img/arrow-up.svg" alt="">
-                        <img src="../assets/img/arrow-down.svg" alt="">
+                        <a href="/artifacts?sortBy=value&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                        <a href="/artifacts?sortBy=value&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                     </div>
                 </div>
                 <div class="type-div">
                     <span>Type:</span>
                     <div class="arrows">
-                        <img src="../assets/img/arrow-up.svg" alt="">
-                        <img src="../assets/img/arrow-down.svg" alt="">
+                        <a href="/artifacts?sortBy=type&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                        <a href="/artifacts?sortBy=type&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                     </div>
                 </div>
                 <div class="date-of-adding-div">
                     <span>Date of adding:</span>
                     <div class="arrows">
-                        <img src="../assets/img/arrow-up.svg" alt="">
-                        <img src="../assets/img/arrow-down.svg" alt="">
+                        <a href="/artifacts?sortBy=date&order=ASC"><img src="../assets/img/arrow-up.svg" alt="^"></a>
+                        <a href="/artifacts?sortBy=date&order=DESC"><img src="../assets/img/arrow-down.svg" alt="v"></a>
                     </div>
                 </div>
                 <div class="actions-div">
