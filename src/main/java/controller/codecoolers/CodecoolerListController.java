@@ -1,10 +1,14 @@
-package controller.teams;
+package controller.codecoolers;
 
-import DAO.TeamDAO;
+import DAO.CodecoolerClassJDBCDAO;
+import DAO.CodecoolerJDBCDAO;
+import DAO.QuestJDBCDAO;
 import DAO.TeamJDBCDAO;
 import exception.ReadException;
-import model.Team;
-import service.TeamService;
+import model.Codecooler;
+import model.Quest;
+import service.CodecoolerService;
+import service.QuestService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,28 +20,27 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(name = "TeamListController", urlPatterns = "/teams")
-public class TeamListController extends HttpServlet {
-    private TeamService teamService;
+@WebServlet(name = "CodecoolerListController", urlPatterns = "/codecoolers")
+public class CodecoolerListController extends HttpServlet {
+    private CodecoolerService codecoolerService;
 
     @Override
     public void init() throws ServletException {
         super.init();
-        this.teamService = new TeamService(new TeamJDBCDAO());
+        this.codecoolerService = new CodecoolerService(new CodecoolerJDBCDAO(), new CodecoolerClassJDBCDAO(), new TeamJDBCDAO());
     }
 
-    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Map<String, String[]> parameters = request.getParameterMap();
         Boolean order = getOrder(parameters);
         String sortBy = getSortBy(parameters);
         try {
-            List<Team> teamsList = teamService.getAllTeams(sortBy, order);
-            request.setAttribute("teamsList", teamsList);
-            if (teamsList.size() == 0) {
-                request.setAttribute("message", "There are no teams available");
+            Map<Codecooler, List<String>> codecoolersMap = codecoolerService.getAllCodecoolersWithClassNameAndTeamName(sortBy, order);
+            request.setAttribute("codecoolersMap", codecoolersMap);
+            if (codecoolersMap.size() == 0) {
+                request.setAttribute("message", "There are no quests available");
             }
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/teams_list.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/html-cms/codecoolers_list.jsp");
             dispatcher.forward(request, response);
         } catch (ReadException e) {
             request.setAttribute("error_message", e.getMessage());

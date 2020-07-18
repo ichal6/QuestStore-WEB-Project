@@ -1,3 +1,6 @@
+<%@ page import="model.CodecoolerClass" %>
+<%@ page import="java.util.List" %>
+<%@ page import="model.Team" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en" onclick="return hideSubMenu()">
 
@@ -18,37 +21,58 @@
         <div class="details-container">
 
             <h1>Add new Codecooler</h1>
-            <a href="codecoolers_list.jsp">&#60;- Back to the list</a>
+            <a href="/codecoolers">&#60;- Back to the list</a>
+            <p class="validation-message">${message}</p>
             <div class="personal-details">
-                <h2>Basic details</h2>
+                <form class="basic-details" action="/codecoolers/add" method="post">
+                    <h2>Basic details</h2>
 
-                <div class="details">
+                    <div class="details">
 
-                    <div class="person"> Name*: <br><input type="text" id="person-name" placeholder=""></div>
-                    <div class="person"> Class:<br>
-                        <select class="class-team-seletor" id="class-selector">
-                            <option value="" disabled selected>Choose...</option>
-                            <option> KRK-JAVA-2020</option>
-                            <option> KRK-WEEKEND-2019</option>
-                            <option> KRK-WEEKEND-2020</option>
-                            <option> WAW-PYTHON-2019</option>
-                        </select>
+                        <div class="person"> Name*: <br>
+                            <input name="person-name" type="text" id="person-name" placeholder="">
+                            <p class="validation-message">${name_validation_message}</p>
+                        </div>
+                        <div class="person"> Class:<br>
+                            <select name="person-class" class="class-team-seletor" id="class-selector">
+                                <option value="" disabled selected>Choose...</option>
+                                <%
+                                    List<CodecoolerClass> classList = (List<CodecoolerClass>) request.getAttribute("classList");
+                                    for (CodecoolerClass codecoolerClass : classList) {
+                                %>
+                                <option value=<%=codecoolerClass.getId()%>><%=codecoolerClass.getName()%></option>
+                                <%
+                                    }
+                                %>
+                            </select>
+                        </div>
+                        <div class="person"> Email*:<br>
+                            <input name="person-email" type="text" id="person-email" placeholder="">
+                            <p class="validation-message">${email_validation_message}</p>
+                        </div>
+                        <div class="person"> Team:<br>
+                            <select name="person-team" class="class-team-seletor" id="team-selector">
+                                <option value="" disabled selected>Choose...</option>
+                                <%
+                                    List<Team> teamsList = (List<Team>) request.getAttribute("teamsList");
+                                    for (Team team : teamsList) {
+                                %>
+                                <option value=<%=team.getId()%>><%=team.getName()%></option>
+                                <%
+                                    }
+                                %>
+                            </select>
+                        </div>
+                        <div class="person"> City:<br>
+                            <input name="person-city" type="text" id="person-city" placeholder="">
+                            <p class="validation-message">${city_validation_message}</p>
+                        </div>
+                        <div class="lower-section">
+                            <p>*- Fields marked like these need to be filled to add new entry<br></p>
+                            <button class="btn" id="update-student">Add new Codecooler</button>
+                        </div>
                     </div>
-                    <div class="person"> Email*:<br><input type="text" id="person-email" placeholder=""></div>
-                    <div class="person"> Team:<br>
-                        <select class="class-team-seletor" id="team-selector">
-                            <option value="" disabled selected>Choose...</option>
-                            <option> Andrzej-Marta-Mariusz-Kuba</option>
-                            <option> Michał-Rafał-Michał-Karolina</option>
-                            <option> Jolanta-Szymon-Mariusz</option>
-                        </select>
-                    </div>
-                    <div class="person"> City:<br> <input type="text" id="person-city" placeholder=""></div>
-                    <div class="lower-section">
-                        <p>*- Fields marked like these need to be filled to add new entry<br></p>
-                        <button class="btn" id="update-student">Add new Codecooler</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

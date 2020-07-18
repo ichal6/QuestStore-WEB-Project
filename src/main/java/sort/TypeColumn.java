@@ -1,11 +1,11 @@
 package sort;
 
 public enum TypeColumn {
-    NAME, EMAIL, CITY, DATE, DESCRIPTION, VALUE, TYPE, START_DATE, END_DATE;
+    NAME, EMAIL, CITY, DATE, DESCRIPTION, CLASS, TEAM, VALUE, TYPE, START_DATE, END_DATE;
 
     public static TypeColumn returnType(String type){
         type = type.toLowerCase();
-        TypeColumn typeColumn = null;
+        TypeColumn typeColumn;
         switch(type){
             case "name":
                typeColumn = NAME;
@@ -21,6 +21,12 @@ public enum TypeColumn {
                 break;
             case "description":
                 typeColumn = DESCRIPTION;
+                break;
+            case "class":
+                typeColumn = CLASS;
+                break;
+            case "team":
+                typeColumn = TEAM;
                 break;
             case "value":
                 typeColumn = VALUE;

@@ -48,6 +48,7 @@ public class TeamEditController extends HttpServlet {
         this.allRemainingCodecoolersList = new ArrayList<>();
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             updateTeamIdFromRequestIfExists(request);
