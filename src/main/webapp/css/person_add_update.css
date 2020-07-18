@@ -129,3 +129,9 @@
 .error{
     color: #BF343F !important;
 }
+
+.validation-message {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: #BF343F;
+}
