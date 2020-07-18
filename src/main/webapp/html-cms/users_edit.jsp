@@ -17,14 +17,18 @@
         <div class="details-container">
             <h1>${editAdmin.getRole()}'s details</h1>
             <a href="/user-list?type=${type}">&#60;- Back to the list</a>
+            <p class="validation-message">${message}</p>
             <form class="personal-details" action="/user/edit" method="post">
                 <h2>Personal details</h2>
                 <label for="person-name">Name*:</label>
                 <input type="text" name="person-name" id="person-name" value="${editAdmin.getName()}">
+                <p class="validation-message">${name_validation_message}</p>
                 <label for="person-mail">Email*:</label>
                 <input type="text" name="person-mail" id="person-mail" value="${editAdmin.getEmail()}">
+                <p class="validation-message">${email_validation_message}</p>
                 <label for="person-city">City*:</label>
                 <input type="text" name="person-city" id="person-city" value="${editAdmin.getCity()}">
+                <p class="validation-message">${city_validation_message}</p>
                 <div class="lower-section">
                     <p>*- Fields marked like the need to be filled to add new entry</p>
                     <button class="btn" id="update-admin">Update</button>
