@@ -42,7 +42,7 @@
                         <input type="text" value="<%=artifact.getValue()%>" name="artifact-value"><br>
                         <label>Type (Single or Team):</label><br>
                         <select class="type-selector" id="type-selector" name="type-selector">
-                            <option value="" selected disabled hidden>${artifact.getType()}</option>
+                            <option selected hidden>${artifact.getType()}</option>
                             <option name="artifact-type">Single</option>
                             <option name="artifact-type">Team</option>
                         </select>
