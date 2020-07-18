@@ -23,8 +23,10 @@
                 <h2>Basic details</h2>
                 <label for="artifacts-name">Name*:</label>
                 <input type="text" id="artifacts-name" name="artifact-name">
+                <p class="validation-message">${name_validation_message}</p>
                 <label for="artifacts-descripton">Description*:</label>
                 <textarea id="artifacts-descripton" name="artifact-description"></textarea>
+                <p class="validation-message">${description_validation_message}</p>
                 <div class="proporties-section">
                     <div class="picture">
                         <p>Picture: </p>
@@ -33,12 +35,14 @@
                     <div class=proporties>
                         <label>Value (Number of coins student will get for the artifacts)*:</label><br>
                         <input type="text" name="artifact-value"><br>
+                        <p class="validation-message">${value_validation_message}</p>
                         <label>Type (Single or Team):</label><br>
                         <select class= "type-seletor" id="type-selector" name="type-selector">
                             <option value="" selected disabled hidden>Choose...</option>
                             <option>Single</option>
                             <option>Team</option>
                         </select>
+                        <p class="validation-message">${type_validation_message}</p>
                     </div>
                 </div>
                     <div class="lower-section">

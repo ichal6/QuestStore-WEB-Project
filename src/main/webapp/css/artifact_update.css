@@ -136,3 +136,9 @@
 .proporties select{
     padding-left: 15px;
 }
+
+.validation-message {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: #BF343F;
+}
