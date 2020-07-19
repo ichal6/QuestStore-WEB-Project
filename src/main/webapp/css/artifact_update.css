@@ -63,7 +63,7 @@
     border-radius: 12px;
 }
 
-.artifacts-details textarea{
+.artifacts-details textarea {
     height: auto;
 }
 
@@ -92,12 +92,13 @@
     transition: all 0.2s;
 }
 
-.btn:hover{
+.btn:hover {
     background-color: rgb(55, 158, 223);
     font-size: 19px;
     cursor: pointer;
 }
-.type-seletor{
+
+.type-seletor {
     width: 400px;
     height: 50px;
     border-radius: 12px;
@@ -108,32 +109,32 @@
     color: #545759;
 }
 
-.proporties-section{
+.proporties-section {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-#artifacts-logo{
+#artifacts-logo {
     width: 156px;
     height: 156px;
 }
 
-.picture a{
+.picture a {
     text-decoration: underline;
 }
 
-.picture a img{
+.picture a img {
     margin-top: 10px;
     margin-right: 10px;
     margin-left: 10px;
 }
 
-.proporties input{
+.proporties input {
     width: 400px;
 }
 
-.proporties select{
+.proporties select {
     padding-left: 15px;
 }
 

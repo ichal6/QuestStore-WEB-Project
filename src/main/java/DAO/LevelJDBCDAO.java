@@ -39,7 +39,7 @@ public class LevelJDBCDAO implements LevelDAO {
             statement.setString(4, level.getPictureUrl());
             statement.executeUpdate();
         }catch(SQLException e){
-            throw new ReadException("Insertion failed. Please try again");
+            throw new ReadException("Adding new level is currently impossible.");
         }
     }
 
