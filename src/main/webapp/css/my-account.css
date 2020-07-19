@@ -177,6 +177,10 @@ button:hover {
     font-size: 14px;
 }
 
+.warning-password{
+    margin-bottom: 25px;
+}
+
 .hidden {
     display: none;
 }

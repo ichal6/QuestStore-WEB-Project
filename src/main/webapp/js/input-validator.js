@@ -8,14 +8,18 @@ const submitBtn = document.querySelector(".submit-button");
 let correctName = true;
 let correctEmail = true;
 
-function switchButton(id){
+function switchButton(id, arr){
     var button = document.getElementById(id);
-    if (correctName && correctEmail) {
-        console.log("enabled")
-        button.disabled = false;
-    }else{
-        console.log("disabled")
-        button.disabled = true;
+    var i;
+    for (i = 0; i < arr.length; i++) {
+        if (arr[i]) {
+            console.log("enabled")
+            button.disabled = false;
+            break;
+        }else{
+            console.log("disabled")
+            button.disabled = true;
+        }
     }
 }
 
@@ -32,8 +36,10 @@ function emailValidator() {
         email_paragraph.classList.add("hidden");
         correctEmail = true;
     }
-    switchButton("btn-update");
+    let arr = [correctEmail, correctName];
+    switchButton("btn-update", arr);
 }
+
 function passwordValidator() {
     var passwFormat = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
     let passw_value = passw_input.value;
@@ -43,6 +49,8 @@ function passwordValidator() {
     }else{
         document.querySelector(".warning-password").classList.add("hidden");
     }
+    let arr = [validPassw];
+    switchButton("password-change", arr)
 }
 
 function checkMatchPasswords(){
@@ -66,7 +74,8 @@ function nameValidator(){
         correctName = false;
     }
     displayWarning(validName);
-    switchButton("btn-update");
+    let arr = [validName];
+    switchButton("btn-update", arr);
 }
 
 
@@ -78,7 +87,7 @@ function displayWarning(validatorResult){
     }
 }
 function checkEmail(){
-    email_input.addEventListener("focusout",emailValidator);
+    email_input.addEventListener("input",emailValidator);
 }
 function checkName(){
     name_input.addEventListener("focusout",nameValidator);
