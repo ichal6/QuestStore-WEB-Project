@@ -51,6 +51,9 @@
                     <input type="hidden" name="action" value="change-password">
                     <label>Old password*:</label><br>
                     <input type="password" id="old-password" name="old-password"><br>
+                    <div class="warning-old-password${invalidOldPassword}">
+                        <p>You inserted invalid password</p>
+                    </div>
                     <label>New password*:</label><br>
                     <input name = "new-password" type="password" id="new-password" class="passw-input"><br>
                     <div class="warning-password hidden">
