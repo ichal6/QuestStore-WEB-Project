@@ -170,11 +170,16 @@ button:hover {
 .warning,
 .warning-email,
 .warning-password,
+.warning-old-password,
 .warning-equals {
     color: #BF343F;
     height: 24px;
     padding: 0 8px;
     font-size: 14px;
+}
+
+.warning-password{
+    margin-bottom: 25px;
 }
 
 .hidden {

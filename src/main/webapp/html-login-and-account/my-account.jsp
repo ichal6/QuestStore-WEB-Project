@@ -51,10 +51,14 @@
                     <input type="hidden" name="action" value="change-password">
                     <label>Old password*:</label><br>
                     <input type="password" id="old-password" name="old-password"><br>
+                    <div class="warning-old-password${invalidOldPassword}">
+                        <p>You inserted invalid password</p>
+                    </div>
                     <label>New password*:</label><br>
                     <input name = "new-password" type="password" id="new-password" class="passw-input"><br>
                     <div class="warning-password hidden">
-                        <p>Your password is invalid</p>
+                        <p>Your password is invalid. The password have to contain 8 characters, minimum one special symbol,
+                            minimum one small and big letter and minimum one digit</p>
                     </div>
                     <label>Repeat new password*:</label><br>
                     <input type="password" id="repeat-new-password" class="sec-passw"><br>
@@ -63,7 +67,7 @@
                     </div>
 
                 <div id="change-password-button" class="button">
-                    <button >Change password</button>
+                    <button disabled id="password-change">Change password</button>
                 </div>
                 </form>
             </div>
@@ -71,7 +75,7 @@
     </div>
 
     <jsp:include page="../html-common/footer.html" />
-<%--    <script src="../js/input-validator.js"></script>--%>
+    <script src="../js/input-validator.js"></script>
 </body>
 
 </html>
