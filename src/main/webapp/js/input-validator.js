@@ -20,7 +20,7 @@ function switchButton(id){
 }
 
 function emailValidator() {
-    var mailformat = /([a-zA-z_\-.\]+)@([a-zA-z0-9-]+)\.([a-z\.])/
+    var mailformat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     let email_value = email_input.value;
     let validEmail = mailformat.test(email_value);
     const email_paragraph = document.querySelector(".warning-email");
