@@ -19,6 +19,8 @@ import java.io.IOException;
 public class MyAccountCMSUserController extends HttpServlet {
     private UserDAO dao;
     private CMSUser userToEdit;
+    private String oldPassword;
+    private boolean firstStart;
 
     @Override
     public void init() throws ServletException {
@@ -28,23 +30,21 @@ public class MyAccountCMSUserController extends HttpServlet {
         } catch (IOException ex) {
             throw new ServletException(ex);
         }
+        this.firstStart = true;
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         String name = request.getParameter("person-name");
         String email = request.getParameter("person-mail");
-        String oldPassword = request.getParameter("old-password");
+        this.oldPassword = request.getParameter("old-password");
         String newPassword = request.getParameter("new-password");
 
-        if (name == null || email == null) {
-            response.sendRedirect("/dashboard");
-        }
-
-        HttpSession session = request.getSession();
-        userToEdit = (CMSUser) session.getAttribute("user");
-
         if ("personal-information".equals(action)) {
+            if (name == null || email == null) {
+                response.sendRedirect("/dashboard");
+            }
+
             userToEdit.setName(name);
             userToEdit.setEmail(email);
             try {
@@ -55,8 +55,12 @@ public class MyAccountCMSUserController extends HttpServlet {
             response.sendRedirect("/dashboard");
 
         } else if ("change-password".equals(action)) {
+            if (oldPassword == null || newPassword == null) {
+                response.sendRedirect("/dashboard");
+            }
+
             int userId = userToEdit.getID();
-            if (checkIfCorrectPassword(oldPassword)) {
+            if (checkIfCorrectPassword(request)) {
                 try {
                     dao.changeUserPassword(userId, newPassword);
                 } catch (ReadException e) {
@@ -64,21 +68,38 @@ public class MyAccountCMSUserController extends HttpServlet {
                 }
             }
         }
+        doGet(request, response);
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        userToEdit = (CMSUser) session.getAttribute("user");
-        request.setAttribute("userToEdit", userToEdit);
+        setUserToEditFromRequest(request);
+        if(this.firstStart){
+            request.setAttribute("invalidOldPassword", " hidden");
+        }
+        firstStart = false;
 
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("/html-login-and-account/my-account.jsp");
         dispatcher.forward(request, response);
     }
 
-    private boolean checkIfCorrectPassword(String oldPassword) {
-        return userToEdit.getPassword().equals(oldPassword);
+    private boolean checkIfCorrectPassword(HttpServletRequest request) {
+        if(userToEdit.getPassword().equals(oldPassword)){
+            request.setAttribute("invalidOldPassword", " hidden");
+            return true;
+        }else{
+            request.setAttribute("invalidOldPassword", "");
+            return false;
+        }
+    }
+
+    private void setUserToEditFromRequest(HttpServletRequest request){
+        if(userToEdit == null){
+            HttpSession session = request.getSession();
+            userToEdit = (CMSUser) session.getAttribute("user");
+            request.setAttribute("userToEdit", userToEdit);
+        }
     }
 
 }
