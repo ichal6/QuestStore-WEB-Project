@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <div class="lower_section">
-                    <p><a href="codecoolers_list.jsp">See list of Codecoolers...</a></p>
+                    <p><a href="/codecoolers">See list of Codecoolers...</a></p>
                 </div>
             </div>
             <div class="options_rectangle">
@@ -78,7 +78,7 @@
                     </div>
                 </div>
                 <div class="lower_section">
-                    <p><a href="classes_list.jsp">See list of classes...</a></p>
+                    <p><a href="/classes">See list of classes...</a></p>
                 </div>
             </div>
             <div class="options_rectangle">
@@ -90,7 +90,7 @@
                     </div>
                 </div>
                 <div class="lower_section">
-                    <p><a href="teams_list.jsp">See list of teams...</a></p>
+                    <p><a href="/teams">See list of teams...</a></p>
                 </div>
             </div>
             <div class="options_rectangle">
