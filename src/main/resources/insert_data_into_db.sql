@@ -172,19 +172,19 @@ TO_DATE('2020-04-01','YYYY-MM-DD'),
 default);
 
 INSERT INTO team_artifacts
-values(default, 1, 1, TO_DATE('2020-04-01','YYYY-MM-DD'), FALSE);
+values(default, 1, 5, TO_DATE('2020-04-01','YYYY-MM-DD'), FALSE);
 
 INSERT INTO team_artifacts
-values(default, 1, 3, TO_DATE('2020-04-05','YYYY-MM-DD'), FALSE);
+values(default, 1, 6, TO_DATE('2020-04-05','YYYY-MM-DD'), FALSE);
 
 INSERT INTO team_artifacts
-values(default, 1, 2, TO_DATE('2020-06-01','YYYY-MM-DD'), TRUE);
+values(default, 1, 4, TO_DATE('2020-06-01','YYYY-MM-DD'), TRUE);
 
 INSERT INTO team_artifacts
-values(default, 2, 3, TO_DATE('2020-04-01','YYYY-MM-DD'), FALSE);
+values(default, 2, 6, TO_DATE('2020-04-01','YYYY-MM-DD'), FALSE);
 
 INSERT INTO team_artifacts
-values(default, 3, 1, TO_DATE('2020-07-01','YYYY-MM-DD'), TRUE);
+values(default, 3, 5, TO_DATE('2020-07-01','YYYY-MM-DD'), TRUE);
 
 INSERT INTO team_artifacts
 values(default, 3, 4, TO_DATE('2020-04-15','YYYY-MM-DD'), FALSE);
