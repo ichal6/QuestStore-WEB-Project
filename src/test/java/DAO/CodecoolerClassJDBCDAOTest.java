@@ -58,20 +58,5 @@ public class CodecoolerClassJDBCDAOTest {
         verify(mockPst, times(2)).setDate(anyInt(), any(Date.class));
         verify(mockPst, times(1)).execute();
     }
-
-    @Test
-    void deleteCodecoolerClass() {
-    }
-
-    @Test
-    void getAllCodecoolerClasss() {
-    }
-
-    @Test
-    void getCodecoolerClassById() {
-    }
-
-    @Test
-    void editCodecoolerClass() {
-    }
+    
 }
