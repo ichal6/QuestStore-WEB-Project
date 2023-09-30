@@ -15,3 +15,8 @@ Actual branch for front-end.
 Branch is used for try eliminate multiply CSS files.
 ## include-jsp
 Divide header and footer section to another files and include they for jsp include.
+
+# Status
+Project is: finite.
+
+This project was built to learn Java EE and JSP. These purposes were fulfilled, and the project has been completed.
