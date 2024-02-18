@@ -9,7 +9,7 @@ Assortment and prices can be changed at the beggining of week, depending on dema
 # Images:
 Main page:
 
-![Main Page](img/CodeQuest Student's Portal.png)
+![Main Page](img/CodeQuest-Students-Portal.png)
 
 Login Page:
 
