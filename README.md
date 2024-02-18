@@ -6,6 +6,15 @@ The store offers two type of items basic and extra (magic).
 Basic items are meant for individual buyers while extra items are designed to be purchased by a group of students.
 Assortment and prices can be changed at the beggining of week, depending on demand and supply.
 
+# Images:
+Main page:
+
+![Main Page](img/CodeQuest Student's Portal.png)
+
+Login Page:
+
+![Login Page](img/Login-page.png)
+
 # Branches:
 ## dev
 Actual branch for attach the back-end layer to the front-end layer.
